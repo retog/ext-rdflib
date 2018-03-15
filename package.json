@@ -1,0 +1,27 @@
+{
+  "name": "ext-rdflib",
+  "version": "1.0.0",
+  "description": "rdflib.js on top of rdf-ext",
+  "main": "js/rdf.js",
+  "repository": "git@github.com:retog/ext-rdflib.git",
+  "author": "Reto Gmür <reto@factsmission.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^1.7.3",
+    "rdf-ext": "^1.1.0",
+    "rdf-formats-common": "^1.4.0",
+    "string-to-stream": "^1.1.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha",
+    "start": "webpack-dev-server --hot --inline --content-base examples --host 0.0.0.0",
+    "build": "webpack -p"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
+  }
+}
