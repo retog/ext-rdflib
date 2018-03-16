@@ -172,6 +172,7 @@ DataSetPrototype.setPrefixForURI = function(prefix, nsuri) {
 
 DataSetPrototype.sym = $rdf.sym;
 DataSetPrototype.bnode = $rdf.blankNode;
+DataSetPrototype.literal = $rdf.literal;
 
 let addQuad = DataSetPrototype.add;
 
