@@ -141,6 +141,9 @@ $rdf.Util = {
 
 let DataSetPrototype = Object.getPrototypeOf($rdf.graph());
 
+DataSetPrototype.statementsMatching = function(s,p,o,g) {
+    return this.match(s,p,o,g).toArray();
+}
 DataSetPrototype.each = function(subject, predicate) {
     return this.match(subject, predicate).toArray().map(t => t.object);
 };
