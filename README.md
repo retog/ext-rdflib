@@ -1,6 +1,6 @@
 # ext-rdflib.js
 
-An experimental blendof [rdflib.js](https://github.com/linkeddata/rdflib.js) and [rdf-ext](https://github.com/rdf-ext/rdf-ext).
+An experimental blend of [rdflib.js](https://github.com/linkeddata/rdflib.js) and [rdf-ext](https://github.com/rdf-ext/rdf-ext).
 
 ## Description
 
