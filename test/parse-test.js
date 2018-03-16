@@ -60,4 +60,32 @@ describe('Parse', () => {
       })
     })
   })
+  describe('an RDF/XML document', () => {
+    describe('with a base IRI', () => {
+      let store
+      before(done => {
+        const base = 'https://www.example.org/abc/def'
+        const mimeType = 'application/rdf+xml'
+        const content = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <rdf:RDF
+          xmlns:foaf="http://xmlns.com/foaf/0.1/"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        >
+          <rdf:Description rdf:about="#me">
+            <foaf:homepage rdf:resource="/xyz"/>
+          </rdf:Description>
+        </rdf:RDF>`
+        store = graph()
+        parse(content, store, base, mimeType, done)
+      })
+
+      it('uses the specified base IRI', () => {
+        expect(store.statements).to.have.length(1);
+        const statement = store.statements[0]
+        expect(statement.subject.value).to.equal('https://www.example.org/abc/def#me')
+        expect(statement.object.value).to.equal('https://www.example.org/xyz')
+      })
+    })
+  })
 })

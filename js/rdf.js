@@ -91,6 +91,13 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
         return new Promise((accept, reject) => $rdf.parse(string, graph, baseIRI, mediaType, 
             (error, result) => error ? reject(error) : accept(result)));
     } else {
+        if ((mediaType === "application/rdf+xml")) {
+            let RdfXmlParser = require("./rdfxmlparser");
+            let rdfXmlParser = new RdfXmlParser(graph);
+            rdfXmlParser.parse($rdf.Util.parseXML(string), baseIRI, $rdf.sym(baseIRI));
+            callback(null, graph);
+            return;
+        }
         if ((mediaType === "text/html")) {
             console.log("RDFa support is rudimentary");
             const RDFaProcessor = (function() {
@@ -107,6 +114,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
                 return;
             }
             callback(null, graph);
+            return;
         }
         let parser = formats.parsers[mediaType.split(";")[0]];
         if (!parser) {
@@ -155,6 +163,27 @@ DataSetPrototype.each = function(subject, predicate) {
 DataSetPrototype.toNT = function() {
     return this.toArray().map(q => `${q.subject.toCanonical()} ${q.predicate.toCanonical()} ${q.object.toCanonical()} ${q.graph.toCanonical()}.`).join("\n");
 };
+
+DataSetPrototype.namespaces = {};
+
+DataSetPrototype.setPrefixForURI = function(prefix, nsuri) {
+    this.namespaces[prefix] = nsuri;
+}
+
+DataSetPrototype.sym = $rdf.sym;
+DataSetPrototype.bnode = $rdf.blankNode;
+
+let addQuad = DataSetPrototype.add;
+
+let Quad = Object.getPrototypeOf($rdf.quad());
+
+DataSetPrototype.add = function(subjectOrQuad, p, o, g) {
+    if (Object.getPrototypeOf(subjectOrQuad) === Quad) {
+        addQuad.call(this, subjectOrQuad);
+    } else {
+        addQuad.call(this, $rdf.quad(subjectOrQuad, p, o, g));
+    }
+}
 
 let LiteralPrototype = Object.getPrototypeOf($rdf.literal());
 
