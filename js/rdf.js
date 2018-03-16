@@ -108,8 +108,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
             }
             callback(null, graph);
         }
-        let parser = formats.parsers[mediaType];
-        console.log("parser: "+parser);
+        let parser = formats.parsers[mediaType.split(";")[0]];
         if (!parser) {
             callback("No Parser for "+mediaType);
             return;
@@ -118,7 +117,6 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
             'baseIRI': baseIRI
         });
         quadStream.on('data', (quad) => {
-            console.log("the parsed "+ quad.toCanonical() + '\n');
             graph.add(quad);
         });
         quadStream.on('error', (error) => {
@@ -141,6 +139,12 @@ $rdf.Util = {
 
 let DataSetPrototype = Object.getPrototypeOf($rdf.graph());
 
+Object.defineProperty(DataSetPrototype, "statements", {
+    get: function myProperty() {
+        return this.toArray();
+    }
+});
+
 DataSetPrototype.statementsMatching = function(s,p,o,g) {
     return this.match(s,p,o,g).toArray();
 }
@@ -151,5 +155,13 @@ DataSetPrototype.each = function(subject, predicate) {
 DataSetPrototype.toNT = function() {
     return this.toArray().map(q => `${q.subject.toCanonical()} ${q.predicate.toCanonical()} ${q.object.toCanonical()} ${q.graph.toCanonical()}.`).join("\n");
 };
+
+let LiteralPrototype = Object.getPrototypeOf($rdf.literal());
+
+Object.defineProperty(LiteralPrototype, "lang", {
+    get: function myProperty() {
+        return this.language;
+    }
+});
 
 module.exports = $rdf;
