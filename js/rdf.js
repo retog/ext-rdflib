@@ -13,6 +13,9 @@ const DOMParser = (function() {
 })();
 
 
+$rdf.serializers = formats.serializers;
+$rdf.parsers = formats.parsers;
+
 let Headers = ((h) => h ? h : window.Headers)(fetch.Headers);
 
 /**
@@ -156,6 +159,11 @@ Object.defineProperty(DataSetPrototype, "statements", {
 DataSetPrototype.statementsMatching = function(s,p,o,g) {
     return this.match(s,p,o,g).toArray();
 }
+
+DataSetPrototype.anyStatementMatching = function(s,p,o,g) {
+    return this.statementsMatching(s,p,o,g)[0];
+}
+
 DataSetPrototype.each = function(subject, predicate) {
     return this.match(subject, predicate).toArray().map(t => t.object);
 };
