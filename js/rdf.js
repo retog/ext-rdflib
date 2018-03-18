@@ -139,7 +139,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
     }
 }
 
-$rdf.version = "Ext-RDFLib 1.0.0"
+$rdf.version = "Ext-RDFLib " + VERSION;
 
 $rdf.Util = {
     parseXML : function(str, options) {
