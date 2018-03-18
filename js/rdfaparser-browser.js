@@ -186,7 +186,7 @@ class RDFaProcessor {
   }
 
   parseSafeCURIEOrCURIEOrURI (value, prefixes, base) {
-    value = this.trim(value)
+    value = RDFaProcessor.trim(value)
     if (value.charAt(0) === '[' && value.charAt(value.length - 1) === ']') {
       value = value.substring(1, value.length - 1)
       value = value.trim(value)
@@ -205,7 +205,7 @@ class RDFaProcessor {
 
   parseTermOrCURIEOrAbsURI (value, defaultVocabulary, terms, prefixes, base) {
     // alert("Parsing "+value+" with default vocab "+defaultVocabulary)
-    value = this.trim(value)
+    value = RDFaProcessor.trim(value)
     var curie = this.parseCURIE(value, prefixes, base)
     if (curie) {
       return curie
@@ -231,7 +231,7 @@ class RDFaProcessor {
 
   parseTermOrCURIEOrURI (value, defaultVocabulary, terms, prefixes, base) {
     // alert("Parsing "+value+" with default vocab "+defaultVocabulary)
-    value = this.trim(value)
+    value = RDFaProcessor.trim(value)
     var curie = this.parseCURIE(value, prefixes, base)
     if (curie) {
       return curie
@@ -339,7 +339,7 @@ class RDFaProcessor {
       // Sequence Step 2: set the default vocabulary
       var vocabAtt = current.getAttributeNode('vocab')
       if (vocabAtt) {
-        let value = this.trim(vocabAtt.value)
+        let value = RDFaProcessor.trim(vocabAtt.value)
         if (value.length > 0) {
           vocabulary = value
           var baseSubject = base.spec
@@ -857,7 +857,7 @@ class RDFaProcessor {
   }
 
   tokenize (str) {
-    return this.trim(str).split(/\s+/)
+    return RDFaProcessor.trim(str).split(/\s+/)
   }
 
   toRDFNodeObject (x) {
