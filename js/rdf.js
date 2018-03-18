@@ -12,6 +12,8 @@ const DOMParser = (function() {
     }
 })();
 
+const version = typeof VERSION !== 'undefined' ?  VERSION : 'development'; 
+
 
 $rdf.serializers = formats.serializers;
 $rdf.parsers = formats.parsers;
@@ -139,7 +141,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
     }
 }
 
-$rdf.version = "Ext-RDFLib " + VERSION;
+$rdf.version = "Ext-RDFLib " + version;
 
 $rdf.Util = {
     parseXML : function(str, options) {
