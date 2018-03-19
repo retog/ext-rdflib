@@ -1,4 +1,4 @@
-# ext-rdflib.js
+# ext-rdflib.js [![Build Status](https://travis-ci.org/retog/ext-rdflib.svg?branch=master)](https://travis-ci.org/retog/ext-rdflib)
 
 An experimental blend of [rdflib.js](https://github.com/linkeddata/rdflib.js) and [rdf-ext](https://github.com/rdf-ext/rdf-ext).
 
