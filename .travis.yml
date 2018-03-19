@@ -12,10 +12,15 @@ branches:
     - gh-pages
     - /.*/ 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-  local-dir: distribution
-  on:
-    branch: master
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+    keep-history: true
+    local-dir: distribution
+    on:
+      tags: true
+  - provider: npm
+    email: "reto@factsmission.com"
+    api_key: $NPM_AUTH_TOKEN
+    on:
+      tags: true
