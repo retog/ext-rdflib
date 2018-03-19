@@ -7,6 +7,9 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 cache:
   yarn: true
+script:
+  - yarn test
+  - yarn build
 branches:
   only: 
     - gh-pages
@@ -18,7 +21,7 @@ deploy:
     keep-history: true
     local-dir: distribution
     on:
-      tags: true
+      branch: master
   - provider: npm
     email: "reto@factsmission.com"
     api_key: $NPM_AUTH_TOKEN
