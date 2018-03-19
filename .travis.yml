@@ -21,7 +21,7 @@ deploy:
     keep-history: true
     local-dir: distribution
     on:
-      branch: master
+      tags: true
   - provider: npm
     email: "reto@factsmission.com"
     api_key: $NPM_AUTH_TOKEN
