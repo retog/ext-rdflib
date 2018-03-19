@@ -10,7 +10,13 @@ Also I add features as I need them and you're invited to do the same. The design
 
 ## Usage
 
-const $rdf = require("ext-rdflib");
+With node.js:
+
+    const $rdf = require("ext-rdflib");
+
+In the browser:
+
+    <script type="text/javascript" src="https://retog.github.io/ext-rdflib/latest/rdf.js"></script>
 
 The `$rdf` variable will provide all method of rdf-ext plus some methods to mimick the rdflib.js API.
 
