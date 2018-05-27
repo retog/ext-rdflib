@@ -26,6 +26,8 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: bash .travis_publish
+    on:
+      tags: true
   - provider: npm
     email: "reto@factsmission.com"
     api_key: $NPM_AUTH_TOKEN
