@@ -20,11 +20,16 @@ In the browser:
 
 The above URI always point to the latest version, replace `latest` with a specific version number to avoid potentially breaking updates, e.g. `https://retog.github.io/ext-rdflib/0.0.2/rdf.js`
 
+For supporting JSON-LD you also have to include:
+
+    <script src="https://cdn.jsdelivr.net/npm/jsonld@1.0.2/dist/jsonld.min.js"></script>
+
+
 The `$rdf` variable will provide all method of rdf-ext plus some methods to mimick the rdflib.js API.
 
 # Features
 
-Parsing in all formats supported by rdflib.js is supported. However the `parse` method must be clled asynchronously:
+Parsing in all formats supported by rdflib.js is supported. However the `parse` method must be called asynchronously:
 
     parse(content, store, base, mediaType, (error, store) => {
         //do something
