@@ -60,6 +60,41 @@ describe('Parse', () => {
       })
     })
   })
+  describe('another JSON-LD document', () => {
+    describe('with IRI in data', () => {
+      let store
+      before(done => {
+        const base = 'https://www.example.org/abc/def'
+        const mimeType = 'application/ld+json'
+        const content = `
+        [
+          {
+              "@id":"",
+              "@type": "http://schema.org/WebPage",
+              "http://schema.org/headline":"An LD2h demo page",
+              "http://schema.org/text":[
+                  {"@value":"Everything you see on this page is content expressed in RDF either within this\\r\\npage or from somewhere else on the web rendered  in the browser using \\r\\n<a href=\\"http://rdf2h.github.io/rdf2h\\">RDF2h</a> and mustache templates."}
+              ]
+          },
+          {   "@id":"https://farewellutopia.com/me",
+              "@type": "http://xmlns.com/foaf/0.1/Person",
+              "http://xmlns.com/foaf/0.1/name":[
+                  {"@value":"Reto Gmür"}
+              ]
+          }
+        ]
+        `
+        store = graph()
+        parse(content, store, base, mimeType, done)
+      })
+
+      it('uses the specified base IRI', () => {
+        expect(store.statements).to.have.length(5);
+        const statement = store.statements[0]
+        expect(statement.subject.value).to.equal('https://farewellutopia.com/me')
+      })
+    })
+  })
   describe('an RDF/XML document', () => {
     describe('with a base IRI', () => {
       let store
