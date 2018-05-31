@@ -28,8 +28,7 @@ module.exports = {
   },
   externals: {
     'node-fetch': 'fetch',
-    'xmldom': 'window',
-    'jsonld': 'jsonld'
+    'xmldom': 'window'
   },
   devtool: 'source-map',
   plugins: [

@@ -4,9 +4,35 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/jsonld@1.0.2/dist/jsonld.min.js"></script>
+    This page is a playground for testing, nothing more.
     <script src="distribution/latest/rdf.js"></script>
+    <script id="data" type="application/ld+json">
+        [
+            {
+                "@id":"",
+                "@type": "http://schema.org/WebPage",
+                "http://schema.org/headline":"An LD2h demo page",
+                "http://schema.org/text":[
+                    {"@value":"Everything you see on this page is content expressed in RDF either within this\r\npage or from somewhere else on the web rendered  in the browser using \r\n<a href=\"http://rdf2h.github.io/rdf2h\">RDF2h</a> and mustache templates."}
+                ]
+            },
+            {   "@id":"https://farewellutopia.com/me",
+                "@type": "http://xmlns.com/foaf/0.1/Person",
+                "http://xmlns.com/foaf/0.1/name":[
+                    {"@value":"Reto Gmür"}
+                ]
+            }
+        ]
+    </script>     
     <script>
+        let jsonld = document.getElementById("data").text
+        $rdf.parse(jsonld, $rdf.graph(), window.location.toString().split('#')[0], "application/ld+json", (err, result) => {
+            if (err) {
+                alert("error: "+err)
+            } else {
+                alert("result: "+result);
+            }
+        });
         alert("version: "+$rdf.version);
     </script>
 </body>
