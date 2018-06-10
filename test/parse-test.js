@@ -122,5 +122,46 @@ describe('Parse', () => {
         expect(statement.object.value).to.equal('https://www.example.org/xyz')
       })
     })
+    describe('an RDFa document', () => {
+      describe('with a base IRI', () => {
+        let store
+        before(done => {
+          const base = 'https://www.example.org/abc/def'
+          const mimeType = 'text/html'
+          const content = `
+          <div id="data" type="text/html"><div about='' >
+          <li >
+          <ul>
+          <a property="http://schema.org/agent" resource=_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144>_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144</a>
+          </ul>
+          </li>
+          <li >
+          <ul>
+          <a property="http://purl.org/dc/terms/source" resource=https://github.com/retog/linked>https://github.com/retog/linked</a>
+          </ul>
+          </li>
+          <li >
+          <ul>
+          <a property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" resource=http://schema.org/AskAction>http://schema.org/AskAction</a>
+          </ul>
+          </li>
+
+          </div>
+          <div about='_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144' >
+          <li >
+          <ul>
+          <span datatype="http://www.w3.org/2001/XMLSchema#string" property="http://schema.org/name">John</span>
+          </ul>
+          </li>
+          </div>`
+          store = graph()
+          parse(content, store, base, mimeType, done)
+        })
+  
+        it('uses the specified base IRI', () => {
+          expect(store.statements).to.have.length(4);
+        })
+      })
+    })
   })
 })

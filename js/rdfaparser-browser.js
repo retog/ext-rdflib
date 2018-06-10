@@ -865,7 +865,7 @@ class RDFaProcessor {
     if (typeof x === 'string') {
       if (x.substring(0, 2) === '_:') {
         if (typeof this.blankNodes[x.substring(2)] === 'undefined') {
-          this.blankNodes[x.substring(2)] = new BlankNode(x.substring(2))
+          this.blankNodes[x.substring(2)] = $rdf.blankNode(x.substring(2))
         }
         return this.blankNodes[x.substring(2)]
       }
@@ -875,7 +875,7 @@ class RDFaProcessor {
       case RDFaProcessor.objectURI:
         if (x.value.substring(0, 2) === '_:') {
           if (typeof this.blankNodes[x.value.substring(2)] === 'undefined') {
-            this.blankNodes[x.value.substring(2)] = new BlankNode(x.value.substring(2))
+            this.blankNodes[x.value.substring(2)] = $rdf.blankNode(x.value.substring(2))
           }
           return this.blankNodes[x.value.substring(2)]
         }
@@ -888,9 +888,9 @@ class RDFaProcessor {
         Object.keys(x.value).forEach(function (i) {
           string += Util.domToString(x.value[i], this.htmlOptions)
         })
-        return new Literal(string, '', $rdf.namedNode(x.type))
+        return $rdf.literal(string, '', $rdf.namedNode(x.type))
       default:
-        return new Literal(x.value, '', $rdf.namedNode(x.type))
+        return $rdf.literal(x.value, '', $rdf.namedNode(x.type))
     }
   }
 
