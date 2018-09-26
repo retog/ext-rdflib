@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    This page is a playground for testing, nothing more.
+    <script src="/rdf.js"></script>
+    <div id="data" type="text/html">
+        <div about='https://farewellutopia.com/opinions'>
+            <li>
+                <ul>
+                    <span datatype="http://www.w3.org/2001/XMLSchema#string" property="http://schema.org/alternativeHeadline">This
+                        isn't an opinion</span>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <span datatype="http://www.w3.org/2001/XMLSchema#string" property="http://schema.org/name">opinions</span>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <a property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" resource=http://schema.org/Article>http://schema.org/Article
+                        </a> </ul> </li> <li>
+                        <ul>
+                            <span datatype="http://www.w3.org/2001/XMLSchema#string" property="http://schema.org/headline">Opinions</span>
+                        </ul>
+            </li>
+            <li>
+                <ul>
+                    <span datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML" property="http://schema.org/articleBody">Maybe...
+                        I should elaborate this on multiple lines.
+                        <div>
+                            <em>Maybe</em> even with HTML
+                        </div></span>
+                </ul>
+            </li>
+        </div>
+    </div>
+    <script>
+        let rdfa = document.getElementById("data").innerHTML
+        alert(rdfa);
+        $rdf.parse(rdfa, $rdf.graph(), window.location.toString().split('#')[0], "text/html", (err, result) => {
+            if (err) {
+                alert("error: " + err)
+            } else {
+                alert("result: " + result);
+            }
+        });
+        alert("version: " + $rdf.version);
+    </script>
+</body>
+
+</html>

@@ -885,8 +885,15 @@ class RDFaProcessor {
       case RDFaProcessor.XMLLiteralURI:
       case RDFaProcessor.HTMLLiteralURI:
         var string = ''
+        var self = this;
         Object.keys(x.value).forEach(function (i) {
-          string += Util.domToString(x.value[i], this.htmlOptions)
+          var elem = x.value[i];
+          if (elem.innerHTML) {
+            string += elem.innerHTML;
+          } else {
+            string += elem.textContent;
+          }
+          //string += Util.domToString(x.value[i], self.htmlOptions)
         })
         return $rdf.literal(string, '', $rdf.namedNode(x.type))
       default:

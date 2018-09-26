@@ -151,6 +151,7 @@ describe('Parse', () => {
           <li >
           <ul>
           <span datatype="http://www.w3.org/2001/XMLSchema#string" property="http://schema.org/name">John</span>
+          <span datatype="rdf:HTML" property="http://schema.org/comment">bla <i>bla</i> bla</span>
           </ul>
           </li>
           </div>`
@@ -159,7 +160,7 @@ describe('Parse', () => {
         })
   
         it('uses the specified base IRI', () => {
-          expect(store.statements).to.have.length(4);
+          expect(store.statements).to.have.length(5);
         })
       })
     })
