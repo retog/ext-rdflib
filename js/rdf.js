@@ -1,3 +1,5 @@
+const rdfjsDataModel = require("@rdfjs/data-model");
+const dataModel = require('rdf-data-model')
 const $rdf = require("rdf-ext");
 const fetch = require("node-fetch");
 
@@ -186,10 +188,8 @@ DataSetPrototype.literal = $rdf.literal;
 
 let addQuad = DataSetPrototype.add;
 
-let Quad = Object.getPrototypeOf($rdf.quad());
-
 DataSetPrototype.add = function(subjectOrQuad, p, o, g) {
-    if (Object.getPrototypeOf(subjectOrQuad) === Quad) {
+    if (("subject" in subjectOrQuad) && ("predicate" in subjectOrQuad)) {
         addQuad.call(this, subjectOrQuad);
     } else {
         addQuad.call(this, $rdf.quad(subjectOrQuad, p, o, g));
@@ -199,6 +199,22 @@ DataSetPrototype.add = function(subjectOrQuad, p, o, g) {
 let LiteralPrototype = Object.getPrototypeOf($rdf.literal());
 
 Object.defineProperty(LiteralPrototype, "lang", {
+    get: function myProperty() {
+        return this.language;
+    }
+});
+
+let LiteralPrototype2 = Object.getPrototypeOf(rdfjsDataModel.literal());
+
+Object.defineProperty(LiteralPrototype2, "lang", {
+    get: function myProperty() {
+        return this.language;
+    }
+});
+
+let LiteralPrototype3 = Object.getPrototypeOf(dataModel.literal());
+
+Object.defineProperty(LiteralPrototype3, "lang", {
     get: function myProperty() {
         return this.language;
     }
