@@ -4,7 +4,7 @@ const $rdf = require("rdf-ext");
 const fetch = require("node-fetch");
 
 
-const formats = require('rdf-formats-common')();
+//const formats = require('rdf-formats-common')();
 const stringToStream = require('string-to-stream');
 const DOMParser = (function() {
     if (typeof window !== 'undefined') {
@@ -17,8 +17,25 @@ const DOMParser = (function() {
 const version = typeof VERSION !== 'undefined' ?  VERSION : 'development'; 
 
 
-$rdf.serializers = formats.serializers;
-$rdf.parsers = formats.parsers;
+$rdf.serializers = new $rdf.Serializers();
+$rdf.parsers = new $rdf.Parsers();
+const SerializerJsonld = require("@rdfjs/serializer-jsonld");
+$rdf.serializers["application/ld+json"] = new SerializerJsonld();
+
+const NTriplesSerializer = require("@rdfjs/serializer-ntriples");
+$rdf.serializers["application/n-triples"] = new NTriplesSerializer();
+$rdf.serializers["text/n3"] = new NTriplesSerializer();
+$rdf.serializers["text/turtle"] = new NTriplesSerializer();
+
+$rdf.parsers["application/ld+json"] = new (require("@rdfjs/parser-jsonld"))();
+
+const N3Parser = require("@rdfjs/parser-n3");
+$rdf.parsers["application/n-triples"] = new N3Parser();
+$rdf.parsers["application/n-quads"] = new N3Parser();
+$rdf.parsers["application/trig"] = new N3Parser();
+$rdf.parsers["text/n3"] = new N3Parser();
+$rdf.parsers["text/turtle"] = new N3Parser();
+
 
 let Headers = ((h) => h ? h : window.Headers)(fetch.Headers);
 
@@ -123,7 +140,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
             callback(null, graph);
             return;
         }
-        let parser = formats.parsers[mediaType.split(";")[0]];
+        let parser = $rdf.parsers[mediaType.split(";")[0]];
         if (!parser) {
             callback("No Parser for "+mediaType);
             return;
