@@ -2,7 +2,7 @@ const rdfjsDataModel = require("@rdfjs/data-model");
 const dataModel = require('rdf-data-model')
 const $rdf = require("rdf-ext");
 const fetch = require("node-fetch");
-const rdfaParser = require("rdfa-parser");
+const rdfaParser = require("@factsmission/rdfa-parser");
 const quadToNTriples = require('@rdfjs/to-ntriples').quadToNTriples
 
 
