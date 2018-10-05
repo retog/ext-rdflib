@@ -3,6 +3,7 @@ const dataModel = require('rdf-data-model')
 const $rdf = require("rdf-ext");
 const fetch = require("node-fetch");
 const rdfaParser = require("rdfa-parser");
+const quadToNTriples = require('@rdfjs/to-ntriples').quadToNTriples
 
 
 //const formats = require('rdf-formats-common')();
@@ -172,7 +173,7 @@ DataSetPrototype.each = function(subject, predicate) {
 };
 
 DataSetPrototype.toNT = function() {
-    return this.toArray().map(q => `${q.subject.toCanonical()} ${q.predicate.toCanonical()} ${q.object.toCanonical()} ${q.graph.toCanonical()}.`).join("\n");
+    return this.toArray().map(q => quadToNTriples(q)).join("\n");
 };
 
 DataSetPrototype.namespaces = {};
