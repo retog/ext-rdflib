@@ -2,6 +2,7 @@ const rdfjsDataModel = require("@rdfjs/data-model");
 const dataModel = require('rdf-data-model')
 const $rdf = require("rdf-ext");
 const fetch = require("node-fetch");
+const rdfaParser = require("rdfa-parser");
 
 
 //const formats = require('rdf-formats-common')();
@@ -65,24 +66,13 @@ $rdf.rdfFetch = function(uri, options, login) {
                     let graph = $rdf.graph();
                     let mediaType = response.headers.get("Content-type").split(";")[0];
                     return response.text().then(text => {
-                        if ((mediaType === "text/html")  && (typeof DOMParser !== 'undefined')) {
-                            console.log("Working around rdflib problem parsing RDFa in browser");
-                            try {
-                                RDFaProcessor.parseRDFaDOM($rdf.Util.parseXML(text, { contentType: mediaType }), graph, uri);
-                            } catch(error) {
+                        $rdf.parse(text, graph, uri, mediaType, (error, graph) => {
+                            if (error) {
                                 reject(error);
-                                return;
+                            } else {
+                                resolve(graph);
                             }
-                            resolve(graph);
-                        } else {
-                            $rdf.parse(text, graph, uri, mediaType, (error, graph) => {
-                                if (error) {
-                                    reject(error);
-                                } else {
-                                    resolve(graph);
-                                }
-                            });
-                        }
+                        });
                     });
                 });
                 return response;
@@ -122,17 +112,9 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
             callback(null, graph);
             return;
         }
-        if ((mediaType === "text/html")) {
-            console.log("RDFa support is rudimentary");
-            const RDFaProcessor = (function() {
-                if (typeof window === 'undefined') {
-                    return require("./rdfaparser");
-                } else {
-                    return require("./rdfaparser-browser");
-                }
-            })();
+        if ((mediaType === "text/html")) {     
             try {
-                RDFaProcessor.parseRDFaDOM($rdf.Util.parseXML(string, { contentType: mediaType }), graph, baseIRI);
+                rdfaParser.parseString(string, quad => graph.add(quad), baseIRI);
             } catch(error) {
                 callback(error);
                 return;

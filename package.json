@@ -1,6 +1,6 @@
 {
   "name": "ext-rdflib",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "rdflib.js on top of rdf-ext",
   "main": "js/rdf.js",
   "repository": "git@github.com:retog/ext-rdflib.git",
@@ -15,6 +15,7 @@
     "node-fetch": "^2.2.0",
     "rdf-data-model": "^1.0.0",
     "rdf-ext": "^1.1.2",
+    "rdfa-parser": "https://github.com/factsmission/rdfa-parser",
     "string-to-stream": "^1.1.1",
     "xmldom": "^0.1.27"
   },

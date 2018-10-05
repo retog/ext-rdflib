@@ -132,17 +132,17 @@ describe('Parse', () => {
           <div id="data" type="text/html"><div about='' >
           <li >
           <ul>
-          <a property="http://schema.org/agent" resource=_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144>_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144</a>
+          <a property="http://schema.org/agent" resource="_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144">_:org.apache.clerezza.rdf.jena.commons.JenaBNodeWrapper@5e0c9144</a>
           </ul>
           </li>
           <li >
           <ul>
-          <a property="http://purl.org/dc/terms/source" resource=https://github.com/retog/linked>https://github.com/retog/linked</a>
+          <a property="http://purl.org/dc/terms/source" resource="https://github.com/retog/linked">https://github.com/retog/linked</a>
           </ul>
           </li>
           <li >
           <ul>
-          <a property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" resource=http://schema.org/AskAction>http://schema.org/AskAction</a>
+          <a property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" resource="http://schema.org/AskAction">http://schema.org/AskAction</a>
           </ul>
           </li>
 
