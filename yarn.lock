@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@factsmission/rdfa-parser@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@factsmission/rdfa-parser/-/rdfa-parser-0.0.4.tgz#1544d717e4a2b2eb825419582a500e4889e16fc7"
+  dependencies:
+    "@rdfjs/data-model" "^1.1.0"
+    xmldom "^0.1.27"
+
 "@rdfjs/data-model@^1.0.1", "@rdfjs/data-model@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@rdfjs/data-model/-/data-model-1.1.0.tgz#15d9c5b7b8166893696565aefb65bad95da3fd99"
@@ -3496,13 +3503,6 @@ rdf-ext@^1.1.2:
 rdf-normalize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/rdf-normalize/-/rdf-normalize-1.0.0.tgz#53496baf362cce9d9fca1f2216c6c30007f99cca"
-
-"rdfa-parser@https://github.com/factsmission/rdfa-parser":
-  version "0.0.1"
-  resolved "https://github.com/factsmission/rdfa-parser#5a4c273d47f0537c857971552b26cd24d83d4072"
-  dependencies:
-    "@rdfjs/data-model" "^1.1.0"
-    xmldom "^0.1.27"
 
 "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.4, readable-stream@^2.0.6, readable-stream@^2.1.0, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.9, readable-stream@^2.3.3, readable-stream@^2.3.6:
   version "2.3.6"

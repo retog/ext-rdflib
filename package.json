@@ -15,7 +15,7 @@
     "node-fetch": "^2.2.0",
     "rdf-data-model": "^1.0.0",
     "rdf-ext": "^1.1.2",
-    "rdfa-parser": "https://github.com/factsmission/rdfa-parser",
+    "@factsmission/rdfa-parser": "0.0.4",
     "string-to-stream": "^1.1.1",
     "xmldom": "^0.1.27"
   },
