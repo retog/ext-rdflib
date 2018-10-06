@@ -2,12 +2,16 @@
 # yarn lockfile v1
 
 
-"@factsmission/rdfa-parser@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@factsmission/rdfa-parser/-/rdfa-parser-0.0.4.tgz#1544d717e4a2b2eb825419582a500e4889e16fc7"
+"@factsmission/rdfa-parser@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@factsmission/rdfa-parser/-/rdfa-parser-0.0.6.tgz#167501cdcb17507debb492cb2dad25b042b48a3f"
   dependencies:
+    "@nleanba/ndjs" "^1.0.2"
     "@rdfjs/data-model" "^1.1.0"
-    xmldom "^0.1.27"
+
+"@nleanba/ndjs@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nleanba/ndjs/-/ndjs-1.0.2.tgz#cbaa12c44e9d457f782e300a1d1d8feefd60ea0d"
 
 "@rdfjs/data-model@^1.0.1", "@rdfjs/data-model@^1.1.0":
   version "1.1.0"
