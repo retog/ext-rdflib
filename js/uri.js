@@ -10,12 +10,17 @@
  */
 var alert = alert || console.log
 
-module.exports.docpart = docpart
+const _docpart = docpart;
+export { _docpart as docpart };
 //module.exports.document = document
-module.exports.hostpart = hostpart
-module.exports.join = join
-module.exports.protocol = protocol
-module.exports.refTo = refTo
+const _hostpart = hostpart;
+export { _hostpart as hostpart };
+const _join = join;
+export { _join as join };
+const _protocol = protocol;
+export { _protocol as protocol };
+const _refTo = refTo;
+export { _refTo as refTo };
 
 //const NamedNode = require('./named-node')
 

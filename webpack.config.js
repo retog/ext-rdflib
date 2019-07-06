@@ -9,22 +9,18 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'distribution', 'latest'),
     filename: 'rdf.js',
-    libraryTarget: 'var',
+    libraryTarget: 'umd',
+    libraryExport: "default",
     library: '$rdf'
   },
   module: {
     rules: [
       {
-        test: /\.js/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: { 
-              presets: ['env']
-            }
-        }
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: ['babel-loader']
       }
-    ],
+    ]
   },
   externals: {
     'node-fetch': 'fetch',

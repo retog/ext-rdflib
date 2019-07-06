@@ -1,13 +1,13 @@
-const rdfjsDataModel = require("@rdfjs/data-model");
-const dataModel = require('rdf-data-model')
-const $rdf = require("rdf-ext");
-const fetch = require("node-fetch");
-const rdfaParser = require("@factsmission/rdfa-parser");
-const quadToNTriples = require('@rdfjs/to-ntriples').quadToNTriples
+import rdfjsDataModel  from "@rdfjs/data-model";
+import dataModel from 'rdf-data-model';
+import $rdf, {  Serializers, Parsers, graph as _graph, namedNode, Util, version as _version, blankNode, literal as __literal, quad as _quad } from "rdf-ext";
+import fetch from "node-fetch";
+import {parseString as parseRDFaString} from "@factsmission/rdfa-parser";
+import { quadToNTriples } from '@rdfjs/to-ntriples';
 
 
 //const formats = require('rdf-formats-common')();
-const stringToStream = require('string-to-stream');
+import stringToStream from 'string-to-stream';
 const DOMParser = (function() {
     if (typeof window !== 'undefined') {
         return window.DOMParser;
@@ -19,19 +19,19 @@ const DOMParser = (function() {
 const version = typeof VERSION !== 'undefined' ?  VERSION : 'development'; 
 
 
-$rdf.serializers = new $rdf.Serializers();
-$rdf.parsers = new $rdf.Parsers();
-const SerializerJsonld = require("@rdfjs/serializer-jsonld");
+$rdf.serializers = new Serializers();
+$rdf.parsers = new Parsers();
+import SerializerJsonld from "@rdfjs/serializer-jsonld";
 $rdf.serializers["application/ld+json"] = new SerializerJsonld();
 
-const NTriplesSerializer = require("@rdfjs/serializer-ntriples");
+import NTriplesSerializer from "@rdfjs/serializer-ntriples";
 $rdf.serializers["application/n-triples"] = new NTriplesSerializer();
 $rdf.serializers["text/n3"] = new NTriplesSerializer();
 $rdf.serializers["text/turtle"] = new NTriplesSerializer();
 
 $rdf.parsers["application/ld+json"] = new (require("@rdfjs/parser-jsonld"))();
 
-const N3Parser = require("@rdfjs/parser-n3");
+import N3Parser from "@rdfjs/parser-n3";
 $rdf.parsers["application/n-triples"] = new N3Parser();
 $rdf.parsers["application/n-quads"] = new N3Parser();
 $rdf.parsers["application/trig"] = new N3Parser();
@@ -107,7 +107,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
             (error, result) => error ? reject(error) : accept(result)));
     } else {
         if ((mediaType === "application/rdf+xml")) {
-            let RdfXmlParser = require("./rdfxmlparser");
+            let RdfXmlParser = require("./rdfxmlparser").default;
             let rdfXmlParser = new RdfXmlParser(graph);
             rdfXmlParser.parse($rdf.Util.parseXML(string), baseIRI, $rdf.sym(baseIRI));
             callback(null, graph);
@@ -115,7 +115,7 @@ $rdf.parse = function(string, graph, baseIRI, mediaType, callback) {
         }
         if ((mediaType === "text/html")) {     
             try {
-                rdfaParser.parseString(string, quad => graph.add(quad), baseIRI);
+                parseRDFaString(string, quad => graph.add(quad), baseIRI);
             } catch(error) {
                 callback(error);
                 return;
@@ -220,4 +220,4 @@ Object.defineProperty(LiteralPrototype3, "lang", {
     }
 });
 
-module.exports = $rdf;
+export default $rdf;
