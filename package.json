@@ -1,6 +1,6 @@
 {
   "name": "ext-rdflib",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "rdflib.js on top of rdf-ext",
   "main": "distribution/latest/rdf.js",
   "repository": "git@github.com:retog/ext-rdflib.git",
