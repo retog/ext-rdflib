@@ -2,7 +2,7 @@
   "name": "ext-rdflib",
   "version": "0.3.4",
   "description": "rdflib.js on top of rdf-ext",
-  "main": "js/rdf.js",
+  "main": "distribution/latest/rdf.js",
   "repository": "git@github.com:retog/ext-rdflib.git",
   "author": "Reto Gmür <reto@factsmission.com>",
   "license": "MIT",
