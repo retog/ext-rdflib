@@ -667,10 +667,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@factsmission/rdfa-parser@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@factsmission/rdfa-parser/-/rdfa-parser-0.0.6.tgz#167501cdcb17507debb492cb2dad25b042b48a3f"
-  integrity sha512-mea36H4cDFJvKV+bMeAsgOMc1lRDEZBzcQJoESh9sc3q17yKCAuIBhVBR7I6/+74EmddU8Ju72O/VmMdC/TxSQ==
+"@factsmission/rdfa-parser@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@factsmission/rdfa-parser/-/rdfa-parser-0.1.1.tgz#ec11c2db879de9246efd1f0ddacf0dc287df1ecb"
+  integrity sha512-kjVWoMuqWlpKRQPah6u4rZJYZGZnAqmh/XV6kd1GgbXpPHd866abQANa3+uqx7g22BgliXcf5UEkqhk/hGiQiw==
   dependencies:
     "@nleanba/ndjs" "^1.0.2"
     "@rdfjs/data-model" "^1.1.0"
