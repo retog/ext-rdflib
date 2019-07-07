@@ -1,13 +1,13 @@
 {
   "name": "ext-rdflib",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "rdflib.js on top of rdf-ext",
   "main": "distribution/latest/rdf.js",
   "repository": "git@github.com:retog/ext-rdflib.git",
   "author": "Reto Gmür <reto@factsmission.com>",
   "license": "MIT",
   "dependencies": {
-    "@factsmission/rdfa-parser": "^0.0.6",
+    "@factsmission/rdfa-parser": "^0.1.1",
     "@rdfjs/data-model": "^1.1.0",
     "@rdfjs/parser-jsonld": "^1.1.1",
     "@rdfjs/parser-n3": "^1.1.2",
