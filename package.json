@@ -2,7 +2,7 @@
   "name": "ext-rdflib",
   "version": "0.4.1",
   "description": "rdflib.js on top of rdf-ext",
-  "main": "distribution/latest/rdf.js",
+  "main": "lib/rdf.js",
   "repository": "git@github.com:retog/ext-rdflib.git",
   "author": "Reto Gmür <reto@factsmission.com>",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "string-to-stream": "^1.1.1"
   },
   "scripts": {
+    "prepublishOnly": "yarn && babel --no-babelrc js --out-dir lib -s --plugins=babel-plugin-add-module-exports --presets=@babel/preset-env",
     "test": "node_modules/.bin/mocha --require @babel/register",
     "start": "webpack-dev-server --hot --inline --content-base examples --host 0.0.0.0",
     "build": "cross-var \"webpack -p && ncp distribution/latest distribution/$npm_package_version\""
@@ -32,6 +33,7 @@
     "@babel/preset-env": "^7.5.0",
     "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.6",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "chai": "^4.1.2",
     "cross-var": "^1.1.0",
     "mocha": "^6.1.4",
