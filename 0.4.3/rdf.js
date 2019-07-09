@@ -273,7 +273,7 @@ module.exports = _getPrototypeOf;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(16);
+var _typeof = __webpack_require__(14);
 
 var assertThisInitialized = __webpack_require__(36);
 
@@ -5838,7 +5838,7 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(141));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
@@ -6545,6 +6545,28 @@ function _labelBlankNodes(issuer, element) {
 /* 14 */
 /***/ (function(module, exports) {
 
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
 module.exports = assert;
 
 function assert(val, msg) {
@@ -6559,7 +6581,7 @@ assert.equal = function assertEqual(l, r, msg) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6567,7 +6589,7 @@ assert.equal = function assertEqual(l, r, msg) {
 
 var utils = exports;
 var BN = __webpack_require__(10);
-var minAssert = __webpack_require__(14);
+var minAssert = __webpack_require__(15);
 var minUtils = __webpack_require__(113);
 
 utils.assert = minAssert;
@@ -6684,28 +6706,6 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return _typeof2(obj);
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-    };
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
 
 /***/ }),
 /* 17 */
@@ -6845,7 +6845,7 @@ api.isUndefined = function (v) {
 "use strict";
 
 
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(1);
 
 exports.inherits = inherits;
@@ -7671,7 +7671,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
@@ -7862,7 +7862,7 @@ function _invokeCallback(callback, err, result) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
@@ -10267,7 +10267,15 @@ module.exports = Hash;
 "use strict";
 
 
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+var _interopRequireDefault = __webpack_require__(0);
+
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
 
 var codes = {};
 
@@ -10372,7 +10380,7 @@ createErrorType('ERR_INVALID_ARG_TYPE', function (name, expected, actual) {
     msg = "The \"".concat(name, "\" ").concat(type, " ").concat(determiner, " ").concat(oneOf(expected, 'type'));
   }
 
-  msg += ". Received type ".concat(typeof actual);
+  msg += ". Received type ".concat((0, _typeof2["default"])(actual));
   return msg;
 }, TypeError);
 createErrorType('ERR_STREAM_PUSH_AFTER_EOF', 'stream.push() after EOF');
@@ -10392,7 +10400,6 @@ createErrorType('ERR_UNKNOWN_ENCODING', function (arg) {
 }, TypeError);
 createErrorType('ERR_STREAM_UNSHIFT_AFTER_END_EVENT', 'stream.unshift() after end event');
 module.exports.codes = codes;
-
 
 /***/ }),
 /* 35 */
@@ -11147,7 +11154,7 @@ function simpleEnd(buf) {
 
 
 var utils = __webpack_require__(18);
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 function BlockHash() {
   this.pending = null;
@@ -11274,7 +11281,7 @@ base.Node = __webpack_require__(232);
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(36));
 
@@ -12422,7 +12429,7 @@ module.exports = EVP_BytesToKey
 
 
 var BN = __webpack_require__(10);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var getNAF = utils.getNAF;
 var getJSF = utils.getJSF;
 var assert = utils.assert;
@@ -14681,7 +14688,7 @@ function getr(priv) {
 var elliptic = exports;
 
 elliptic.version = __webpack_require__(210).version;
-elliptic.utils = __webpack_require__(15);
+elliptic.utils = __webpack_require__(16);
 elliptic.rand = __webpack_require__(67);
 elliptic.curve = __webpack_require__(114);
 elliptic.curves = __webpack_require__(70);
@@ -14702,7 +14709,7 @@ var curves = exports;
 
 var hash = __webpack_require__(71);
 var curve = __webpack_require__(114);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 
 var assert = utils.assert;
 
@@ -19069,7 +19076,7 @@ exports.g1_256 = g1_256;
 var utils = __webpack_require__(18);
 var common = __webpack_require__(42);
 var shaCommon = __webpack_require__(115);
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 var sum32 = utils.sum32;
 var sum32_4 = utils.sum32_4;
@@ -19180,7 +19187,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(18);
 var common = __webpack_require__(42);
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 var rotr64_hi = utils.rotr64_hi;
 var rotr64_lo = utils.rotr64_lo;
@@ -21447,8 +21454,10 @@ function indexOf(xs, x) {
 /* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(30).EventEmitter;
+"use strict";
 
+
+module.exports = __webpack_require__(30).EventEmitter;
 
 /***/ }),
 /* 128 */
@@ -21824,7 +21833,7 @@ function Writable(options) {
     if (typeof options.write === 'function') this._write = options.write;
     if (typeof options.writev === 'function') this._writev = options.writev;
     if (typeof options.destroy === 'function') this._destroy = options.destroy;
-    if (typeof options.final === 'function') this._final = options.final;
+    if (typeof options["final"] === 'function') this._final = options["final"];
   }
 
   Stream.call(this);
@@ -30140,7 +30149,7 @@ module.exports = normalize;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 /**
  * A JavaScript implementation of the JSON-LD API.
@@ -32515,7 +32524,7 @@ exports.padSplit = function padSplit(num, size, group) {
 "use strict";
 
 
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 function Cipher(options) {
   this.options = options;
@@ -32663,7 +32672,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 "use strict";
 
 
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(1);
 
 var des = __webpack_require__(64);
@@ -32813,7 +32822,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 "use strict";
 
 
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(1);
 
 var proto = {};
@@ -32885,7 +32894,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 "use strict";
 
 
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(1);
 
 var des = __webpack_require__(64);
@@ -33993,7 +34002,7 @@ module.exports = {"name":"elliptic","version":"6.5.0","description":"EC cryptogr
 "use strict";
 
 
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 
 var BN = __webpack_require__(10);
 
@@ -34839,7 +34848,7 @@ var BN = __webpack_require__(10);
 var inherits = __webpack_require__(1);
 var Base = __webpack_require__(52);
 
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 
 function MontCurve(conf) {
   Base.call(this, 'mont', conf);
@@ -35020,7 +35029,7 @@ Point.prototype.getX = function getX() {
 "use strict";
 
 
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var BN = __webpack_require__(10);
 var inherits = __webpack_require__(1);
 var Base = __webpack_require__(52);
@@ -35787,7 +35796,7 @@ var sh = [
 
 
 var utils = __webpack_require__(18);
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 function Hmac(hash, key, enc) {
   if (!(this instanceof Hmac))
@@ -36628,7 +36637,7 @@ module.exports = {
 
 var BN = __webpack_require__(10);
 var HmacDRBG = __webpack_require__(222);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var curves = __webpack_require__(70);
 var rand = __webpack_require__(67);
 var assert = utils.assert;
@@ -36876,7 +36885,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 var hash = __webpack_require__(71);
 var utils = __webpack_require__(113);
-var assert = __webpack_require__(14);
+var assert = __webpack_require__(15);
 
 function HmacDRBG(options) {
   if (!(this instanceof HmacDRBG))
@@ -36995,7 +37004,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 var BN = __webpack_require__(10);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var assert = utils.assert;
 
 function KeyPair(ec, options) {
@@ -37121,7 +37130,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 var BN = __webpack_require__(10);
 
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var assert = utils.assert;
 
 function Signature(options, enc) {
@@ -37262,7 +37271,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 var hash = __webpack_require__(71);
 var curves = __webpack_require__(70);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
 var KeyPair = __webpack_require__(226);
@@ -37385,7 +37394,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 "use strict";
 
 
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
 var cachedProperty = utils.cachedProperty;
@@ -37488,7 +37497,7 @@ module.exports = KeyPair;
 
 
 var BN = __webpack_require__(10);
-var utils = __webpack_require__(15);
+var utils = __webpack_require__(16);
 var assert = utils.assert;
 var cachedProperty = utils.cachedProperty;
 var parseBytes = utils.parseBytes;
@@ -38039,7 +38048,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var Reporter = __webpack_require__(44).Reporter;
 
@@ -38047,7 +38056,7 @@ var EncoderBuffer = __webpack_require__(44).EncoderBuffer;
 
 var DecoderBuffer = __webpack_require__(44).DecoderBuffer;
 
-var assert = __webpack_require__(14); // Supported tags
+var assert = __webpack_require__(15); // Supported tags
 
 
 var tags = ['seq', 'seqof', 'set', 'setof', 'objid', 'bool', 'gentime', 'utctime', 'null_', 'enum', 'int', 'objDesc', 'bitstr', 'bmpstr', 'charstr', 'genstr', 'graphstr', 'ia5str', 'iso646str', 'numstr', 'octstr', 'printstr', 't61str', 'unistr', 'utf8str', 'videostr']; // Public methods list
@@ -39605,6 +39614,9 @@ module.exports = Dataset;
 /* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 exports = module.exports = __webpack_require__(126);
 exports.Stream = exports;
 exports.Readable = exports;
@@ -39614,7 +39626,6 @@ exports.Transform = __webpack_require__(131);
 exports.PassThrough = __webpack_require__(254);
 exports.finished = __webpack_require__(72);
 exports.pipeline = __webpack_require__(255);
-
 
 /***/ }),
 /* 249 */
@@ -39629,9 +39640,39 @@ exports.pipeline = __webpack_require__(255);
 "use strict";
 
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 var _require = __webpack_require__(9),
     Buffer = _require.Buffer;
@@ -39834,18 +39875,14 @@ var experimentalWarnings = new Set();
 
 function emitExperimentalWarning(feature) {
   if (experimentalWarnings.has(feature)) return;
-  var msg = feature + ' is an experimental feature. This feature could ' +
-       'change at any time';
+  var msg = feature + ' is an experimental feature. This feature could ' + 'change at any time';
   experimentalWarnings.add(feature);
   process.emitWarning(msg, 'ExperimentalWarning');
 }
 
 function noop() {}
 
-module.exports.emitExperimentalWarning = process.emitWarning
-  ? emitExperimentalWarning
-  : noop;
-
+module.exports.emitExperimentalWarning = process.emitWarning ? emitExperimentalWarning : noop;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
@@ -41039,79 +41076,93 @@ module.exports = N3Store;
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const DataFactory = __webpack_require__(25)
+"use strict";
 
-const xsd = {
+
+var DataFactory = __webpack_require__(25);
+
+var xsd = {
   decimal: 'http://www.w3.org/2001/XMLSchema#decimal',
-  boolean: 'http://www.w3.org/2001/XMLSchema#boolean',
-  double: 'http://www.w3.org/2001/XMLSchema#double',
+  "boolean": 'http://www.w3.org/2001/XMLSchema#boolean',
+  "double": 'http://www.w3.org/2001/XMLSchema#double',
   integer: 'http://www.w3.org/2001/XMLSchema#integer',
   string: 'http://www.w3.org/2001/XMLSchema#string'
-}
+};
+var DEFAULTGRAPH = DataFactory.defaultGraph(); // ### Constructs a term from the given internal string ID
 
-const DEFAULTGRAPH = DataFactory.defaultGraph()
+function fromId(id, factory) {
+  factory = factory || DataFactory; // Falsy value or empty string indicate the default graph
 
-// ### Constructs a term from the given internal string ID
-function fromId (id, factory) {
-  factory = factory || DataFactory
-
-  // Falsy value or empty string indicate the default graph
   if (!id) {
-    return factory.defaultGraph()
-  }
+    return factory.defaultGraph();
+  } // Identify the term type based on the first character
 
-  // Identify the term type based on the first character
+
   switch (id[0]) {
-    case '_': return factory.blankNode(id.substr(2))
-    case '?': return factory.variable(id.substr(1))
+    case '_':
+      return factory.blankNode(id.substr(2));
+
+    case '?':
+      return factory.variable(id.substr(1));
+
     case '"':
-    // Literal without datatype or language
+      // Literal without datatype or language
       if (id[id.length - 1] === '"') {
-        return factory.literal(id.substr(1, id.length - 2))
-      }
-      // Literal with datatype or language
-      const endPos = id.lastIndexOf('"', id.length - 1)
-      return factory.literal(
-        id.substr(1, endPos - 1),
-        id[endPos + 1] === '@' ? id.substr(endPos + 2) : factory.namedNode(id.substr(endPos + 3))
-      )
-    default: return factory.namedNode(id)
-  }
-}
+        return factory.literal(id.substr(1, id.length - 2));
+      } // Literal with datatype or language
 
-// ### Constructs an internal string ID from the given term or ID string
-function toId (term) {
+
+      var endPos = id.lastIndexOf('"', id.length - 1);
+      return factory.literal(id.substr(1, endPos - 1), id[endPos + 1] === '@' ? id.substr(endPos + 2) : factory.namedNode(id.substr(endPos + 3)));
+
+    default:
+      return factory.namedNode(id);
+  }
+} // ### Constructs an internal string ID from the given term or ID string
+
+
+function toId(term) {
   if (typeof term === 'string') {
-    return term
+    return term;
   }
+
   if (term && !term.equals(DEFAULTGRAPH) && term.id) {
-    return term.id
+    return term.id;
   }
+
   if (!term) {
-    return DEFAULTGRAPH.value
-  }
+    return DEFAULTGRAPH.value;
+  } // Term instantiated with another library
 
-  // Term instantiated with another library
+
   switch (term.termType) {
-    case 'NamedNode': return term.value
-    case 'BlankNode': return `_:${term.value}`
-    case 'Variable': return `?${term.value}`
-    case 'DefaultGraph': return ''
+    case 'NamedNode':
+      return term.value;
+
+    case 'BlankNode':
+      return "_:".concat(term.value);
+
+    case 'Variable':
+      return "?".concat(term.value);
+
+    case 'DefaultGraph':
+      return '';
+
     case 'Literal':
-      const datatype = term.datatype && term.datatype.value !== xsd.string ? `^^${term.datatype.value}` : ''
-      const language = term.language ? `@${term.language}` : datatype
+      var datatype = term.datatype && term.datatype.value !== xsd.string ? "^^".concat(term.datatype.value) : '';
+      var language = term.language ? "@".concat(term.language) : datatype;
+      return "\"".concat(term.value, "\"").concat(language);
 
-      return `"${term.value}"${language}`
-    default: throw new Error(`Unexpected termType: ${term.termType}`)
+    default:
+      throw new Error("Unexpected termType: ".concat(term.termType));
   }
-}
+} // ## Module exports
 
-// ## Module exports
+
 module.exports = {
-  fromId,
-  toId
-}
-
+  fromId: fromId,
+  toId: toId
+};
 
 /***/ }),
 /* 258 */
@@ -43362,7 +43413,7 @@ module.exports = Parser;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
@@ -46156,7 +46207,7 @@ module.exports = _objectWithoutPropertiesLoose;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -48494,7 +48545,7 @@ function getXMLSerializerClass() {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
@@ -50893,7 +50944,7 @@ function _objectToRDF(item) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+var _typeof2 = _interopRequireDefault(__webpack_require__(14));
 
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(73));
 
