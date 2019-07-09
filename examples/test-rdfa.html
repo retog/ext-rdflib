@@ -41,10 +41,11 @@
         </div>
     </div>
     <script>
-        let rdfa = document.getElementById("data").innerHTML
+        var rdfa = document.getElementById("data").innerHTML
         alert(rdfa);
-        $rdf.parse(rdfa, $rdf.graph(), window.location.toString().split('#')[0], "text/html", (err, result) => {
+        $rdf.parse(rdfa, $rdf.graph(), window.location.toString().split('#')[0], "text/html", function(err, result)  {
             if (err) {
+                console.log(err);
                 alert("error: " + err)
             } else {
                 alert("result: " + result);

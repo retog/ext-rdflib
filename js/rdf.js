@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import rdfjsDataModel  from "@rdfjs/data-model";
 import dataModel from 'rdf-data-model';
 import $rdf, {  Serializers, Parsers, graph as _graph, namedNode, Util, version as _version, blankNode, literal as __literal, quad as _quad } from "rdf-ext";

@@ -28,7 +28,8 @@
         let jsonld = document.getElementById("data").text
         $rdf.parse(jsonld, $rdf.graph(), window.location.toString().split('#')[0], "application/ld+json", (err, result) => {
             if (err) {
-                alert("error: "+err)
+                console.log(err);
+                alert("error: "+err);
             } else {
                 alert("result: "+result);
             }
