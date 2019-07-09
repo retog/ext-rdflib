@@ -7,7 +7,7 @@
 		exports["$rdf"] = factory(require("window"), require("fetch"));
 	else
 		root["$rdf"] = factory(root["window"], root["fetch"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__73__, __WEBPACK_EXTERNAL_MODULE__263__) {
+})(window, function(__WEBPACK_EXTERNAL_MODULE__74__, __WEBPACK_EXTERNAL_MODULE__263__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -143,8 +143,23 @@ if (typeof Object.create === 'function') {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /* eslint-disable node/no-deprecated-api */
-var buffer = __webpack_require__(5)
+var buffer = __webpack_require__(9)
 var Buffer = buffer.Buffer
 
 // alternative to using Object.keys for old browsers
@@ -208,7 +223,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 function _newArrowCheck(innerThis, boundThis) {
@@ -220,19 +235,83 @@ function _newArrowCheck(innerThis, boundThis) {
 module.exports = _newArrowCheck;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
 
-module.exports = _classCallCheck;
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
 
 /***/ }),
-/* 5 */
+/* 6 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(16);
+
+var assertThisInitialized = __webpack_require__(36);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(59);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -242,18 +321,19 @@ module.exports = _classCallCheck;
  * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
  * @license  MIT
  */
+
 /* eslint-disable no-proto */
 
 
+var base64 = __webpack_require__(168);
 
-var base64 = __webpack_require__(168)
-var ieee754 = __webpack_require__(169)
-var isArray = __webpack_require__(89)
+var ieee754 = __webpack_require__(169);
 
-exports.Buffer = Buffer
-exports.SlowBuffer = SlowBuffer
-exports.INSPECT_MAX_BYTES = 50
+var isArray = __webpack_require__(89);
 
+exports.Buffer = Buffer;
+exports.SlowBuffer = SlowBuffer;
+exports.INSPECT_MAX_BYTES = 50;
 /**
  * If `Buffer.TYPED_ARRAY_SUPPORT`:
  *   === true    Use Uint8Array implementation (fastest)
@@ -278,52 +358,55 @@ exports.INSPECT_MAX_BYTES = 50
  * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
  * get the Object implementation, which is slower but behaves correctly.
  */
-Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
-  ? global.TYPED_ARRAY_SUPPORT
-  : typedArraySupport()
 
+Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined ? global.TYPED_ARRAY_SUPPORT : typedArraySupport();
 /*
  * Export kMaxLength after typed array support is determined.
  */
-exports.kMaxLength = kMaxLength()
 
-function typedArraySupport () {
+exports.kMaxLength = kMaxLength();
+
+function typedArraySupport() {
   try {
-    var arr = new Uint8Array(1)
-    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    var arr = new Uint8Array(1);
+    arr.__proto__ = {
+      __proto__: Uint8Array.prototype,
+      foo: function foo() {
+        return 42;
+      }
+    };
     return arr.foo() === 42 && // typed array instances can be augmented
-        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
-        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+    typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+    arr.subarray(1, 1).byteLength === 0; // ie10 has broken `subarray`
   } catch (e) {
-    return false
+    return false;
   }
 }
 
-function kMaxLength () {
-  return Buffer.TYPED_ARRAY_SUPPORT
-    ? 0x7fffffff
-    : 0x3fffffff
+function kMaxLength() {
+  return Buffer.TYPED_ARRAY_SUPPORT ? 0x7fffffff : 0x3fffffff;
 }
 
-function createBuffer (that, length) {
+function createBuffer(that, length) {
   if (kMaxLength() < length) {
-    throw new RangeError('Invalid typed array length')
+    throw new RangeError('Invalid typed array length');
   }
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     // Return an augmented `Uint8Array` instance, for best performance
-    that = new Uint8Array(length)
-    that.__proto__ = Buffer.prototype
+    that = new Uint8Array(length);
+    that.__proto__ = Buffer.prototype;
   } else {
     // Fallback: Return an object instance of the Buffer class
     if (that === null) {
-      that = new Buffer(length)
+      that = new Buffer(length);
     }
-    that.length = length
+
+    that.length = length;
   }
 
-  return that
+  return that;
 }
-
 /**
  * The Buffer constructor returns instances of `Uint8Array` that have their
  * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
@@ -334,47 +417,47 @@ function createBuffer (that, length) {
  * The `Uint8Array` prototype remains unmodified.
  */
 
-function Buffer (arg, encodingOrOffset, length) {
-  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
-    return new Buffer(arg, encodingOrOffset, length)
-  }
 
-  // Common case.
+function Buffer(arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length);
+  } // Common case.
+
+
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
-      throw new Error(
-        'If encoding is specified then the first argument must be a string'
-      )
+      throw new Error('If encoding is specified then the first argument must be a string');
     }
-    return allocUnsafe(this, arg)
+
+    return allocUnsafe(this, arg);
   }
-  return from(this, arg, encodingOrOffset, length)
+
+  return from(this, arg, encodingOrOffset, length);
 }
 
-Buffer.poolSize = 8192 // not used by this implementation
-
+Buffer.poolSize = 8192; // not used by this implementation
 // TODO: Legacy, not needed anymore. Remove in next major version.
-Buffer._augment = function (arr) {
-  arr.__proto__ = Buffer.prototype
-  return arr
-}
 
-function from (that, value, encodingOrOffset, length) {
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype;
+  return arr;
+};
+
+function from(that, value, encodingOrOffset, length) {
   if (typeof value === 'number') {
-    throw new TypeError('"value" argument must not be a number')
+    throw new TypeError('"value" argument must not be a number');
   }
 
   if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
-    return fromArrayBuffer(that, value, encodingOrOffset, length)
+    return fromArrayBuffer(that, value, encodingOrOffset, length);
   }
 
   if (typeof value === 'string') {
-    return fromString(that, value, encodingOrOffset)
+    return fromString(that, value, encodingOrOffset);
   }
 
-  return fromObject(that, value)
+  return fromObject(that, value);
 }
-
 /**
  * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
  * if value is a number.
@@ -383,217 +466,229 @@ function from (that, value, encodingOrOffset, length) {
  * Buffer.from(buffer)
  * Buffer.from(arrayBuffer[, byteOffset[, length]])
  **/
+
+
 Buffer.from = function (value, encodingOrOffset, length) {
-  return from(null, value, encodingOrOffset, length)
-}
+  return from(null, value, encodingOrOffset, length);
+};
 
 if (Buffer.TYPED_ARRAY_SUPPORT) {
-  Buffer.prototype.__proto__ = Uint8Array.prototype
-  Buffer.__proto__ = Uint8Array
-  if (typeof Symbol !== 'undefined' && Symbol.species &&
-      Buffer[Symbol.species] === Buffer) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype;
+  Buffer.__proto__ = Uint8Array;
+
+  if (typeof Symbol !== 'undefined' && Symbol.species && Buffer[Symbol.species] === Buffer) {
     // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
     Object.defineProperty(Buffer, Symbol.species, {
       value: null,
       configurable: true
-    })
+    });
   }
 }
 
-function assertSize (size) {
+function assertSize(size) {
   if (typeof size !== 'number') {
-    throw new TypeError('"size" argument must be a number')
+    throw new TypeError('"size" argument must be a number');
   } else if (size < 0) {
-    throw new RangeError('"size" argument must not be negative')
+    throw new RangeError('"size" argument must not be negative');
   }
 }
 
-function alloc (that, size, fill, encoding) {
-  assertSize(size)
+function alloc(that, size, fill, encoding) {
+  assertSize(size);
+
   if (size <= 0) {
-    return createBuffer(that, size)
+    return createBuffer(that, size);
   }
+
   if (fill !== undefined) {
     // Only pay attention to encoding if it's a string. This
     // prevents accidentally sending in a number that would
     // be interpretted as a start offset.
-    return typeof encoding === 'string'
-      ? createBuffer(that, size).fill(fill, encoding)
-      : createBuffer(that, size).fill(fill)
+    return typeof encoding === 'string' ? createBuffer(that, size).fill(fill, encoding) : createBuffer(that, size).fill(fill);
   }
-  return createBuffer(that, size)
-}
 
+  return createBuffer(that, size);
+}
 /**
  * Creates a new filled Buffer instance.
  * alloc(size[, fill[, encoding]])
  **/
-Buffer.alloc = function (size, fill, encoding) {
-  return alloc(null, size, fill, encoding)
-}
 
-function allocUnsafe (that, size) {
-  assertSize(size)
-  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding);
+};
+
+function allocUnsafe(that, size) {
+  assertSize(size);
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0);
+
   if (!Buffer.TYPED_ARRAY_SUPPORT) {
     for (var i = 0; i < size; ++i) {
-      that[i] = 0
+      that[i] = 0;
     }
   }
-  return that
-}
 
+  return that;
+}
 /**
  * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
  * */
+
+
 Buffer.allocUnsafe = function (size) {
-  return allocUnsafe(null, size)
-}
+  return allocUnsafe(null, size);
+};
 /**
  * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
  */
-Buffer.allocUnsafeSlow = function (size) {
-  return allocUnsafe(null, size)
-}
 
-function fromString (that, string, encoding) {
+
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size);
+};
+
+function fromString(that, string, encoding) {
   if (typeof encoding !== 'string' || encoding === '') {
-    encoding = 'utf8'
+    encoding = 'utf8';
   }
 
   if (!Buffer.isEncoding(encoding)) {
-    throw new TypeError('"encoding" must be a valid string encoding')
+    throw new TypeError('"encoding" must be a valid string encoding');
   }
 
-  var length = byteLength(string, encoding) | 0
-  that = createBuffer(that, length)
-
-  var actual = that.write(string, encoding)
+  var length = byteLength(string, encoding) | 0;
+  that = createBuffer(that, length);
+  var actual = that.write(string, encoding);
 
   if (actual !== length) {
     // Writing a hex string, for example, that contains invalid characters will
     // cause everything after the first invalid character to be ignored. (e.g.
     // 'abxxcd' will be treated as 'ab')
-    that = that.slice(0, actual)
+    that = that.slice(0, actual);
   }
 
-  return that
+  return that;
 }
 
-function fromArrayLike (that, array) {
-  var length = array.length < 0 ? 0 : checked(array.length) | 0
-  that = createBuffer(that, length)
+function fromArrayLike(that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0;
+  that = createBuffer(that, length);
+
   for (var i = 0; i < length; i += 1) {
-    that[i] = array[i] & 255
+    that[i] = array[i] & 255;
   }
-  return that
+
+  return that;
 }
 
-function fromArrayBuffer (that, array, byteOffset, length) {
-  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+function fromArrayBuffer(that, array, byteOffset, length) {
+  array.byteLength; // this throws if `array` is not a valid ArrayBuffer
 
   if (byteOffset < 0 || array.byteLength < byteOffset) {
-    throw new RangeError('\'offset\' is out of bounds')
+    throw new RangeError('\'offset\' is out of bounds');
   }
 
   if (array.byteLength < byteOffset + (length || 0)) {
-    throw new RangeError('\'length\' is out of bounds')
+    throw new RangeError('\'length\' is out of bounds');
   }
 
   if (byteOffset === undefined && length === undefined) {
-    array = new Uint8Array(array)
+    array = new Uint8Array(array);
   } else if (length === undefined) {
-    array = new Uint8Array(array, byteOffset)
+    array = new Uint8Array(array, byteOffset);
   } else {
-    array = new Uint8Array(array, byteOffset, length)
+    array = new Uint8Array(array, byteOffset, length);
   }
 
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     // Return an augmented `Uint8Array` instance, for best performance
-    that = array
-    that.__proto__ = Buffer.prototype
+    that = array;
+    that.__proto__ = Buffer.prototype;
   } else {
     // Fallback: Return an object instance of the Buffer class
-    that = fromArrayLike(that, array)
+    that = fromArrayLike(that, array);
   }
-  return that
+
+  return that;
 }
 
-function fromObject (that, obj) {
+function fromObject(that, obj) {
   if (Buffer.isBuffer(obj)) {
-    var len = checked(obj.length) | 0
-    that = createBuffer(that, len)
+    var len = checked(obj.length) | 0;
+    that = createBuffer(that, len);
 
     if (that.length === 0) {
-      return that
+      return that;
     }
 
-    obj.copy(that, 0, 0, len)
-    return that
+    obj.copy(that, 0, 0, len);
+    return that;
   }
 
   if (obj) {
-    if ((typeof ArrayBuffer !== 'undefined' &&
-        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+    if (typeof ArrayBuffer !== 'undefined' && obj.buffer instanceof ArrayBuffer || 'length' in obj) {
       if (typeof obj.length !== 'number' || isnan(obj.length)) {
-        return createBuffer(that, 0)
+        return createBuffer(that, 0);
       }
-      return fromArrayLike(that, obj)
+
+      return fromArrayLike(that, obj);
     }
 
     if (obj.type === 'Buffer' && isArray(obj.data)) {
-      return fromArrayLike(that, obj.data)
+      return fromArrayLike(that, obj.data);
     }
   }
 
-  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.');
 }
 
-function checked (length) {
+function checked(length) {
   // Note: cannot use `length < kMaxLength()` here because that fails when
   // length is NaN (which is otherwise coerced to zero.)
   if (length >= kMaxLength()) {
-    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
-                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' + 'size: 0x' + kMaxLength().toString(16) + ' bytes');
   }
-  return length | 0
+
+  return length | 0;
 }
 
-function SlowBuffer (length) {
-  if (+length != length) { // eslint-disable-line eqeqeq
-    length = 0
+function SlowBuffer(length) {
+  if (+length != length) {
+    // eslint-disable-line eqeqeq
+    length = 0;
   }
-  return Buffer.alloc(+length)
+
+  return Buffer.alloc(+length);
 }
 
-Buffer.isBuffer = function isBuffer (b) {
-  return !!(b != null && b._isBuffer)
-}
+Buffer.isBuffer = function isBuffer(b) {
+  return !!(b != null && b._isBuffer);
+};
 
-Buffer.compare = function compare (a, b) {
+Buffer.compare = function compare(a, b) {
   if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
-    throw new TypeError('Arguments must be Buffers')
+    throw new TypeError('Arguments must be Buffers');
   }
 
-  if (a === b) return 0
-
-  var x = a.length
-  var y = b.length
+  if (a === b) return 0;
+  var x = a.length;
+  var y = b.length;
 
   for (var i = 0, len = Math.min(x, y); i < len; ++i) {
     if (a[i] !== b[i]) {
-      x = a[i]
-      y = b[i]
-      break
+      x = a[i];
+      y = b[i];
+      break;
     }
   }
 
-  if (x < y) return -1
-  if (y < x) return 1
-  return 0
-}
+  if (x < y) return -1;
+  if (y < x) return 1;
+  return 0;
+};
 
-Buffer.isEncoding = function isEncoding (encoding) {
+Buffer.isEncoding = function isEncoding(encoding) {
   switch (String(encoding).toLowerCase()) {
     case 'hex':
     case 'utf8':
@@ -606,287 +701,312 @@ Buffer.isEncoding = function isEncoding (encoding) {
     case 'ucs-2':
     case 'utf16le':
     case 'utf-16le':
-      return true
-    default:
-      return false
-  }
-}
+      return true;
 
-Buffer.concat = function concat (list, length) {
+    default:
+      return false;
+  }
+};
+
+Buffer.concat = function concat(list, length) {
   if (!isArray(list)) {
-    throw new TypeError('"list" argument must be an Array of Buffers')
+    throw new TypeError('"list" argument must be an Array of Buffers');
   }
 
   if (list.length === 0) {
-    return Buffer.alloc(0)
+    return Buffer.alloc(0);
   }
 
-  var i
+  var i;
+
   if (length === undefined) {
-    length = 0
+    length = 0;
+
     for (i = 0; i < list.length; ++i) {
-      length += list[i].length
+      length += list[i].length;
     }
   }
 
-  var buffer = Buffer.allocUnsafe(length)
-  var pos = 0
+  var buffer = Buffer.allocUnsafe(length);
+  var pos = 0;
+
   for (i = 0; i < list.length; ++i) {
-    var buf = list[i]
+    var buf = list[i];
+
     if (!Buffer.isBuffer(buf)) {
-      throw new TypeError('"list" argument must be an Array of Buffers')
+      throw new TypeError('"list" argument must be an Array of Buffers');
     }
-    buf.copy(buffer, pos)
-    pos += buf.length
-  }
-  return buffer
-}
 
-function byteLength (string, encoding) {
+    buf.copy(buffer, pos);
+    pos += buf.length;
+  }
+
+  return buffer;
+};
+
+function byteLength(string, encoding) {
   if (Buffer.isBuffer(string)) {
-    return string.length
+    return string.length;
   }
-  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
-      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
-    return string.byteLength
+
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' && (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength;
   }
+
   if (typeof string !== 'string') {
-    string = '' + string
+    string = '' + string;
   }
 
-  var len = string.length
-  if (len === 0) return 0
+  var len = string.length;
+  if (len === 0) return 0; // Use a for loop to avoid recursion
 
-  // Use a for loop to avoid recursion
-  var loweredCase = false
+  var loweredCase = false;
+
   for (;;) {
     switch (encoding) {
       case 'ascii':
       case 'latin1':
       case 'binary':
-        return len
+        return len;
+
       case 'utf8':
       case 'utf-8':
       case undefined:
-        return utf8ToBytes(string).length
+        return utf8ToBytes(string).length;
+
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
-        return len * 2
+        return len * 2;
+
       case 'hex':
-        return len >>> 1
+        return len >>> 1;
+
       case 'base64':
-        return base64ToBytes(string).length
+        return base64ToBytes(string).length;
+
       default:
-        if (loweredCase) return utf8ToBytes(string).length // assume utf8
-        encoding = ('' + encoding).toLowerCase()
-        loweredCase = true
+        if (loweredCase) return utf8ToBytes(string).length; // assume utf8
+
+        encoding = ('' + encoding).toLowerCase();
+        loweredCase = true;
     }
   }
 }
-Buffer.byteLength = byteLength
 
-function slowToString (encoding, start, end) {
-  var loweredCase = false
+Buffer.byteLength = byteLength;
 
-  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+function slowToString(encoding, start, end) {
+  var loweredCase = false; // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
   // property of a typed array.
-
   // This behaves neither like String nor Uint8Array in that we set start/end
   // to their upper/lower bounds if the value passed is out of range.
   // undefined is handled specially as per ECMA-262 6th Edition,
   // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+
   if (start === undefined || start < 0) {
-    start = 0
-  }
-  // Return early if start > this.length. Done here to prevent potential uint32
+    start = 0;
+  } // Return early if start > this.length. Done here to prevent potential uint32
   // coercion fail below.
+
+
   if (start > this.length) {
-    return ''
+    return '';
   }
 
   if (end === undefined || end > this.length) {
-    end = this.length
+    end = this.length;
   }
 
   if (end <= 0) {
-    return ''
-  }
+    return '';
+  } // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
 
-  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
-  end >>>= 0
-  start >>>= 0
+
+  end >>>= 0;
+  start >>>= 0;
 
   if (end <= start) {
-    return ''
+    return '';
   }
 
-  if (!encoding) encoding = 'utf8'
+  if (!encoding) encoding = 'utf8';
 
   while (true) {
     switch (encoding) {
       case 'hex':
-        return hexSlice(this, start, end)
+        return hexSlice(this, start, end);
 
       case 'utf8':
       case 'utf-8':
-        return utf8Slice(this, start, end)
+        return utf8Slice(this, start, end);
 
       case 'ascii':
-        return asciiSlice(this, start, end)
+        return asciiSlice(this, start, end);
 
       case 'latin1':
       case 'binary':
-        return latin1Slice(this, start, end)
+        return latin1Slice(this, start, end);
 
       case 'base64':
-        return base64Slice(this, start, end)
+        return base64Slice(this, start, end);
 
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
-        return utf16leSlice(this, start, end)
+        return utf16leSlice(this, start, end);
 
       default:
-        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
-        encoding = (encoding + '').toLowerCase()
-        loweredCase = true
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
+        encoding = (encoding + '').toLowerCase();
+        loweredCase = true;
     }
   }
-}
-
-// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+} // The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
 // Buffer instances.
-Buffer.prototype._isBuffer = true
 
-function swap (b, n, m) {
-  var i = b[n]
-  b[n] = b[m]
-  b[m] = i
+
+Buffer.prototype._isBuffer = true;
+
+function swap(b, n, m) {
+  var i = b[n];
+  b[n] = b[m];
+  b[m] = i;
 }
 
-Buffer.prototype.swap16 = function swap16 () {
-  var len = this.length
+Buffer.prototype.swap16 = function swap16() {
+  var len = this.length;
+
   if (len % 2 !== 0) {
-    throw new RangeError('Buffer size must be a multiple of 16-bits')
+    throw new RangeError('Buffer size must be a multiple of 16-bits');
   }
+
   for (var i = 0; i < len; i += 2) {
-    swap(this, i, i + 1)
+    swap(this, i, i + 1);
   }
-  return this
-}
 
-Buffer.prototype.swap32 = function swap32 () {
-  var len = this.length
+  return this;
+};
+
+Buffer.prototype.swap32 = function swap32() {
+  var len = this.length;
+
   if (len % 4 !== 0) {
-    throw new RangeError('Buffer size must be a multiple of 32-bits')
+    throw new RangeError('Buffer size must be a multiple of 32-bits');
   }
+
   for (var i = 0; i < len; i += 4) {
-    swap(this, i, i + 3)
-    swap(this, i + 1, i + 2)
+    swap(this, i, i + 3);
+    swap(this, i + 1, i + 2);
   }
-  return this
-}
 
-Buffer.prototype.swap64 = function swap64 () {
-  var len = this.length
+  return this;
+};
+
+Buffer.prototype.swap64 = function swap64() {
+  var len = this.length;
+
   if (len % 8 !== 0) {
-    throw new RangeError('Buffer size must be a multiple of 64-bits')
+    throw new RangeError('Buffer size must be a multiple of 64-bits');
   }
+
   for (var i = 0; i < len; i += 8) {
-    swap(this, i, i + 7)
-    swap(this, i + 1, i + 6)
-    swap(this, i + 2, i + 5)
-    swap(this, i + 3, i + 4)
+    swap(this, i, i + 7);
+    swap(this, i + 1, i + 6);
+    swap(this, i + 2, i + 5);
+    swap(this, i + 3, i + 4);
   }
-  return this
-}
 
-Buffer.prototype.toString = function toString () {
-  var length = this.length | 0
-  if (length === 0) return ''
-  if (arguments.length === 0) return utf8Slice(this, 0, length)
-  return slowToString.apply(this, arguments)
-}
+  return this;
+};
 
-Buffer.prototype.equals = function equals (b) {
-  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
-  if (this === b) return true
-  return Buffer.compare(this, b) === 0
-}
+Buffer.prototype.toString = function toString() {
+  var length = this.length | 0;
+  if (length === 0) return '';
+  if (arguments.length === 0) return utf8Slice(this, 0, length);
+  return slowToString.apply(this, arguments);
+};
 
-Buffer.prototype.inspect = function inspect () {
-  var str = ''
-  var max = exports.INSPECT_MAX_BYTES
+Buffer.prototype.equals = function equals(b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer');
+  if (this === b) return true;
+  return Buffer.compare(this, b) === 0;
+};
+
+Buffer.prototype.inspect = function inspect() {
+  var str = '';
+  var max = exports.INSPECT_MAX_BYTES;
+
   if (this.length > 0) {
-    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
-    if (this.length > max) str += ' ... '
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ');
+    if (this.length > max) str += ' ... ';
   }
-  return '<Buffer ' + str + '>'
-}
 
-Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  return '<Buffer ' + str + '>';
+};
+
+Buffer.prototype.compare = function compare(target, start, end, thisStart, thisEnd) {
   if (!Buffer.isBuffer(target)) {
-    throw new TypeError('Argument must be a Buffer')
+    throw new TypeError('Argument must be a Buffer');
   }
 
   if (start === undefined) {
-    start = 0
+    start = 0;
   }
+
   if (end === undefined) {
-    end = target ? target.length : 0
+    end = target ? target.length : 0;
   }
+
   if (thisStart === undefined) {
-    thisStart = 0
+    thisStart = 0;
   }
+
   if (thisEnd === undefined) {
-    thisEnd = this.length
+    thisEnd = this.length;
   }
 
   if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
-    throw new RangeError('out of range index')
+    throw new RangeError('out of range index');
   }
 
   if (thisStart >= thisEnd && start >= end) {
-    return 0
+    return 0;
   }
+
   if (thisStart >= thisEnd) {
-    return -1
+    return -1;
   }
+
   if (start >= end) {
-    return 1
+    return 1;
   }
 
-  start >>>= 0
-  end >>>= 0
-  thisStart >>>= 0
-  thisEnd >>>= 0
-
-  if (this === target) return 0
-
-  var x = thisEnd - thisStart
-  var y = end - start
-  var len = Math.min(x, y)
-
-  var thisCopy = this.slice(thisStart, thisEnd)
-  var targetCopy = target.slice(start, end)
+  start >>>= 0;
+  end >>>= 0;
+  thisStart >>>= 0;
+  thisEnd >>>= 0;
+  if (this === target) return 0;
+  var x = thisEnd - thisStart;
+  var y = end - start;
+  var len = Math.min(x, y);
+  var thisCopy = this.slice(thisStart, thisEnd);
+  var targetCopy = target.slice(start, end);
 
   for (var i = 0; i < len; ++i) {
     if (thisCopy[i] !== targetCopy[i]) {
-      x = thisCopy[i]
-      y = targetCopy[i]
-      break
+      x = thisCopy[i];
+      y = targetCopy[i];
+      break;
     }
   }
 
-  if (x < y) return -1
-  if (y < x) return 1
-  return 0
-}
-
-// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+  if (x < y) return -1;
+  if (y < x) return 1;
+  return 0;
+}; // Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
 // OR the last index of `val` in `buffer` at offset <= `byteOffset`.
 //
 // Arguments:
@@ -895,1163 +1015,1163 @@ Buffer.prototype.compare = function compare (target, start, end, thisStart, this
 // - byteOffset - an index into `buffer`; will be clamped to an int32
 // - encoding - an optional encoding, relevant is val is a string
 // - dir - true for indexOf, false for lastIndexOf
-function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
-  // Empty buffer means no match
-  if (buffer.length === 0) return -1
 
-  // Normalize byteOffset
+
+function bidirectionalIndexOf(buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1; // Normalize byteOffset
+
   if (typeof byteOffset === 'string') {
-    encoding = byteOffset
-    byteOffset = 0
+    encoding = byteOffset;
+    byteOffset = 0;
   } else if (byteOffset > 0x7fffffff) {
-    byteOffset = 0x7fffffff
+    byteOffset = 0x7fffffff;
   } else if (byteOffset < -0x80000000) {
-    byteOffset = -0x80000000
+    byteOffset = -0x80000000;
   }
-  byteOffset = +byteOffset  // Coerce to Number.
+
+  byteOffset = +byteOffset; // Coerce to Number.
+
   if (isNaN(byteOffset)) {
     // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
-    byteOffset = dir ? 0 : (buffer.length - 1)
-  }
+    byteOffset = dir ? 0 : buffer.length - 1;
+  } // Normalize byteOffset: negative offsets start from the end of the buffer
 
-  // Normalize byteOffset: negative offsets start from the end of the buffer
-  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset;
+
   if (byteOffset >= buffer.length) {
-    if (dir) return -1
-    else byteOffset = buffer.length - 1
+    if (dir) return -1;else byteOffset = buffer.length - 1;
   } else if (byteOffset < 0) {
-    if (dir) byteOffset = 0
-    else return -1
-  }
+    if (dir) byteOffset = 0;else return -1;
+  } // Normalize val
 
-  // Normalize val
+
   if (typeof val === 'string') {
-    val = Buffer.from(val, encoding)
-  }
+    val = Buffer.from(val, encoding);
+  } // Finally, search either indexOf (if dir is true) or lastIndexOf
 
-  // Finally, search either indexOf (if dir is true) or lastIndexOf
+
   if (Buffer.isBuffer(val)) {
     // Special case: looking for empty string/buffer always fails
     if (val.length === 0) {
-      return -1
+      return -1;
     }
-    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir);
   } else if (typeof val === 'number') {
-    val = val & 0xFF // Search for a byte value [0-255]
-    if (Buffer.TYPED_ARRAY_SUPPORT &&
-        typeof Uint8Array.prototype.indexOf === 'function') {
+    val = val & 0xFF; // Search for a byte value [0-255]
+
+    if (Buffer.TYPED_ARRAY_SUPPORT && typeof Uint8Array.prototype.indexOf === 'function') {
       if (dir) {
-        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset);
       } else {
-        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset);
       }
     }
-    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+
+    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir);
   }
 
-  throw new TypeError('val must be string, number or Buffer')
+  throw new TypeError('val must be string, number or Buffer');
 }
 
-function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
-  var indexSize = 1
-  var arrLength = arr.length
-  var valLength = val.length
+function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1;
+  var arrLength = arr.length;
+  var valLength = val.length;
 
   if (encoding !== undefined) {
-    encoding = String(encoding).toLowerCase()
-    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
-        encoding === 'utf16le' || encoding === 'utf-16le') {
+    encoding = String(encoding).toLowerCase();
+
+    if (encoding === 'ucs2' || encoding === 'ucs-2' || encoding === 'utf16le' || encoding === 'utf-16le') {
       if (arr.length < 2 || val.length < 2) {
-        return -1
+        return -1;
       }
-      indexSize = 2
-      arrLength /= 2
-      valLength /= 2
-      byteOffset /= 2
+
+      indexSize = 2;
+      arrLength /= 2;
+      valLength /= 2;
+      byteOffset /= 2;
     }
   }
 
-  function read (buf, i) {
+  function read(buf, i) {
     if (indexSize === 1) {
-      return buf[i]
+      return buf[i];
     } else {
-      return buf.readUInt16BE(i * indexSize)
+      return buf.readUInt16BE(i * indexSize);
     }
   }
 
-  var i
+  var i;
+
   if (dir) {
-    var foundIndex = -1
+    var foundIndex = -1;
+
     for (i = byteOffset; i < arrLength; i++) {
       if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
-        if (foundIndex === -1) foundIndex = i
-        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+        if (foundIndex === -1) foundIndex = i;
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize;
       } else {
-        if (foundIndex !== -1) i -= i - foundIndex
-        foundIndex = -1
+        if (foundIndex !== -1) i -= i - foundIndex;
+        foundIndex = -1;
       }
     }
   } else {
-    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength;
+
     for (i = byteOffset; i >= 0; i--) {
-      var found = true
+      var found = true;
+
       for (var j = 0; j < valLength; j++) {
         if (read(arr, i + j) !== read(val, j)) {
-          found = false
-          break
+          found = false;
+          break;
         }
       }
-      if (found) return i
+
+      if (found) return i;
     }
   }
 
-  return -1
+  return -1;
 }
 
-Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
-  return this.indexOf(val, byteOffset, encoding) !== -1
-}
+Buffer.prototype.includes = function includes(val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1;
+};
 
-Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
-  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
-}
+Buffer.prototype.indexOf = function indexOf(val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true);
+};
 
-Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
-  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
-}
+Buffer.prototype.lastIndexOf = function lastIndexOf(val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false);
+};
 
-function hexWrite (buf, string, offset, length) {
-  offset = Number(offset) || 0
-  var remaining = buf.length - offset
+function hexWrite(buf, string, offset, length) {
+  offset = Number(offset) || 0;
+  var remaining = buf.length - offset;
+
   if (!length) {
-    length = remaining
+    length = remaining;
   } else {
-    length = Number(length)
-    if (length > remaining) {
-      length = remaining
-    }
-  }
+    length = Number(length);
 
-  // must be an even number of digits
-  var strLen = string.length
-  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+    if (length > remaining) {
+      length = remaining;
+    }
+  } // must be an even number of digits
+
+
+  var strLen = string.length;
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string');
 
   if (length > strLen / 2) {
-    length = strLen / 2
+    length = strLen / 2;
   }
+
   for (var i = 0; i < length; ++i) {
-    var parsed = parseInt(string.substr(i * 2, 2), 16)
-    if (isNaN(parsed)) return i
-    buf[offset + i] = parsed
+    var parsed = parseInt(string.substr(i * 2, 2), 16);
+    if (isNaN(parsed)) return i;
+    buf[offset + i] = parsed;
   }
-  return i
+
+  return i;
 }
 
-function utf8Write (buf, string, offset, length) {
-  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+function utf8Write(buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length);
 }
 
-function asciiWrite (buf, string, offset, length) {
-  return blitBuffer(asciiToBytes(string), buf, offset, length)
+function asciiWrite(buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length);
 }
 
-function latin1Write (buf, string, offset, length) {
-  return asciiWrite(buf, string, offset, length)
+function latin1Write(buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length);
 }
 
-function base64Write (buf, string, offset, length) {
-  return blitBuffer(base64ToBytes(string), buf, offset, length)
+function base64Write(buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length);
 }
 
-function ucs2Write (buf, string, offset, length) {
-  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+function ucs2Write(buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length);
 }
 
-Buffer.prototype.write = function write (string, offset, length, encoding) {
+Buffer.prototype.write = function write(string, offset, length, encoding) {
   // Buffer#write(string)
   if (offset === undefined) {
-    encoding = 'utf8'
-    length = this.length
-    offset = 0
-  // Buffer#write(string, encoding)
+    encoding = 'utf8';
+    length = this.length;
+    offset = 0; // Buffer#write(string, encoding)
   } else if (length === undefined && typeof offset === 'string') {
-    encoding = offset
-    length = this.length
-    offset = 0
-  // Buffer#write(string, offset[, length][, encoding])
+    encoding = offset;
+    length = this.length;
+    offset = 0; // Buffer#write(string, offset[, length][, encoding])
   } else if (isFinite(offset)) {
-    offset = offset | 0
+    offset = offset | 0;
+
     if (isFinite(length)) {
-      length = length | 0
-      if (encoding === undefined) encoding = 'utf8'
+      length = length | 0;
+      if (encoding === undefined) encoding = 'utf8';
     } else {
-      encoding = length
-      length = undefined
-    }
-  // legacy write(string, encoding, offset, length) - remove in v0.13
+      encoding = length;
+      length = undefined;
+    } // legacy write(string, encoding, offset, length) - remove in v0.13
+
   } else {
-    throw new Error(
-      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
-    )
+    throw new Error('Buffer.write(string, encoding, offset[, length]) is no longer supported');
   }
 
-  var remaining = this.length - offset
-  if (length === undefined || length > remaining) length = remaining
+  var remaining = this.length - offset;
+  if (length === undefined || length > remaining) length = remaining;
 
-  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
-    throw new RangeError('Attempt to write outside buffer bounds')
+  if (string.length > 0 && (length < 0 || offset < 0) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds');
   }
 
-  if (!encoding) encoding = 'utf8'
+  if (!encoding) encoding = 'utf8';
+  var loweredCase = false;
 
-  var loweredCase = false
   for (;;) {
     switch (encoding) {
       case 'hex':
-        return hexWrite(this, string, offset, length)
+        return hexWrite(this, string, offset, length);
 
       case 'utf8':
       case 'utf-8':
-        return utf8Write(this, string, offset, length)
+        return utf8Write(this, string, offset, length);
 
       case 'ascii':
-        return asciiWrite(this, string, offset, length)
+        return asciiWrite(this, string, offset, length);
 
       case 'latin1':
       case 'binary':
-        return latin1Write(this, string, offset, length)
+        return latin1Write(this, string, offset, length);
 
       case 'base64':
         // Warning: maxLength not taken into account in base64Write
-        return base64Write(this, string, offset, length)
+        return base64Write(this, string, offset, length);
 
       case 'ucs2':
       case 'ucs-2':
       case 'utf16le':
       case 'utf-16le':
-        return ucs2Write(this, string, offset, length)
+        return ucs2Write(this, string, offset, length);
 
       default:
-        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
-        encoding = ('' + encoding).toLowerCase()
-        loweredCase = true
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
+        encoding = ('' + encoding).toLowerCase();
+        loweredCase = true;
     }
   }
-}
+};
 
-Buffer.prototype.toJSON = function toJSON () {
+Buffer.prototype.toJSON = function toJSON() {
   return {
     type: 'Buffer',
     data: Array.prototype.slice.call(this._arr || this, 0)
-  }
-}
+  };
+};
 
-function base64Slice (buf, start, end) {
+function base64Slice(buf, start, end) {
   if (start === 0 && end === buf.length) {
-    return base64.fromByteArray(buf)
+    return base64.fromByteArray(buf);
   } else {
-    return base64.fromByteArray(buf.slice(start, end))
+    return base64.fromByteArray(buf.slice(start, end));
   }
 }
 
-function utf8Slice (buf, start, end) {
-  end = Math.min(buf.length, end)
-  var res = []
+function utf8Slice(buf, start, end) {
+  end = Math.min(buf.length, end);
+  var res = [];
+  var i = start;
 
-  var i = start
   while (i < end) {
-    var firstByte = buf[i]
-    var codePoint = null
-    var bytesPerSequence = (firstByte > 0xEF) ? 4
-      : (firstByte > 0xDF) ? 3
-      : (firstByte > 0xBF) ? 2
-      : 1
+    var firstByte = buf[i];
+    var codePoint = null;
+    var bytesPerSequence = firstByte > 0xEF ? 4 : firstByte > 0xDF ? 3 : firstByte > 0xBF ? 2 : 1;
 
     if (i + bytesPerSequence <= end) {
-      var secondByte, thirdByte, fourthByte, tempCodePoint
+      var secondByte, thirdByte, fourthByte, tempCodePoint;
 
       switch (bytesPerSequence) {
         case 1:
           if (firstByte < 0x80) {
-            codePoint = firstByte
+            codePoint = firstByte;
           }
-          break
+
+          break;
+
         case 2:
-          secondByte = buf[i + 1]
+          secondByte = buf[i + 1];
+
           if ((secondByte & 0xC0) === 0x80) {
-            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | secondByte & 0x3F;
+
             if (tempCodePoint > 0x7F) {
-              codePoint = tempCodePoint
+              codePoint = tempCodePoint;
             }
           }
-          break
+
+          break;
+
         case 3:
-          secondByte = buf[i + 1]
-          thirdByte = buf[i + 2]
+          secondByte = buf[i + 1];
+          thirdByte = buf[i + 2];
+
           if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
-            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | thirdByte & 0x3F;
+
             if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
-              codePoint = tempCodePoint
+              codePoint = tempCodePoint;
             }
           }
-          break
+
+          break;
+
         case 4:
-          secondByte = buf[i + 1]
-          thirdByte = buf[i + 2]
-          fourthByte = buf[i + 3]
+          secondByte = buf[i + 1];
+          thirdByte = buf[i + 2];
+          fourthByte = buf[i + 3];
+
           if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
-            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | fourthByte & 0x3F;
+
             if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
-              codePoint = tempCodePoint
+              codePoint = tempCodePoint;
             }
           }
+
       }
     }
 
     if (codePoint === null) {
       // we did not generate a valid codePoint so insert a
       // replacement char (U+FFFD) and advance only 1 byte
-      codePoint = 0xFFFD
-      bytesPerSequence = 1
+      codePoint = 0xFFFD;
+      bytesPerSequence = 1;
     } else if (codePoint > 0xFFFF) {
       // encode to utf16 (surrogate pair dance)
-      codePoint -= 0x10000
-      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
-      codePoint = 0xDC00 | codePoint & 0x3FF
+      codePoint -= 0x10000;
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800);
+      codePoint = 0xDC00 | codePoint & 0x3FF;
     }
 
-    res.push(codePoint)
-    i += bytesPerSequence
+    res.push(codePoint);
+    i += bytesPerSequence;
   }
 
-  return decodeCodePointsArray(res)
-}
-
-// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+  return decodeCodePointsArray(res);
+} // Based on http://stackoverflow.com/a/22747272/680742, the browser with
 // the lowest limit is Chrome, with 0x10000 args.
 // We go 1 magnitude less, for safety
-var MAX_ARGUMENTS_LENGTH = 0x1000
 
-function decodeCodePointsArray (codePoints) {
-  var len = codePoints.length
+
+var MAX_ARGUMENTS_LENGTH = 0x1000;
+
+function decodeCodePointsArray(codePoints) {
+  var len = codePoints.length;
+
   if (len <= MAX_ARGUMENTS_LENGTH) {
-    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
-  }
+    return String.fromCharCode.apply(String, codePoints); // avoid extra slice()
+  } // Decode in chunks to avoid "call stack size exceeded".
 
-  // Decode in chunks to avoid "call stack size exceeded".
-  var res = ''
-  var i = 0
+
+  var res = '';
+  var i = 0;
+
   while (i < len) {
-    res += String.fromCharCode.apply(
-      String,
-      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
-    )
+    res += String.fromCharCode.apply(String, codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH));
   }
-  return res
+
+  return res;
 }
 
-function asciiSlice (buf, start, end) {
-  var ret = ''
-  end = Math.min(buf.length, end)
+function asciiSlice(buf, start, end) {
+  var ret = '';
+  end = Math.min(buf.length, end);
 
   for (var i = start; i < end; ++i) {
-    ret += String.fromCharCode(buf[i] & 0x7F)
+    ret += String.fromCharCode(buf[i] & 0x7F);
   }
-  return ret
+
+  return ret;
 }
 
-function latin1Slice (buf, start, end) {
-  var ret = ''
-  end = Math.min(buf.length, end)
+function latin1Slice(buf, start, end) {
+  var ret = '';
+  end = Math.min(buf.length, end);
 
   for (var i = start; i < end; ++i) {
-    ret += String.fromCharCode(buf[i])
+    ret += String.fromCharCode(buf[i]);
   }
-  return ret
+
+  return ret;
 }
 
-function hexSlice (buf, start, end) {
-  var len = buf.length
+function hexSlice(buf, start, end) {
+  var len = buf.length;
+  if (!start || start < 0) start = 0;
+  if (!end || end < 0 || end > len) end = len;
+  var out = '';
 
-  if (!start || start < 0) start = 0
-  if (!end || end < 0 || end > len) end = len
-
-  var out = ''
   for (var i = start; i < end; ++i) {
-    out += toHex(buf[i])
+    out += toHex(buf[i]);
   }
-  return out
+
+  return out;
 }
 
-function utf16leSlice (buf, start, end) {
-  var bytes = buf.slice(start, end)
-  var res = ''
+function utf16leSlice(buf, start, end) {
+  var bytes = buf.slice(start, end);
+  var res = '';
+
   for (var i = 0; i < bytes.length; i += 2) {
-    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
   }
-  return res
+
+  return res;
 }
 
-Buffer.prototype.slice = function slice (start, end) {
-  var len = this.length
-  start = ~~start
-  end = end === undefined ? len : ~~end
+Buffer.prototype.slice = function slice(start, end) {
+  var len = this.length;
+  start = ~~start;
+  end = end === undefined ? len : ~~end;
 
   if (start < 0) {
-    start += len
-    if (start < 0) start = 0
+    start += len;
+    if (start < 0) start = 0;
   } else if (start > len) {
-    start = len
+    start = len;
   }
 
   if (end < 0) {
-    end += len
-    if (end < 0) end = 0
+    end += len;
+    if (end < 0) end = 0;
   } else if (end > len) {
-    end = len
+    end = len;
   }
 
-  if (end < start) end = start
+  if (end < start) end = start;
+  var newBuf;
 
-  var newBuf
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    newBuf = this.subarray(start, end)
-    newBuf.__proto__ = Buffer.prototype
+    newBuf = this.subarray(start, end);
+    newBuf.__proto__ = Buffer.prototype;
   } else {
-    var sliceLen = end - start
-    newBuf = new Buffer(sliceLen, undefined)
+    var sliceLen = end - start;
+    newBuf = new Buffer(sliceLen, undefined);
+
     for (var i = 0; i < sliceLen; ++i) {
-      newBuf[i] = this[i + start]
+      newBuf[i] = this[i + start];
     }
   }
 
-  return newBuf
-}
-
+  return newBuf;
+};
 /*
  * Need to make sure that buffer isn't trying to write out of bounds.
  */
-function checkOffset (offset, ext, length) {
-  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
-  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+
+
+function checkOffset(offset, ext, length) {
+  if (offset % 1 !== 0 || offset < 0) throw new RangeError('offset is not uint');
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length');
 }
 
-Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
+Buffer.prototype.readUIntLE = function readUIntLE(offset, byteLength, noAssert) {
+  offset = offset | 0;
+  byteLength = byteLength | 0;
+  if (!noAssert) checkOffset(offset, byteLength, this.length);
+  var val = this[offset];
+  var mul = 1;
+  var i = 0;
 
-  var val = this[offset]
-  var mul = 1
-  var i = 0
   while (++i < byteLength && (mul *= 0x100)) {
-    val += this[offset + i] * mul
+    val += this[offset + i] * mul;
   }
 
-  return val
-}
+  return val;
+};
 
-Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
+Buffer.prototype.readUIntBE = function readUIntBE(offset, byteLength, noAssert) {
+  offset = offset | 0;
+  byteLength = byteLength | 0;
+
   if (!noAssert) {
-    checkOffset(offset, byteLength, this.length)
+    checkOffset(offset, byteLength, this.length);
   }
 
-  var val = this[offset + --byteLength]
-  var mul = 1
+  var val = this[offset + --byteLength];
+  var mul = 1;
+
   while (byteLength > 0 && (mul *= 0x100)) {
-    val += this[offset + --byteLength] * mul
+    val += this[offset + --byteLength] * mul;
   }
 
-  return val
-}
+  return val;
+};
 
-Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 1, this.length)
-  return this[offset]
-}
+Buffer.prototype.readUInt8 = function readUInt8(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length);
+  return this[offset];
+};
 
-Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
-  return this[offset] | (this[offset + 1] << 8)
-}
+Buffer.prototype.readUInt16LE = function readUInt16LE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length);
+  return this[offset] | this[offset + 1] << 8;
+};
 
-Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
-  return (this[offset] << 8) | this[offset + 1]
-}
+Buffer.prototype.readUInt16BE = function readUInt16BE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length);
+  return this[offset] << 8 | this[offset + 1];
+};
 
-Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readUInt32LE = function readUInt32LE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return (this[offset] | this[offset + 1] << 8 | this[offset + 2] << 16) + this[offset + 3] * 0x1000000;
+};
 
-  return ((this[offset]) |
-      (this[offset + 1] << 8) |
-      (this[offset + 2] << 16)) +
-      (this[offset + 3] * 0x1000000)
-}
+Buffer.prototype.readUInt32BE = function readUInt32BE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return this[offset] * 0x1000000 + (this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3]);
+};
 
-Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readIntLE = function readIntLE(offset, byteLength, noAssert) {
+  offset = offset | 0;
+  byteLength = byteLength | 0;
+  if (!noAssert) checkOffset(offset, byteLength, this.length);
+  var val = this[offset];
+  var mul = 1;
+  var i = 0;
 
-  return (this[offset] * 0x1000000) +
-    ((this[offset + 1] << 16) |
-    (this[offset + 2] << 8) |
-    this[offset + 3])
-}
-
-Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
-
-  var val = this[offset]
-  var mul = 1
-  var i = 0
   while (++i < byteLength && (mul *= 0x100)) {
-    val += this[offset + i] * mul
+    val += this[offset + i] * mul;
   }
-  mul *= 0x80
 
-  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+  mul *= 0x80;
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength);
+  return val;
+};
 
-  return val
-}
+Buffer.prototype.readIntBE = function readIntBE(offset, byteLength, noAssert) {
+  offset = offset | 0;
+  byteLength = byteLength | 0;
+  if (!noAssert) checkOffset(offset, byteLength, this.length);
+  var i = byteLength;
+  var mul = 1;
+  var val = this[offset + --i];
 
-Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
-
-  var i = byteLength
-  var mul = 1
-  var val = this[offset + --i]
   while (i > 0 && (mul *= 0x100)) {
-    val += this[offset + --i] * mul
+    val += this[offset + --i] * mul;
   }
-  mul *= 0x80
 
-  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+  mul *= 0x80;
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength);
+  return val;
+};
 
-  return val
+Buffer.prototype.readInt8 = function readInt8(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length);
+  if (!(this[offset] & 0x80)) return this[offset];
+  return (0xff - this[offset] + 1) * -1;
+};
+
+Buffer.prototype.readInt16LE = function readInt16LE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length);
+  var val = this[offset] | this[offset + 1] << 8;
+  return val & 0x8000 ? val | 0xFFFF0000 : val;
+};
+
+Buffer.prototype.readInt16BE = function readInt16BE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length);
+  var val = this[offset + 1] | this[offset] << 8;
+  return val & 0x8000 ? val | 0xFFFF0000 : val;
+};
+
+Buffer.prototype.readInt32LE = function readInt32LE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return this[offset] | this[offset + 1] << 8 | this[offset + 2] << 16 | this[offset + 3] << 24;
+};
+
+Buffer.prototype.readInt32BE = function readInt32BE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return this[offset] << 24 | this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3];
+};
+
+Buffer.prototype.readFloatLE = function readFloatLE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return ieee754.read(this, offset, true, 23, 4);
+};
+
+Buffer.prototype.readFloatBE = function readFloatBE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length);
+  return ieee754.read(this, offset, false, 23, 4);
+};
+
+Buffer.prototype.readDoubleLE = function readDoubleLE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length);
+  return ieee754.read(this, offset, true, 52, 8);
+};
+
+Buffer.prototype.readDoubleBE = function readDoubleBE(offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length);
+  return ieee754.read(this, offset, false, 52, 8);
+};
+
+function checkInt(buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance');
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds');
+  if (offset + ext > buf.length) throw new RangeError('Index out of range');
 }
 
-Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 1, this.length)
-  if (!(this[offset] & 0x80)) return (this[offset])
-  return ((0xff - this[offset] + 1) * -1)
-}
+Buffer.prototype.writeUIntLE = function writeUIntLE(value, offset, byteLength, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  byteLength = byteLength | 0;
 
-Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
-  var val = this[offset] | (this[offset + 1] << 8)
-  return (val & 0x8000) ? val | 0xFFFF0000 : val
-}
-
-Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
-  var val = this[offset + 1] | (this[offset] << 8)
-  return (val & 0x8000) ? val | 0xFFFF0000 : val
-}
-
-Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
-
-  return (this[offset]) |
-    (this[offset + 1] << 8) |
-    (this[offset + 2] << 16) |
-    (this[offset + 3] << 24)
-}
-
-Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
-
-  return (this[offset] << 24) |
-    (this[offset + 1] << 16) |
-    (this[offset + 2] << 8) |
-    (this[offset + 3])
-}
-
-Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
-  return ieee754.read(this, offset, true, 23, 4)
-}
-
-Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
-  return ieee754.read(this, offset, false, 23, 4)
-}
-
-Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 8, this.length)
-  return ieee754.read(this, offset, true, 52, 8)
-}
-
-Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 8, this.length)
-  return ieee754.read(this, offset, false, 52, 8)
-}
-
-function checkInt (buf, value, offset, ext, max, min) {
-  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
-  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
-  if (offset + ext > buf.length) throw new RangeError('Index out of range')
-}
-
-Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
-  value = +value
-  offset = offset | 0
-  byteLength = byteLength | 0
   if (!noAssert) {
-    var maxBytes = Math.pow(2, 8 * byteLength) - 1
-    checkInt(this, value, offset, byteLength, maxBytes, 0)
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1;
+    checkInt(this, value, offset, byteLength, maxBytes, 0);
   }
 
-  var mul = 1
-  var i = 0
-  this[offset] = value & 0xFF
+  var mul = 1;
+  var i = 0;
+  this[offset] = value & 0xFF;
+
   while (++i < byteLength && (mul *= 0x100)) {
-    this[offset + i] = (value / mul) & 0xFF
+    this[offset + i] = value / mul & 0xFF;
   }
 
-  return offset + byteLength
-}
+  return offset + byteLength;
+};
 
-Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
-  value = +value
-  offset = offset | 0
-  byteLength = byteLength | 0
+Buffer.prototype.writeUIntBE = function writeUIntBE(value, offset, byteLength, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  byteLength = byteLength | 0;
+
   if (!noAssert) {
-    var maxBytes = Math.pow(2, 8 * byteLength) - 1
-    checkInt(this, value, offset, byteLength, maxBytes, 0)
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1;
+    checkInt(this, value, offset, byteLength, maxBytes, 0);
   }
 
-  var i = byteLength - 1
-  var mul = 1
-  this[offset + i] = value & 0xFF
+  var i = byteLength - 1;
+  var mul = 1;
+  this[offset + i] = value & 0xFF;
+
   while (--i >= 0 && (mul *= 0x100)) {
-    this[offset + i] = (value / mul) & 0xFF
+    this[offset + i] = value / mul & 0xFF;
   }
 
-  return offset + byteLength
-}
+  return offset + byteLength;
+};
 
-Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
-  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
-  this[offset] = (value & 0xff)
-  return offset + 1
-}
+Buffer.prototype.writeUInt8 = function writeUInt8(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0);
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value);
+  this[offset] = value & 0xff;
+  return offset + 1;
+};
 
-function objectWriteUInt16 (buf, value, offset, littleEndian) {
-  if (value < 0) value = 0xffff + value + 1
+function objectWriteUInt16(buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1;
+
   for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
-    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
-      (littleEndian ? i : 1 - i) * 8
+    buf[offset + i] = (value & 0xff << 8 * (littleEndian ? i : 1 - i)) >>> (littleEndian ? i : 1 - i) * 8;
   }
 }
 
-Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+Buffer.prototype.writeUInt16LE = function writeUInt16LE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
+    this[offset] = value & 0xff;
+    this[offset + 1] = value >>> 8;
   } else {
-    objectWriteUInt16(this, value, offset, true)
+    objectWriteUInt16(this, value, offset, true);
   }
-  return offset + 2
-}
 
-Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  return offset + 2;
+};
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 8)
-    this[offset + 1] = (value & 0xff)
+    this[offset] = value >>> 8;
+    this[offset + 1] = value & 0xff;
   } else {
-    objectWriteUInt16(this, value, offset, false)
+    objectWriteUInt16(this, value, offset, false);
   }
-  return offset + 2
-}
 
-function objectWriteUInt32 (buf, value, offset, littleEndian) {
-  if (value < 0) value = 0xffffffff + value + 1
+  return offset + 2;
+};
+
+function objectWriteUInt32(buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1;
+
   for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
-    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+    buf[offset + i] = value >>> (littleEndian ? i : 3 - i) * 8 & 0xff;
   }
 }
 
-Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+Buffer.prototype.writeUInt32LE = function writeUInt32LE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset + 3] = (value >>> 24)
-    this[offset + 2] = (value >>> 16)
-    this[offset + 1] = (value >>> 8)
-    this[offset] = (value & 0xff)
+    this[offset + 3] = value >>> 24;
+    this[offset + 2] = value >>> 16;
+    this[offset + 1] = value >>> 8;
+    this[offset] = value & 0xff;
   } else {
-    objectWriteUInt32(this, value, offset, true)
+    objectWriteUInt32(this, value, offset, true);
   }
-  return offset + 4
-}
 
-Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  return offset + 4;
+};
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 24)
-    this[offset + 1] = (value >>> 16)
-    this[offset + 2] = (value >>> 8)
-    this[offset + 3] = (value & 0xff)
+    this[offset] = value >>> 24;
+    this[offset + 1] = value >>> 16;
+    this[offset + 2] = value >>> 8;
+    this[offset + 3] = value & 0xff;
   } else {
-    objectWriteUInt32(this, value, offset, false)
+    objectWriteUInt32(this, value, offset, false);
   }
-  return offset + 4
-}
 
-Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
-  value = +value
-  offset = offset | 0
+  return offset + 4;
+};
+
+Buffer.prototype.writeIntLE = function writeIntLE(value, offset, byteLength, noAssert) {
+  value = +value;
+  offset = offset | 0;
+
   if (!noAssert) {
-    var limit = Math.pow(2, 8 * byteLength - 1)
-
-    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+    var limit = Math.pow(2, 8 * byteLength - 1);
+    checkInt(this, value, offset, byteLength, limit - 1, -limit);
   }
 
-  var i = 0
-  var mul = 1
-  var sub = 0
-  this[offset] = value & 0xFF
+  var i = 0;
+  var mul = 1;
+  var sub = 0;
+  this[offset] = value & 0xFF;
+
   while (++i < byteLength && (mul *= 0x100)) {
     if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
-      sub = 1
+      sub = 1;
     }
-    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+
+    this[offset + i] = (value / mul >> 0) - sub & 0xFF;
   }
 
-  return offset + byteLength
-}
+  return offset + byteLength;
+};
 
-Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
-  value = +value
-  offset = offset | 0
+Buffer.prototype.writeIntBE = function writeIntBE(value, offset, byteLength, noAssert) {
+  value = +value;
+  offset = offset | 0;
+
   if (!noAssert) {
-    var limit = Math.pow(2, 8 * byteLength - 1)
-
-    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+    var limit = Math.pow(2, 8 * byteLength - 1);
+    checkInt(this, value, offset, byteLength, limit - 1, -limit);
   }
 
-  var i = byteLength - 1
-  var mul = 1
-  var sub = 0
-  this[offset + i] = value & 0xFF
+  var i = byteLength - 1;
+  var mul = 1;
+  var sub = 0;
+  this[offset + i] = value & 0xFF;
+
   while (--i >= 0 && (mul *= 0x100)) {
     if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
-      sub = 1
+      sub = 1;
     }
-    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+
+    this[offset + i] = (value / mul >> 0) - sub & 0xFF;
   }
 
-  return offset + byteLength
-}
+  return offset + byteLength;
+};
 
-Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
-  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
-  if (value < 0) value = 0xff + value + 1
-  this[offset] = (value & 0xff)
-  return offset + 1
-}
+Buffer.prototype.writeInt8 = function writeInt8(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80);
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value);
+  if (value < 0) value = 0xff + value + 1;
+  this[offset] = value & 0xff;
+  return offset + 1;
+};
 
-Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+Buffer.prototype.writeInt16LE = function writeInt16LE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
+    this[offset] = value & 0xff;
+    this[offset + 1] = value >>> 8;
   } else {
-    objectWriteUInt16(this, value, offset, true)
+    objectWriteUInt16(this, value, offset, true);
   }
-  return offset + 2
-}
 
-Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  return offset + 2;
+};
+
+Buffer.prototype.writeInt16BE = function writeInt16BE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 8)
-    this[offset + 1] = (value & 0xff)
+    this[offset] = value >>> 8;
+    this[offset + 1] = value & 0xff;
   } else {
-    objectWriteUInt16(this, value, offset, false)
+    objectWriteUInt16(this, value, offset, false);
   }
-  return offset + 2
-}
 
-Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  return offset + 2;
+};
+
+Buffer.prototype.writeInt32LE = function writeInt32LE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000);
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
-    this[offset + 2] = (value >>> 16)
-    this[offset + 3] = (value >>> 24)
+    this[offset] = value & 0xff;
+    this[offset + 1] = value >>> 8;
+    this[offset + 2] = value >>> 16;
+    this[offset + 3] = value >>> 24;
   } else {
-    objectWriteUInt32(this, value, offset, true)
+    objectWriteUInt32(this, value, offset, true);
   }
-  return offset + 4
-}
 
-Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
-  value = +value
-  offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
-  if (value < 0) value = 0xffffffff + value + 1
+  return offset + 4;
+};
+
+Buffer.prototype.writeInt32BE = function writeInt32BE(value, offset, noAssert) {
+  value = +value;
+  offset = offset | 0;
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000);
+  if (value < 0) value = 0xffffffff + value + 1;
+
   if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 24)
-    this[offset + 1] = (value >>> 16)
-    this[offset + 2] = (value >>> 8)
-    this[offset + 3] = (value & 0xff)
+    this[offset] = value >>> 24;
+    this[offset + 1] = value >>> 16;
+    this[offset + 2] = value >>> 8;
+    this[offset + 3] = value & 0xff;
   } else {
-    objectWriteUInt32(this, value, offset, false)
+    objectWriteUInt32(this, value, offset, false);
   }
-  return offset + 4
+
+  return offset + 4;
+};
+
+function checkIEEE754(buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range');
+  if (offset < 0) throw new RangeError('Index out of range');
 }
 
-function checkIEEE754 (buf, value, offset, ext, max, min) {
-  if (offset + ext > buf.length) throw new RangeError('Index out of range')
-  if (offset < 0) throw new RangeError('Index out of range')
-}
-
-function writeFloat (buf, value, offset, littleEndian, noAssert) {
+function writeFloat(buf, value, offset, littleEndian, noAssert) {
   if (!noAssert) {
-    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38);
   }
-  ieee754.write(buf, value, offset, littleEndian, 23, 4)
-  return offset + 4
+
+  ieee754.write(buf, value, offset, littleEndian, 23, 4);
+  return offset + 4;
 }
 
-Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
-  return writeFloat(this, value, offset, true, noAssert)
-}
+Buffer.prototype.writeFloatLE = function writeFloatLE(value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert);
+};
 
-Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
-  return writeFloat(this, value, offset, false, noAssert)
-}
+Buffer.prototype.writeFloatBE = function writeFloatBE(value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert);
+};
 
-function writeDouble (buf, value, offset, littleEndian, noAssert) {
+function writeDouble(buf, value, offset, littleEndian, noAssert) {
   if (!noAssert) {
-    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308);
   }
-  ieee754.write(buf, value, offset, littleEndian, 52, 8)
-  return offset + 8
+
+  ieee754.write(buf, value, offset, littleEndian, 52, 8);
+  return offset + 8;
 }
 
-Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
-  return writeDouble(this, value, offset, true, noAssert)
-}
+Buffer.prototype.writeDoubleLE = function writeDoubleLE(value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert);
+};
 
-Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
-  return writeDouble(this, value, offset, false, noAssert)
-}
+Buffer.prototype.writeDoubleBE = function writeDoubleBE(value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert);
+}; // copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 
-// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
-Buffer.prototype.copy = function copy (target, targetStart, start, end) {
-  if (!start) start = 0
-  if (!end && end !== 0) end = this.length
-  if (targetStart >= target.length) targetStart = target.length
-  if (!targetStart) targetStart = 0
-  if (end > 0 && end < start) end = start
 
-  // Copy 0 bytes; we're done
-  if (end === start) return 0
-  if (target.length === 0 || this.length === 0) return 0
+Buffer.prototype.copy = function copy(target, targetStart, start, end) {
+  if (!start) start = 0;
+  if (!end && end !== 0) end = this.length;
+  if (targetStart >= target.length) targetStart = target.length;
+  if (!targetStart) targetStart = 0;
+  if (end > 0 && end < start) end = start; // Copy 0 bytes; we're done
 
-  // Fatal error conditions
+  if (end === start) return 0;
+  if (target.length === 0 || this.length === 0) return 0; // Fatal error conditions
+
   if (targetStart < 0) {
-    throw new RangeError('targetStart out of bounds')
+    throw new RangeError('targetStart out of bounds');
   }
-  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
-  if (end < 0) throw new RangeError('sourceEnd out of bounds')
 
-  // Are we oob?
-  if (end > this.length) end = this.length
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds');
+  if (end < 0) throw new RangeError('sourceEnd out of bounds'); // Are we oob?
+
+  if (end > this.length) end = this.length;
+
   if (target.length - targetStart < end - start) {
-    end = target.length - targetStart + start
+    end = target.length - targetStart + start;
   }
 
-  var len = end - start
-  var i
+  var len = end - start;
+  var i;
 
   if (this === target && start < targetStart && targetStart < end) {
     // descending copy from end
     for (i = len - 1; i >= 0; --i) {
-      target[i + targetStart] = this[i + start]
+      target[i + targetStart] = this[i + start];
     }
   } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
     // ascending copy from start
     for (i = 0; i < len; ++i) {
-      target[i + targetStart] = this[i + start]
+      target[i + targetStart] = this[i + start];
     }
   } else {
-    Uint8Array.prototype.set.call(
-      target,
-      this.subarray(start, start + len),
-      targetStart
-    )
+    Uint8Array.prototype.set.call(target, this.subarray(start, start + len), targetStart);
   }
 
-  return len
-}
-
-// Usage:
+  return len;
+}; // Usage:
 //    buffer.fill(number[, offset[, end]])
 //    buffer.fill(buffer[, offset[, end]])
 //    buffer.fill(string[, offset[, end]][, encoding])
-Buffer.prototype.fill = function fill (val, start, end, encoding) {
+
+
+Buffer.prototype.fill = function fill(val, start, end, encoding) {
   // Handle string cases:
   if (typeof val === 'string') {
     if (typeof start === 'string') {
-      encoding = start
-      start = 0
-      end = this.length
+      encoding = start;
+      start = 0;
+      end = this.length;
     } else if (typeof end === 'string') {
-      encoding = end
-      end = this.length
+      encoding = end;
+      end = this.length;
     }
+
     if (val.length === 1) {
-      var code = val.charCodeAt(0)
+      var code = val.charCodeAt(0);
+
       if (code < 256) {
-        val = code
+        val = code;
       }
     }
+
     if (encoding !== undefined && typeof encoding !== 'string') {
-      throw new TypeError('encoding must be a string')
+      throw new TypeError('encoding must be a string');
     }
+
     if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
-      throw new TypeError('Unknown encoding: ' + encoding)
+      throw new TypeError('Unknown encoding: ' + encoding);
     }
   } else if (typeof val === 'number') {
-    val = val & 255
-  }
+    val = val & 255;
+  } // Invalid ranges are not set to a default, so can range check early.
 
-  // Invalid ranges are not set to a default, so can range check early.
+
   if (start < 0 || this.length < start || this.length < end) {
-    throw new RangeError('Out of range index')
+    throw new RangeError('Out of range index');
   }
 
   if (end <= start) {
-    return this
+    return this;
   }
 
-  start = start >>> 0
-  end = end === undefined ? this.length : end >>> 0
+  start = start >>> 0;
+  end = end === undefined ? this.length : end >>> 0;
+  if (!val) val = 0;
+  var i;
 
-  if (!val) val = 0
-
-  var i
   if (typeof val === 'number') {
     for (i = start; i < end; ++i) {
-      this[i] = val
+      this[i] = val;
     }
   } else {
-    var bytes = Buffer.isBuffer(val)
-      ? val
-      : utf8ToBytes(new Buffer(val, encoding).toString())
-    var len = bytes.length
+    var bytes = Buffer.isBuffer(val) ? val : utf8ToBytes(new Buffer(val, encoding).toString());
+    var len = bytes.length;
+
     for (i = 0; i < end - start; ++i) {
-      this[i + start] = bytes[i % len]
+      this[i + start] = bytes[i % len];
     }
   }
 
-  return this
-}
-
-// HELPER FUNCTIONS
+  return this;
+}; // HELPER FUNCTIONS
 // ================
 
-var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
 
-function base64clean (str) {
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g;
+
+function base64clean(str) {
   // Node strips out invalid characters like \n and \t from the string, base64-js does not
-  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
-  // Node converts strings with length < 2 to ''
-  if (str.length < 2) return ''
-  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, ''); // Node converts strings with length < 2 to ''
+
+  if (str.length < 2) return ''; // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+
   while (str.length % 4 !== 0) {
-    str = str + '='
+    str = str + '=';
   }
-  return str
+
+  return str;
 }
 
-function stringtrim (str) {
-  if (str.trim) return str.trim()
-  return str.replace(/^\s+|\s+$/g, '')
+function stringtrim(str) {
+  if (str.trim) return str.trim();
+  return str.replace(/^\s+|\s+$/g, '');
 }
 
-function toHex (n) {
-  if (n < 16) return '0' + n.toString(16)
-  return n.toString(16)
+function toHex(n) {
+  if (n < 16) return '0' + n.toString(16);
+  return n.toString(16);
 }
 
-function utf8ToBytes (string, units) {
-  units = units || Infinity
-  var codePoint
-  var length = string.length
-  var leadSurrogate = null
-  var bytes = []
+function utf8ToBytes(string, units) {
+  units = units || Infinity;
+  var codePoint;
+  var length = string.length;
+  var leadSurrogate = null;
+  var bytes = [];
 
   for (var i = 0; i < length; ++i) {
-    codePoint = string.charCodeAt(i)
+    codePoint = string.charCodeAt(i); // is surrogate component
 
-    // is surrogate component
     if (codePoint > 0xD7FF && codePoint < 0xE000) {
       // last char was a lead
       if (!leadSurrogate) {
         // no lead yet
         if (codePoint > 0xDBFF) {
           // unexpected trail
-          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-          continue
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
+          continue;
         } else if (i + 1 === length) {
           // unpaired lead
-          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-          continue
-        }
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
+          continue;
+        } // valid lead
 
-        // valid lead
-        leadSurrogate = codePoint
 
-        continue
-      }
+        leadSurrogate = codePoint;
+        continue;
+      } // 2 leads in a row
 
-      // 2 leads in a row
+
       if (codePoint < 0xDC00) {
-        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-        leadSurrogate = codePoint
-        continue
-      }
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
+        leadSurrogate = codePoint;
+        continue;
+      } // valid surrogate pair
 
-      // valid surrogate pair
-      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000;
     } else if (leadSurrogate) {
       // valid bmp char, but last char was a lead
-      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
     }
 
-    leadSurrogate = null
+    leadSurrogate = null; // encode utf8
 
-    // encode utf8
     if (codePoint < 0x80) {
-      if ((units -= 1) < 0) break
-      bytes.push(codePoint)
+      if ((units -= 1) < 0) break;
+      bytes.push(codePoint);
     } else if (codePoint < 0x800) {
-      if ((units -= 2) < 0) break
-      bytes.push(
-        codePoint >> 0x6 | 0xC0,
-        codePoint & 0x3F | 0x80
-      )
+      if ((units -= 2) < 0) break;
+      bytes.push(codePoint >> 0x6 | 0xC0, codePoint & 0x3F | 0x80);
     } else if (codePoint < 0x10000) {
-      if ((units -= 3) < 0) break
-      bytes.push(
-        codePoint >> 0xC | 0xE0,
-        codePoint >> 0x6 & 0x3F | 0x80,
-        codePoint & 0x3F | 0x80
-      )
+      if ((units -= 3) < 0) break;
+      bytes.push(codePoint >> 0xC | 0xE0, codePoint >> 0x6 & 0x3F | 0x80, codePoint & 0x3F | 0x80);
     } else if (codePoint < 0x110000) {
-      if ((units -= 4) < 0) break
-      bytes.push(
-        codePoint >> 0x12 | 0xF0,
-        codePoint >> 0xC & 0x3F | 0x80,
-        codePoint >> 0x6 & 0x3F | 0x80,
-        codePoint & 0x3F | 0x80
-      )
+      if ((units -= 4) < 0) break;
+      bytes.push(codePoint >> 0x12 | 0xF0, codePoint >> 0xC & 0x3F | 0x80, codePoint >> 0x6 & 0x3F | 0x80, codePoint & 0x3F | 0x80);
     } else {
-      throw new Error('Invalid code point')
+      throw new Error('Invalid code point');
     }
   }
 
-  return bytes
+  return bytes;
 }
 
-function asciiToBytes (str) {
-  var byteArray = []
+function asciiToBytes(str) {
+  var byteArray = [];
+
   for (var i = 0; i < str.length; ++i) {
     // Node's code seems to be doing this and not & 0x7F..
-    byteArray.push(str.charCodeAt(i) & 0xFF)
+    byteArray.push(str.charCodeAt(i) & 0xFF);
   }
-  return byteArray
+
+  return byteArray;
 }
 
-function utf16leToBytes (str, units) {
-  var c, hi, lo
-  var byteArray = []
+function utf16leToBytes(str, units) {
+  var c, hi, lo;
+  var byteArray = [];
+
   for (var i = 0; i < str.length; ++i) {
-    if ((units -= 2) < 0) break
-
-    c = str.charCodeAt(i)
-    hi = c >> 8
-    lo = c % 256
-    byteArray.push(lo)
-    byteArray.push(hi)
+    if ((units -= 2) < 0) break;
+    c = str.charCodeAt(i);
+    hi = c >> 8;
+    lo = c % 256;
+    byteArray.push(lo);
+    byteArray.push(hi);
   }
 
-  return byteArray
+  return byteArray;
 }
 
-function base64ToBytes (str) {
-  return base64.toByteArray(base64clean(str))
+function base64ToBytes(str) {
+  return base64.toByteArray(base64clean(str));
 }
 
-function blitBuffer (src, dst, offset, length) {
+function blitBuffer(src, dst, offset, length) {
   for (var i = 0; i < length; ++i) {
-    if ((i + offset >= dst.length) || (i >= src.length)) break
-    dst[i + offset] = src[i]
+    if (i + offset >= dst.length || i >= src.length) break;
+    dst[i + offset] = src[i];
   }
-  return i
+
+  return i;
 }
 
-function isnan (val) {
-  return val !== val // eslint-disable-line no-self-compare
+function isnan(val) {
+  return val !== val; // eslint-disable-line no-self-compare
 }
-
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12)))
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-
-/***/ }),
-/* 7 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -5485,7 +5605,7 @@ module.exports = _createClass;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(111)(module)))
 
 /***/ }),
-/* 8 */
+/* 11 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -5675,60 +5795,6 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(17);
-
-var assertThisInitialized = __webpack_require__(86);
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return assertThisInitialized(self);
-}
-
-module.exports = _possibleConstructorReturn;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(58);
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) setPrototypeOf(subClass, superClass);
-}
-
-module.exports = _inherits;
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
@@ -5772,18 +5838,18 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(141));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
 var graphTypes = __webpack_require__(23);
 
-var types = __webpack_require__(16); // TODO: move `IdentifierIssuer` to its own package
+var types = __webpack_require__(17); // TODO: move `IdentifierIssuer` to its own package
 
 
-var IdentifierIssuer = __webpack_require__(74).IdentifierIssuer;
+var IdentifierIssuer = __webpack_require__(75).IdentifierIssuer;
 
 var JsonLdError = __webpack_require__(24); // constants
 
@@ -6473,7 +6539,7 @@ function _labelBlankNodes(issuer, element) {
 
   return element;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(38).setImmediate, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(39).setImmediate, __webpack_require__(11)))
 
 /***/ }),
 /* 14 */
@@ -6500,7 +6566,7 @@ assert.equal = function assertEqual(l, r, msg) {
 
 
 var utils = exports;
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var minAssert = __webpack_require__(14);
 var minUtils = __webpack_require__(113);
 
@@ -6621,6 +6687,28 @@ utils.intFromLE = intFromLE;
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports) {
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6631,7 +6719,7 @@ utils.intFromLE = intFromLE;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -6749,28 +6837,6 @@ api.isUndefined = function (v) {
   (0, _newArrowCheck2["default"])(this, _this);
   return typeof v === 'undefined';
 }.bind(void 0);
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return _typeof2(obj);
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-    };
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
 
 /***/ }),
 /* 18 */
@@ -7077,7 +7143,7 @@ module.exports = {
 exports = module.exports = __webpack_require__(91);
 exports.Stream = exports;
 exports.Readable = exports;
-exports.Writable = __webpack_require__(60);
+exports.Writable = __webpack_require__(61);
 exports.Duplex = __webpack_require__(27);
 exports.Transform = __webpack_require__(95);
 exports.PassThrough = __webpack_require__(174);
@@ -7144,11 +7210,11 @@ module.exports = _asyncToGenerator;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var api = {};
 module.exports = api;
@@ -7299,13 +7365,13 @@ api.isBlankNode = function (v) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(296));
 
@@ -7351,9 +7417,9 @@ module.exports = DataFactory
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var Transform = __webpack_require__(32).Transform
-var StringDecoder = __webpack_require__(39).StringDecoder
+var StringDecoder = __webpack_require__(40).StringDecoder
 var inherits = __webpack_require__(1)
 
 function CipherBase (hashMode) {
@@ -7487,7 +7553,7 @@ module.exports = CipherBase
 
 /*<replacement>*/
 
-var pna = __webpack_require__(48);
+var pna = __webpack_require__(49);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -7502,12 +7568,12 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var util = __webpack_require__(37);
+var util = __webpack_require__(38);
 util.inherits = __webpack_require__(1);
 /*</replacement>*/
 
 var Readable = __webpack_require__(91);
-var Writable = __webpack_require__(60);
+var Writable = __webpack_require__(61);
 
 util.inherits(Duplex, Readable);
 
@@ -7605,9 +7671,9 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -7782,7 +7848,7 @@ function _invokeCallback(callback, err, result) {
     }.bind(this));
   }
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(38).setImmediate, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(39).setImmediate, __webpack_require__(11)))
 
 /***/ }),
 /* 29 */
@@ -7796,7 +7862,7 @@ function _invokeCallback(callback, err, result) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
 var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
@@ -7806,7 +7872,7 @@ var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(302));
 
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(141));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -7816,13 +7882,13 @@ var ActiveContextCache = __webpack_require__(305);
 
 var JsonLdError = __webpack_require__(24);
 
-var _require = __webpack_require__(16),
+var _require = __webpack_require__(17),
     _isArray = _require.isArray,
     _isObject = _require.isObject,
     _isString = _require.isString,
     _isUndefined = _require.isUndefined;
 
-var _require2 = __webpack_require__(47),
+var _require2 = __webpack_require__(48),
     _isAbsoluteIri = _require2.isAbsolute,
     _isRelativeIri = _require2.isRelative,
     prependBase = _require2.prependBase,
@@ -9934,7 +10000,7 @@ function oldBrowser () {
   throw new Error('Secure random number generation is not supported by this browser.\nUse Chrome, Firefox or Internet Explorer 11')
 }
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var crypto = global.crypto || global.msCrypto
 
 if (crypto && crypto.getRandomValues) {
@@ -9971,7 +10037,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 32 */
@@ -10110,88 +10176,89 @@ Stream.prototype.pipe = function(dest, options) {
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
+"use strict";
 
-// prototype class for hash functions
-function Hash (blockSize, finalSize) {
-  this._block = Buffer.alloc(blockSize)
-  this._finalSize = finalSize
-  this._blockSize = blockSize
-  this._len = 0
+
+var Buffer = __webpack_require__(3).Buffer; // prototype class for hash functions
+
+
+function Hash(blockSize, finalSize) {
+  this._block = Buffer.alloc(blockSize);
+  this._finalSize = finalSize;
+  this._blockSize = blockSize;
+  this._len = 0;
 }
 
 Hash.prototype.update = function (data, enc) {
   if (typeof data === 'string') {
-    enc = enc || 'utf8'
-    data = Buffer.from(data, enc)
+    enc = enc || 'utf8';
+    data = Buffer.from(data, enc);
   }
 
-  var block = this._block
-  var blockSize = this._blockSize
-  var length = data.length
-  var accum = this._len
+  var block = this._block;
+  var blockSize = this._blockSize;
+  var length = data.length;
+  var accum = this._len;
 
   for (var offset = 0; offset < length;) {
-    var assigned = accum % blockSize
-    var remainder = Math.min(length - offset, blockSize - assigned)
+    var assigned = accum % blockSize;
+    var remainder = Math.min(length - offset, blockSize - assigned);
 
     for (var i = 0; i < remainder; i++) {
-      block[assigned + i] = data[offset + i]
+      block[assigned + i] = data[offset + i];
     }
 
-    accum += remainder
-    offset += remainder
+    accum += remainder;
+    offset += remainder;
 
-    if ((accum % blockSize) === 0) {
-      this._update(block)
+    if (accum % blockSize === 0) {
+      this._update(block);
     }
   }
 
-  this._len += length
-  return this
-}
+  this._len += length;
+  return this;
+};
 
 Hash.prototype.digest = function (enc) {
-  var rem = this._len % this._blockSize
-
-  this._block[rem] = 0x80
-
-  // zero (rem + 1) trailing bits, where (rem + 1) is the smallest
+  var rem = this._len % this._blockSize;
+  this._block[rem] = 0x80; // zero (rem + 1) trailing bits, where (rem + 1) is the smallest
   // non-negative solution to the equation (length + 1 + (rem + 1)) === finalSize mod blockSize
-  this._block.fill(0, rem + 1)
+
+  this._block.fill(0, rem + 1);
 
   if (rem >= this._finalSize) {
-    this._update(this._block)
-    this._block.fill(0)
+    this._update(this._block);
+
+    this._block.fill(0);
   }
 
-  var bits = this._len * 8
+  var bits = this._len * 8; // uint32
 
-  // uint32
   if (bits <= 0xffffffff) {
-    this._block.writeUInt32BE(bits, this._blockSize - 4)
+    this._block.writeUInt32BE(bits, this._blockSize - 4); // uint64
 
-  // uint64
   } else {
-    var lowBits = (bits & 0xffffffff) >>> 0
-    var highBits = (bits - lowBits) / 0x100000000
+    var lowBits = (bits & 0xffffffff) >>> 0;
+    var highBits = (bits - lowBits) / 0x100000000;
 
-    this._block.writeUInt32BE(highBits, this._blockSize - 8)
-    this._block.writeUInt32BE(lowBits, this._blockSize - 4)
+    this._block.writeUInt32BE(highBits, this._blockSize - 8);
+
+    this._block.writeUInt32BE(lowBits, this._blockSize - 4);
   }
 
-  this._update(this._block)
-  var hash = this._hash()
+  this._update(this._block);
 
-  return enc ? hash.toString(enc) : hash
-}
+  var hash = this._hash();
+
+  return enc ? hash.toString(enc) : hash;
+};
 
 Hash.prototype._update = function () {
-  throw new Error('_update must be implemented by subclass')
-}
+  throw new Error('_update must be implemented by subclass');
+};
 
-module.exports = Hash
-
+module.exports = Hash;
 
 /***/ }),
 /* 34 */
@@ -10471,18 +10538,32 @@ Object.defineProperty(Duplex.prototype, 'destroyed', {
     this._writableState.destroyed = value;
   }
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var inherits = __webpack_require__(1)
-var MD5 = __webpack_require__(59)
-var RIPEMD160 = __webpack_require__(61)
-var sha = __webpack_require__(62)
+var MD5 = __webpack_require__(60)
+var RIPEMD160 = __webpack_require__(62)
+var sha = __webpack_require__(63)
 var Base = __webpack_require__(26)
 
 function Hash (hash) {
@@ -10511,7 +10592,7 @@ module.exports = function createHash (alg) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
@@ -10622,10 +10703,10 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -10695,7 +10776,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12)))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10722,7 +10803,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /*<replacement>*/
 
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 /*</replacement>*/
 
 
@@ -11042,7 +11123,7 @@ function simpleEnd(buf) {
 }
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function xor (a, b) {
@@ -11056,10 +11137,10 @@ function simpleEnd(buf) {
   return buffer
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11158,22 +11239,22 @@ BlockHash.prototype._pad = function pad() {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = exports;
 
-asn1.bignum = __webpack_require__(7);
+asn1.bignum = __webpack_require__(10);
 
 asn1.define = __webpack_require__(229).define;
-asn1.base = __webpack_require__(43);
+asn1.base = __webpack_require__(44);
 asn1.constants = __webpack_require__(119);
 asn1.decoders = __webpack_require__(234);
 asn1.encoders = __webpack_require__(236);
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var base = exports;
@@ -11185,347 +11266,433 @@ base.Node = __webpack_require__(232);
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(36));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 // N3.js implementations of the RDF/JS core data types
 // See https://github.com/rdfjs/representation-task-force/blob/master/interface-spec.md
+var namespaces = __webpack_require__(55);
 
-var namespaces = __webpack_require__(54);
 var rdf = namespaces.rdf,
     xsd = namespaces.xsd;
-
 var DataFactory, DEFAULTGRAPH;
-
 var _blankNodeCounter = 0;
 
-class Term {
-  constructor(id) {
+var Term =
+/*#__PURE__*/
+function () {
+  function Term(id) {
+    (0, _classCallCheck2["default"])(this, Term);
     this.id = id;
+  } // ### The value of this term
+
+
+  (0, _createClass2["default"])(Term, [{
+    key: "equals",
+    // ### Returns whether this object represents the same term as the other
+    value: function equals(other) {
+      // If both terms were created by this library,
+      // equality can be computed through ids
+      if (other instanceof Term) return this.id === other.id; // Otherwise, compare term type and value
+
+      return !!other && this.termType === other.termType && this.value === other.value;
+    } // ### Returns a plain object representation of this term
+
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        termType: this.termType,
+        value: this.value
+      };
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return this.id;
+    }
+  }]);
+  return Term;
+}(); // ## NamedNode constructor
+
+
+var NamedNode =
+/*#__PURE__*/
+function (_Term) {
+  (0, _inherits2["default"])(NamedNode, _Term);
+
+  function NamedNode() {
+    (0, _classCallCheck2["default"])(this, NamedNode);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(NamedNode).apply(this, arguments));
   }
 
-  // ### The value of this term
-  get value() {
-    return this.id;
+  (0, _createClass2["default"])(NamedNode, [{
+    key: "termType",
+    // ### The term type of this term
+    get: function get() {
+      return 'NamedNode';
+    }
+  }]);
+  return NamedNode;
+}(Term); // ## Literal constructor
+
+
+var Literal =
+/*#__PURE__*/
+function (_Term2) {
+  (0, _inherits2["default"])(Literal, _Term2);
+
+  function Literal() {
+    (0, _classCallCheck2["default"])(this, Literal);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(Literal).apply(this, arguments));
   }
 
-  // ### Returns whether this object represents the same term as the other
-  equals(other) {
-    // If both terms were created by this library,
-    // equality can be computed through ids
-    if (other instanceof Term)
-      return this.id === other.id;
-    // Otherwise, compare term type and value
-    return !!other && this.termType === other.termType &&
-                      this.value    === other.value;
-  }
+  (0, _createClass2["default"])(Literal, [{
+    key: "equals",
+    // ### Returns whether this object represents the same term as the other
+    value: function equals(other) {
+      // If both literals were created by this library,
+      // equality can be computed through ids
+      if (other instanceof Literal) return this.id === other.id; // Otherwise, compare term type, value, language, and datatype
 
-  // ### Returns a plain object representation of this term
-  toJSON() {
-    return {
-      termType: this.termType,
-      value:    this.value,
-    };
-  }
-}
+      return !!other && !!other.datatype && this.termType === other.termType && this.value === other.value && this.language === other.language && this.datatype.value === other.datatype.value;
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        termType: this.termType,
+        value: this.value,
+        language: this.language,
+        datatype: {
+          termType: 'NamedNode',
+          value: this.datatypeString
+        }
+      };
+    }
+  }, {
+    key: "termType",
+    // ### The term type of this term
+    get: function get() {
+      return 'Literal';
+    } // ### The text value of this literal
 
+  }, {
+    key: "value",
+    get: function get() {
+      return this.id.substring(1, this.id.lastIndexOf('"'));
+    } // ### The language of this literal
 
-// ## NamedNode constructor
-class NamedNode extends Term {
-  // ### The term type of this term
-  get termType() {
-    return 'NamedNode';
-  }
-}
+  }, {
+    key: "language",
+    get: function get() {
+      // Find the last quotation mark (e.g., '"abc"@en-us')
+      var id = this.id,
+          atPos = id.lastIndexOf('"') + 1; // If "@" it follows, return the remaining substring; empty otherwise
 
-// ## Literal constructor
-class Literal extends Term {
-  // ### The term type of this term
-  get termType() {
-    return 'Literal';
-  }
+      return atPos < id.length && id[atPos++] === '@' ? id.substr(atPos).toLowerCase() : '';
+    } // ### The datatype IRI of this literal
 
-  // ### The text value of this literal
-  get value() {
-    return this.id.substring(1, this.id.lastIndexOf('"'));
-  }
+  }, {
+    key: "datatype",
+    get: function get() {
+      return new NamedNode(this.datatypeString);
+    } // ### The datatype string of this literal
 
-  // ### The language of this literal
-  get language() {
-    // Find the last quotation mark (e.g., '"abc"@en-us')
-    var id = this.id, atPos = id.lastIndexOf('"') + 1;
-    // If "@" it follows, return the remaining substring; empty otherwise
-    return atPos < id.length && id[atPos++] === '@' ? id.substr(atPos).toLowerCase() : '';
-  }
+  }, {
+    key: "datatypeString",
+    get: function get() {
+      // Find the last quotation mark (e.g., '"abc"^^http://ex.org/types#t')
+      var id = this.id,
+          dtPos = id.lastIndexOf('"') + 1,
+          ch; // If "^" it follows, return the remaining substring
 
-  // ### The datatype IRI of this literal
-  get datatype() {
-    return new NamedNode(this.datatypeString);
-  }
-
-  // ### The datatype string of this literal
-  get datatypeString() {
-    // Find the last quotation mark (e.g., '"abc"^^http://ex.org/types#t')
-    var id = this.id, dtPos = id.lastIndexOf('"') + 1, ch;
-    // If "^" it follows, return the remaining substring
-    return dtPos < id.length && (ch = id[dtPos]) === '^' ? id.substr(dtPos + 2) :
-           // If "@" follows, return rdf:langString; xsd:string otherwise
-           (ch !== '@' ? xsd.string : rdf.langString);
-  }
-
-  // ### Returns whether this object represents the same term as the other
-  equals(other) {
-    // If both literals were created by this library,
-    // equality can be computed through ids
-    if (other instanceof Literal)
-      return this.id === other.id;
-    // Otherwise, compare term type, value, language, and datatype
-    return !!other && !!other.datatype &&
-                      this.termType === other.termType &&
-                      this.value    === other.value    &&
-                      this.language === other.language &&
-                      this.datatype.value === other.datatype.value;
-  }
-
-  toJSON() {
-    return {
-      termType: this.termType,
-      value:    this.value,
-      language: this.language,
-      datatype: { termType: 'NamedNode', value: this.datatypeString },
-    };
-  }
-}
-
-// ## BlankNode constructor
-class BlankNode extends Term {
-  constructor(name) {
-    super('_:' + name);
-  }
-
-  // ### The term type of this term
-  get termType() {
-    return 'BlankNode';
-  }
-
-  // ### The name of this blank node
-  get value() {
-    return this.id.substr(2);
-  }
-}
-
-class Variable extends Term {
-  constructor(name) {
-    super('?' + name);
-  }
-
-  // ### The term type of this term
-  get termType() {
-    return 'Variable';
-  }
-
-  // ### The name of this variable
-  get value() {
-    return this.id.substr(1);
-  }
-}
-
-// ## DefaultGraph constructor
-class DefaultGraph extends Term {
-  constructor() {
-    super('');
-    return DEFAULTGRAPH || this;
-  }
-
-  // ### The term type of this term
-  get termType() {
-    return 'DefaultGraph';
-  }
-
-  // ### Returns whether this object represents the same term as the other
-  equals(other) {
-    // If both terms were created by this library,
-    // equality can be computed through strict equality;
-    // otherwise, compare term types.
-    return (this === other) || (!!other && (this.termType === other.termType));
-  }
-}
-
-// ## DefaultGraph singleton
-DEFAULTGRAPH = new DefaultGraph();
+      return dtPos < id.length && (ch = id[dtPos]) === '^' ? id.substr(dtPos + 2) : // If "@" follows, return rdf:langString; xsd:string otherwise
+      ch !== '@' ? xsd.string : rdf.langString;
+    }
+  }]);
+  return Literal;
+}(Term); // ## BlankNode constructor
 
 
-// ### Constructs a term from the given internal string ID
+var BlankNode =
+/*#__PURE__*/
+function (_Term3) {
+  (0, _inherits2["default"])(BlankNode, _Term3);
+
+  function BlankNode(name) {
+    (0, _classCallCheck2["default"])(this, BlankNode);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(BlankNode).call(this, '_:' + name));
+  } // ### The term type of this term
+
+
+  (0, _createClass2["default"])(BlankNode, [{
+    key: "termType",
+    get: function get() {
+      return 'BlankNode';
+    } // ### The name of this blank node
+
+  }, {
+    key: "value",
+    get: function get() {
+      return this.id.substr(2);
+    }
+  }]);
+  return BlankNode;
+}(Term);
+
+var Variable =
+/*#__PURE__*/
+function (_Term4) {
+  (0, _inherits2["default"])(Variable, _Term4);
+
+  function Variable(name) {
+    (0, _classCallCheck2["default"])(this, Variable);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(Variable).call(this, '?' + name));
+  } // ### The term type of this term
+
+
+  (0, _createClass2["default"])(Variable, [{
+    key: "termType",
+    get: function get() {
+      return 'Variable';
+    } // ### The name of this variable
+
+  }, {
+    key: "value",
+    get: function get() {
+      return this.id.substr(1);
+    }
+  }]);
+  return Variable;
+}(Term); // ## DefaultGraph constructor
+
+
+var DefaultGraph =
+/*#__PURE__*/
+function (_Term5) {
+  (0, _inherits2["default"])(DefaultGraph, _Term5);
+
+  function DefaultGraph() {
+    var _this;
+
+    (0, _classCallCheck2["default"])(this, DefaultGraph);
+    _this = (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(DefaultGraph).call(this, ''));
+    return (0, _possibleConstructorReturn2["default"])(_this, DEFAULTGRAPH || (0, _assertThisInitialized2["default"])(_this));
+  } // ### The term type of this term
+
+
+  (0, _createClass2["default"])(DefaultGraph, [{
+    key: "equals",
+    // ### Returns whether this object represents the same term as the other
+    value: function equals(other) {
+      // If both terms were created by this library,
+      // equality can be computed through strict equality;
+      // otherwise, compare term types.
+      return this === other || !!other && this.termType === other.termType;
+    }
+  }, {
+    key: "termType",
+    get: function get() {
+      return 'DefaultGraph';
+    }
+  }]);
+  return DefaultGraph;
+}(Term); // ## DefaultGraph singleton
+
+
+DEFAULTGRAPH = new DefaultGraph(); // ### Constructs a term from the given internal string ID
+
 function fromId(id, factory) {
-  factory = factory || DataFactory;
+  factory = factory || DataFactory; // Falsy value or empty string indicate the default graph
 
-  // Falsy value or empty string indicate the default graph
-  if (!id)
-    return factory.defaultGraph();
+  if (!id) return factory.defaultGraph(); // Identify the term type based on the first character
 
-  // Identify the term type based on the first character
   switch (id[0]) {
-  case '_': return factory.blankNode(id.substr(2));
-  case '?': return factory.variable(id.substr(1));
-  case '"':
-    // Shortcut for internal literals
-    if (factory === DataFactory)
-      return new Literal(id);
-    // Literal without datatype or language
-    if (id[id.length - 1] === '"')
-      return factory.literal(id.substr(1, id.length - 2));
-    // Literal with datatype or language
-    var endPos = id.lastIndexOf('"', id.length - 1);
-    return factory.literal(id.substr(1, endPos - 1),
-            id[endPos + 1] === '@' ? id.substr(endPos + 2)
-                                   : factory.namedNode(id.substr(endPos + 3)));
-  default:  return factory.namedNode(id);
-  }
-}
+    case '_':
+      return factory.blankNode(id.substr(2));
 
-// ### Constructs an internal string ID from the given term or ID string
+    case '?':
+      return factory.variable(id.substr(1));
+
+    case '"':
+      // Shortcut for internal literals
+      if (factory === DataFactory) return new Literal(id); // Literal without datatype or language
+
+      if (id[id.length - 1] === '"') return factory.literal(id.substr(1, id.length - 2)); // Literal with datatype or language
+
+      var endPos = id.lastIndexOf('"', id.length - 1);
+      return factory.literal(id.substr(1, endPos - 1), id[endPos + 1] === '@' ? id.substr(endPos + 2) : factory.namedNode(id.substr(endPos + 3)));
+
+    default:
+      return factory.namedNode(id);
+  }
+} // ### Constructs an internal string ID from the given term or ID string
+
+
 function toId(term) {
-  if (typeof term === 'string')
-    return term;
-  if (term instanceof Term)
-    return term.id;
-  if (!term)
-    return DEFAULTGRAPH.id;
+  if (typeof term === 'string') return term;
+  if (term instanceof Term) return term.id;
+  if (!term) return DEFAULTGRAPH.id; // Term instantiated with another library
 
-  // Term instantiated with another library
   switch (term.termType) {
-  case 'NamedNode':    return term.value;
-  case 'BlankNode':    return '_:' + term.value;
-  case 'Variable':     return '?' + term.value;
-  case 'DefaultGraph': return '';
-  case 'Literal':      return '"' + term.value + '"' +
-    (term.language ? '@' + term.language :
-      (term.datatype && term.datatype.value !== xsd.string ? '^^' + term.datatype.value : ''));
-  default: throw new Error('Unexpected termType: ' + term.termType);
+    case 'NamedNode':
+      return term.value;
+
+    case 'BlankNode':
+      return '_:' + term.value;
+
+    case 'Variable':
+      return '?' + term.value;
+
+    case 'DefaultGraph':
+      return '';
+
+    case 'Literal':
+      return '"' + term.value + '"' + (term.language ? '@' + term.language : term.datatype && term.datatype.value !== xsd.string ? '^^' + term.datatype.value : '');
+
+    default:
+      throw new Error('Unexpected termType: ' + term.termType);
   }
-}
+} // ## Quad constructor
 
 
-// ## Quad constructor
-class Quad {
-  constructor(subject, predicate, object, graph) {
-    this.subject   = subject;
+var Quad =
+/*#__PURE__*/
+function () {
+  function Quad(subject, predicate, object, graph) {
+    (0, _classCallCheck2["default"])(this, Quad);
+    this.subject = subject;
     this.predicate = predicate;
-    this.object    = object;
-    this.graph     = graph || DEFAULTGRAPH;
-  }
-
-  // ### Returns a plain object representation of this quad
-  toJSON() {
-    return {
-      subject:   this.subject.toJSON(),
-      predicate: this.predicate.toJSON(),
-      object:    this.object.toJSON(),
-      graph:     this.graph.toJSON(),
-    };
-  }
-
-  // ### Returns whether this object represents the same quad as the other
-  equals(other) {
-    return !!other && this.subject.equals(other.subject)     &&
-                      this.predicate.equals(other.predicate) &&
-                      this.object.equals(other.object)       &&
-                      this.graph.equals(other.graph);
-  }
-}
+    this.object = object;
+    this.graph = graph || DEFAULTGRAPH;
+  } // ### Returns a plain object representation of this quad
 
 
-// ## DataFactory functions
+  (0, _createClass2["default"])(Quad, [{
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        subject: this.subject.toJSON(),
+        predicate: this.predicate.toJSON(),
+        object: this.object.toJSON(),
+        graph: this.graph.toJSON()
+      };
+    } // ### Returns whether this object represents the same quad as the other
 
+  }, {
+    key: "equals",
+    value: function equals(other) {
+      return !!other && this.subject.equals(other.subject) && this.predicate.equals(other.predicate) && this.object.equals(other.object) && this.graph.equals(other.graph);
+    }
+  }]);
+  return Quad;
+}(); // ## DataFactory functions
 // ### Creates an IRI
+
+
 function namedNode(iri) {
   return new NamedNode(iri);
-}
+} // ### Creates a blank node
 
-// ### Creates a blank node
+
 function blankNode(name) {
-  if (!name)
-    name = 'n3-' + _blankNodeCounter++;
+  if (!name) name = 'n3-' + _blankNodeCounter++;
   return new BlankNode(name);
-}
+} // ### Creates a literal
 
-// ### Creates a literal
+
 function literal(value, languageOrDataType) {
   // Create a language-tagged string
-  if (typeof languageOrDataType === 'string')
-    return new Literal('"' + value + '"@' + languageOrDataType.toLowerCase());
+  if (typeof languageOrDataType === 'string') return new Literal('"' + value + '"@' + languageOrDataType.toLowerCase()); // Create a datatyped literal
 
-  // Create a datatyped literal
   var datatype = languageOrDataType && languageOrDataType.value || '';
+
   if (!datatype) {
-    switch (typeof value) {
-    // Convert a boolean
-    case 'boolean':
-      datatype = xsd.boolean;
-      break;
-    // Convert an integer or double
-    case 'number':
-      if (Number.isFinite(value))
-        datatype = Number.isInteger(value) ? xsd.integer : xsd.double;
-      else {
-        datatype = xsd.double;
-        if (!Number.isNaN(value))
-          value = value > 0 ? 'INF' : '-INF';
-      }
-      break;
-    // No datatype, so convert a plain string
-    default:
-      return new Literal('"' + value + '"');
+    switch ((0, _typeof2["default"])(value)) {
+      // Convert a boolean
+      case 'boolean':
+        datatype = xsd["boolean"];
+        break;
+      // Convert an integer or double
+
+      case 'number':
+        if (Number.isFinite(value)) datatype = Number.isInteger(value) ? xsd.integer : xsd["double"];else {
+          datatype = xsd["double"];
+          if (!Number.isNaN(value)) value = value > 0 ? 'INF' : '-INF';
+        }
+        break;
+      // No datatype, so convert a plain string
+
+      default:
+        return new Literal('"' + value + '"');
     }
   }
-  return new Literal('"' + value + '"^^' + datatype);
-}
 
-// ### Creates a variable
+  return new Literal('"' + value + '"^^' + datatype);
+} // ### Creates a variable
+
+
 function variable(name) {
   return new Variable(name);
-}
+} // ### Returns the default graph
 
-// ### Returns the default graph
+
 function defaultGraph() {
   return DEFAULTGRAPH;
-}
+} // ### Creates a quad
 
-// ### Creates a quad
+
 function quad(subject, predicate, object, graph) {
   return new Quad(subject, predicate, object, graph);
-}
+} // ## Module exports
 
 
-// ## Module exports
 module.exports = DataFactory = {
   // ### Public factory functions
   namedNode: namedNode,
   blankNode: blankNode,
-  variable:  variable,
-  literal:   literal,
+  variable: variable,
+  literal: literal,
   defaultGraph: defaultGraph,
-  quad:      quad,
-  triple:    quad,
-
+  quad: quad,
+  triple: quad,
   // ### Internal datatype constructors
   internal: {
-    Term:      Term,
+    Term: Term,
     NamedNode: NamedNode,
     BlankNode: BlankNode,
-    Variable:  Variable,
-    Literal:   Literal,
+    Variable: Variable,
+    Literal: Literal,
     DefaultGraph: DefaultGraph,
-    Quad:      Quad,
-    Triple:    Quad,
-    fromId:    fromId,
-    toId:      toId,
-  },
+    Quad: Quad,
+    Triple: Quad,
+    fromId: fromId,
+    toId: toId
+  }
 };
 
-
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -11544,7 +11711,7 @@ module.exports = {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11575,7 +11742,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11586,11 +11753,11 @@ module.exports = {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var api = {};
 module.exports = api; // define URL parser
@@ -11910,7 +12077,7 @@ api.isRelative = function (v) {
 }.bind(void 0);
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11960,10 +12127,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // based on the aes implimentation in triple sec
@@ -11971,7 +12138,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 // which is in turn based on the one from crypto-js
 // https://code.google.com/p/crypto-js/
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 function asUInt32Array (buf) {
   if (!Buffer.isBuffer(buf)) buf = Buffer.from(buf)
@@ -12197,11 +12364,11 @@ module.exports.AES = AES
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
-var MD5 = __webpack_require__(59)
+var Buffer = __webpack_require__(3).Buffer
+var MD5 = __webpack_require__(60)
 
 /* eslint-disable camelcase */
 function EVP_BytesToKey (password, salt, keyBits, ivLen) {
@@ -12248,13 +12415,13 @@ module.exports = EVP_BytesToKey
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var utils = __webpack_require__(15);
 var getNAF = utils.getNAF;
 var getJSF = utils.getJSF;
@@ -12629,15 +12796,15 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(228)
 var aesid = __webpack_require__(239)
 var fixProc = __webpack_require__(240)
-var ciphers = __webpack_require__(64)
+var ciphers = __webpack_require__(65)
 var compat = __webpack_require__(101)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 module.exports = parseKeys
 
 function parseKeys (buffer) {
@@ -12742,7 +12909,7 @@ function decrypt (data, password) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12750,11 +12917,11 @@ function decrypt (data, password) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var Sink =
 /*#__PURE__*/
@@ -12791,7 +12958,7 @@ function () {
 module.exports = Sink;
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports) {
 
 var RDF  = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -12827,7 +12994,7 @@ module.exports = {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12838,7 +13005,7 @@ module.exports = {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -12847,7 +13014,7 @@ var _require = __webpack_require__(29),
 
 var graphTypes = __webpack_require__(23);
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var util = __webpack_require__(13);
 
@@ -13243,7 +13410,7 @@ api.mergeNodeMaps = function (graphs) {
 }.bind(void 0);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 function DefaultGraph () {
@@ -13260,7 +13427,7 @@ module.exports = DefaultGraph
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports) {
 
 function NamedNode (iri) {
@@ -13277,7 +13444,7 @@ module.exports = NamedNode
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -13292,14 +13459,14 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var inherits = __webpack_require__(1)
 var HashBase = __webpack_require__(90)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var ARRAY16 = new Array(16)
 
@@ -13445,7 +13612,7 @@ module.exports = MD5
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13478,7 +13645,7 @@ module.exports = MD5
 
 /*<replacement>*/
 
-var pna = __webpack_require__(48);
+var pna = __webpack_require__(49);
 /*</replacement>*/
 
 module.exports = Writable;
@@ -13515,7 +13682,7 @@ var Duplex;
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = __webpack_require__(37);
+var util = __webpack_require__(38);
 util.inherits = __webpack_require__(1);
 /*</replacement>*/
 
@@ -13531,7 +13698,7 @@ var Stream = __webpack_require__(92);
 
 /*<replacement>*/
 
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -14136,15 +14303,15 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(38).setImmediate, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11), __webpack_require__(39).setImmediate, __webpack_require__(12)))
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var Buffer = __webpack_require__(5).Buffer
+var Buffer = __webpack_require__(9).Buffer
 var inherits = __webpack_require__(1)
 var HashBase = __webpack_require__(90)
 
@@ -14309,7 +14476,7 @@ module.exports = RIPEMD160
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -14330,7 +14497,7 @@ exports.sha512 = __webpack_require__(97)
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14344,7 +14511,7 @@ exports.EDE = __webpack_require__(192);
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ciphers = __webpack_require__(193)
@@ -14363,7 +14530,7 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
@@ -14387,7 +14554,7 @@ module.exports = modes
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var r;
@@ -14458,10 +14625,10 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(7);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(10);
 var randomBytes = __webpack_require__(31);
 module.exports = crt;
 function blind(priv) {
@@ -14502,10 +14669,10 @@ function getr(priv) {
   return r;
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14515,9 +14682,9 @@ var elliptic = exports;
 
 elliptic.version = __webpack_require__(210).version;
 elliptic.utils = __webpack_require__(15);
-elliptic.rand = __webpack_require__(66);
+elliptic.rand = __webpack_require__(67);
 elliptic.curve = __webpack_require__(114);
-elliptic.curves = __webpack_require__(69);
+elliptic.curves = __webpack_require__(70);
 
 // Protocols
 elliptic.ec = __webpack_require__(221);
@@ -14525,7 +14692,7 @@ elliptic.eddsa = __webpack_require__(225);
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14533,7 +14700,7 @@ elliptic.eddsa = __webpack_require__(225);
 
 var curves = exports;
 
-var hash = __webpack_require__(70);
+var hash = __webpack_require__(71);
 var curve = __webpack_require__(114);
 var utils = __webpack_require__(15);
 
@@ -14738,13 +14905,13 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = exports;
 
 hash.utils = __webpack_require__(18);
-hash.common = __webpack_require__(41);
+hash.common = __webpack_require__(42);
 hash.sha = __webpack_require__(214);
 hash.ripemd = __webpack_require__(218);
 hash.hmac = __webpack_require__(219);
@@ -14759,7 +14926,7 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14869,7 +15036,7 @@ function eos(stream, opts, callback) {
 module.exports = eos;
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -14890,13 +15057,13 @@ function _defineProperty(obj, key, value) {
 module.exports = _defineProperty;
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__73__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__74__;
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14940,7 +15107,7 @@ var _interopRequireDefault = __webpack_require__(0);
 
 var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
@@ -14964,8 +15131,8 @@ try {
 var api = {};
 module.exports = api; // expose helpers
 
-api.NQuads = __webpack_require__(77);
-api.IdentifierIssuer = __webpack_require__(75);
+api.NQuads = __webpack_require__(78);
+api.IdentifierIssuer = __webpack_require__(76);
 /**
  * Get or set native API.
  *
@@ -15141,102 +15308,7 @@ api.canonizeSync = function (dataset, options) {
 };
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
- * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
- */
-
-
-const util = __webpack_require__(28);
-
-module.exports = class IdentifierIssuer {
-  /**
-   * Creates a new IdentifierIssuer. A IdentifierIssuer issues unique
-   * identifiers, keeping track of any previously issued identifiers.
-   *
-   * @param prefix the prefix to use ('<prefix><counter>').
-   */
-  constructor(prefix) {
-    this.prefix = prefix;
-    this.counter = 0;
-    this.existing = {};
-  }
-
-  /**
-   * Copies this IdentifierIssuer.
-   *
-   * @return a copy of this IdentifierIssuer.
-   */
-  clone() {
-    const copy = new IdentifierIssuer(this.prefix);
-    copy.counter = this.counter;
-    copy.existing = util.clone(this.existing);
-    return copy;
-  }
-
-  /**
-   * Gets the new identifier for the given old identifier, where if no old
-   * identifier is given a new identifier will be generated.
-   *
-   * @param [old] the old identifier to get the new identifier for.
-   *
-   * @return the new identifier.
-   */
-  getId(old) {
-    // return existing old identifier
-    if(old && old in this.existing) {
-      return this.existing[old];
-    }
-
-    // get next identifier
-    const identifier = this.prefix + this.counter;
-    this.counter += 1;
-
-    // save mapping
-    if(old) {
-      this.existing[old] = identifier;
-    }
-
-    return identifier;
-  }
-
-  /**
-   * Returns true if the given old identifer has already been assigned a new
-   * identifier.
-   *
-   * @param old the old identifier to check.
-   *
-   * @return true if the old identifier has been assigned a new identifier,
-   *   false if not.
-   */
-  hasId(old) {
-    return (old in this.existing);
-  }
-};
-
-
-/***/ }),
 /* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Node.js module for Forge message digests.
- *
- * @author Dave Longley
- *
- * Copyright 2011-2017 Digital Bazaar, Inc.
- */
-var forge = __webpack_require__(45);
-
-module.exports = forge.md = forge.md || {};
-forge.md.algorithms = forge.md.algorithms || {};
-
-
-/***/ }),
-/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15247,11 +15319,122 @@ forge.md.algorithms = forge.md.algorithms || {};
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var util = __webpack_require__(28);
+
+module.exports =
+/*#__PURE__*/
+function () {
+  /**
+   * Creates a new IdentifierIssuer. A IdentifierIssuer issues unique
+   * identifiers, keeping track of any previously issued identifiers.
+   *
+   * @param prefix the prefix to use ('<prefix><counter>').
+   */
+  function IdentifierIssuer(prefix) {
+    (0, _classCallCheck2["default"])(this, IdentifierIssuer);
+    this.prefix = prefix;
+    this.counter = 0;
+    this.existing = {};
+  }
+  /**
+   * Copies this IdentifierIssuer.
+   *
+   * @return a copy of this IdentifierIssuer.
+   */
+
+
+  (0, _createClass2["default"])(IdentifierIssuer, [{
+    key: "clone",
+    value: function clone() {
+      var copy = new IdentifierIssuer(this.prefix);
+      copy.counter = this.counter;
+      copy.existing = util.clone(this.existing);
+      return copy;
+    }
+    /**
+     * Gets the new identifier for the given old identifier, where if no old
+     * identifier is given a new identifier will be generated.
+     *
+     * @param [old] the old identifier to get the new identifier for.
+     *
+     * @return the new identifier.
+     */
+
+  }, {
+    key: "getId",
+    value: function getId(old) {
+      // return existing old identifier
+      if (old && old in this.existing) {
+        return this.existing[old];
+      } // get next identifier
+
+
+      var identifier = this.prefix + this.counter;
+      this.counter += 1; // save mapping
+
+      if (old) {
+        this.existing[old] = identifier;
+      }
+
+      return identifier;
+    }
+    /**
+     * Returns true if the given old identifer has already been assigned a new
+     * identifier.
+     *
+     * @param old the old identifier to check.
+     *
+     * @return true if the old identifier has been assigned a new identifier,
+     *   false if not.
+     */
+
+  }, {
+    key: "hasId",
+    value: function hasId(old) {
+      return old in this.existing;
+    }
+  }]);
+  return IdentifierIssuer;
+}();
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Node.js module for Forge message digests.
+ *
+ * @author Dave Longley
+ *
+ * Copyright 2011-2017 Digital Bazaar, Inc.
+ */
+var forge = __webpack_require__(46);
+
+module.exports = forge.md = forge.md || {};
+forge.md.algorithms = forge.md.algorithms || {};
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
+ */
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -15738,7 +15921,7 @@ function _unescape(s) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15753,9 +15936,9 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var _require = __webpack_require__(13),
     callbackify = _require.callbackify,
@@ -15839,7 +16022,7 @@ function () {
 }();
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 function BlankNode (id) {
@@ -15858,10 +16041,10 @@ module.exports = BlankNode
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var NamedNode = __webpack_require__(57)
+var NamedNode = __webpack_require__(58)
 
 function Literal (value, language, datatype) {
   this.value = value
@@ -15889,10 +16072,10 @@ module.exports = Literal
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DefaultGraph = __webpack_require__(56)
+var DefaultGraph = __webpack_require__(57)
 
 function Quad (subject, predicate, object, graph) {
   this.subject = subject
@@ -15915,7 +16098,7 @@ module.exports = Quad
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 function Variable (name) {
@@ -15932,7 +16115,7 @@ module.exports = Variable
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15952,7 +16135,7 @@ module.exports = DefaultGraph
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15972,7 +16155,7 @@ module.exports = NamedNode
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15980,7 +16163,7 @@ module.exports = NamedNode
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var Event = __webpack_require__(30).EventEmitter;
 
@@ -16015,20 +16198,6 @@ module.exports = {
   asEvent: asEvent,
   waitFor: waitFor
 };
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
 
 /***/ }),
 /* 87 */
@@ -16088,7 +16257,7 @@ module.exports = Array.isArray || function (arr) {
 
 "use strict";
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var Transform = __webpack_require__(32).Transform
 var inherits = __webpack_require__(1)
 
@@ -16212,7 +16381,7 @@ module.exports = HashBase
 
 /*<replacement>*/
 
-var pna = __webpack_require__(48);
+var pna = __webpack_require__(49);
 /*</replacement>*/
 
 
@@ -16247,7 +16416,7 @@ var Stream = __webpack_require__(92);
 /*<replacement>*/
 
 
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
 var OurUint8Array = global.Uint8Array || function () {};
 
@@ -16263,7 +16432,7 @@ function _isUint8Array(obj) {
 /*<replacement>*/
 
 
-var util = __webpack_require__(37);
+var util = __webpack_require__(38);
 
 util.inherits = __webpack_require__(1);
 /*</replacement>*/
@@ -16358,7 +16527,7 @@ function ReadableState(options, stream) {
   this.encoding = null;
 
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(39).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(40).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -16518,7 +16687,7 @@ Readable.prototype.isPaused = function () {
 
 
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(39).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(40).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -17229,7 +17398,7 @@ function indexOf(xs, x) {
 
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 92 */
@@ -17247,7 +17416,7 @@ module.exports = __webpack_require__(30).EventEmitter;
 
 /*<replacement>*/
 
-var pna = __webpack_require__(48);
+var pna = __webpack_require__(49);
 /*</replacement>*/
 
 // undocumented cb() API, needed for core, not for public API
@@ -17467,7 +17636,7 @@ module.exports = Transform;
 var Duplex = __webpack_require__(27);
 
 /*<replacement>*/
-var util = __webpack_require__(37);
+var util = __webpack_require__(38);
 util.inherits = __webpack_require__(1);
 /*</replacement>*/
 
@@ -17626,7 +17795,7 @@ function done(stream, er, data) {
 
 var inherits = __webpack_require__(1)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var K = [
   0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5,
@@ -17759,7 +17928,7 @@ module.exports = Sha256
 
 var inherits = __webpack_require__(1)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var K = [
   0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd,
@@ -18028,11 +18197,11 @@ module.exports = Sha512
 var inherits = __webpack_require__(1)
 var Legacy = __webpack_require__(183)
 var Base = __webpack_require__(26)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var md5 = __webpack_require__(99)
-var RIPEMD160 = __webpack_require__(61)
+var RIPEMD160 = __webpack_require__(62)
 
-var sha = __webpack_require__(62)
+var sha = __webpack_require__(63)
 
 var ZEROS = Buffer.alloc(128)
 
@@ -18092,7 +18261,7 @@ module.exports = function createHmac (alg, key) {
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MD5 = __webpack_require__(59)
+var MD5 = __webpack_require__(60)
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
@@ -18146,7 +18315,7 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 103 */
@@ -18163,19 +18332,19 @@ if (process.browser) {
 }
 module.exports = defaultEncoding
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var md5 = __webpack_require__(99)
-var RIPEMD160 = __webpack_require__(61)
-var sha = __webpack_require__(62)
+var RIPEMD160 = __webpack_require__(62)
+var sha = __webpack_require__(63)
 
 var checkParameters = __webpack_require__(102)
 var defaultEncoding = __webpack_require__(103)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var ZEROS = Buffer.alloc(128)
 var sizes = {
   md5: 16,
@@ -18279,8 +18448,8 @@ module.exports = pbkdf2
 /* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(40)
-var Buffer = __webpack_require__(2).Buffer
+var xor = __webpack_require__(41)
+var Buffer = __webpack_require__(3).Buffer
 var incr32 = __webpack_require__(106)
 
 function getBlock (self) {
@@ -18342,12 +18511,12 @@ module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","t
 /* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(49)
-var Buffer = __webpack_require__(2).Buffer
+var aes = __webpack_require__(50)
+var Buffer = __webpack_require__(3).Buffer
 var Transform = __webpack_require__(26)
 var inherits = __webpack_require__(1)
 var GHASH = __webpack_require__(200)
-var xor = __webpack_require__(40)
+var xor = __webpack_require__(41)
 var incr32 = __webpack_require__(106)
 
 function xorTest (a, b) {
@@ -18465,8 +18634,8 @@ module.exports = StreamCipher
 /* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(49)
-var Buffer = __webpack_require__(2).Buffer
+var aes = __webpack_require__(50)
+var Buffer = __webpack_require__(3).Buffer
 var Transform = __webpack_require__(26)
 var inherits = __webpack_require__(1)
 
@@ -18502,7 +18671,7 @@ var randomBytes = __webpack_require__(31);
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
 findPrime.fermatTest = fermatTest;
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var TWENTYFOUR = new BN(24);
 var MillerRabin = __webpack_require__(112);
 var millerRabin = new MillerRabin();
@@ -18637,8 +18806,8 @@ module.exports = function(module) {
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var bn = __webpack_require__(7);
-var brorand = __webpack_require__(66);
+var bn = __webpack_require__(10);
+var brorand = __webpack_require__(67);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -18828,7 +18997,7 @@ utils.encode = function encode(arr, enc) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(51);
+curve.base = __webpack_require__(52);
 curve.short = __webpack_require__(211);
 curve.mont = __webpack_require__(212);
 curve.edwards = __webpack_require__(213);
@@ -18898,7 +19067,7 @@ exports.g1_256 = g1_256;
 
 
 var utils = __webpack_require__(18);
-var common = __webpack_require__(41);
+var common = __webpack_require__(42);
 var shaCommon = __webpack_require__(115);
 var assert = __webpack_require__(14);
 
@@ -19010,7 +19179,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 
 var utils = __webpack_require__(18);
-var common = __webpack_require__(41);
+var common = __webpack_require__(42);
 var assert = __webpack_require__(14);
 
 var rotr64_hi = utils.rotr64_hi;
@@ -19344,8 +19513,8 @@ function g1_512_lo(xh, xl) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(1);
-var Reporter = __webpack_require__(43).Reporter;
-var Buffer = __webpack_require__(5).Buffer;
+var Reporter = __webpack_require__(44).Reporter;
+var Buffer = __webpack_require__(9).Buffer;
 
 function DecoderBuffer(base, options) {
   Reporter.call(this, options);
@@ -19492,7 +19661,7 @@ constants.der = __webpack_require__(233);
 
 var inherits = __webpack_require__(1);
 
-var asn1 = __webpack_require__(42);
+var asn1 = __webpack_require__(43);
 var base = asn1.base;
 var bignum = asn1.bignum;
 
@@ -19821,9 +19990,9 @@ function derDecodeLen(buf, primitive, fail) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(1);
-var Buffer = __webpack_require__(5).Buffer;
+var Buffer = __webpack_require__(9).Buffer;
 
-var asn1 = __webpack_require__(42);
+var asn1 = __webpack_require__(43);
 var base = asn1.base;
 
 // Import DER constants
@@ -20127,8 +20296,8 @@ module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.1004
 /* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var createHash = __webpack_require__(36)
-var Buffer = __webpack_require__(2).Buffer
+var createHash = __webpack_require__(37)
+var Buffer = __webpack_require__(3).Buffer
 
 module.exports = function (seed, len) {
   var t = Buffer.alloc(0)
@@ -20166,8 +20335,8 @@ module.exports = function xor (a, b) {
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BN = __webpack_require__(7)
-var Buffer = __webpack_require__(2).Buffer
+var BN = __webpack_require__(10)
+var Buffer = __webpack_require__(3).Buffer
 
 function withPublic (paddedMsg, key) {
   return Buffer.from(paddedMsg
@@ -20230,7 +20399,7 @@ var Stream = __webpack_require__(127);
 /*</replacement>*/
 
 
-var Buffer = __webpack_require__(5).Buffer;
+var Buffer = __webpack_require__(9).Buffer;
 
 var OurUint8Array = global.Uint8Array || function () {};
 
@@ -20346,7 +20515,7 @@ function ReadableState(options, stream, isDuplex) {
   this.encoding = null;
 
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(39).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(40).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -20508,7 +20677,7 @@ Readable.prototype.isPaused = function () {
 
 
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(39).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(40).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc); // if setEncoding(null), decoder.encoding equals utf8
 
   this._readableState.encoding = this._readableState.decoder.encoding;
@@ -21272,7 +21441,7 @@ function indexOf(xs, x) {
 
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 127 */
@@ -21371,7 +21540,7 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
 /* 129 */
@@ -21480,7 +21649,7 @@ var Stream = __webpack_require__(127);
 /*</replacement>*/
 
 
-var Buffer = __webpack_require__(5).Buffer;
+var Buffer = __webpack_require__(9).Buffer;
 
 var OurUint8Array = global.Uint8Array || function () {};
 
@@ -22094,7 +22263,7 @@ Writable.prototype._undestroy = destroyImpl.undestroy;
 Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 131 */
@@ -22307,54 +22476,114 @@ function done(stream, er, data) {
 /* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const quadToNTriples = __webpack_require__(19).quadToNTriples
-const Quad = __webpack_require__(81)
+"use strict";
 
-class QuadExt extends Quad {
-  toCanonical () {
-    return quadToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var quadToNTriples = __webpack_require__(19).quadToNTriples;
+
+var Quad = __webpack_require__(82);
+
+var QuadExt =
+/*#__PURE__*/
+function (_Quad) {
+  (0, _inherits2["default"])(QuadExt, _Quad);
+
+  function QuadExt() {
+    (0, _classCallCheck2["default"])(this, QuadExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(QuadExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.toCanonical()
-  }
-
-  toJSON () {
-    return {
-      subject: this.subject.toJSON(),
-      predicate: this.predicate.toJSON(),
-      object: this.object.toJSON(),
-      graph: this.graph.toJSON()
+  (0, _createClass2["default"])(QuadExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return quadToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.toCanonical();
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        subject: this.subject.toJSON(),
+        predicate: this.predicate.toJSON(),
+        object: this.object.toJSON(),
+        graph: this.graph.toJSON()
+      };
+    }
+  }]);
+  return QuadExt;
+}(Quad);
 
-module.exports = QuadExt
-
+module.exports = QuadExt;
 
 /***/ }),
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(setImmediate, Buffer) {// **N3Lexer** tokenizes N3 documents.
-var xsd = __webpack_require__(54).xsd;
+"use strict";
+/* WEBPACK VAR INJECTION */(function(setImmediate, Buffer) {
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+// **N3Lexer** tokenizes N3 documents.
+var xsd = __webpack_require__(55).xsd;
 
 var fromCharCode = String.fromCharCode;
-var immediately = typeof setImmediate === 'function' ? setImmediate :
-                  function setImmediate(func) { setTimeout(func, 0); };
-
-// Regular expression and replacement string to escape N3 strings.
+var immediately = typeof setImmediate === 'function' ? setImmediate : function setImmediate(func) {
+  setTimeout(func, 0);
+}; // Regular expression and replacement string to escape N3 strings.
 // Note how we catch invalid unicode sequences separately (they will trigger an error).
+
 var escapeSequence = /\\u([a-fA-F0-9]{4})|\\U([a-fA-F0-9]{8})|\\[uU]|\\(.)/g;
 var escapeReplacements = {
-  '\\': '\\', "'": "'", '"': '"',
-  'n': '\n', 'r': '\r', 't': '\t', 'f': '\f', 'b': '\b',
-  '_': '_', '~': '~', '.': '.', '-': '-', '!': '!', '$': '$', '&': '&',
-  '(': '(', ')': ')', '*': '*', '+': '+', ',': ',', ';': ';', '=': '=',
-  '/': '/', '?': '?', '#': '#', '@': '@', '%': '%',
+  '\\': '\\',
+  "'": "'",
+  '"': '"',
+  'n': '\n',
+  'r': '\r',
+  't': '\t',
+  'f': '\f',
+  'b': '\b',
+  '_': '_',
+  '~': '~',
+  '.': '.',
+  '-': '-',
+  '!': '!',
+  '$': '$',
+  '&': '&',
+  '(': '(',
+  ')': ')',
+  '*': '*',
+  '+': '+',
+  ',': ',',
+  ';': ';',
+  '=': '=',
+  '/': '/',
+  '?': '?',
+  '#': '#',
+  '@': '@',
+  '%': '%'
 };
 var illegalIriChars = /[\x00-\x20<>\\"\{\}\|\^\`]/;
-
 var lineModeRegExps = {
   _iri: true,
   _unescapedIri: true,
@@ -22365,23 +22594,28 @@ var lineModeRegExps = {
   _newline: true,
   _comment: true,
   _whitespace: true,
-  _endOfFile: true,
+  _endOfFile: true
 };
-var invalidRegExp = /$0^/;
+var invalidRegExp = /$0^/; // ## Constructor
 
-// ## Constructor
-class N3Lexer {
-  constructor(options) {
+var N3Lexer =
+/*#__PURE__*/
+function () {
+  function N3Lexer(options) {
+    (0, _classCallCheck2["default"])(this, N3Lexer);
     // ## Regular expressions
     // It's slightly faster to have these as properties than as in-scope variables
     this._iri = /^<((?:[^ <>{}\\]|\\[uU])+)>[ \t]*/; // IRI with escape sequences; needs sanity check after unescaping
+
     this._unescapedIri = /^<([^\x00-\x20<>\\"\{\}\|\^\`]*)>[ \t]*/; // IRI without escape sequences; no unescaping
+
     this._unescapedQuote = /^"([^"\\\r\n]+)"/; // non-empty string without escape sequences
-    this._unescapedApos =  /^'([^'\\\r\n]+)'/;
+
+    this._unescapedApos = /^'([^'\\\r\n]+)'/;
     this._singleQuote = /^"((?:[^"\\\r\n]|\\.)*)"(?=[^"])/;
-    this._singleApos =  /^'((?:[^'\\\r\n]|\\.)*)'(?=[^'])/;
+    this._singleApos = /^'((?:[^'\\\r\n]|\\.)*)'(?=[^'])/;
     this._tripleQuote = /^"""([^"\\]*(?:(?:\\.|"(?!""))[^"\\]*)*)"""/;
-    this._tripleApos =  /^'''([^'\\]*(?:(?:\\.|'(?!''))[^'\\]*)*)'''/;
+    this._tripleApos = /^'''([^'\\]*(?:(?:\\.|'(?!''))[^'\\]*)*)'''/;
     this._langcode = /^@([a-z]+(?:-[a-z0-9]+)*)(?=[^a-z0-9\-])/i;
     this._prefix = /^((?:[A-Za-z\xc0-\xd6\xd8-\xf6\xf8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff])(?:\.?[\-0-9A-Z_a-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u037f-\u1fff\u200c\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff])*)?:(?=[#\s<])/;
     this._prefixed = /^((?:[A-Za-z\xc0-\xd6\xd8-\xf6\xf8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff])(?:\.?[\-0-9A-Z_a-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u037f-\u1fff\u200c\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff])*)?:((?:(?:[0-:A-Z_a-z\xc0-\xd6\xd8-\xf6\xf8-\u02ff\u0370-\u037d\u037f-\u1fff\u200c\u200d\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff]|%[0-9a-fA-F]{2}|\\[!#-\/;=?\-@_~])(?:(?:[\.\-0-:A-Z_a-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u037f-\u1fff\u200c\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff]|%[0-9a-fA-F]{2}|\\[!#-\/;=?\-@_~])*(?:[\-0-:A-Z_a-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u037f-\u1fff\u200c\u200d\u203f\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\ud7ff\uf900-\ufdcf\ufdf0-\ufffd]|[\ud800-\udb7f][\udc00-\udfff]|%[0-9a-fA-F]{2}|\\[!#-\/;=?\-@_~]))?)?)(?:[ \t]+|(?=\.?[,;!\^\s#()\[\]\{\}"'<]))/;
@@ -22396,1719 +22630,1876 @@ class N3Lexer {
     this._comment = /#([^\n\r]*)/;
     this._whitespace = /^[ \t]+/;
     this._endOfFile = /^(?:#[^\n\r]*)?$/;
-    options = options || {};
+    options = options || {}; // In line mode (N-Triples or N-Quads), only simple features may be parsed
 
-    // In line mode (N-Triples or N-Quads), only simple features may be parsed
     if (this._lineMode = !!options.lineMode) {
-      this._n3Mode = false;
-      // Don't tokenize special literals
+      this._n3Mode = false; // Don't tokenize special literals
+
       for (var key in this) {
-        if (!(key in lineModeRegExps) && this[key] instanceof RegExp)
-          this[key] = invalidRegExp;
+        if (!(key in lineModeRegExps) && this[key] instanceof RegExp) this[key] = invalidRegExp;
       }
-    }
-    // When not in line mode, enable N3 functionality by default
+    } // When not in line mode, enable N3 functionality by default
     else {
-      this._n3Mode = options.n3 !== false;
-    }
-    // Don't output comment tokens by default
+        this._n3Mode = options.n3 !== false;
+      } // Don't output comment tokens by default
+
+
     this._comments = !!options.comments;
-  }
-
-  // ## Private methods
-
+  } // ## Private methods
   // ### `_tokenizeToEnd` tokenizes as for as possible, emitting tokens through the callback
-  _tokenizeToEnd(callback, inputFinished) {
-    // Continue parsing as far as possible; the loop will return eventually
-    var input = this._input, outputComments = this._comments;
-    while (true) {
-      // Count and skip whitespace lines
-      var whiteSpaceMatch, comment;
-      while (whiteSpaceMatch = this._newline.exec(input)) {
-        // Try to find a comment
-        if (outputComments && (comment = this._comment.exec(whiteSpaceMatch[0])))
-          callback(null, { line: this._line, type: 'comment', value: comment[1], prefix: '' });
-        // Advance the input
-        input = input.substr(whiteSpaceMatch[0].length, input.length);
-        this._line++;
-      }
-      // Skip whitespace on current line
-      if (whiteSpaceMatch = this._whitespace.exec(input))
-        input = input.substr(whiteSpaceMatch[0].length, input.length);
 
-      // Stop for now if we're at the end
-      if (this._endOfFile.test(input)) {
-        // If the input is finished, emit EOF
-        if (inputFinished) {
-          // Try to find a final comment
-          if (outputComments && (comment = this._comment.exec(input)))
-            callback(null, { line: this._line, type: 'comment', value: comment[1], prefix: '' });
-          callback(input = null, { line: this._line, type: 'eof', value: '', prefix: '' });
-        }
-        return this._input = input;
-      }
 
-      // Look for specific token types based on the first character
-      var line = this._line, type = '', value = '', prefix = '',
-          firstChar = input[0], match = null, matchLength = 0, inconclusive = false;
-      switch (firstChar) {
-      case '^':
-        // We need at least 3 tokens lookahead to distinguish ^^<IRI> and ^^pre:fixed
-        if (input.length < 3)
-          break;
-        // Try to match a type
-        else if (input[1] === '^') {
-          this._previousMarker = '^^';
-          // Move to type IRI or prefixed name
-          input = input.substr(2);
-          if (input[0] !== '<') {
-            inconclusive = true;
-            break;
+  (0, _createClass2["default"])(N3Lexer, [{
+    key: "_tokenizeToEnd",
+    value: function _tokenizeToEnd(callback, inputFinished) {
+      // Continue parsing as far as possible; the loop will return eventually
+      var input = this._input,
+          outputComments = this._comments;
+
+      while (true) {
+        // Count and skip whitespace lines
+        var whiteSpaceMatch, comment;
+
+        while (whiteSpaceMatch = this._newline.exec(input)) {
+          // Try to find a comment
+          if (outputComments && (comment = this._comment.exec(whiteSpaceMatch[0]))) callback(null, {
+            line: this._line,
+            type: 'comment',
+            value: comment[1],
+            prefix: ''
+          }); // Advance the input
+
+          input = input.substr(whiteSpaceMatch[0].length, input.length);
+          this._line++;
+        } // Skip whitespace on current line
+
+
+        if (whiteSpaceMatch = this._whitespace.exec(input)) input = input.substr(whiteSpaceMatch[0].length, input.length); // Stop for now if we're at the end
+
+        if (this._endOfFile.test(input)) {
+          // If the input is finished, emit EOF
+          if (inputFinished) {
+            // Try to find a final comment
+            if (outputComments && (comment = this._comment.exec(input))) callback(null, {
+              line: this._line,
+              type: 'comment',
+              value: comment[1],
+              prefix: ''
+            });
+            callback(input = null, {
+              line: this._line,
+              type: 'eof',
+              value: '',
+              prefix: ''
+            });
           }
-        }
-        // If no type, it must be a path expression
-        else {
-          if (this._n3Mode) {
-            matchLength = 1;
-            type = '^';
-          }
-          break;
-        }
-        // Fall through in case the type is an IRI
-      case '<':
-        // Try to find a full IRI without escape sequences
-        if (match = this._unescapedIri.exec(input))
-          type = 'IRI', value = match[1];
-        // Try to find a full IRI with escape sequences
-        else if (match = this._iri.exec(input)) {
-          value = this._unescape(match[1]);
-          if (value === null || illegalIriChars.test(value))
-            return reportSyntaxError(this);
-          type = 'IRI';
-        }
-        // Try to find a backwards implication arrow
-        else if (this._n3Mode && input.length > 1 && input[1] === '=')
-          type = 'inverse', matchLength = 2, value = '>';
-        break;
 
-      case '_':
-        // Try to find a blank node. Since it can contain (but not end with) a dot,
-        // we always need a non-dot character before deciding it is a blank node.
-        // Therefore, try inserting a space if we're at the end of the input.
-        if ((match = this._blank.exec(input)) ||
-            inputFinished && (match = this._blank.exec(input + ' ')))
-          type = 'blank', prefix = '_', value = match[1];
-        break;
-
-      case '"':
-        // Try to find a literal without escape sequences
-        if (match = this._unescapedQuote.exec(input))
-          value = match[1];
-        // Before attempting more complex string patterns, try to detect a closing quote
-        else if (input.indexOf('"', 1) > 0) {
-          // Try to find any other literal wrapped in a pair of quotes
-          if (match = this._singleQuote.exec(input))
-            value = this._unescape(match[1]);
-          // Try to find a literal wrapped in three pairs of quotes
-          else if (match = this._tripleQuote.exec(input)) {
-            value = match[1];
-            // Advance line counter
-            this._line += value.split(/\r\n|\r|\n/).length - 1;
-            value = this._unescape(value);
-          }
-          if (value === null)
-            return reportSyntaxError(this);
-        }
-        if (match !== null)
-          type = 'literal';
-        break;
-
-      case "'":
-        // Try to find a literal without escape sequences
-        if (match = this._unescapedApos.exec(input))
-          value = match[1];
-        // Before attempting more complex string patterns, try to detect a closing apostrophe
-        else if (input.indexOf("'", 1) > 0) {
-          // Try to find any other literal wrapped in a pair of apostrophes
-          if (match = this._singleApos.exec(input))
-            value = this._unescape(match[1]);
-          // Try to find a literal wrapped in three pairs of apostrophes
-          else if (match = this._tripleApos.exec(input)) {
-            value = match[1];
-            // Advance line counter
-            this._line += value.split(/\r\n|\r|\n/).length - 1;
-            value = this._unescape(value);
-          }
-          if (value === null)
-            return reportSyntaxError(this);
-        }
-        if (match !== null)
-          type = 'literal';
-        break;
-
-      case '?':
-        // Try to find a variable
-        if (this._n3Mode && (match = this._variable.exec(input)))
-          type = 'var', value = match[0];
-        break;
-
-      case '@':
-        // Try to find a language code
-        if (this._previousMarker === 'literal' && (match = this._langcode.exec(input)))
-          type = 'langcode', value = match[1];
-        // Try to find a keyword
-        else if (match = this._keyword.exec(input))
-          type = match[0];
-        break;
-
-      case '.':
-        // Try to find a dot as punctuation
-        if (input.length === 1 ? inputFinished : (input[1] < '0' || input[1] > '9')) {
-          type = '.';
-          matchLength = 1;
-          break;
-        }
-        // Fall through to numerical case (could be a decimal dot)
-
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '+':
-      case '-':
-        // Try to find a number. Since it can contain (but not end with) a dot,
-        // we always need a non-dot character before deciding it is a number.
-        // Therefore, try inserting a space if we're at the end of the input.
-        if (match = this._number.exec(input) ||
-            inputFinished && (match = this._number.exec(input + ' '))) {
-          type = 'literal', value = match[0];
-          prefix = (match[1] ? xsd.double :
-                    (/^[+\-]?\d+$/.test(match[0]) ? xsd.integer : xsd.decimal));
-        }
-        break;
-
-      case 'B':
-      case 'b':
-      case 'p':
-      case 'P':
-      case 'G':
-      case 'g':
-        // Try to find a SPARQL-style keyword
-        if (match = this._sparqlKeyword.exec(input))
-          type = match[0].toUpperCase();
-        else
-          inconclusive = true;
-        break;
-
-      case 'f':
-      case 't':
-        // Try to match a boolean
-        if (match = this._boolean.exec(input))
-          type = 'literal', value = match[0], prefix = xsd.boolean;
-        else
-          inconclusive = true;
-        break;
-
-      case 'a':
-        // Try to find an abbreviated predicate
-        if (match = this._shortPredicates.exec(input))
-          type = 'abbreviation', value = 'a';
-        else
-          inconclusive = true;
-        break;
-
-      case '=':
-        // Try to find an implication arrow or equals sign
-        if (this._n3Mode && input.length > 1) {
-          type = 'abbreviation';
-          if (input[1] !== '>')
-            matchLength = 1, value = '=';
-          else
-            matchLength = 2, value = '>';
-        }
-        break;
-
-      case '!':
-        if (!this._n3Mode)
-          break;
-      case ',':
-      case ';':
-      case '[':
-      case ']':
-      case '(':
-      case ')':
-      case '{':
-      case '}':
-        if (!this._lineMode) {
-          matchLength = 1;
-          type = firstChar;
-        }
-        break;
-
-      default:
-        inconclusive = true;
-      }
-
-      // Some first characters do not allow an immediate decision, so inspect more
-      if (inconclusive) {
-        // Try to find a prefix
-        if ((this._previousMarker === '@prefix' || this._previousMarker === 'PREFIX') &&
-            (match = this._prefix.exec(input)))
-          type = 'prefix', value = match[1] || '';
-        // Try to find a prefixed name. Since it can contain (but not end with) a dot,
-        // we always need a non-dot character before deciding it is a prefixed name.
-        // Therefore, try inserting a space if we're at the end of the input.
-        else if ((match = this._prefixed.exec(input)) ||
-                 inputFinished && (match = this._prefixed.exec(input + ' ')))
-          type = 'prefixed', prefix = match[1] || '', value = this._unescape(match[2]);
-      }
-
-      // A type token is special: it can only be emitted after an IRI or prefixed name is read
-      if (this._previousMarker === '^^') {
-        switch (type) {
-        case 'prefixed': type = 'type';    break;
-        case 'IRI':      type = 'typeIRI'; break;
-        default:         type = '';
-        }
-      }
-
-      // What if nothing of the above was found?
-      if (!type) {
-        // We could be in streaming mode, and then we just wait for more input to arrive.
-        // Otherwise, a syntax error has occurred in the input.
-        // One exception: error on an unaccounted linebreak (= not inside a triple-quoted literal).
-        if (inputFinished || (!/^'''|^"""/.test(input) && /\n|\r/.test(input)))
-          return reportSyntaxError(this);
-        else
           return this._input = input;
+        } // Look for specific token types based on the first character
+
+
+        var line = this._line,
+            type = '',
+            value = '',
+            prefix = '',
+            firstChar = input[0],
+            match = null,
+            matchLength = 0,
+            inconclusive = false;
+
+        switch (firstChar) {
+          case '^':
+            // We need at least 3 tokens lookahead to distinguish ^^<IRI> and ^^pre:fixed
+            if (input.length < 3) break; // Try to match a type
+            else if (input[1] === '^') {
+                this._previousMarker = '^^'; // Move to type IRI or prefixed name
+
+                input = input.substr(2);
+
+                if (input[0] !== '<') {
+                  inconclusive = true;
+                  break;
+                }
+              } // If no type, it must be a path expression
+              else {
+                  if (this._n3Mode) {
+                    matchLength = 1;
+                    type = '^';
+                  }
+
+                  break;
+                }
+          // Fall through in case the type is an IRI
+
+          case '<':
+            // Try to find a full IRI without escape sequences
+            if (match = this._unescapedIri.exec(input)) type = 'IRI', value = match[1]; // Try to find a full IRI with escape sequences
+            else if (match = this._iri.exec(input)) {
+                value = this._unescape(match[1]);
+                if (value === null || illegalIriChars.test(value)) return reportSyntaxError(this);
+                type = 'IRI';
+              } // Try to find a backwards implication arrow
+              else if (this._n3Mode && input.length > 1 && input[1] === '=') type = 'inverse', matchLength = 2, value = '>';
+            break;
+
+          case '_':
+            // Try to find a blank node. Since it can contain (but not end with) a dot,
+            // we always need a non-dot character before deciding it is a blank node.
+            // Therefore, try inserting a space if we're at the end of the input.
+            if ((match = this._blank.exec(input)) || inputFinished && (match = this._blank.exec(input + ' '))) type = 'blank', prefix = '_', value = match[1];
+            break;
+
+          case '"':
+            // Try to find a literal without escape sequences
+            if (match = this._unescapedQuote.exec(input)) value = match[1]; // Before attempting more complex string patterns, try to detect a closing quote
+            else if (input.indexOf('"', 1) > 0) {
+                // Try to find any other literal wrapped in a pair of quotes
+                if (match = this._singleQuote.exec(input)) value = this._unescape(match[1]); // Try to find a literal wrapped in three pairs of quotes
+                else if (match = this._tripleQuote.exec(input)) {
+                    value = match[1]; // Advance line counter
+
+                    this._line += value.split(/\r\n|\r|\n/).length - 1;
+                    value = this._unescape(value);
+                  }
+                if (value === null) return reportSyntaxError(this);
+              }
+            if (match !== null) type = 'literal';
+            break;
+
+          case "'":
+            // Try to find a literal without escape sequences
+            if (match = this._unescapedApos.exec(input)) value = match[1]; // Before attempting more complex string patterns, try to detect a closing apostrophe
+            else if (input.indexOf("'", 1) > 0) {
+                // Try to find any other literal wrapped in a pair of apostrophes
+                if (match = this._singleApos.exec(input)) value = this._unescape(match[1]); // Try to find a literal wrapped in three pairs of apostrophes
+                else if (match = this._tripleApos.exec(input)) {
+                    value = match[1]; // Advance line counter
+
+                    this._line += value.split(/\r\n|\r|\n/).length - 1;
+                    value = this._unescape(value);
+                  }
+                if (value === null) return reportSyntaxError(this);
+              }
+            if (match !== null) type = 'literal';
+            break;
+
+          case '?':
+            // Try to find a variable
+            if (this._n3Mode && (match = this._variable.exec(input))) type = 'var', value = match[0];
+            break;
+
+          case '@':
+            // Try to find a language code
+            if (this._previousMarker === 'literal' && (match = this._langcode.exec(input))) type = 'langcode', value = match[1]; // Try to find a keyword
+            else if (match = this._keyword.exec(input)) type = match[0];
+            break;
+
+          case '.':
+            // Try to find a dot as punctuation
+            if (input.length === 1 ? inputFinished : input[1] < '0' || input[1] > '9') {
+              type = '.';
+              matchLength = 1;
+              break;
+            }
+
+          // Fall through to numerical case (could be a decimal dot)
+
+          case '0':
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+          case '+':
+          case '-':
+            // Try to find a number. Since it can contain (but not end with) a dot,
+            // we always need a non-dot character before deciding it is a number.
+            // Therefore, try inserting a space if we're at the end of the input.
+            if (match = this._number.exec(input) || inputFinished && (match = this._number.exec(input + ' '))) {
+              type = 'literal', value = match[0];
+              prefix = match[1] ? xsd["double"] : /^[+\-]?\d+$/.test(match[0]) ? xsd.integer : xsd.decimal;
+            }
+
+            break;
+
+          case 'B':
+          case 'b':
+          case 'p':
+          case 'P':
+          case 'G':
+          case 'g':
+            // Try to find a SPARQL-style keyword
+            if (match = this._sparqlKeyword.exec(input)) type = match[0].toUpperCase();else inconclusive = true;
+            break;
+
+          case 'f':
+          case 't':
+            // Try to match a boolean
+            if (match = this._boolean.exec(input)) type = 'literal', value = match[0], prefix = xsd["boolean"];else inconclusive = true;
+            break;
+
+          case 'a':
+            // Try to find an abbreviated predicate
+            if (match = this._shortPredicates.exec(input)) type = 'abbreviation', value = 'a';else inconclusive = true;
+            break;
+
+          case '=':
+            // Try to find an implication arrow or equals sign
+            if (this._n3Mode && input.length > 1) {
+              type = 'abbreviation';
+              if (input[1] !== '>') matchLength = 1, value = '=';else matchLength = 2, value = '>';
+            }
+
+            break;
+
+          case '!':
+            if (!this._n3Mode) break;
+
+          case ',':
+          case ';':
+          case '[':
+          case ']':
+          case '(':
+          case ')':
+          case '{':
+          case '}':
+            if (!this._lineMode) {
+              matchLength = 1;
+              type = firstChar;
+            }
+
+            break;
+
+          default:
+            inconclusive = true;
+        } // Some first characters do not allow an immediate decision, so inspect more
+
+
+        if (inconclusive) {
+          // Try to find a prefix
+          if ((this._previousMarker === '@prefix' || this._previousMarker === 'PREFIX') && (match = this._prefix.exec(input))) type = 'prefix', value = match[1] || ''; // Try to find a prefixed name. Since it can contain (but not end with) a dot,
+          // we always need a non-dot character before deciding it is a prefixed name.
+          // Therefore, try inserting a space if we're at the end of the input.
+          else if ((match = this._prefixed.exec(input)) || inputFinished && (match = this._prefixed.exec(input + ' '))) type = 'prefixed', prefix = match[1] || '', value = this._unescape(match[2]);
+        } // A type token is special: it can only be emitted after an IRI or prefixed name is read
+
+
+        if (this._previousMarker === '^^') {
+          switch (type) {
+            case 'prefixed':
+              type = 'type';
+              break;
+
+            case 'IRI':
+              type = 'typeIRI';
+              break;
+
+            default:
+              type = '';
+          }
+        } // What if nothing of the above was found?
+
+
+        if (!type) {
+          // We could be in streaming mode, and then we just wait for more input to arrive.
+          // Otherwise, a syntax error has occurred in the input.
+          // One exception: error on an unaccounted linebreak (= not inside a triple-quoted literal).
+          if (inputFinished || !/^'''|^"""/.test(input) && /\n|\r/.test(input)) return reportSyntaxError(this);else return this._input = input;
+        } // Emit the parsed token
+
+
+        var token = {
+          line: line,
+          type: type,
+          value: value,
+          prefix: prefix
+        };
+        callback(null, token);
+        this.previousToken = token;
+        this._previousMarker = type; // Advance to next part to tokenize
+
+        input = input.substr(matchLength || match[0].length, input.length);
+      } // Signals the syntax error through the callback
+
+
+      function reportSyntaxError(self) {
+        callback(self._syntaxError(/^\S*/.exec(input)[0]));
       }
+    } // ### `_unescape` replaces N3 escape codes by their corresponding characters
 
-      // Emit the parsed token
-      var token = { line: line, type: type, value: value, prefix: prefix };
-      callback(null, token);
-      this.previousToken = token;
-      this._previousMarker = type;
-      // Advance to next part to tokenize
-      input = input.substr(matchLength || match[0].length, input.length);
-    }
+  }, {
+    key: "_unescape",
+    value: function _unescape(item) {
+      try {
+        return item.replace(escapeSequence, function (sequence, unicode4, unicode8, escapedChar) {
+          var charCode;
 
-    // Signals the syntax error through the callback
-    function reportSyntaxError(self) { callback(self._syntaxError(/^\S*/.exec(input)[0])); }
-  }
+          if (unicode4) {
+            charCode = parseInt(unicode4, 16);
+            if (isNaN(charCode)) throw new Error(); // can never happen (regex), but helps performance
 
-  // ### `_unescape` replaces N3 escape codes by their corresponding characters
-  _unescape(item) {
-    try {
-      return item.replace(escapeSequence, function (sequence, unicode4, unicode8, escapedChar) {
-        var charCode;
-        if (unicode4) {
-          charCode = parseInt(unicode4, 16);
-          if (isNaN(charCode)) throw new Error(); // can never happen (regex), but helps performance
-          return fromCharCode(charCode);
-        }
-        else if (unicode8) {
-          charCode = parseInt(unicode8, 16);
-          if (isNaN(charCode)) throw new Error(); // can never happen (regex), but helps performance
-          if (charCode <= 0xFFFF) return fromCharCode(charCode);
-          return fromCharCode(0xD800 + ((charCode -= 0x10000) / 0x400), 0xDC00 + (charCode & 0x3FF));
-        }
-        else {
-          var replacement = escapeReplacements[escapedChar];
-          if (!replacement)
-            throw new Error();
-          return replacement;
-        }
-      });
-    }
-    catch (error) { return null; }
-  }
+            return fromCharCode(charCode);
+          } else if (unicode8) {
+            charCode = parseInt(unicode8, 16);
+            if (isNaN(charCode)) throw new Error(); // can never happen (regex), but helps performance
 
-  // ### `_syntaxError` creates a syntax error for the given issue
-  _syntaxError(issue) {
-    this._input = null;
-    var err = new Error('Unexpected "' + issue + '" on line ' + this._line + '.');
-    err.context = {
-      token: undefined,
-      line: this._line,
-      previousToken: this.previousToken,
-    };
-    return err;
-  }
-
-  // ## Public methods
-
-  // ### `tokenize` starts the transformation of an N3 document into an array of tokens.
-  // The input can be a string or a stream.
-  tokenize(input, callback) {
-    var self = this;
-    this._line = 1;
-
-    // If the input is a string, continuously emit tokens through the callback until the end
-    if (typeof input === 'string') {
-      this._input = input;
-      // If a callback was passed, asynchronously call it
-      if (typeof callback === 'function')
-        immediately(function () { self._tokenizeToEnd(callback, true); });
-      // If no callback was passed, tokenize synchronously and return
-      else {
-        var tokens = [], error;
-        this._tokenizeToEnd(function (e, t) { e ? (error = e) : tokens.push(t); }, true);
-        if (error) throw error;
-        return tokens;
+            if (charCode <= 0xFFFF) return fromCharCode(charCode);
+            return fromCharCode(0xD800 + (charCode -= 0x10000) / 0x400, 0xDC00 + (charCode & 0x3FF));
+          } else {
+            var replacement = escapeReplacements[escapedChar];
+            if (!replacement) throw new Error();
+            return replacement;
+          }
+        });
+      } catch (error) {
+        return null;
       }
-    }
-    // Otherwise, the input must be a stream
-    else {
-      this._input = '';
-      this._pendingBuffer = null;
-      if (typeof input.setEncoding === 'function')
-        input.setEncoding('utf8');
-      // Adds the data chunk to the buffer and parses as far as possible
-      input.on('data', function (data) {
-        if (self._input !== null && data.length !== 0) {
-          // Prepend any previous pending writes
-          if (self._pendingBuffer) {
-            data = Buffer.concat([self._pendingBuffer, data]);
-            self._pendingBuffer = null;
-          }
-          // Hold if the buffer ends in an incomplete unicode sequence
-          if (data[data.length - 1] & 0x80) {
-            self._pendingBuffer = data;
-          }
-          // Otherwise, tokenize as far as possible
-          else {
-            self._input += data;
-            self._tokenizeToEnd(callback, false);
-          }
-        }
-      });
-      // Parses until the end
-      input.on('end', function () {
-        if (self._input !== null)
+    } // ### `_syntaxError` creates a syntax error for the given issue
+
+  }, {
+    key: "_syntaxError",
+    value: function _syntaxError(issue) {
+      this._input = null;
+      var err = new Error('Unexpected "' + issue + '" on line ' + this._line + '.');
+      err.context = {
+        token: undefined,
+        line: this._line,
+        previousToken: this.previousToken
+      };
+      return err;
+    } // ## Public methods
+    // ### `tokenize` starts the transformation of an N3 document into an array of tokens.
+    // The input can be a string or a stream.
+
+  }, {
+    key: "tokenize",
+    value: function tokenize(input, callback) {
+      var self = this;
+      this._line = 1; // If the input is a string, continuously emit tokens through the callback until the end
+
+      if (typeof input === 'string') {
+        this._input = input; // If a callback was passed, asynchronously call it
+
+        if (typeof callback === 'function') immediately(function () {
           self._tokenizeToEnd(callback, true);
-      });
-      input.on('error', callback);
+        }); // If no callback was passed, tokenize synchronously and return
+        else {
+            var tokens = [],
+                error;
+
+            this._tokenizeToEnd(function (e, t) {
+              e ? error = e : tokens.push(t);
+            }, true);
+
+            if (error) throw error;
+            return tokens;
+          }
+      } // Otherwise, the input must be a stream
+      else {
+          this._input = '';
+          this._pendingBuffer = null;
+          if (typeof input.setEncoding === 'function') input.setEncoding('utf8'); // Adds the data chunk to the buffer and parses as far as possible
+
+          input.on('data', function (data) {
+            if (self._input !== null && data.length !== 0) {
+              // Prepend any previous pending writes
+              if (self._pendingBuffer) {
+                data = Buffer.concat([self._pendingBuffer, data]);
+                self._pendingBuffer = null;
+              } // Hold if the buffer ends in an incomplete unicode sequence
+
+
+              if (data[data.length - 1] & 0x80) {
+                self._pendingBuffer = data;
+              } // Otherwise, tokenize as far as possible
+              else {
+                  self._input += data;
+
+                  self._tokenizeToEnd(callback, false);
+                }
+            }
+          }); // Parses until the end
+
+          input.on('end', function () {
+            if (self._input !== null) self._tokenizeToEnd(callback, true);
+          });
+          input.on('error', callback);
+        }
     }
-  }
-}
+  }]);
+  return N3Lexer;
+}(); // ## Exports
 
 
-// ## Exports
 module.exports = N3Lexer;
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(38).setImmediate, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(39).setImmediate, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
 // **N3Parser** parses N3 documents.
 var Lexer = __webpack_require__(133),
-    DataFactory = __webpack_require__(44),
-    namespaces = __webpack_require__(54);
+    DataFactory = __webpack_require__(45),
+    namespaces = __webpack_require__(55); // The next ID for new blank nodes
 
-// The next ID for new blank nodes
-var blankNodePrefix = 0, blankNodeCount = 0;
 
-// ## Constructor
-class N3Parser {
-  constructor(options) {
+var blankNodePrefix = 0,
+    blankNodeCount = 0; // ## Constructor
+
+var N3Parser =
+/*#__PURE__*/
+function () {
+  function N3Parser(options) {
+    (0, _classCallCheck2["default"])(this, N3Parser);
     this._contextStack = [];
-    this._graph = null;
+    this._graph = null; // Set the document IRI
 
-    // Set the document IRI
     options = options || {};
-    this._setBase(options.baseIRI);
-    options.factory && initDataFactory(this, options.factory);
 
-    // Set supported features depending on the format
-    var format = (typeof options.format === 'string') ?
-                 options.format.match(/\w*$/)[0].toLowerCase() : '',
-        isTurtle = format === 'turtle', isTriG = format === 'trig',
-        isNTriples = /triple/.test(format), isNQuads = /quad/.test(format),
+    this._setBase(options.baseIRI);
+
+    options.factory && initDataFactory(this, options.factory); // Set supported features depending on the format
+
+    var format = typeof options.format === 'string' ? options.format.match(/\w*$/)[0].toLowerCase() : '',
+        isTurtle = format === 'turtle',
+        isTriG = format === 'trig',
+        isNTriples = /triple/.test(format),
+        isNQuads = /quad/.test(format),
         isN3 = this._n3Mode = /n3/.test(format),
         isLineMode = isNTriples || isNQuads;
-    if (!(this._supportsNamedGraphs = !(isTurtle || isN3)))
-      this._readPredicateOrNamedGraph = this._readPredicate;
-    this._supportsQuads = !(isTurtle || isTriG || isNTriples || isN3);
-    // Disable relative IRIs in N-Triples or N-Quads mode
-    if (isLineMode)
-      this._resolveRelativeIRI = function (iri) { return ''; };
-    this._blankNodePrefix = typeof options.blankNodePrefix !== 'string' ? '' :
-                              options.blankNodePrefix.replace(/^(?!_:)/, '_:');
-    this._lexer = options.lexer || new Lexer({ lineMode: isLineMode, n3: isN3 });
-    // Disable explicit quantifiers by default
-    this._explicitQuantifiers = !!options.explicitQuantifiers;
-  }
+    if (!(this._supportsNamedGraphs = !(isTurtle || isN3))) this._readPredicateOrNamedGraph = this._readPredicate;
+    this._supportsQuads = !(isTurtle || isTriG || isNTriples || isN3); // Disable relative IRIs in N-Triples or N-Quads mode
 
-  // ## Static class methods
-
-// ### `_resetBlankNodeIds` restarts blank node identification
-  static _resetBlankNodeIds() {
-    blankNodePrefix = blankNodeCount = 0;
-  }
-
-  // ## Private methods
-
-  // ### `_blank` creates a new blank node
-  _blank() {
-    return this._blankNode('b' + blankNodeCount++);
-  }
-
-  // ### `_setBase` sets the base IRI to resolve relative IRIs
-  _setBase(baseIRI) {
-    if (!baseIRI)
-      this._base = null;
-    else {
-      // Remove fragment if present
-      var fragmentPos = baseIRI.indexOf('#');
-      if (fragmentPos >= 0)
-        baseIRI = baseIRI.substr(0, fragmentPos);
-      // Set base IRI and its components
-      this._base = baseIRI;
-      this._basePath   = baseIRI.indexOf('/') < 0 ? baseIRI :
-                         baseIRI.replace(/[^\/?]*(?:\?.*)?$/, '');
-      baseIRI = baseIRI.match(/^(?:([a-z][a-z0-9+.-]*:))?(?:\/\/[^\/]*)?/i);
-      this._baseRoot   = baseIRI[0];
-      this._baseScheme = baseIRI[1];
-    }
-  }
-
-  // ### `_saveContext` stores the current parsing context
-  // when entering a new scope (list, blank node, formula)
-  _saveContext(type, graph, subject, predicate, object) {
-    var n3Mode = this._n3Mode;
-    this._contextStack.push({
-      subject: subject, predicate: predicate, object: object,
-      graph: graph, type: type,
-      inverse: n3Mode ? this._inversePredicate : false,
-      blankPrefix: n3Mode ? this._prefixes._ : '',
-      quantified: n3Mode ? this._quantified : null,
-    });
-    // The settings below only apply to N3 streams
-    if (n3Mode) {
-      // Every new scope resets the predicate direction
-      this._inversePredicate = false;
-      // In N3, blank nodes are scoped to a formula
-      // (using a dot as separator, as a blank node label cannot start with it)
-      this._prefixes._ = (this._graph ? this._graph.id.substr(2) + '.' : '.');
-      // Quantifiers are scoped to a formula
-      this._quantified = Object.create(this._quantified);
-    }
-  }
-
-  // ### `_restoreContext` restores the parent context
-  // when leaving a scope (list, blank node, formula)
-  _restoreContext() {
-    var context = this._contextStack.pop(), n3Mode = this._n3Mode;
-    this._subject   = context.subject;
-    this._predicate = context.predicate;
-    this._object    = context.object;
-    this._graph     = context.graph;
-    // The settings below only apply to N3 streams
-    if (n3Mode) {
-      this._inversePredicate = context.inverse;
-      this._prefixes._ = context.blankPrefix;
-      this._quantified = context.quantified;
-    }
-  }
-
-  // ### `_readInTopContext` reads a token when in the top context
-  _readInTopContext(token) {
-    switch (token.type) {
-    // If an EOF token arrives in the top context, signal that we're done
-    case 'eof':
-      if (this._graph !== null)
-        return this._error('Unclosed graph', token);
-      delete this._prefixes._;
-      return this._callback(null, null, this._prefixes);
-    // It could be a prefix declaration
-    case 'PREFIX':
-      this._sparqlStyle = true;
-    case '@prefix':
-      return this._readPrefix;
-    // It could be a base declaration
-    case 'BASE':
-      this._sparqlStyle = true;
-    case '@base':
-      return this._readBaseIRI;
-    // It could be a graph
-    case '{':
-      if (this._supportsNamedGraphs) {
-        this._graph = '';
-        this._subject = null;
-        return this._readSubject;
-      }
-    case 'GRAPH':
-      if (this._supportsNamedGraphs)
-        return this._readNamedGraphLabel;
-    // Otherwise, the next token must be a subject
-    default:
-      return this._readSubject(token);
-    }
-  }
-
-  // ### `_readEntity` reads an IRI, prefixed name, blank node, or variable
-  _readEntity(token, quantifier) {
-    var value;
-    switch (token.type) {
-    // Read a relative or absolute IRI
-    case 'IRI':
-    case 'typeIRI':
-      var iri = this._resolveIRI(token.value);
-      if (iri === '')
-        return this._error('Invalid IRI', token);
-      value = this._namedNode(iri);
-      break;
-    // Read a prefixed name
-    case 'type':
-    case 'prefixed':
-      var prefix = this._prefixes[token.prefix];
-      if (prefix === undefined)
-        return this._error('Undefined prefix "' + token.prefix + ':"', token);
-      value = this._namedNode(prefix + token.value);
-      break;
-    // Read a blank node
-    case 'blank':
-      value = this._blankNode(this._prefixes[token.prefix] + token.value);
-      break;
-    // Read a variable
-    case 'var':
-      value = this._variable(token.value.substr(1));
-      break;
-    // Everything else is not an entity
-    default:
-      return this._error('Expected entity but got ' + token.type, token);
-    }
-    // In N3 mode, replace the entity if it is quantified
-    if (!quantifier && this._n3Mode && (value.id in this._quantified))
-      value = this._quantified[value.id];
-    return value;
-  }
-
-  // ### `_readSubject` reads a quad's subject
-  _readSubject(token) {
-    this._predicate = null;
-    switch (token.type) {
-    case '[':
-      // Start a new quad with a new blank node as subject
-      this._saveContext('blank', this._graph,
-                        this._subject = this._blank(), null, null);
-      return this._readBlankNodeHead;
-    case '(':
-      // Start a new list
-      this._saveContext('list', this._graph, this.RDF_NIL, null, null);
-      this._subject = null;
-      return this._readListItem;
-    case '{':
-      // Start a new formula
-      if (!this._n3Mode)
-        return this._error('Unexpected graph', token);
-      this._saveContext('formula', this._graph,
-                        this._graph = this._blank(), null, null);
-      return this._readSubject;
-    case '}':
-       // No subject; the graph in which we are reading is closed instead
-      return this._readPunctuation(token);
-    case '@forSome':
-      if (!this._n3Mode)
-        return this._error('Unexpected "@forSome"', token);
-      this._subject = null;
-      this._predicate = this.N3_FORSOME;
-      this._quantifier = this._blankNode;
-      return this._readQuantifierList;
-    case '@forAll':
-      if (!this._n3Mode)
-        return this._error('Unexpected "@forAll"', token);
-      this._subject = null;
-      this._predicate = this.N3_FORALL;
-      this._quantifier = this._variable;
-      return this._readQuantifierList;
-    default:
-      // Read the subject entity
-      if ((this._subject = this._readEntity(token)) === undefined)
-        return;
-      // In N3 mode, the subject might be a path
-      if (this._n3Mode)
-        return this._getPathReader(this._readPredicateOrNamedGraph);
-    }
-
-    // The next token must be a predicate,
-    // or, if the subject was actually a graph IRI, a named graph
-    return this._readPredicateOrNamedGraph;
-  }
-
-  // ### `_readPredicate` reads a quad's predicate
-  _readPredicate(token) {
-    var type = token.type;
-    switch (type) {
-    case 'inverse':
-      this._inversePredicate = true;
-    case 'abbreviation':
-      this._predicate = this.ABBREVIATIONS[token.value];
-      break;
-    case '.':
-    case ']':
-    case '}':
-      // Expected predicate didn't come, must have been trailing semicolon
-      if (this._predicate === null)
-        return this._error('Unexpected ' + type, token);
-      this._subject = null;
-      return type === ']' ? this._readBlankNodeTail(token) : this._readPunctuation(token);
-    case ';':
-      // Additional semicolons can be safely ignored
-      return this._predicate !== null ? this._readPredicate :
-             this._error('Expected predicate but got ;', token);
-    case 'blank':
-      if (!this._n3Mode)
-        return this._error('Disallowed blank node as predicate', token);
-    default:
-      if ((this._predicate = this._readEntity(token)) === undefined)
-        return;
-    }
-    // The next token must be an object
-    return this._readObject;
-  }
-
-  // ### `_readObject` reads a quad's object
-  _readObject(token) {
-    switch (token.type) {
-    case 'literal':
-      // Regular literal, can still get a datatype or language
-      if (token.prefix.length === 0) {
-        this._literalValue = token.value;
-        return this._readDataTypeOrLang;
-      }
-      // Pre-datatyped string literal (prefix stores the datatype)
-      else
-        this._object = this._literal(token.value, this._namedNode(token.prefix));
-      break;
-    case '[':
-      // Start a new quad with a new blank node as subject
-      this._saveContext('blank', this._graph, this._subject, this._predicate,
-                        this._subject = this._blank());
-      return this._readBlankNodeHead;
-    case '(':
-      // Start a new list
-      this._saveContext('list', this._graph, this._subject, this._predicate, this.RDF_NIL);
-      this._subject = null;
-      return this._readListItem;
-    case '{':
-      // Start a new formula
-      if (!this._n3Mode)
-        return this._error('Unexpected graph', token);
-      this._saveContext('formula', this._graph, this._subject, this._predicate,
-                        this._graph = this._blank());
-      return this._readSubject;
-    default:
-      // Read the object entity
-      if ((this._object = this._readEntity(token)) === undefined)
-        return;
-      // In N3 mode, the object might be a path
-      if (this._n3Mode)
-        return this._getPathReader(this._getContextEndReader());
-    }
-    return this._getContextEndReader();
-  }
-
-  // ### `_readPredicateOrNamedGraph` reads a quad's predicate, or a named graph
-  _readPredicateOrNamedGraph(token) {
-    return token.type === '{' ? this._readGraph(token) : this._readPredicate(token);
-  }
-
-  // ### `_readGraph` reads a graph
-  _readGraph(token) {
-    if (token.type !== '{')
-      return this._error('Expected graph but got ' + token.type, token);
-    // The "subject" we read is actually the GRAPH's label
-    this._graph = this._subject, this._subject = null;
-    return this._readSubject;
-  }
-
-  // ### `_readBlankNodeHead` reads the head of a blank node
-  _readBlankNodeHead(token) {
-    if (token.type === ']') {
-      this._subject = null;
-      return this._readBlankNodeTail(token);
-    }
-    else {
-      this._predicate = null;
-      return this._readPredicate(token);
-    }
-  }
-
-  // ### `_readBlankNodeTail` reads the end of a blank node
-  _readBlankNodeTail(token) {
-    if (token.type !== ']')
-      return this._readBlankNodePunctuation(token);
-
-    // Store blank node quad
-    if (this._subject !== null)
-      this._emit(this._subject, this._predicate, this._object, this._graph);
-
-    // Restore the parent context containing this blank node
-    var empty = this._predicate === null;
-    this._restoreContext();
-    // If the blank node was the subject, continue reading the predicate
-    if (this._object === null)
-      // If the blank node was empty, it could be a named graph label
-      return empty ? this._readPredicateOrNamedGraph : this._readPredicateAfterBlank;
-    // If the blank node was the object, restore previous context and read punctuation
-    else
-      return this._getContextEndReader();
-  }
-
-  // ### `_readPredicateAfterBlank` reads a predicate after an anonymous blank node
-  _readPredicateAfterBlank(token) {
-    switch (token.type) {
-    case '.':
-    case '}':
-      // No predicate is coming if the triple is terminated here
-      this._subject = null;
-      return this._readPunctuation(token);
-    default:
-      return this._readPredicate(token);
-    }
-  }
-
-  // ### `_readListItem` reads items from a list
-  _readListItem(token) {
-    var item = null,                      // The item of the list
-        list = null,                      // The list itself
-        previousList = this._subject,     // The previous list that contains this list
-        stack = this._contextStack,       // The stack of parent contexts
-        parent = stack[stack.length - 1], // The parent containing the current list
-        next = this._readListItem;        // The next function to execute
-
-    switch (token.type) {
-    case '[':
-      // Stack the current list quad and start a new quad with a blank node as subject
-      this._saveContext('blank', this._graph,
-                        list = this._blank(), this.RDF_FIRST,
-                        this._subject = item = this._blank());
-      next = this._readBlankNodeHead;
-      break;
-    case '(':
-      // Stack the current list quad and start a new list
-      this._saveContext('list', this._graph,
-                        list = this._blank(), this.RDF_FIRST, this.RDF_NIL);
-      this._subject = null;
-      break;
-    case ')':
-      // Closing the list; restore the parent context
-      this._restoreContext();
-      // If this list is contained within a parent list, return the membership quad here.
-      // This will be `<parent list element> rdf:first <this list>.`.
-      if (stack.length !== 0 && stack[stack.length - 1].type === 'list')
-        this._emit(this._subject, this._predicate, this._object, this._graph);
-      // Was this list the parent's subject?
-      if (this._predicate === null) {
-        // The next token is the predicate
-        next = this._readPredicate;
-        // No list tail if this was an empty list
-        if (this._subject === this.RDF_NIL)
-          return next;
-      }
-      // The list was in the parent context's object
-      else {
-        next = this._getContextEndReader();
-        // No list tail if this was an empty list
-        if (this._object === this.RDF_NIL)
-          return next;
-      }
-      // Close the list by making the head nil
-      list = this.RDF_NIL;
-      break;
-    case 'literal':
-      // Regular literal, can still get a datatype or language
-      if (token.prefix.length === 0) {
-        this._literalValue = token.value;
-        next = this._readListItemDataTypeOrLang;
-      }
-      // Pre-datatyped string literal (prefix stores the datatype)
-      else {
-        item = this._literal(token.value, this._namedNode(token.prefix));
-        next = this._getContextEndReader();
-      }
-      break;
-    default:
-      if ((item = this._readEntity(token)) === undefined)
-        return;
-    }
-
-     // Create a new blank node if no item head was assigned yet
-    if (list === null)
-      this._subject = list = this._blank();
-
-    // Is this the first element of the list?
-    if (previousList === null) {
-      // This list is either the subject or the object of its parent
-      if (parent.predicate === null)
-        parent.subject = list;
-      else
-        parent.object = list;
-    }
-    else {
-      // Continue the previous list with the current list
-      this._emit(previousList, this.RDF_REST, list, this._graph);
-    }
-    // If an item was read, add it to the list
-    if (item !== null) {
-      // In N3 mode, the item might be a path
-      if (this._n3Mode && (token.type === 'IRI' || token.type === 'prefixed')) {
-        // Create a new context to add the item's path
-        this._saveContext('item', this._graph, list, this.RDF_FIRST, item);
-        this._subject = item, this._predicate = null;
-        // _readPath will restore the context and output the item
-        return this._getPathReader(this._readListItem);
-      }
-      // Output the item
-      this._emit(list, this.RDF_FIRST, item, this._graph);
-    }
-    return next;
-  }
-
-  // ### `_readDataTypeOrLang` reads an _optional_ datatype or language
-  _readDataTypeOrLang(token) {
-    return this._completeLiteral(token, false);
-  }
-
-  // ### `_readListItemDataTypeOrLang` reads an _optional_ datatype or language in a list
-  _readListItemDataTypeOrLang(token) {
-    return this._completeLiteral(token, true);
-  }
-
-  // ### `_completeLiteral` completes a literal with an optional datatype or language
-  _completeLiteral(token, listItem) {
-    switch (token.type) {
-    // Create a datatyped literal
-    case 'type':
-    case 'typeIRI':
-      var datatype = this._readEntity(token);
-      if (datatype === undefined) return; // No datatype means an error occurred
-      this._object = this._literal(this._literalValue, datatype);
-      token = null;
-      break;
-    // Create a language-tagged string
-    case 'langcode':
-      this._object = this._literal(this._literalValue, token.value);
-      token = null;
-      break;
-    // Create a simple string literal
-    default:
-      this._object = this._literal(this._literalValue);
-    }
-    // If this literal was part of a list, write the item
-    // (we could also check the context stack, but passing in a flag is faster)
-    if (listItem)
-      this._emit(this._subject, this.RDF_FIRST, this._object, this._graph);
-    // If the token was consumed, continue with the rest of the input
-    if (token === null)
-      return this._getContextEndReader();
-    // Otherwise, consume the token now
-    else {
-      this._readCallback = this._getContextEndReader();
-      return this._readCallback(token);
-    }
-  }
-
-  // ### `_readFormulaTail` reads the end of a formula
-  _readFormulaTail(token) {
-    if (token.type !== '}')
-      return this._readPunctuation(token);
-
-    // Store the last quad of the formula
-    if (this._subject !== null)
-      this._emit(this._subject, this._predicate, this._object, this._graph);
-
-    // Restore the parent context containing this formula
-    this._restoreContext();
-    // If the formula was the subject, continue reading the predicate.
-    // If the formula was the object, read punctuation.
-    return this._object === null ? this._readPredicate : this._getContextEndReader();
-  }
-
-  // ### `_readPunctuation` reads punctuation between quads or quad parts
-  _readPunctuation(token) {
-    var next, subject = this._subject, graph = this._graph,
-        inversePredicate = this._inversePredicate;
-    switch (token.type) {
-    // A closing brace ends a graph
-    case '}':
-      if (this._graph === null)
-        return this._error('Unexpected graph closing', token);
-      if (this._n3Mode)
-        return this._readFormulaTail(token);
-      this._graph = null;
-    // A dot just ends the statement, without sharing anything with the next
-    case '.':
-      this._subject = null;
-      next = this._contextStack.length ? this._readSubject : this._readInTopContext;
-      if (inversePredicate) this._inversePredicate = false;
-      break;
-    // Semicolon means the subject is shared; predicate and object are different
-    case ';':
-      next = this._readPredicate;
-      break;
-    // Comma means both the subject and predicate are shared; the object is different
-    case ',':
-      next = this._readObject;
-      break;
-    default:
-      // An entity means this is a quad (only allowed if not already inside a graph)
-      if (this._supportsQuads && this._graph === null && (graph = this._readEntity(token)) !== undefined) {
-        next = this._readQuadPunctuation;
-        break;
-      }
-      return this._error('Expected punctuation to follow "' + this._object.id + '"', token);
-    }
-    // A quad has been completed now, so return it
-    if (subject !== null) {
-      var predicate = this._predicate, object = this._object;
-      if (!inversePredicate)
-        this._emit(subject, predicate, object,  graph);
-      else
-        this._emit(object,  predicate, subject, graph);
-    }
-    return next;
-  }
-
-    // ### `_readBlankNodePunctuation` reads punctuation in a blank node
-  _readBlankNodePunctuation(token) {
-    var next;
-    switch (token.type) {
-    // Semicolon means the subject is shared; predicate and object are different
-    case ';':
-      next = this._readPredicate;
-      break;
-    // Comma means both the subject and predicate are shared; the object is different
-    case ',':
-      next = this._readObject;
-      break;
-    default:
-      return this._error('Expected punctuation to follow "' + this._object.id + '"', token);
-    }
-    // A quad has been completed now, so return it
-    this._emit(this._subject, this._predicate, this._object, this._graph);
-    return next;
-  }
-
-  // ### `_readQuadPunctuation` reads punctuation after a quad
-  _readQuadPunctuation(token) {
-    if (token.type !== '.')
-      return this._error('Expected dot to follow quad', token);
-    return this._readInTopContext;
-  }
-
-  // ### `_readPrefix` reads the prefix of a prefix declaration
-  _readPrefix(token) {
-    if (token.type !== 'prefix')
-      return this._error('Expected prefix to follow @prefix', token);
-    this._prefix = token.value;
-    return this._readPrefixIRI;
-  }
-
-  // ### `_readPrefixIRI` reads the IRI of a prefix declaration
-  _readPrefixIRI(token) {
-    if (token.type !== 'IRI')
-      return this._error('Expected IRI to follow prefix "' + this._prefix + ':"', token);
-    var prefixNode = this._readEntity(token);
-    this._prefixes[this._prefix] = prefixNode.value;
-    this._prefixCallback(this._prefix, prefixNode);
-    return this._readDeclarationPunctuation;
-  }
-
-  // ### `_readBaseIRI` reads the IRI of a base declaration
-  _readBaseIRI(token) {
-    var iri = token.type === 'IRI' && this._resolveIRI(token.value);
-    if (!iri)
-      return this._error('Expected valid IRI to follow base declaration', token);
-    this._setBase(iri);
-    return this._readDeclarationPunctuation;
-  }
-
-  // ### `_readNamedGraphLabel` reads the label of a named graph
-  _readNamedGraphLabel(token) {
-    switch (token.type) {
-    case 'IRI':
-    case 'blank':
-    case 'prefixed':
-      return this._readSubject(token), this._readGraph;
-    case '[':
-      return this._readNamedGraphBlankLabel;
-    default:
-      return this._error('Invalid graph label', token);
-    }
-  }
-
-  // ### `_readNamedGraphLabel` reads a blank node label of a named graph
-  _readNamedGraphBlankLabel(token) {
-    if (token.type !== ']')
-      return this._error('Invalid graph label', token);
-    this._subject = this._blank();
-    return this._readGraph;
-  }
-
-  // ### `_readDeclarationPunctuation` reads the punctuation of a declaration
-  _readDeclarationPunctuation(token) {
-    // SPARQL-style declarations don't have punctuation
-    if (this._sparqlStyle) {
-      this._sparqlStyle = false;
-      return this._readInTopContext(token);
-    }
-
-    if (token.type !== '.')
-      return this._error('Expected declaration to end with a dot', token);
-    return this._readInTopContext;
-  }
-
-  // Reads a list of quantified symbols from a @forSome or @forAll statement
-  _readQuantifierList(token) {
-    var entity;
-    switch (token.type) {
-    case 'IRI':
-    case 'prefixed':
-      if ((entity = this._readEntity(token, true)) !== undefined)
-        break;
-    default:
-      return this._error('Unexpected ' + token.type, token);
-    }
-    // Without explicit quantifiers, map entities to a quantified entity
-    if (!this._explicitQuantifiers)
-      this._quantified[entity.id] = this._quantifier('b' + blankNodeCount++);
-    // With explicit quantifiers, output the reified quantifier
-    else {
-      // If this is the first item, start a new quantifier list
-      if (this._subject === null)
-        this._emit(this._graph || this.DEFAULTGRAPH, this._predicate,
-                   this._subject = this._blank(), this.QUANTIFIERS_GRAPH);
-      // Otherwise, continue the previous list
-      else
-        this._emit(this._subject, this.RDF_REST,
-                   this._subject = this._blank(), this.QUANTIFIERS_GRAPH);
-      // Output the list item
-      this._emit(this._subject, this.RDF_FIRST, entity, this.QUANTIFIERS_GRAPH);
-    }
-    return this._readQuantifierPunctuation;
-  }
-
-  // Reads punctuation from a @forSome or @forAll statement
-  _readQuantifierPunctuation(token) {
-    // Read more quantifiers
-    if (token.type === ',')
-      return this._readQuantifierList;
-    // End of the quantifier list
-    else {
-      // With explicit quantifiers, close the quantifier list
-      if (this._explicitQuantifiers) {
-        this._emit(this._subject, this.RDF_REST, this.RDF_NIL, this.QUANTIFIERS_GRAPH);
-        this._subject = null;
-      }
-      // Read a dot
-      this._readCallback = this._getContextEndReader();
-      return this._readCallback(token);
-    }
-  }
-
-  // ### `_getPathReader` reads a potential path and then resumes with the given function
-  _getPathReader(afterPath) {
-    this._afterPath = afterPath;
-    return this._readPath;
-  }
-
-  // ### `_readPath` reads a potential path
-  _readPath(token) {
-    switch (token.type) {
-    // Forward path
-    case '!': return this._readForwardPath;
-    // Backward path
-    case '^': return this._readBackwardPath;
-    // Not a path; resume reading where we left off
-    default:
-      var stack = this._contextStack, parent = stack.length && stack[stack.length - 1];
-      // If we were reading a list item, we still need to output it
-      if (parent && parent.type === 'item') {
-        // The list item is the remaining subejct after reading the path
-        var item = this._subject;
-        // Switch back to the context of the list
-        this._restoreContext();
-        // Output the list item
-        this._emit(this._subject, this.RDF_FIRST, item, this._graph);
-      }
-      return this._afterPath(token);
-    }
-  }
-
-  // ### `_readForwardPath` reads a '!' path
-  _readForwardPath(token) {
-    var subject, predicate, object = this._blank();
-    // The next token is the predicate
-    if ((predicate = this._readEntity(token)) === undefined)
-      return;
-    // If we were reading a subject, replace the subject by the path's object
-    if (this._predicate === null)
-      subject = this._subject, this._subject = object;
-    // If we were reading an object, replace the subject by the path's object
-    else
-      subject = this._object,  this._object  = object;
-    // Emit the path's current quad and read its next section
-    this._emit(subject, predicate, object, this._graph);
-    return this._readPath;
-  }
-
-  // ### `_readBackwardPath` reads a '^' path
-  _readBackwardPath(token) {
-    var subject = this._blank(), predicate, object;
-    // The next token is the predicate
-    if ((predicate = this._readEntity(token)) === undefined)
-      return;
-    // If we were reading a subject, replace the subject by the path's subject
-    if (this._predicate === null)
-      object = this._subject, this._subject = subject;
-    // If we were reading an object, replace the subject by the path's subject
-    else
-      object = this._object,  this._object  = subject;
-    // Emit the path's current quad and read its next section
-    this._emit(subject, predicate, object, this._graph);
-    return this._readPath;
-  }
-
-  // ### `_getContextEndReader` gets the next reader function at the end of a context
-  _getContextEndReader() {
-    var contextStack = this._contextStack;
-    if (!contextStack.length)
-      return this._readPunctuation;
-
-    switch (contextStack[contextStack.length - 1].type) {
-    case 'blank':
-      return this._readBlankNodeTail;
-    case 'list':
-      return this._readListItem;
-    case 'formula':
-      return this._readFormulaTail;
-    }
-  }
-
-  // ### `_emit` sends a quad through the callback
-  _emit(subject, predicate, object, graph) {
-    this._callback(null, this._quad(subject, predicate, object, graph || this.DEFAULTGRAPH));
-  }
-
-  // ### `_error` emits an error message through the callback
-  _error(message, token) {
-    var err = new Error(message + ' on line ' + token.line + '.');
-    err.context = {
-      token: token,
-      line: token.line,
-      previousToken: this._lexer.previousToken,
+    if (isLineMode) this._resolveRelativeIRI = function (iri) {
+      return '';
     };
-    this._callback(err);
-    this._callback = noop;
-  }
+    this._blankNodePrefix = typeof options.blankNodePrefix !== 'string' ? '' : options.blankNodePrefix.replace(/^(?!_:)/, '_:');
+    this._lexer = options.lexer || new Lexer({
+      lineMode: isLineMode,
+      n3: isN3
+    }); // Disable explicit quantifiers by default
 
-  // ### `_resolveIRI` resolves an IRI against the base path
-  _resolveIRI(iri) {
-    return /^[a-z][a-z0-9+.-]*:/i.test(iri) ? iri : this._resolveRelativeIRI(iri);
-  }
+    this._explicitQuantifiers = !!options.explicitQuantifiers;
+  } // ## Static class methods
+  // ### `_resetBlankNodeIds` restarts blank node identification
 
-  // ### `_resolveRelativeIRI` resolves an IRI against the base path,
-  // assuming that a base path has been set and that the IRI is indeed relative
-  _resolveRelativeIRI(iri) {
-    // An empty relative IRI indicates the base IRI
-    if (!iri.length)
-      return this._base;
-    // Decide resolving strategy based in the first character
-    switch (iri[0]) {
-    // Resolve relative fragment IRIs against the base IRI
-    case '#': return this._base + iri;
-    // Resolve relative query string IRIs by replacing the query string
-    case '?': return this._base.replace(/(?:\?.*)?$/, iri);
-    // Resolve root-relative IRIs at the root of the base IRI
-    case '/':
-      // Resolve scheme-relative IRIs to the scheme
-      return (iri[1] === '/' ? this._baseScheme : this._baseRoot) + this._removeDotSegments(iri);
-    // Resolve all other IRIs at the base IRI's path
-    default:
-      // Relative IRIs cannot contain a colon in the first path segment
-      return (/^[^/:]*:/.test(iri)) ? '' : this._removeDotSegments(this._basePath + iri);
-    }
-  }
 
-  // ### `_removeDotSegments` resolves './' and '../' path segments in an IRI as per RFC3986
-  _removeDotSegments(iri) {
-    // Don't modify the IRI if it does not contain any dot segments
-    if (!/(^|\/)\.\.?($|[/#?])/.test(iri))
-      return iri;
+  (0, _createClass2["default"])(N3Parser, [{
+    key: "_blank",
+    // ## Private methods
+    // ### `_blank` creates a new blank node
+    value: function _blank() {
+      return this._blankNode('b' + blankNodeCount++);
+    } // ### `_setBase` sets the base IRI to resolve relative IRIs
 
-    // Start with an imaginary slash before the IRI in order to resolve trailing './' and '../'
-    var result = '', length = iri.length, i = -1, pathStart = -1, segmentStart = 0, next = '/';
+  }, {
+    key: "_setBase",
+    value: function _setBase(baseIRI) {
+      if (!baseIRI) this._base = null;else {
+        // Remove fragment if present
+        var fragmentPos = baseIRI.indexOf('#');
+        if (fragmentPos >= 0) baseIRI = baseIRI.substr(0, fragmentPos); // Set base IRI and its components
 
-    while (i < length) {
-      switch (next) {
-      // The path starts with the first slash after the authority
-      case ':':
-        if (pathStart < 0) {
-          // Skip two slashes before the authority
-          if (iri[++i] === '/' && iri[++i] === '/')
-            // Skip to slash after the authority
-            while ((pathStart = i + 1) < length && iri[pathStart] !== '/')
-              i = pathStart;
+        this._base = baseIRI;
+        this._basePath = baseIRI.indexOf('/') < 0 ? baseIRI : baseIRI.replace(/[^\/?]*(?:\?.*)?$/, '');
+        baseIRI = baseIRI.match(/^(?:([a-z][a-z0-9+.-]*:))?(?:\/\/[^\/]*)?/i);
+        this._baseRoot = baseIRI[0];
+        this._baseScheme = baseIRI[1];
+      }
+    } // ### `_saveContext` stores the current parsing context
+    // when entering a new scope (list, blank node, formula)
+
+  }, {
+    key: "_saveContext",
+    value: function _saveContext(type, graph, subject, predicate, object) {
+      var n3Mode = this._n3Mode;
+
+      this._contextStack.push({
+        subject: subject,
+        predicate: predicate,
+        object: object,
+        graph: graph,
+        type: type,
+        inverse: n3Mode ? this._inversePredicate : false,
+        blankPrefix: n3Mode ? this._prefixes._ : '',
+        quantified: n3Mode ? this._quantified : null
+      }); // The settings below only apply to N3 streams
+
+
+      if (n3Mode) {
+        // Every new scope resets the predicate direction
+        this._inversePredicate = false; // In N3, blank nodes are scoped to a formula
+        // (using a dot as separator, as a blank node label cannot start with it)
+
+        this._prefixes._ = this._graph ? this._graph.id.substr(2) + '.' : '.'; // Quantifiers are scoped to a formula
+
+        this._quantified = Object.create(this._quantified);
+      }
+    } // ### `_restoreContext` restores the parent context
+    // when leaving a scope (list, blank node, formula)
+
+  }, {
+    key: "_restoreContext",
+    value: function _restoreContext() {
+      var context = this._contextStack.pop(),
+          n3Mode = this._n3Mode;
+
+      this._subject = context.subject;
+      this._predicate = context.predicate;
+      this._object = context.object;
+      this._graph = context.graph; // The settings below only apply to N3 streams
+
+      if (n3Mode) {
+        this._inversePredicate = context.inverse;
+        this._prefixes._ = context.blankPrefix;
+        this._quantified = context.quantified;
+      }
+    } // ### `_readInTopContext` reads a token when in the top context
+
+  }, {
+    key: "_readInTopContext",
+    value: function _readInTopContext(token) {
+      switch (token.type) {
+        // If an EOF token arrives in the top context, signal that we're done
+        case 'eof':
+          if (this._graph !== null) return this._error('Unclosed graph', token);
+          delete this._prefixes._;
+          return this._callback(null, null, this._prefixes);
+        // It could be a prefix declaration
+
+        case 'PREFIX':
+          this._sparqlStyle = true;
+
+        case '@prefix':
+          return this._readPrefix;
+        // It could be a base declaration
+
+        case 'BASE':
+          this._sparqlStyle = true;
+
+        case '@base':
+          return this._readBaseIRI;
+        // It could be a graph
+
+        case '{':
+          if (this._supportsNamedGraphs) {
+            this._graph = '';
+            this._subject = null;
+            return this._readSubject;
+          }
+
+        case 'GRAPH':
+          if (this._supportsNamedGraphs) return this._readNamedGraphLabel;
+        // Otherwise, the next token must be a subject
+
+        default:
+          return this._readSubject(token);
+      }
+    } // ### `_readEntity` reads an IRI, prefixed name, blank node, or variable
+
+  }, {
+    key: "_readEntity",
+    value: function _readEntity(token, quantifier) {
+      var value;
+
+      switch (token.type) {
+        // Read a relative or absolute IRI
+        case 'IRI':
+        case 'typeIRI':
+          var iri = this._resolveIRI(token.value);
+
+          if (iri === '') return this._error('Invalid IRI', token);
+          value = this._namedNode(iri);
+          break;
+        // Read a prefixed name
+
+        case 'type':
+        case 'prefixed':
+          var prefix = this._prefixes[token.prefix];
+          if (prefix === undefined) return this._error('Undefined prefix "' + token.prefix + ':"', token);
+          value = this._namedNode(prefix + token.value);
+          break;
+        // Read a blank node
+
+        case 'blank':
+          value = this._blankNode(this._prefixes[token.prefix] + token.value);
+          break;
+        // Read a variable
+
+        case 'var':
+          value = this._variable(token.value.substr(1));
+          break;
+        // Everything else is not an entity
+
+        default:
+          return this._error('Expected entity but got ' + token.type, token);
+      } // In N3 mode, replace the entity if it is quantified
+
+
+      if (!quantifier && this._n3Mode && value.id in this._quantified) value = this._quantified[value.id];
+      return value;
+    } // ### `_readSubject` reads a quad's subject
+
+  }, {
+    key: "_readSubject",
+    value: function _readSubject(token) {
+      this._predicate = null;
+
+      switch (token.type) {
+        case '[':
+          // Start a new quad with a new blank node as subject
+          this._saveContext('blank', this._graph, this._subject = this._blank(), null, null);
+
+          return this._readBlankNodeHead;
+
+        case '(':
+          // Start a new list
+          this._saveContext('list', this._graph, this.RDF_NIL, null, null);
+
+          this._subject = null;
+          return this._readListItem;
+
+        case '{':
+          // Start a new formula
+          if (!this._n3Mode) return this._error('Unexpected graph', token);
+
+          this._saveContext('formula', this._graph, this._graph = this._blank(), null, null);
+
+          return this._readSubject;
+
+        case '}':
+          // No subject; the graph in which we are reading is closed instead
+          return this._readPunctuation(token);
+
+        case '@forSome':
+          if (!this._n3Mode) return this._error('Unexpected "@forSome"', token);
+          this._subject = null;
+          this._predicate = this.N3_FORSOME;
+          this._quantifier = this._blankNode;
+          return this._readQuantifierList;
+
+        case '@forAll':
+          if (!this._n3Mode) return this._error('Unexpected "@forAll"', token);
+          this._subject = null;
+          this._predicate = this.N3_FORALL;
+          this._quantifier = this._variable;
+          return this._readQuantifierList;
+
+        default:
+          // Read the subject entity
+          if ((this._subject = this._readEntity(token)) === undefined) return; // In N3 mode, the subject might be a path
+
+          if (this._n3Mode) return this._getPathReader(this._readPredicateOrNamedGraph);
+      } // The next token must be a predicate,
+      // or, if the subject was actually a graph IRI, a named graph
+
+
+      return this._readPredicateOrNamedGraph;
+    } // ### `_readPredicate` reads a quad's predicate
+
+  }, {
+    key: "_readPredicate",
+    value: function _readPredicate(token) {
+      var type = token.type;
+
+      switch (type) {
+        case 'inverse':
+          this._inversePredicate = true;
+
+        case 'abbreviation':
+          this._predicate = this.ABBREVIATIONS[token.value];
+          break;
+
+        case '.':
+        case ']':
+        case '}':
+          // Expected predicate didn't come, must have been trailing semicolon
+          if (this._predicate === null) return this._error('Unexpected ' + type, token);
+          this._subject = null;
+          return type === ']' ? this._readBlankNodeTail(token) : this._readPunctuation(token);
+
+        case ';':
+          // Additional semicolons can be safely ignored
+          return this._predicate !== null ? this._readPredicate : this._error('Expected predicate but got ;', token);
+
+        case 'blank':
+          if (!this._n3Mode) return this._error('Disallowed blank node as predicate', token);
+
+        default:
+          if ((this._predicate = this._readEntity(token)) === undefined) return;
+      } // The next token must be an object
+
+
+      return this._readObject;
+    } // ### `_readObject` reads a quad's object
+
+  }, {
+    key: "_readObject",
+    value: function _readObject(token) {
+      switch (token.type) {
+        case 'literal':
+          // Regular literal, can still get a datatype or language
+          if (token.prefix.length === 0) {
+            this._literalValue = token.value;
+            return this._readDataTypeOrLang;
+          } // Pre-datatyped string literal (prefix stores the datatype)
+          else this._object = this._literal(token.value, this._namedNode(token.prefix));
+
+          break;
+
+        case '[':
+          // Start a new quad with a new blank node as subject
+          this._saveContext('blank', this._graph, this._subject, this._predicate, this._subject = this._blank());
+
+          return this._readBlankNodeHead;
+
+        case '(':
+          // Start a new list
+          this._saveContext('list', this._graph, this._subject, this._predicate, this.RDF_NIL);
+
+          this._subject = null;
+          return this._readListItem;
+
+        case '{':
+          // Start a new formula
+          if (!this._n3Mode) return this._error('Unexpected graph', token);
+
+          this._saveContext('formula', this._graph, this._subject, this._predicate, this._graph = this._blank());
+
+          return this._readSubject;
+
+        default:
+          // Read the object entity
+          if ((this._object = this._readEntity(token)) === undefined) return; // In N3 mode, the object might be a path
+
+          if (this._n3Mode) return this._getPathReader(this._getContextEndReader());
+      }
+
+      return this._getContextEndReader();
+    } // ### `_readPredicateOrNamedGraph` reads a quad's predicate, or a named graph
+
+  }, {
+    key: "_readPredicateOrNamedGraph",
+    value: function _readPredicateOrNamedGraph(token) {
+      return token.type === '{' ? this._readGraph(token) : this._readPredicate(token);
+    } // ### `_readGraph` reads a graph
+
+  }, {
+    key: "_readGraph",
+    value: function _readGraph(token) {
+      if (token.type !== '{') return this._error('Expected graph but got ' + token.type, token); // The "subject" we read is actually the GRAPH's label
+
+      this._graph = this._subject, this._subject = null;
+      return this._readSubject;
+    } // ### `_readBlankNodeHead` reads the head of a blank node
+
+  }, {
+    key: "_readBlankNodeHead",
+    value: function _readBlankNodeHead(token) {
+      if (token.type === ']') {
+        this._subject = null;
+        return this._readBlankNodeTail(token);
+      } else {
+        this._predicate = null;
+        return this._readPredicate(token);
+      }
+    } // ### `_readBlankNodeTail` reads the end of a blank node
+
+  }, {
+    key: "_readBlankNodeTail",
+    value: function _readBlankNodeTail(token) {
+      if (token.type !== ']') return this._readBlankNodePunctuation(token); // Store blank node quad
+
+      if (this._subject !== null) this._emit(this._subject, this._predicate, this._object, this._graph); // Restore the parent context containing this blank node
+
+      var empty = this._predicate === null;
+
+      this._restoreContext(); // If the blank node was the subject, continue reading the predicate
+
+
+      if (this._object === null) // If the blank node was empty, it could be a named graph label
+        return empty ? this._readPredicateOrNamedGraph : this._readPredicateAfterBlank; // If the blank node was the object, restore previous context and read punctuation
+      else return this._getContextEndReader();
+    } // ### `_readPredicateAfterBlank` reads a predicate after an anonymous blank node
+
+  }, {
+    key: "_readPredicateAfterBlank",
+    value: function _readPredicateAfterBlank(token) {
+      switch (token.type) {
+        case '.':
+        case '}':
+          // No predicate is coming if the triple is terminated here
+          this._subject = null;
+          return this._readPunctuation(token);
+
+        default:
+          return this._readPredicate(token);
+      }
+    } // ### `_readListItem` reads items from a list
+
+  }, {
+    key: "_readListItem",
+    value: function _readListItem(token) {
+      var item = null,
+          // The item of the list
+      list = null,
+          // The list itself
+      previousList = this._subject,
+          // The previous list that contains this list
+      stack = this._contextStack,
+          // The stack of parent contexts
+      parent = stack[stack.length - 1],
+          // The parent containing the current list
+      next = this._readListItem; // The next function to execute
+
+      switch (token.type) {
+        case '[':
+          // Stack the current list quad and start a new quad with a blank node as subject
+          this._saveContext('blank', this._graph, list = this._blank(), this.RDF_FIRST, this._subject = item = this._blank());
+
+          next = this._readBlankNodeHead;
+          break;
+
+        case '(':
+          // Stack the current list quad and start a new list
+          this._saveContext('list', this._graph, list = this._blank(), this.RDF_FIRST, this.RDF_NIL);
+
+          this._subject = null;
+          break;
+
+        case ')':
+          // Closing the list; restore the parent context
+          this._restoreContext(); // If this list is contained within a parent list, return the membership quad here.
+          // This will be `<parent list element> rdf:first <this list>.`.
+
+
+          if (stack.length !== 0 && stack[stack.length - 1].type === 'list') this._emit(this._subject, this._predicate, this._object, this._graph); // Was this list the parent's subject?
+
+          if (this._predicate === null) {
+            // The next token is the predicate
+            next = this._readPredicate; // No list tail if this was an empty list
+
+            if (this._subject === this.RDF_NIL) return next;
+          } // The list was in the parent context's object
+          else {
+              next = this._getContextEndReader(); // No list tail if this was an empty list
+
+              if (this._object === this.RDF_NIL) return next;
+            } // Close the list by making the head nil
+
+
+          list = this.RDF_NIL;
+          break;
+
+        case 'literal':
+          // Regular literal, can still get a datatype or language
+          if (token.prefix.length === 0) {
+            this._literalValue = token.value;
+            next = this._readListItemDataTypeOrLang;
+          } // Pre-datatyped string literal (prefix stores the datatype)
+          else {
+              item = this._literal(token.value, this._namedNode(token.prefix));
+              next = this._getContextEndReader();
+            }
+
+          break;
+
+        default:
+          if ((item = this._readEntity(token)) === undefined) return;
+      } // Create a new blank node if no item head was assigned yet
+
+
+      if (list === null) this._subject = list = this._blank(); // Is this the first element of the list?
+
+      if (previousList === null) {
+        // This list is either the subject or the object of its parent
+        if (parent.predicate === null) parent.subject = list;else parent.object = list;
+      } else {
+        // Continue the previous list with the current list
+        this._emit(previousList, this.RDF_REST, list, this._graph);
+      } // If an item was read, add it to the list
+
+
+      if (item !== null) {
+        // In N3 mode, the item might be a path
+        if (this._n3Mode && (token.type === 'IRI' || token.type === 'prefixed')) {
+          // Create a new context to add the item's path
+          this._saveContext('item', this._graph, list, this.RDF_FIRST, item);
+
+          this._subject = item, this._predicate = null; // _readPath will restore the context and output the item
+
+          return this._getPathReader(this._readListItem);
+        } // Output the item
+
+
+        this._emit(list, this.RDF_FIRST, item, this._graph);
+      }
+
+      return next;
+    } // ### `_readDataTypeOrLang` reads an _optional_ datatype or language
+
+  }, {
+    key: "_readDataTypeOrLang",
+    value: function _readDataTypeOrLang(token) {
+      return this._completeLiteral(token, false);
+    } // ### `_readListItemDataTypeOrLang` reads an _optional_ datatype or language in a list
+
+  }, {
+    key: "_readListItemDataTypeOrLang",
+    value: function _readListItemDataTypeOrLang(token) {
+      return this._completeLiteral(token, true);
+    } // ### `_completeLiteral` completes a literal with an optional datatype or language
+
+  }, {
+    key: "_completeLiteral",
+    value: function _completeLiteral(token, listItem) {
+      switch (token.type) {
+        // Create a datatyped literal
+        case 'type':
+        case 'typeIRI':
+          var datatype = this._readEntity(token);
+
+          if (datatype === undefined) return; // No datatype means an error occurred
+
+          this._object = this._literal(this._literalValue, datatype);
+          token = null;
+          break;
+        // Create a language-tagged string
+
+        case 'langcode':
+          this._object = this._literal(this._literalValue, token.value);
+          token = null;
+          break;
+        // Create a simple string literal
+
+        default:
+          this._object = this._literal(this._literalValue);
+      } // If this literal was part of a list, write the item
+      // (we could also check the context stack, but passing in a flag is faster)
+
+
+      if (listItem) this._emit(this._subject, this.RDF_FIRST, this._object, this._graph); // If the token was consumed, continue with the rest of the input
+
+      if (token === null) return this._getContextEndReader(); // Otherwise, consume the token now
+      else {
+          this._readCallback = this._getContextEndReader();
+          return this._readCallback(token);
         }
-        break;
-      // Don't modify a query string or fragment
-      case '?':
-      case '#':
-        i = length;
-        break;
-      // Handle '/.' or '/..' path segments
-      case '/':
-        if (iri[i + 1] === '.') {
-          next = iri[++i + 1];
-          switch (next) {
-          // Remove a '/.' segment
-          case '/':
-            result += iri.substring(segmentStart, i - 1);
-            segmentStart = i + 1;
+    } // ### `_readFormulaTail` reads the end of a formula
+
+  }, {
+    key: "_readFormulaTail",
+    value: function _readFormulaTail(token) {
+      if (token.type !== '}') return this._readPunctuation(token); // Store the last quad of the formula
+
+      if (this._subject !== null) this._emit(this._subject, this._predicate, this._object, this._graph); // Restore the parent context containing this formula
+
+      this._restoreContext(); // If the formula was the subject, continue reading the predicate.
+      // If the formula was the object, read punctuation.
+
+
+      return this._object === null ? this._readPredicate : this._getContextEndReader();
+    } // ### `_readPunctuation` reads punctuation between quads or quad parts
+
+  }, {
+    key: "_readPunctuation",
+    value: function _readPunctuation(token) {
+      var next,
+          subject = this._subject,
+          graph = this._graph,
+          inversePredicate = this._inversePredicate;
+
+      switch (token.type) {
+        // A closing brace ends a graph
+        case '}':
+          if (this._graph === null) return this._error('Unexpected graph closing', token);
+          if (this._n3Mode) return this._readFormulaTail(token);
+          this._graph = null;
+        // A dot just ends the statement, without sharing anything with the next
+
+        case '.':
+          this._subject = null;
+          next = this._contextStack.length ? this._readSubject : this._readInTopContext;
+          if (inversePredicate) this._inversePredicate = false;
+          break;
+        // Semicolon means the subject is shared; predicate and object are different
+
+        case ';':
+          next = this._readPredicate;
+          break;
+        // Comma means both the subject and predicate are shared; the object is different
+
+        case ',':
+          next = this._readObject;
+          break;
+
+        default:
+          // An entity means this is a quad (only allowed if not already inside a graph)
+          if (this._supportsQuads && this._graph === null && (graph = this._readEntity(token)) !== undefined) {
+            next = this._readQuadPunctuation;
             break;
-          // Remove a trailing '/.' segment
-          case undefined:
+          }
+
+          return this._error('Expected punctuation to follow "' + this._object.id + '"', token);
+      } // A quad has been completed now, so return it
+
+
+      if (subject !== null) {
+        var predicate = this._predicate,
+            object = this._object;
+        if (!inversePredicate) this._emit(subject, predicate, object, graph);else this._emit(object, predicate, subject, graph);
+      }
+
+      return next;
+    } // ### `_readBlankNodePunctuation` reads punctuation in a blank node
+
+  }, {
+    key: "_readBlankNodePunctuation",
+    value: function _readBlankNodePunctuation(token) {
+      var next;
+
+      switch (token.type) {
+        // Semicolon means the subject is shared; predicate and object are different
+        case ';':
+          next = this._readPredicate;
+          break;
+        // Comma means both the subject and predicate are shared; the object is different
+
+        case ',':
+          next = this._readObject;
+          break;
+
+        default:
+          return this._error('Expected punctuation to follow "' + this._object.id + '"', token);
+      } // A quad has been completed now, so return it
+
+
+      this._emit(this._subject, this._predicate, this._object, this._graph);
+
+      return next;
+    } // ### `_readQuadPunctuation` reads punctuation after a quad
+
+  }, {
+    key: "_readQuadPunctuation",
+    value: function _readQuadPunctuation(token) {
+      if (token.type !== '.') return this._error('Expected dot to follow quad', token);
+      return this._readInTopContext;
+    } // ### `_readPrefix` reads the prefix of a prefix declaration
+
+  }, {
+    key: "_readPrefix",
+    value: function _readPrefix(token) {
+      if (token.type !== 'prefix') return this._error('Expected prefix to follow @prefix', token);
+      this._prefix = token.value;
+      return this._readPrefixIRI;
+    } // ### `_readPrefixIRI` reads the IRI of a prefix declaration
+
+  }, {
+    key: "_readPrefixIRI",
+    value: function _readPrefixIRI(token) {
+      if (token.type !== 'IRI') return this._error('Expected IRI to follow prefix "' + this._prefix + ':"', token);
+
+      var prefixNode = this._readEntity(token);
+
+      this._prefixes[this._prefix] = prefixNode.value;
+
+      this._prefixCallback(this._prefix, prefixNode);
+
+      return this._readDeclarationPunctuation;
+    } // ### `_readBaseIRI` reads the IRI of a base declaration
+
+  }, {
+    key: "_readBaseIRI",
+    value: function _readBaseIRI(token) {
+      var iri = token.type === 'IRI' && this._resolveIRI(token.value);
+
+      if (!iri) return this._error('Expected valid IRI to follow base declaration', token);
+
+      this._setBase(iri);
+
+      return this._readDeclarationPunctuation;
+    } // ### `_readNamedGraphLabel` reads the label of a named graph
+
+  }, {
+    key: "_readNamedGraphLabel",
+    value: function _readNamedGraphLabel(token) {
+      switch (token.type) {
+        case 'IRI':
+        case 'blank':
+        case 'prefixed':
+          return this._readSubject(token), this._readGraph;
+
+        case '[':
+          return this._readNamedGraphBlankLabel;
+
+        default:
+          return this._error('Invalid graph label', token);
+      }
+    } // ### `_readNamedGraphLabel` reads a blank node label of a named graph
+
+  }, {
+    key: "_readNamedGraphBlankLabel",
+    value: function _readNamedGraphBlankLabel(token) {
+      if (token.type !== ']') return this._error('Invalid graph label', token);
+      this._subject = this._blank();
+      return this._readGraph;
+    } // ### `_readDeclarationPunctuation` reads the punctuation of a declaration
+
+  }, {
+    key: "_readDeclarationPunctuation",
+    value: function _readDeclarationPunctuation(token) {
+      // SPARQL-style declarations don't have punctuation
+      if (this._sparqlStyle) {
+        this._sparqlStyle = false;
+        return this._readInTopContext(token);
+      }
+
+      if (token.type !== '.') return this._error('Expected declaration to end with a dot', token);
+      return this._readInTopContext;
+    } // Reads a list of quantified symbols from a @forSome or @forAll statement
+
+  }, {
+    key: "_readQuantifierList",
+    value: function _readQuantifierList(token) {
+      var entity;
+
+      switch (token.type) {
+        case 'IRI':
+        case 'prefixed':
+          if ((entity = this._readEntity(token, true)) !== undefined) break;
+
+        default:
+          return this._error('Unexpected ' + token.type, token);
+      } // Without explicit quantifiers, map entities to a quantified entity
+
+
+      if (!this._explicitQuantifiers) this._quantified[entity.id] = this._quantifier('b' + blankNodeCount++); // With explicit quantifiers, output the reified quantifier
+      else {
+          // If this is the first item, start a new quantifier list
+          if (this._subject === null) this._emit(this._graph || this.DEFAULTGRAPH, this._predicate, this._subject = this._blank(), this.QUANTIFIERS_GRAPH); // Otherwise, continue the previous list
+          else this._emit(this._subject, this.RDF_REST, this._subject = this._blank(), this.QUANTIFIERS_GRAPH); // Output the list item
+
+          this._emit(this._subject, this.RDF_FIRST, entity, this.QUANTIFIERS_GRAPH);
+        }
+      return this._readQuantifierPunctuation;
+    } // Reads punctuation from a @forSome or @forAll statement
+
+  }, {
+    key: "_readQuantifierPunctuation",
+    value: function _readQuantifierPunctuation(token) {
+      // Read more quantifiers
+      if (token.type === ',') return this._readQuantifierList; // End of the quantifier list
+      else {
+          // With explicit quantifiers, close the quantifier list
+          if (this._explicitQuantifiers) {
+            this._emit(this._subject, this.RDF_REST, this.RDF_NIL, this.QUANTIFIERS_GRAPH);
+
+            this._subject = null;
+          } // Read a dot
+
+
+          this._readCallback = this._getContextEndReader();
+          return this._readCallback(token);
+        }
+    } // ### `_getPathReader` reads a potential path and then resumes with the given function
+
+  }, {
+    key: "_getPathReader",
+    value: function _getPathReader(afterPath) {
+      this._afterPath = afterPath;
+      return this._readPath;
+    } // ### `_readPath` reads a potential path
+
+  }, {
+    key: "_readPath",
+    value: function _readPath(token) {
+      switch (token.type) {
+        // Forward path
+        case '!':
+          return this._readForwardPath;
+        // Backward path
+
+        case '^':
+          return this._readBackwardPath;
+        // Not a path; resume reading where we left off
+
+        default:
+          var stack = this._contextStack,
+              parent = stack.length && stack[stack.length - 1]; // If we were reading a list item, we still need to output it
+
+          if (parent && parent.type === 'item') {
+            // The list item is the remaining subejct after reading the path
+            var item = this._subject; // Switch back to the context of the list
+
+            this._restoreContext(); // Output the list item
+
+
+            this._emit(this._subject, this.RDF_FIRST, item, this._graph);
+          }
+
+          return this._afterPath(token);
+      }
+    } // ### `_readForwardPath` reads a '!' path
+
+  }, {
+    key: "_readForwardPath",
+    value: function _readForwardPath(token) {
+      var subject,
+          predicate,
+          object = this._blank(); // The next token is the predicate
+
+
+      if ((predicate = this._readEntity(token)) === undefined) return; // If we were reading a subject, replace the subject by the path's object
+
+      if (this._predicate === null) subject = this._subject, this._subject = object; // If we were reading an object, replace the subject by the path's object
+      else subject = this._object, this._object = object; // Emit the path's current quad and read its next section
+
+      this._emit(subject, predicate, object, this._graph);
+
+      return this._readPath;
+    } // ### `_readBackwardPath` reads a '^' path
+
+  }, {
+    key: "_readBackwardPath",
+    value: function _readBackwardPath(token) {
+      var subject = this._blank(),
+          predicate,
+          object; // The next token is the predicate
+
+
+      if ((predicate = this._readEntity(token)) === undefined) return; // If we were reading a subject, replace the subject by the path's subject
+
+      if (this._predicate === null) object = this._subject, this._subject = subject; // If we were reading an object, replace the subject by the path's subject
+      else object = this._object, this._object = subject; // Emit the path's current quad and read its next section
+
+      this._emit(subject, predicate, object, this._graph);
+
+      return this._readPath;
+    } // ### `_getContextEndReader` gets the next reader function at the end of a context
+
+  }, {
+    key: "_getContextEndReader",
+    value: function _getContextEndReader() {
+      var contextStack = this._contextStack;
+      if (!contextStack.length) return this._readPunctuation;
+
+      switch (contextStack[contextStack.length - 1].type) {
+        case 'blank':
+          return this._readBlankNodeTail;
+
+        case 'list':
+          return this._readListItem;
+
+        case 'formula':
+          return this._readFormulaTail;
+      }
+    } // ### `_emit` sends a quad through the callback
+
+  }, {
+    key: "_emit",
+    value: function _emit(subject, predicate, object, graph) {
+      this._callback(null, this._quad(subject, predicate, object, graph || this.DEFAULTGRAPH));
+    } // ### `_error` emits an error message through the callback
+
+  }, {
+    key: "_error",
+    value: function _error(message, token) {
+      var err = new Error(message + ' on line ' + token.line + '.');
+      err.context = {
+        token: token,
+        line: token.line,
+        previousToken: this._lexer.previousToken
+      };
+
+      this._callback(err);
+
+      this._callback = noop;
+    } // ### `_resolveIRI` resolves an IRI against the base path
+
+  }, {
+    key: "_resolveIRI",
+    value: function _resolveIRI(iri) {
+      return /^[a-z][a-z0-9+.-]*:/i.test(iri) ? iri : this._resolveRelativeIRI(iri);
+    } // ### `_resolveRelativeIRI` resolves an IRI against the base path,
+    // assuming that a base path has been set and that the IRI is indeed relative
+
+  }, {
+    key: "_resolveRelativeIRI",
+    value: function _resolveRelativeIRI(iri) {
+      // An empty relative IRI indicates the base IRI
+      if (!iri.length) return this._base; // Decide resolving strategy based in the first character
+
+      switch (iri[0]) {
+        // Resolve relative fragment IRIs against the base IRI
+        case '#':
+          return this._base + iri;
+        // Resolve relative query string IRIs by replacing the query string
+
+        case '?':
+          return this._base.replace(/(?:\?.*)?$/, iri);
+        // Resolve root-relative IRIs at the root of the base IRI
+
+        case '/':
+          // Resolve scheme-relative IRIs to the scheme
+          return (iri[1] === '/' ? this._baseScheme : this._baseRoot) + this._removeDotSegments(iri);
+        // Resolve all other IRIs at the base IRI's path
+
+        default:
+          // Relative IRIs cannot contain a colon in the first path segment
+          return /^[^/:]*:/.test(iri) ? '' : this._removeDotSegments(this._basePath + iri);
+      }
+    } // ### `_removeDotSegments` resolves './' and '../' path segments in an IRI as per RFC3986
+
+  }, {
+    key: "_removeDotSegments",
+    value: function _removeDotSegments(iri) {
+      // Don't modify the IRI if it does not contain any dot segments
+      if (!/(^|\/)\.\.?($|[/#?])/.test(iri)) return iri; // Start with an imaginary slash before the IRI in order to resolve trailing './' and '../'
+
+      var result = '',
+          length = iri.length,
+          i = -1,
+          pathStart = -1,
+          segmentStart = 0,
+          next = '/';
+
+      while (i < length) {
+        switch (next) {
+          // The path starts with the first slash after the authority
+          case ':':
+            if (pathStart < 0) {
+              // Skip two slashes before the authority
+              if (iri[++i] === '/' && iri[++i] === '/') // Skip to slash after the authority
+                while ((pathStart = i + 1) < length && iri[pathStart] !== '/') {
+                  i = pathStart;
+                }
+            }
+
+            break;
+          // Don't modify a query string or fragment
+
           case '?':
           case '#':
-            return result + iri.substring(segmentStart, i) + iri.substr(i + 1);
-          // Remove a '/..' segment
-          case '.':
-            next = iri[++i + 1];
-            if (next === undefined || next === '/' || next === '?' || next === '#') {
-              result += iri.substring(segmentStart, i - 2);
-              // Try to remove the parent path from result
-              if ((segmentStart = result.lastIndexOf('/')) >= pathStart)
-                result = result.substr(0, segmentStart);
-              // Remove a trailing '/..' segment
-              if (next !== '/')
-                return result + '/' + iri.substr(i + 1);
-              segmentStart = i + 1;
+            i = length;
+            break;
+          // Handle '/.' or '/..' path segments
+
+          case '/':
+            if (iri[i + 1] === '.') {
+              next = iri[++i + 1];
+
+              switch (next) {
+                // Remove a '/.' segment
+                case '/':
+                  result += iri.substring(segmentStart, i - 1);
+                  segmentStart = i + 1;
+                  break;
+                // Remove a trailing '/.' segment
+
+                case undefined:
+                case '?':
+                case '#':
+                  return result + iri.substring(segmentStart, i) + iri.substr(i + 1);
+                // Remove a '/..' segment
+
+                case '.':
+                  next = iri[++i + 1];
+
+                  if (next === undefined || next === '/' || next === '?' || next === '#') {
+                    result += iri.substring(segmentStart, i - 2); // Try to remove the parent path from result
+
+                    if ((segmentStart = result.lastIndexOf('/')) >= pathStart) result = result.substr(0, segmentStart); // Remove a trailing '/..' segment
+
+                    if (next !== '/') return result + '/' + iri.substr(i + 1);
+                    segmentStart = i + 1;
+                  }
+
+              }
             }
-          }
+
         }
+
+        next = iri[++i];
       }
-      next = iri[++i];
-    }
-    return result + iri.substring(segmentStart);
-  }
 
-  // ## Public methods
+      return result + iri.substring(segmentStart);
+    } // ## Public methods
+    // ### `parse` parses the N3 input and emits each parsed quad through the callback
 
-  // ### `parse` parses the N3 input and emits each parsed quad through the callback
-  parse(input, quadCallback, prefixCallback) {
-    var self = this;
-    // The read callback is the next function to be executed when a token arrives.
-    // We start reading in the top context.
-    this._readCallback = this._readInTopContext;
-    this._sparqlStyle = false;
-    this._prefixes = Object.create(null);
-    this._prefixes._ = this._blankNodePrefix ? this._blankNodePrefix.substr(2)
-                                             : 'b' + blankNodePrefix++ + '_';
-    this._prefixCallback = prefixCallback || noop;
-    this._inversePredicate = false;
-    this._quantified = Object.create(null);
+  }, {
+    key: "parse",
+    value: function parse(input, quadCallback, prefixCallback) {
+      var self = this; // The read callback is the next function to be executed when a token arrives.
+      // We start reading in the top context.
 
-    // Parse synchronously if no quad callback is given
-    if (!quadCallback) {
-      var quads = [], error;
-      this._callback = function (e, t) { e ? (error = e) : t && quads.push(t); };
-      this._lexer.tokenize(input).every(function (token) {
-        return self._readCallback = self._readCallback(token);
+      this._readCallback = this._readInTopContext;
+      this._sparqlStyle = false;
+      this._prefixes = Object.create(null);
+      this._prefixes._ = this._blankNodePrefix ? this._blankNodePrefix.substr(2) : 'b' + blankNodePrefix++ + '_';
+      this._prefixCallback = prefixCallback || noop;
+      this._inversePredicate = false;
+      this._quantified = Object.create(null); // Parse synchronously if no quad callback is given
+
+      if (!quadCallback) {
+        var quads = [],
+            error;
+
+        this._callback = function (e, t) {
+          e ? error = e : t && quads.push(t);
+        };
+
+        this._lexer.tokenize(input).every(function (token) {
+          return self._readCallback = self._readCallback(token);
+        });
+
+        if (error) throw error;
+        return quads;
+      } // Parse asynchronously otherwise, executing the read callback when a token arrives
+
+
+      this._callback = quadCallback;
+
+      this._lexer.tokenize(input, function (error, token) {
+        if (error !== null) self._callback(error), self._callback = noop;else if (self._readCallback) self._readCallback = self._readCallback(token);
       });
-      if (error) throw error;
-      return quads;
     }
+  }], [{
+    key: "_resetBlankNodeIds",
+    value: function _resetBlankNodeIds() {
+      blankNodePrefix = blankNodeCount = 0;
+    }
+  }]);
+  return N3Parser;
+}(); // The empty function
 
-    // Parse asynchronously otherwise, executing the read callback when a token arrives
-    this._callback = quadCallback;
-    this._lexer.tokenize(input, function (error, token) {
-      if (error !== null)
-        self._callback(error), self._callback = noop;
-      else if (self._readCallback)
-        self._readCallback = self._readCallback(token);
-    });
-  }
-}
 
-// The empty function
-function noop() {}
+function noop() {} // Initializes the parser with the given data factory
 
-// Initializes the parser with the given data factory
+
 function initDataFactory(parser, factory) {
   // Set factory methods
   var namedNode = factory.namedNode;
-  parser._namedNode   = namedNode;
-  parser._blankNode   = factory.blankNode;
-  parser._literal     = factory.literal;
-  parser._variable    = factory.variable;
-  parser._quad        = factory.quad;
-  parser.DEFAULTGRAPH = factory.defaultGraph();
+  parser._namedNode = namedNode;
+  parser._blankNode = factory.blankNode;
+  parser._literal = factory.literal;
+  parser._variable = factory.variable;
+  parser._quad = factory.quad;
+  parser.DEFAULTGRAPH = factory.defaultGraph(); // Set common named nodes
 
-  // Set common named nodes
-  parser.RDF_FIRST  = namedNode(namespaces.rdf.first);
-  parser.RDF_REST   = namedNode(namespaces.rdf.rest);
-  parser.RDF_NIL    = namedNode(namespaces.rdf.nil);
-  parser.N3_FORALL  = namedNode(namespaces.r.forAll);
+  parser.RDF_FIRST = namedNode(namespaces.rdf.first);
+  parser.RDF_REST = namedNode(namespaces.rdf.rest);
+  parser.RDF_NIL = namedNode(namespaces.rdf.nil);
+  parser.N3_FORALL = namedNode(namespaces.r.forAll);
   parser.N3_FORSOME = namedNode(namespaces.r.forSome);
   parser.ABBREVIATIONS = {
     'a': namedNode(namespaces.rdf.type),
     '=': namedNode(namespaces.owl.sameAs),
-    '>': namedNode(namespaces.log.implies),
+    '>': namedNode(namespaces.log.implies)
   };
   parser.QUANTIFIERS_GRAPH = namedNode('urn:n3:quantifiers');
 }
-initDataFactory(N3Parser.prototype, DataFactory);
 
-// ## Exports
+initDataFactory(N3Parser.prototype, DataFactory); // ## Exports
+
 module.exports = N3Parser;
-
 
 /***/ }),
 /* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// **N3Writer** writes N3 documents.
+"use strict";
 
-var namespaces = __webpack_require__(54),
-    DataFactory = __webpack_require__(44);
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+// **N3Writer** writes N3 documents.
+var namespaces = __webpack_require__(55),
+    DataFactory = __webpack_require__(45);
 
 var DEFAULTGRAPH = DataFactory.defaultGraph();
-
 var rdf = namespaces.rdf,
-    xsd = namespaces.xsd;
+    xsd = namespaces.xsd; // Characters in literals that require escaping
 
-// Characters in literals that require escaping
-var escape    = /["\\\t\n\r\b\f\u0000-\u0019\ud800-\udbff]/,
+var escape = /["\\\t\n\r\b\f\u0000-\u0019\ud800-\udbff]/,
     escapeAll = /["\\\t\n\r\b\f\u0000-\u0019]|[\ud800-\udbff][\udc00-\udfff]/g,
     escapedCharacters = {
-      '\\': '\\\\', '"': '\\"', '\t': '\\t',
-      '\n': '\\n', '\r': '\\r', '\b': '\\b', '\f': '\\f',
-    };
+  '\\': '\\\\',
+  '"': '\\"',
+  '\t': '\\t',
+  '\n': '\\n',
+  '\r': '\\r',
+  '\b': '\\b',
+  '\f': '\\f'
+}; // ## Placeholder class to represent already pretty-printed terms
 
-// ## Placeholder class to represent already pretty-printed terms
-class SerializedTerm extends DataFactory.internal.Term {
-  // Pretty-printed nodes are not equal to any other node
-  // (e.g., [] does not equal [])
-  equals() {
-    return false;
+var SerializedTerm =
+/*#__PURE__*/
+function (_DataFactory$internal) {
+  (0, _inherits2["default"])(SerializedTerm, _DataFactory$internal);
+
+  function SerializedTerm() {
+    (0, _classCallCheck2["default"])(this, SerializedTerm);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(SerializedTerm).apply(this, arguments));
   }
-}
 
-// ## Constructor
-class N3Writer {
-  constructor(outputStream, options) {
+  (0, _createClass2["default"])(SerializedTerm, [{
+    key: "equals",
+    // Pretty-printed nodes are not equal to any other node
+    // (e.g., [] does not equal [])
+    value: function equals() {
+      return false;
+    }
+  }]);
+  return SerializedTerm;
+}(DataFactory.internal.Term); // ## Constructor
+
+
+var N3Writer =
+/*#__PURE__*/
+function () {
+  function N3Writer(outputStream, options) {
+    (0, _classCallCheck2["default"])(this, N3Writer);
     // ### `_prefixRegex` matches a prefixed name or IRI that begins with one of the added prefixes
-    this._prefixRegex = /$0^/;
+    this._prefixRegex = /$0^/; // Shift arguments if the first argument is not a stream
 
-    // Shift arguments if the first argument is not a stream
-    if (outputStream && typeof outputStream.write !== 'function')
-      options = outputStream, outputStream = null;
-    options = options || {};
+    if (outputStream && typeof outputStream.write !== 'function') options = outputStream, outputStream = null;
+    options = options || {}; // If no output stream given, send the output as string through the end callback
 
-    // If no output stream given, send the output as string through the end callback
     if (!outputStream) {
       var output = '';
       this._outputStream = {
-        write(chunk, encoding, done) { output += chunk; done && done(); },
-        end:   function (done) { done && done(null, output); },
+        write: function write(chunk, encoding, done) {
+          output += chunk;
+          done && done();
+        },
+        end: function end(done) {
+          done && done(null, output);
+        }
       };
       this._endStream = true;
-    }
-    else {
+    } else {
       this._outputStream = outputStream;
       this._endStream = options.end === undefined ? true : !!options.end;
-    }
+    } // Initialize writer, depending on the format
 
-    // Initialize writer, depending on the format
+
     this._subject = null;
-    if (!(/triple|quad/i).test(options.format)) {
+
+    if (!/triple|quad/i.test(options.format)) {
       this._graph = DEFAULTGRAPH;
       this._prefixIRIs = Object.create(null);
       options.prefixes && this.addPrefixes(options.prefixes);
-    }
-    else {
+    } else {
       this._writeQuad = this._writeQuadLine;
     }
-  }
-
-  // ## Private methods
-
+  } // ## Private methods
   // ### Whether the current graph is the default graph
-  get _inDefaultGraph() {
-    return DEFAULTGRAPH.equals(this._graph);
-  }
 
-  // ### `_write` writes the argument to the output stream
-  _write(string, callback) {
-    this._outputStream.write(string, 'utf8', callback);
-  }
 
-  // ### `_writeQuad` writes the quad to the output stream
-  _writeQuad(subject, predicate, object, graph, done) {
-    try {
-      // Write the graph's label if it has changed
-      if (!graph.equals(this._graph)) {
-        // Close the previous graph and start the new one
-        this._write((this._subject === null ? '' : (this._inDefaultGraph ? '.\n' : '\n}\n')) +
-                    (DEFAULTGRAPH.equals(graph) ? '' : this._encodeIriOrBlank(graph) + ' {\n'));
-        this._graph = graph;
-        this._subject = null;
+  (0, _createClass2["default"])(N3Writer, [{
+    key: "_write",
+    // ### `_write` writes the argument to the output stream
+    value: function _write(string, callback) {
+      this._outputStream.write(string, 'utf8', callback);
+    } // ### `_writeQuad` writes the quad to the output stream
+
+  }, {
+    key: "_writeQuad",
+    value: function _writeQuad(subject, predicate, object, graph, done) {
+      try {
+        // Write the graph's label if it has changed
+        if (!graph.equals(this._graph)) {
+          // Close the previous graph and start the new one
+          this._write((this._subject === null ? '' : this._inDefaultGraph ? '.\n' : '\n}\n') + (DEFAULTGRAPH.equals(graph) ? '' : this._encodeIriOrBlank(graph) + ' {\n'));
+
+          this._graph = graph;
+          this._subject = null;
+        } // Don't repeat the subject if it's the same
+
+
+        if (subject.equals(this._subject)) {
+          // Don't repeat the predicate if it's the same
+          if (predicate.equals(this._predicate)) this._write(', ' + this._encodeObject(object), done); // Same subject, different predicate
+          else this._write(';\n    ' + this._encodePredicate(this._predicate = predicate) + ' ' + this._encodeObject(object), done);
+        } // Different subject; write the whole quad
+        else this._write((this._subject === null ? '' : '.\n') + this._encodeIriOrBlank(this._subject = subject) + ' ' + this._encodePredicate(this._predicate = predicate) + ' ' + this._encodeObject(object), done);
+      } catch (error) {
+        done && done(error);
       }
-      // Don't repeat the subject if it's the same
-      if (subject.equals(this._subject)) {
-        // Don't repeat the predicate if it's the same
-        if (predicate.equals(this._predicate))
-          this._write(', ' + this._encodeObject(object), done);
-        // Same subject, different predicate
-        else
-          this._write(';\n    ' +
-                      this._encodePredicate(this._predicate = predicate) + ' ' +
-                      this._encodeObject(object), done);
+    } // ### `_writeQuadLine` writes the quad to the output stream as a single line
+
+  }, {
+    key: "_writeQuadLine",
+    value: function _writeQuadLine(subject, predicate, object, graph, done) {
+      // Write the quad without prefixes
+      delete this._prefixMatch;
+
+      this._write(this.quadToString(subject, predicate, object, graph), done);
+    } // ### `quadToString` serializes a quad as a string
+
+  }, {
+    key: "quadToString",
+    value: function quadToString(subject, predicate, object, graph) {
+      return this._encodeIriOrBlank(subject) + ' ' + this._encodeIriOrBlank(predicate) + ' ' + this._encodeObject(object) + (graph && graph.value ? ' ' + this._encodeIriOrBlank(graph) + ' .\n' : ' .\n');
+    } // ### `quadsToString` serializes an array of quads as a string
+
+  }, {
+    key: "quadsToString",
+    value: function quadsToString(quads) {
+      return quads.map(function (t) {
+        return this.quadToString(t.subject, t.predicate, t.object, t.graph);
+      }, this).join('');
+    } // ### `_encodeIriOrBlank` represents an IRI or blank node
+
+  }, {
+    key: "_encodeIriOrBlank",
+    value: function _encodeIriOrBlank(entity) {
+      // A blank node or list is represented as-is
+      if (entity.termType !== 'NamedNode') return 'id' in entity ? entity.id : '_:' + entity.value; // Escape special characters
+
+      var iri = entity.value;
+      if (escape.test(iri)) iri = iri.replace(escapeAll, characterReplacer); // Try to represent the IRI as prefixed name
+
+      var prefixMatch = this._prefixRegex.exec(iri);
+
+      return !prefixMatch ? '<' + iri + '>' : !prefixMatch[1] ? iri : this._prefixIRIs[prefixMatch[1]] + prefixMatch[2];
+    } // ### `_encodeLiteral` represents a literal
+
+  }, {
+    key: "_encodeLiteral",
+    value: function _encodeLiteral(literal) {
+      // Escape special characters
+      var value = literal.value;
+      if (escape.test(value)) value = value.replace(escapeAll, characterReplacer); // Write the literal, possibly with type or language
+
+      if (literal.language) return '"' + value + '"@' + literal.language;else if (literal.datatype.value !== xsd.string) return '"' + value + '"^^' + this._encodeIriOrBlank(literal.datatype);else return '"' + value + '"';
+    } // ### `_encodePredicate` represents a predicate
+
+  }, {
+    key: "_encodePredicate",
+    value: function _encodePredicate(predicate) {
+      return predicate.value === rdf.type ? 'a' : this._encodeIriOrBlank(predicate);
+    } // ### `_encodeObject` represents an object
+
+  }, {
+    key: "_encodeObject",
+    value: function _encodeObject(object) {
+      return object.termType === 'Literal' ? this._encodeLiteral(object) : this._encodeIriOrBlank(object);
+    } // ### `_blockedWrite` replaces `_write` after the writer has been closed
+
+  }, {
+    key: "_blockedWrite",
+    value: function _blockedWrite() {
+      throw new Error('Cannot write because the writer has been closed.');
+    } // ### `addQuad` adds the quad to the output stream
+
+  }, {
+    key: "addQuad",
+    value: function addQuad(subject, predicate, object, graph, done) {
+      // The quad was given as an object, so shift parameters
+      if (object === undefined) this._writeQuad(subject.subject, subject.predicate, subject.object, subject.graph, predicate); // The optional `graph` parameter was not provided
+      else if (typeof graph === 'function') this._writeQuad(subject, predicate, object, DEFAULTGRAPH, graph); // The `graph` parameter was provided
+        else this._writeQuad(subject, predicate, object, graph || DEFAULTGRAPH, done);
+    } // ### `addQuads` adds the quads to the output stream
+
+  }, {
+    key: "addQuads",
+    value: function addQuads(quads) {
+      for (var i = 0; i < quads.length; i++) {
+        this.addQuad(quads[i]);
       }
-      // Different subject; write the whole quad
-      else
-        this._write((this._subject === null ? '' : '.\n') +
-                    this._encodeIriOrBlank(this._subject = subject) + ' ' +
-                    this._encodePredicate(this._predicate = predicate) + ' ' +
-                    this._encodeObject(object), done);
-    }
-    catch (error) { done && done(error); }
-  }
+    } // ### `addPrefix` adds the prefix to the output stream
 
-  // ### `_writeQuadLine` writes the quad to the output stream as a single line
-  _writeQuadLine(subject, predicate, object, graph, done) {
-    // Write the quad without prefixes
-    delete this._prefixMatch;
-    this._write(this.quadToString(subject, predicate, object, graph), done);
-  }
+  }, {
+    key: "addPrefix",
+    value: function addPrefix(prefix, iri, done) {
+      var prefixes = {};
+      prefixes[prefix] = iri;
+      this.addPrefixes(prefixes, done);
+    } // ### `addPrefixes` adds the prefixes to the output stream
 
-  // ### `quadToString` serializes a quad as a string
-  quadToString(subject, predicate, object, graph) {
-    return  this._encodeIriOrBlank(subject)   + ' ' +
-            this._encodeIriOrBlank(predicate) + ' ' +
-            this._encodeObject(object) +
-            (graph && graph.value ? ' ' + this._encodeIriOrBlank(graph) + ' .\n' : ' .\n');
-  }
+  }, {
+    key: "addPrefixes",
+    value: function addPrefixes(prefixes, done) {
+      // Add all useful prefixes
+      var prefixIRIs = this._prefixIRIs,
+          hasPrefixes = false;
 
-  // ### `quadsToString` serializes an array of quads as a string
-  quadsToString(quads) {
-    return quads.map(function (t) {
-      return this.quadToString(t.subject, t.predicate, t.object, t.graph);
-    }, this).join('');
-  }
+      for (var prefix in prefixes) {
+        // Verify whether the prefix can be used and does not exist yet
+        var iri = prefixes[prefix];
+        if (typeof iri !== 'string') iri = iri.value;
 
-  // ### `_encodeIriOrBlank` represents an IRI or blank node
-  _encodeIriOrBlank(entity) {
-    // A blank node or list is represented as-is
-    if (entity.termType !== 'NamedNode')
-      return 'id' in entity ? entity.id : '_:' + entity.value;
-    // Escape special characters
-    var iri = entity.value;
-    if (escape.test(iri))
-      iri = iri.replace(escapeAll, characterReplacer);
-    // Try to represent the IRI as prefixed name
-    var prefixMatch = this._prefixRegex.exec(iri);
-    return !prefixMatch ? '<' + iri + '>' :
-           (!prefixMatch[1] ? iri : this._prefixIRIs[prefixMatch[1]] + prefixMatch[2]);
-  }
+        if (/[#\/]$/.test(iri) && prefixIRIs[iri] !== (prefix += ':')) {
+          hasPrefixes = true;
+          prefixIRIs[iri] = prefix; // Finish a possible pending quad
 
-  // ### `_encodeLiteral` represents a literal
-  _encodeLiteral(literal) {
-    // Escape special characters
-    var value = literal.value;
-    if (escape.test(value))
-      value = value.replace(escapeAll, characterReplacer);
-    // Write the literal, possibly with type or language
-    if (literal.language)
-      return '"' + value + '"@' + literal.language;
-    else if (literal.datatype.value !== xsd.string)
-      return '"' + value + '"^^' + this._encodeIriOrBlank(literal.datatype);
-    else
-      return '"' + value + '"';
-  }
+          if (this._subject !== null) {
+            this._write(this._inDefaultGraph ? '.\n' : '\n}\n');
 
-  // ### `_encodePredicate` represents a predicate
-  _encodePredicate(predicate) {
-    return predicate.value === rdf.type ? 'a' : this._encodeIriOrBlank(predicate);
-  }
+            this._subject = null, this._graph = '';
+          } // Write prefix
 
-  // ### `_encodeObject` represents an object
-  _encodeObject(object) {
-    return object.termType === 'Literal' ? this._encodeLiteral(object) : this._encodeIriOrBlank(object);
-  }
 
-  // ### `_blockedWrite` replaces `_write` after the writer has been closed
-  _blockedWrite() {
-    throw new Error('Cannot write because the writer has been closed.');
-  }
-
-  // ### `addQuad` adds the quad to the output stream
-  addQuad(subject, predicate, object, graph, done) {
-    // The quad was given as an object, so shift parameters
-    if (object === undefined)
-      this._writeQuad(subject.subject, subject.predicate, subject.object, subject.graph, predicate);
-    // The optional `graph` parameter was not provided
-    else if (typeof graph === 'function')
-      this._writeQuad(subject, predicate, object, DEFAULTGRAPH, graph);
-    // The `graph` parameter was provided
-    else
-      this._writeQuad(subject, predicate, object, graph || DEFAULTGRAPH, done);
-  }
-
-  // ### `addQuads` adds the quads to the output stream
-  addQuads(quads) {
-    for (var i = 0; i < quads.length; i++)
-      this.addQuad(quads[i]);
-  }
-
-  // ### `addPrefix` adds the prefix to the output stream
-  addPrefix(prefix, iri, done) {
-    var prefixes = {};
-    prefixes[prefix] = iri;
-    this.addPrefixes(prefixes, done);
-  }
-
-  // ### `addPrefixes` adds the prefixes to the output stream
-  addPrefixes(prefixes, done) {
-    // Add all useful prefixes
-    var prefixIRIs = this._prefixIRIs, hasPrefixes = false;
-    for (var prefix in prefixes) {
-      // Verify whether the prefix can be used and does not exist yet
-      var iri = prefixes[prefix];
-      if (typeof iri !== 'string')
-        iri = iri.value;
-      if (/[#\/]$/.test(iri) && prefixIRIs[iri] !== (prefix += ':')) {
-        hasPrefixes = true;
-        prefixIRIs[iri] = prefix;
-        // Finish a possible pending quad
-        if (this._subject !== null) {
-          this._write(this._inDefaultGraph ? '.\n' : '\n}\n');
-          this._subject = null, this._graph = '';
+          this._write('@prefix ' + prefix + ' <' + iri + '>.\n');
         }
-        // Write prefix
-        this._write('@prefix ' + prefix + ' <' + iri + '>.\n');
-      }
-    }
-    // Recreate the prefix matcher
-    if (hasPrefixes) {
-      var IRIlist = '', prefixList = '';
-      for (var prefixIRI in prefixIRIs) {
-        IRIlist += IRIlist ? '|' + prefixIRI : prefixIRI;
-        prefixList += (prefixList ? '|' : '') + prefixIRIs[prefixIRI];
-      }
-      IRIlist = IRIlist.replace(/[\]\/\(\)\*\+\?\.\\\$]/g, '\\$&');
-      this._prefixRegex = new RegExp('^(?:' + prefixList + ')[^\/]*$|' +
-                                     '^(' + IRIlist + ')([a-zA-Z][\\-_a-zA-Z0-9]*)$');
-    }
-    // End a prefix block with a newline
-    this._write(hasPrefixes ? '\n' : '', done);
-  }
+      } // Recreate the prefix matcher
 
-  // ### `blank` creates a blank node with the given content
-  blank(predicate, object) {
-    var children = predicate, child, length;
-    // Empty blank node
-    if (predicate === undefined)
-      children = [];
-    // Blank node passed as blank(Term("predicate"), Term("object"))
-    else if (predicate.termType)
-      children = [{ predicate: predicate, object: object }];
-    // Blank node passed as blank({ predicate: predicate, object: object })
-    else if (!('length' in predicate))
-      children = [predicate];
 
-    switch (length = children.length) {
-    // Generate an empty blank node
-    case 0:
-      return new SerializedTerm('[]');
-    // Generate a non-nested one-triple blank node
-    case 1:
-      child = children[0];
-      if (!(child.object instanceof SerializedTerm))
-        return new SerializedTerm('[ ' + this._encodePredicate(child.predicate) + ' ' +
-                                  this._encodeObject(child.object) + ' ]');
-    // Generate a multi-triple or nested blank node
-    default:
-      var contents = '[';
-      // Write all triples in order
+      if (hasPrefixes) {
+        var IRIlist = '',
+            prefixList = '';
+
+        for (var prefixIRI in prefixIRIs) {
+          IRIlist += IRIlist ? '|' + prefixIRI : prefixIRI;
+          prefixList += (prefixList ? '|' : '') + prefixIRIs[prefixIRI];
+        }
+
+        IRIlist = IRIlist.replace(/[\]\/\(\)\*\+\?\.\\\$]/g, '\\$&');
+        this._prefixRegex = new RegExp('^(?:' + prefixList + ')[^\/]*$|' + '^(' + IRIlist + ')([a-zA-Z][\\-_a-zA-Z0-9]*)$');
+      } // End a prefix block with a newline
+
+
+      this._write(hasPrefixes ? '\n' : '', done);
+    } // ### `blank` creates a blank node with the given content
+
+  }, {
+    key: "blank",
+    value: function blank(predicate, object) {
+      var children = predicate,
+          child,
+          length; // Empty blank node
+
+      if (predicate === undefined) children = []; // Blank node passed as blank(Term("predicate"), Term("object"))
+      else if (predicate.termType) children = [{
+          predicate: predicate,
+          object: object
+        }]; // Blank node passed as blank({ predicate: predicate, object: object })
+        else if (!('length' in predicate)) children = [predicate];
+
+      switch (length = children.length) {
+        // Generate an empty blank node
+        case 0:
+          return new SerializedTerm('[]');
+        // Generate a non-nested one-triple blank node
+
+        case 1:
+          child = children[0];
+          if (!(child.object instanceof SerializedTerm)) return new SerializedTerm('[ ' + this._encodePredicate(child.predicate) + ' ' + this._encodeObject(child.object) + ' ]');
+        // Generate a multi-triple or nested blank node
+
+        default:
+          var contents = '['; // Write all triples in order
+
+          for (var i = 0; i < length; i++) {
+            child = children[i]; // Write only the object is the predicate is the same as the previous
+
+            if (child.predicate.equals(predicate)) contents += ', ' + this._encodeObject(child.object); // Otherwise, write the predicate and the object
+            else {
+                contents += (i ? ';\n  ' : '\n  ') + this._encodePredicate(child.predicate) + ' ' + this._encodeObject(child.object);
+                predicate = child.predicate;
+              }
+          }
+
+          return new SerializedTerm(contents + '\n]');
+      }
+    } // ### `list` creates a list node with the given content
+
+  }, {
+    key: "list",
+    value: function list(elements) {
+      var length = elements && elements.length || 0,
+          contents = new Array(length);
+
       for (var i = 0; i < length; i++) {
-        child = children[i];
-        // Write only the object is the predicate is the same as the previous
-        if (child.predicate.equals(predicate))
-          contents += ', ' + this._encodeObject(child.object);
-        // Otherwise, write the predicate and the object
-        else {
-          contents += (i ? ';\n  ' : '\n  ') +
-                      this._encodePredicate(child.predicate) + ' ' +
-                      this._encodeObject(child.object);
-          predicate = child.predicate;
+        contents[i] = this._encodeObject(elements[i]);
+      }
+
+      return new SerializedTerm('(' + contents.join(' ') + ')');
+    } // ### `end` signals the end of the output stream
+
+  }, {
+    key: "end",
+    value: function end(done) {
+      // Finish a possible pending quad
+      if (this._subject !== null) {
+        this._write(this._inDefaultGraph ? '.\n' : '\n}\n');
+
+        this._subject = null;
+      } // Disallow further writing
+
+
+      this._write = this._blockedWrite; // Try to end the underlying stream, ensuring done is called exactly one time
+
+      var singleDone = done && function (error, result) {
+        singleDone = null, done(error, result);
+      };
+
+      if (this._endStream) {
+        try {
+          return this._outputStream.end(singleDone);
+        } catch (error) {
+          /* error closing stream */
         }
       }
-      return new SerializedTerm(contents + '\n]');
+
+      singleDone && singleDone();
     }
-  }
-
-  // ### `list` creates a list node with the given content
-  list(elements) {
-    var length = elements && elements.length || 0, contents = new Array(length);
-    for (var i = 0; i < length; i++)
-      contents[i] = this._encodeObject(elements[i]);
-    return new SerializedTerm('(' + contents.join(' ') + ')');
-  }
-
-  // ### `end` signals the end of the output stream
-  end(done) {
-    // Finish a possible pending quad
-    if (this._subject !== null) {
-      this._write(this._inDefaultGraph ? '.\n' : '\n}\n');
-      this._subject = null;
+  }, {
+    key: "_inDefaultGraph",
+    get: function get() {
+      return DEFAULTGRAPH.equals(this._graph);
     }
-    // Disallow further writing
-    this._write = this._blockedWrite;
+  }]);
+  return N3Writer;
+}(); // Replaces a character by its escaped version
 
-    // Try to end the underlying stream, ensuring done is called exactly one time
-    var singleDone = done && function (error, result) { singleDone = null, done(error, result); };
-    if (this._endStream) {
-      try { return this._outputStream.end(singleDone); }
-      catch (error) { /* error closing stream */ }
-    }
-    singleDone && singleDone();
-  }
-}
 
-// Replaces a character by its escaped version
 function characterReplacer(character) {
   // Replace a single character by its escaped version
   var result = escapedCharacters[character];
+
   if (result === undefined) {
     // Replace a single character with its 4-bit unicode escape sequence
     if (character.length === 1) {
       result = character.charCodeAt(0).toString(16);
-      result = '\\u0000'.substr(0, 6 - result.length) + result;
-    }
-    // Replace a surrogate pair with its 8-bit unicode escape sequence
+      result = "\\u0000".substr(0, 6 - result.length) + result;
+    } // Replace a surrogate pair with its 8-bit unicode escape sequence
     else {
-      result = ((character.charCodeAt(0) - 0xD800) * 0x400 +
-                 character.charCodeAt(1) + 0x2400).toString(16);
-      result = '\\U00000000'.substr(0, 10 - result.length) + result;
-    }
+        result = ((character.charCodeAt(0) - 0xD800) * 0x400 + character.charCodeAt(1) + 0x2400).toString(16);
+        result = "\\U00000000".substr(0, 10 - result.length) + result;
+      }
   }
+
   return result;
-}
+} // ## Exports
 
-// ## Exports
+
 module.exports = N3Writer;
-
 
 /***/ }),
 /* 136 */
@@ -24122,27 +24513,27 @@ module.exports = N3Writer;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var AsyncAlgorithm = __webpack_require__(288);
 
-var IdentifierIssuer = __webpack_require__(75);
+var IdentifierIssuer = __webpack_require__(76);
 
 var MessageDigest = __webpack_require__(137);
 
 var Permutator = __webpack_require__(139);
 
-var NQuads = __webpack_require__(77);
+var NQuads = __webpack_require__(78);
 
 var util = __webpack_require__(28);
 
@@ -24835,30 +25226,46 @@ function (_AsyncAlgorithm) {
  */
 
 
-const forge = __webpack_require__(45);
-__webpack_require__(76);
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var forge = __webpack_require__(46);
+
+__webpack_require__(77);
+
 __webpack_require__(289);
+
 __webpack_require__(291);
 
-module.exports = class MessageDigest {
+module.exports =
+/*#__PURE__*/
+function () {
   /**
    * Creates a new MessageDigest.
    *
    * @param algorithm the algorithm to use.
    */
-  constructor(algorithm) {
+  function MessageDigest(algorithm) {
+    (0, _classCallCheck2["default"])(this, MessageDigest);
     this.md = forge.md[algorithm].create();
   }
 
-  update(msg) {
-    this.md.update(msg, 'utf8');
-  }
-
-  digest() {
-    return this.md.digest().toHex();
-  }
-};
-
+  (0, _createClass2["default"])(MessageDigest, [{
+    key: "update",
+    value: function update(msg) {
+      this.md.update(msg, 'utf8');
+    }
+  }, {
+    key: "digest",
+    value: function digest() {
+      return this.md.digest().toHex();
+    }
+  }]);
+  return MessageDigest;
+}();
 
 /***/ }),
 /* 138 */
@@ -24871,7 +25278,7 @@ module.exports = class MessageDigest {
  *
  * Copyright (c) 2010-2018 Digital Bazaar, Inc.
  */
-var forge = __webpack_require__(45);
+var forge = __webpack_require__(46);
 var baseN = __webpack_require__(290);
 
 /* Utilities API */
@@ -27858,7 +28265,7 @@ util.estimateCores = function(options, callback) {
   }
 };
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(38).setImmediate, __webpack_require__(12), __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11), __webpack_require__(39).setImmediate, __webpack_require__(12), __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 139 */
@@ -27872,9 +28279,9 @@ util.estimateCores = function(options, callback) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 module.exports =
 /*#__PURE__*/
@@ -27975,19 +28382,19 @@ function () {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var IdentifierIssuer = __webpack_require__(75);
+var IdentifierIssuer = __webpack_require__(76);
 
 var MessageDigest = __webpack_require__(137);
 
 var Permutator = __webpack_require__(139);
 
-var NQuads = __webpack_require__(77);
+var NQuads = __webpack_require__(78);
 
 var util = __webpack_require__(28);
 
@@ -28576,7 +28983,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _dataModel = _interopRequireDefault(__webpack_require__(25));
 
@@ -28604,7 +29011,7 @@ var DOMParser = function () {
   if (typeof window !== 'undefined') {
     return window.DOMParser;
   } else {
-    return __webpack_require__(73).DOMParser;
+    return __webpack_require__(74).DOMParser;
   }
 }();
 
@@ -28894,12 +29301,12 @@ module.exports = _interopRequireWildcard;
 /* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BlankNode = __webpack_require__(79)
-var DefaultGraph = __webpack_require__(56)
-var Literal = __webpack_require__(80)
-var NamedNode = __webpack_require__(57)
-var Quad = __webpack_require__(81)
-var Variable = __webpack_require__(82)
+var BlankNode = __webpack_require__(80)
+var DefaultGraph = __webpack_require__(57)
+var Literal = __webpack_require__(81)
+var NamedNode = __webpack_require__(58)
+var Quad = __webpack_require__(82)
+var Variable = __webpack_require__(83)
 
 function DataFactory () {}
 
@@ -28964,9 +29371,9 @@ module.exports = DataFactory
 
 
 var BlankNode = __webpack_require__(150)
-var DefaultGraph = __webpack_require__(83)
+var DefaultGraph = __webpack_require__(84)
 var Literal = __webpack_require__(151)
-var NamedNode = __webpack_require__(84)
+var NamedNode = __webpack_require__(85)
 var Quad = __webpack_require__(152)
 var Variable = __webpack_require__(153)
 
@@ -29042,7 +29449,7 @@ module.exports = BlankNode
 "use strict";
 
 
-var NamedNode = __webpack_require__(84)
+var NamedNode = __webpack_require__(85)
 
 function Literal (value, language, datatype) {
   this.value = value
@@ -29076,7 +29483,7 @@ module.exports = Literal
 "use strict";
 
 
-var DefaultGraph = __webpack_require__(83)
+var DefaultGraph = __webpack_require__(84)
 
 function Quad (subject, predicate, object, graph) {
   this.subject = subject
@@ -29125,7 +29532,7 @@ module.exports = Variable
 "use strict";
 
 
-var streams = __webpack_require__(85);
+var streams = __webpack_require__(86);
 
 var Parsers = __webpack_require__(155);
 
@@ -29148,11 +29555,11 @@ module.exports = DataFactory;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var Parsers =
 /*#__PURE__*/
@@ -29216,11 +29623,11 @@ module.exports = Parsers;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var Serializers =
 /*#__PURE__*/
@@ -29284,17 +29691,17 @@ module.exports = Serializers;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var BlankNode = __webpack_require__(158);
 
@@ -29429,28 +29836,58 @@ module.exports = DataFactoryExt;
 /* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const termToNTriples = __webpack_require__(19).termToNTriples
-const BlankNode = __webpack_require__(79)
+"use strict";
 
-class BlankNodeExt extends BlankNode {
-  toCanonical () {
-    return termToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var termToNTriples = __webpack_require__(19).termToNTriples;
+
+var BlankNode = __webpack_require__(80);
+
+var BlankNodeExt =
+/*#__PURE__*/
+function (_BlankNode) {
+  (0, _inherits2["default"])(BlankNodeExt, _BlankNode);
+
+  function BlankNodeExt() {
+    (0, _classCallCheck2["default"])(this, BlankNodeExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(BlankNodeExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.toCanonical()
-  }
-
-  toJSON () {
-    return {
-      value: this.value,
-      termType: this.termType
+  (0, _createClass2["default"])(BlankNodeExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return termToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.toCanonical();
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        value: this.value,
+        termType: this.termType
+      };
+    }
+  }]);
+  return BlankNodeExt;
+}(BlankNode);
 
-module.exports = BlankNodeExt
-
+module.exports = BlankNodeExt;
 
 /***/ }),
 /* 159 */
@@ -29557,17 +29994,17 @@ module.exports = variable
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var normalize = __webpack_require__(165);
 
@@ -29632,7 +30069,7 @@ module.exports = DatasetExt;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var jsonldNormalize = __webpack_require__(166);
 
@@ -29703,7 +30140,7 @@ module.exports = normalize;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
 /**
  * A JavaScript implementation of the JSON-LD API.
@@ -30491,7 +30928,7 @@ module.exports = normalize;
 
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(31)
-exports.createHash = exports.Hash = __webpack_require__(36)
+exports.createHash = exports.Hash = __webpack_require__(37)
 exports.createHmac = exports.Hmac = __webpack_require__(98)
 
 var algos = __webpack_require__(184)
@@ -30848,9 +31285,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 "use strict";
 
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
+
 var util = __webpack_require__(172);
 
 function copyBuffer(src, target, offset) {
@@ -30867,14 +31309,20 @@ module.exports = function () {
   }
 
   BufferList.prototype.push = function push(v) {
-    var entry = { data: v, next: null };
+    var entry = {
+      data: v,
+      next: null
+    };
     if (this.length > 0) this.tail.next = entry;else this.head = entry;
     this.tail = entry;
     ++this.length;
   };
 
   BufferList.prototype.unshift = function unshift(v) {
-    var entry = { data: v, next: this.head };
+    var entry = {
+      data: v,
+      next: this.head
+    };
     if (this.length === 0) this.tail = entry;
     this.head = entry;
     ++this.length;
@@ -30897,9 +31345,12 @@ module.exports = function () {
     if (this.length === 0) return '';
     var p = this.head;
     var ret = '' + p.data;
+
     while (p = p.next) {
       ret += s + p.data;
-    }return ret;
+    }
+
+    return ret;
   };
 
   BufferList.prototype.concat = function concat(n) {
@@ -30908,11 +31359,13 @@ module.exports = function () {
     var ret = Buffer.allocUnsafe(n >>> 0);
     var p = this.head;
     var i = 0;
+
     while (p) {
       copyBuffer(p.data, ret, i);
       i += p.data.length;
       p = p.next;
     }
+
     return ret;
   };
 
@@ -30921,7 +31374,9 @@ module.exports = function () {
 
 if (util && util.inspect && util.inspect.custom) {
   module.exports.prototype[util.inspect.custom] = function () {
-    var obj = util.inspect({ length: this.length });
+    var obj = util.inspect({
+      length: this.length
+    });
     return this.constructor.name + ' ' + obj;
   };
 }
@@ -31123,7 +31578,7 @@ if (util && util.inspect && util.inspect.custom) {
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 174 */
@@ -31162,7 +31617,7 @@ module.exports = PassThrough;
 var Transform = __webpack_require__(95);
 
 /*<replacement>*/
-var util = __webpack_require__(37);
+var util = __webpack_require__(38);
 util.inherits = __webpack_require__(1);
 /*</replacement>*/
 
@@ -31182,7 +31637,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 /* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(60);
+module.exports = __webpack_require__(61);
 
 
 /***/ }),
@@ -31220,7 +31675,7 @@ module.exports = __webpack_require__(20).PassThrough
 
 var inherits = __webpack_require__(1)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var K = [
   0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
@@ -31321,7 +31776,7 @@ module.exports = Sha
 
 var inherits = __webpack_require__(1)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var K = [
   0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
@@ -31426,7 +31881,7 @@ module.exports = Sha1
 var inherits = __webpack_require__(1)
 var Sha256 = __webpack_require__(96)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var W = new Array(64)
 
@@ -31477,7 +31932,7 @@ module.exports = Sha224
 var inherits = __webpack_require__(1)
 var SHA512 = __webpack_require__(97)
 var Hash = __webpack_require__(33)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var W = new Array(160)
 
@@ -31540,7 +31995,7 @@ module.exports = Sha384
 "use strict";
 
 var inherits = __webpack_require__(1)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var Base = __webpack_require__(26)
 
@@ -31600,7 +32055,7 @@ module.exports = __webpack_require__(100)
 /* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(102)
 var defaultEncoding = __webpack_require__(103)
 var sync = __webpack_require__(104)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var ZERO_BUF
 var subtle = global.crypto && global.crypto.subtle
@@ -31698,17 +32153,17 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
   }), callback)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var DES = __webpack_require__(187)
-var aes = __webpack_require__(64)
-var aesModes = __webpack_require__(65)
+var aes = __webpack_require__(65)
+var aesModes = __webpack_require__(66)
 var desModes = __webpack_require__(202)
-var ebtk = __webpack_require__(50)
+var ebtk = __webpack_require__(51)
 
 function createCipher (suite, password) {
   suite = suite.toLowerCase()
@@ -31778,9 +32233,9 @@ exports.listCiphers = exports.getCiphers = getCiphers
 /***/ (function(module, exports, __webpack_require__) {
 
 var CipherBase = __webpack_require__(26)
-var des = __webpack_require__(63)
+var des = __webpack_require__(64)
 var inherits = __webpack_require__(1)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 var modes = {
   'des-ede3-cbc': des.CBC.instantiate(des.EDE),
@@ -32211,7 +32666,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 var assert = __webpack_require__(14);
 var inherits = __webpack_require__(1);
 
-var des = __webpack_require__(63);
+var des = __webpack_require__(64);
 var utils = des.utils;
 var Cipher = des.Cipher;
 
@@ -32433,7 +32888,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 var assert = __webpack_require__(14);
 var inherits = __webpack_require__(1);
 
-var des = __webpack_require__(63);
+var des = __webpack_require__(64);
 var Cipher = des.Cipher;
 var DES = des.DES;
 
@@ -32489,13 +32944,13 @@ EDE.prototype._unpad = DES.prototype._unpad;
 /* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MODES = __webpack_require__(65)
+var MODES = __webpack_require__(66)
 var AuthCipher = __webpack_require__(108)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var StreamCipher = __webpack_require__(109)
 var Transform = __webpack_require__(26)
-var aes = __webpack_require__(49)
-var ebtk = __webpack_require__(50)
+var aes = __webpack_require__(50)
+var ebtk = __webpack_require__(51)
 var inherits = __webpack_require__(1)
 
 function Cipher (mode, key, iv) {
@@ -32622,7 +33077,7 @@ exports.decrypt = function (self, block) {
 /* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(40)
+var xor = __webpack_require__(41)
 
 exports.encrypt = function (self, block) {
   var data = xor(block, self._prev)
@@ -32645,8 +33100,8 @@ exports.decrypt = function (self, block) {
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
-var xor = __webpack_require__(40)
+var Buffer = __webpack_require__(3).Buffer
+var xor = __webpack_require__(41)
 
 function encryptStart (self, data, decrypt) {
   var len = data.length
@@ -32684,7 +33139,7 @@ exports.encrypt = function (self, data, decrypt) {
 /* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -32715,7 +33170,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 /* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -32763,7 +33218,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 /* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(40)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(41)
 
 function getBlock (self) {
   self._prev = self._cipher.encryptBlock(self._prev)
@@ -32780,13 +33235,13 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 var ZEROES = Buffer.alloc(16, 0)
 
 function toArray (buf) {
@@ -32882,12 +33337,12 @@ module.exports = GHASH
 /***/ (function(module, exports, __webpack_require__) {
 
 var AuthCipher = __webpack_require__(108)
-var Buffer = __webpack_require__(2).Buffer
-var MODES = __webpack_require__(65)
+var Buffer = __webpack_require__(3).Buffer
+var MODES = __webpack_require__(66)
 var StreamCipher = __webpack_require__(109)
 var Transform = __webpack_require__(26)
-var aes = __webpack_require__(49)
-var ebtk = __webpack_require__(50)
+var aes = __webpack_require__(50)
+var ebtk = __webpack_require__(51)
 var inherits = __webpack_require__(1)
 
 function Decipher (mode, key, iv) {
@@ -33084,7 +33539,7 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 204 */
@@ -33108,7 +33563,7 @@ module.exports = {"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c
 /* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(7);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(10);
 var MillerRabin = __webpack_require__(112);
 var millerRabin = new MillerRabin();
 var TWENTYFOUR = new BN(24);
@@ -33273,13 +33728,13 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(36)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(37)
 var stream = __webpack_require__(32)
 var inherits = __webpack_require__(1)
 var sign = __webpack_require__(209)
@@ -33371,7 +33826,7 @@ module.exports = {
   createVerify: createVerify
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 209 */
@@ -33379,10 +33834,10 @@ module.exports = {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = __webpack_require__(98)
-var crt = __webpack_require__(67)
-var EC = __webpack_require__(68).ec
-var BN = __webpack_require__(7)
-var parseKeys = __webpack_require__(52)
+var crt = __webpack_require__(68)
+var EC = __webpack_require__(69).ec
+var BN = __webpack_require__(10)
+var parseKeys = __webpack_require__(53)
 var curves = __webpack_require__(122)
 
 function sign (hash, key, hashType, signType, tag) {
@@ -33523,7 +33978,7 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 210 */
@@ -33540,11 +33995,11 @@ module.exports = {"name":"elliptic","version":"6.5.0","description":"EC cryptogr
 
 var utils = __webpack_require__(15);
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 
 var inherits = __webpack_require__(1);
 
-var Base = __webpack_require__(51);
+var Base = __webpack_require__(52);
 
 var assert = utils.assert;
 
@@ -34380,9 +34835,9 @@ JPoint.prototype.isInfinity = function isInfinity() {
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var inherits = __webpack_require__(1);
-var Base = __webpack_require__(51);
+var Base = __webpack_require__(52);
 
 var utils = __webpack_require__(15);
 
@@ -34566,9 +35021,9 @@ Point.prototype.getX = function getX() {
 
 
 var utils = __webpack_require__(15);
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var inherits = __webpack_require__(1);
-var Base = __webpack_require__(51);
+var Base = __webpack_require__(52);
 
 var assert = utils.assert;
 
@@ -35019,7 +35474,7 @@ exports.sha512 = __webpack_require__(117);
 
 
 var utils = __webpack_require__(18);
-var common = __webpack_require__(41);
+var common = __webpack_require__(42);
 var shaCommon = __webpack_require__(115);
 
 var rotl32 = utils.rotl32;
@@ -35179,7 +35634,7 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 var utils = __webpack_require__(18);
-var common = __webpack_require__(41);
+var common = __webpack_require__(42);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -36171,11 +36626,11 @@ module.exports = {
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var HmacDRBG = __webpack_require__(222);
 var utils = __webpack_require__(15);
-var curves = __webpack_require__(69);
-var rand = __webpack_require__(66);
+var curves = __webpack_require__(70);
+var rand = __webpack_require__(67);
 var assert = utils.assert;
 
 var KeyPair = __webpack_require__(223);
@@ -36419,7 +36874,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 "use strict";
 
 
-var hash = __webpack_require__(70);
+var hash = __webpack_require__(71);
 var utils = __webpack_require__(113);
 var assert = __webpack_require__(14);
 
@@ -36539,7 +36994,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var utils = __webpack_require__(15);
 var assert = utils.assert;
 
@@ -36664,7 +37119,7 @@ KeyPair.prototype.inspect = function inspect() {
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 
 var utils = __webpack_require__(15);
 var assert = utils.assert;
@@ -36805,8 +37260,8 @@ Signature.prototype.toDER = function toDER(enc) {
 "use strict";
 
 
-var hash = __webpack_require__(70);
-var curves = __webpack_require__(69);
+var hash = __webpack_require__(71);
+var curves = __webpack_require__(70);
 var utils = __webpack_require__(15);
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
@@ -37032,7 +37487,7 @@ module.exports = KeyPair;
 "use strict";
 
 
-var BN = __webpack_require__(7);
+var BN = __webpack_require__(10);
 var utils = __webpack_require__(15);
 var assert = utils.assert;
 var cachedProperty = utils.cachedProperty;
@@ -37106,7 +37561,7 @@ module.exports = Signature;
 // Fedor, you are amazing.
 
 
-var asn1 = __webpack_require__(42)
+var asn1 = __webpack_require__(43)
 
 exports.certificate = __webpack_require__(238)
 
@@ -37230,7 +37685,7 @@ exports.signature = asn1.define('signature', function () {
 /* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var asn1 = __webpack_require__(42);
+var asn1 = __webpack_require__(43);
 var inherits = __webpack_require__(1);
 
 var api = exports;
@@ -37584,13 +38039,13 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var Reporter = __webpack_require__(43).Reporter;
+var Reporter = __webpack_require__(44).Reporter;
 
-var EncoderBuffer = __webpack_require__(43).EncoderBuffer;
+var EncoderBuffer = __webpack_require__(44).EncoderBuffer;
 
-var DecoderBuffer = __webpack_require__(43).DecoderBuffer;
+var DecoderBuffer = __webpack_require__(44).DecoderBuffer;
 
 var assert = __webpack_require__(14); // Supported tags
 
@@ -38125,7 +38580,7 @@ decoders.pem = __webpack_require__(235);
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(1);
-var Buffer = __webpack_require__(5).Buffer;
+var Buffer = __webpack_require__(9).Buffer;
 
 var DERDecoder = __webpack_require__(120);
 
@@ -38222,7 +38677,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 
-var asn = __webpack_require__(42)
+var asn = __webpack_require__(43)
 
 var Time = asn.define('Time', function () {
   this.choice({
@@ -38322,9 +38777,9 @@ module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
 var startRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----/m
 var fullRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
-var evp = __webpack_require__(50)
-var ciphers = __webpack_require__(64)
-var Buffer = __webpack_require__(2).Buffer
+var evp = __webpack_require__(51)
+var ciphers = __webpack_require__(65)
+var Buffer = __webpack_require__(3).Buffer
 module.exports = function (okey, password) {
   var key = okey.toString()
   var match = key.match(findProc)
@@ -38356,9 +38811,9 @@ module.exports = function (okey, password) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var BN = __webpack_require__(7)
-var EC = __webpack_require__(68).ec
-var parseKeys = __webpack_require__(52)
+var BN = __webpack_require__(10)
+var EC = __webpack_require__(69).ec
+var parseKeys = __webpack_require__(53)
 var curves = __webpack_require__(122)
 
 function verify (sig, hash, key, signType, tag) {
@@ -38439,14 +38894,14 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(68)
-var BN = __webpack_require__(7)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(69)
+var BN = __webpack_require__(10)
 
 module.exports = function createECDH (curve) {
   return new ECDH(curve)
@@ -38570,7 +39025,7 @@ function formatReturnValue (bn, enc, len) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 243 */
@@ -38592,15 +39047,15 @@ exports.publicDecrypt = function publicDecrypt (key, buf) {
 /* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(52)
+var parseKeys = __webpack_require__(53)
 var randomBytes = __webpack_require__(31)
-var createHash = __webpack_require__(36)
+var createHash = __webpack_require__(37)
 var mgf = __webpack_require__(123)
 var xor = __webpack_require__(124)
-var BN = __webpack_require__(7)
+var BN = __webpack_require__(10)
 var withPublic = __webpack_require__(125)
-var crt = __webpack_require__(67)
-var Buffer = __webpack_require__(2).Buffer
+var crt = __webpack_require__(68)
+var Buffer = __webpack_require__(3).Buffer
 
 module.exports = function publicEncrypt (publicKey, msg, reverse) {
   var padding
@@ -38686,14 +39141,14 @@ function nonZero (len) {
 /* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(52)
+var parseKeys = __webpack_require__(53)
 var mgf = __webpack_require__(123)
 var xor = __webpack_require__(124)
-var BN = __webpack_require__(7)
-var crt = __webpack_require__(67)
-var createHash = __webpack_require__(36)
+var BN = __webpack_require__(10)
+var crt = __webpack_require__(68)
+var createHash = __webpack_require__(37)
 var withPublic = __webpack_require__(125)
-var Buffer = __webpack_require__(2).Buffer
+var Buffer = __webpack_require__(3).Buffer
 
 module.exports = function privateDecrypt (privateKey, enc, reverse) {
   var padding
@@ -38803,7 +39258,7 @@ function compare (a, b) {
 function oldBrowser () {
   throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
 }
-var safeBuffer = __webpack_require__(2)
+var safeBuffer = __webpack_require__(3)
 var randombytes = __webpack_require__(31)
 var Buffer = safeBuffer.Buffer
 var kBufferMaxLength = safeBuffer.kMaxLength
@@ -38907,7 +39362,7 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(12), __webpack_require__(11)))
 
 /***/ }),
 /* 247 */
@@ -38918,17 +39373,17 @@ function randomFillSync (buf, offset, size) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -39157,7 +39612,7 @@ exports.Writable = __webpack_require__(130);
 exports.Duplex = __webpack_require__(35);
 exports.Transform = __webpack_require__(131);
 exports.PassThrough = __webpack_require__(254);
-exports.finished = __webpack_require__(71);
+exports.finished = __webpack_require__(72);
 exports.pipeline = __webpack_require__(255);
 
 
@@ -39178,7 +39633,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _require = __webpack_require__(5),
+var _require = __webpack_require__(9),
     Buffer = _require.Buffer;
 
 var _require2 = __webpack_require__(251),
@@ -39391,7 +39846,7 @@ module.exports.emitExperimentalWarning = process.emitWarning
   ? emitExperimentalWarning
   : noop;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
 /* 253 */
@@ -39402,9 +39857,22 @@ module.exports.emitExperimentalWarning = process.emitWarning
 
 var _Object$setPrototypeO;
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-var finished = __webpack_require__(71);
+  return obj;
+}
+
+var finished = __webpack_require__(72);
 
 var kLastResolve = Symbol('lastResolve');
 var kLastReject = Symbol('lastReject');
@@ -39464,10 +39932,10 @@ var ReadableStreamAsyncIteratorPrototype = Object.setPrototypeOf((_Object$setPro
   },
 
   next: function next() {
-    var _this = this;
-
-    // if we have detected an error in the meanwhile
+    var _this = this; // if we have detected an error in the meanwhile
     // reject straight away
+
+
     var error = this[kError];
 
     if (error !== null) {
@@ -39521,11 +39989,11 @@ var ReadableStreamAsyncIteratorPrototype = Object.setPrototypeOf((_Object$setPro
 }, _defineProperty(_Object$setPrototypeO, Symbol.asyncIterator, function () {
   return this;
 }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
-  var _this2 = this;
-
-  // destroy(err, cb) is a private API
+  var _this2 = this; // destroy(err, cb) is a private API
   // we can guarantee we have that here, because we control the
   // Readable class this is attached to
+
+
   return new Promise(function (resolve, reject) {
     _this2[kStream].destroy(null, function (err) {
       if (err) {
@@ -39605,7 +40073,7 @@ var createReadableStreamAsyncIterator = function createReadableStreamAsyncIterat
 };
 
 module.exports = createReadableStreamAsyncIterator;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
 /* 254 */
@@ -39691,7 +40159,7 @@ function destroyer(stream, reading, writing, callback) {
   stream.on('close', function () {
     closed = true;
   });
-  if (eos === undefined) eos = __webpack_require__(71);
+  if (eos === undefined) eos = __webpack_require__(72);
   eos(stream, {
     readable: reading,
     writable: writing
@@ -39764,7 +40232,7 @@ module.exports = pipeline;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(72));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(73));
 
 /* eslint max-len: [2, 150] */
 // **N3Store** objects store N3 quads by graph in memory.
@@ -40649,84 +41117,177 @@ module.exports = {
 /* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const termToNTriples = __webpack_require__(19).termToNTriples
-const DefaultGraph = __webpack_require__(56)
+"use strict";
 
-class DefaultGraphExt extends DefaultGraph {
-  toCanonical () {
-    return termToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var termToNTriples = __webpack_require__(19).termToNTriples;
+
+var DefaultGraph = __webpack_require__(57);
+
+var DefaultGraphExt =
+/*#__PURE__*/
+function (_DefaultGraph) {
+  (0, _inherits2["default"])(DefaultGraphExt, _DefaultGraph);
+
+  function DefaultGraphExt() {
+    (0, _classCallCheck2["default"])(this, DefaultGraphExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(DefaultGraphExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.toCanonical()
-  }
-
-  toJSON () {
-    return {
-      value: '',
-      termType: this.termType
+  (0, _createClass2["default"])(DefaultGraphExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return termToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.toCanonical();
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        value: '',
+        termType: this.termType
+      };
+    }
+  }]);
+  return DefaultGraphExt;
+}(DefaultGraph);
 
-module.exports = DefaultGraphExt
-
+module.exports = DefaultGraphExt;
 
 /***/ }),
 /* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const termToNTriples = __webpack_require__(19).termToNTriples
-const Literal = __webpack_require__(80)
+"use strict";
 
-class LiteralExt extends Literal {
-  toCanonical () {
-    return termToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var termToNTriples = __webpack_require__(19).termToNTriples;
+
+var Literal = __webpack_require__(81);
+
+var LiteralExt =
+/*#__PURE__*/
+function (_Literal) {
+  (0, _inherits2["default"])(LiteralExt, _Literal);
+
+  function LiteralExt() {
+    (0, _classCallCheck2["default"])(this, LiteralExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(LiteralExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.value
-  }
-
-  toJSON () {
-    return {
-      value: this.value,
-      termType: this.termType,
-      language: this.language,
-      datatype: { value: this.datatype.value, termType: this.datatype.termType }
+  (0, _createClass2["default"])(LiteralExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return termToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.value;
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        value: this.value,
+        termType: this.termType,
+        language: this.language,
+        datatype: {
+          value: this.datatype.value,
+          termType: this.datatype.termType
+        }
+      };
+    }
+  }]);
+  return LiteralExt;
+}(Literal);
 
-module.exports = LiteralExt
-
+module.exports = LiteralExt;
 
 /***/ }),
 /* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const termToNTriples = __webpack_require__(19).termToNTriples
-const NamedNode = __webpack_require__(57)
+"use strict";
 
-class NamedNodeExt extends NamedNode {
-  toCanonical () {
-    return termToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var termToNTriples = __webpack_require__(19).termToNTriples;
+
+var NamedNode = __webpack_require__(58);
+
+var NamedNodeExt =
+/*#__PURE__*/
+function (_NamedNode) {
+  (0, _inherits2["default"])(NamedNodeExt, _NamedNode);
+
+  function NamedNodeExt() {
+    (0, _classCallCheck2["default"])(this, NamedNodeExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(NamedNodeExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.value
-  }
-
-  toJSON () {
-    return {
-      value: this.value,
-      termType: this.termType
+  (0, _createClass2["default"])(NamedNodeExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return termToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.value;
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        value: this.value,
+        termType: this.termType
+      };
+    }
+  }]);
+  return NamedNodeExt;
+}(NamedNode);
 
-module.exports = NamedNodeExt
-
+module.exports = NamedNodeExt;
 
 /***/ }),
 /* 261 */
@@ -40737,13 +41298,13 @@ module.exports = NamedNodeExt
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var streams = __webpack_require__(85);
+var streams = __webpack_require__(86);
 
 var PrefixMap =
 /*#__PURE__*/
@@ -40846,28 +41407,58 @@ module.exports = PrefixMap;
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const termToNTriples = __webpack_require__(19).termToNTriples
-const Variable = __webpack_require__(82)
+"use strict";
 
-class VariableExt extends Variable {
-  toCanonical () {
-    return termToNTriples(this)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var termToNTriples = __webpack_require__(19).termToNTriples;
+
+var Variable = __webpack_require__(83);
+
+var VariableExt =
+/*#__PURE__*/
+function (_Variable) {
+  (0, _inherits2["default"])(VariableExt, _Variable);
+
+  function VariableExt() {
+    (0, _classCallCheck2["default"])(this, VariableExt);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(VariableExt).apply(this, arguments));
   }
 
-  toString () {
-    return this.toCanonical()
-  }
-
-  toJSON () {
-    return {
-      value: this.value,
-      termType: this.termType
+  (0, _createClass2["default"])(VariableExt, [{
+    key: "toCanonical",
+    value: function toCanonical() {
+      return termToNTriples(this);
     }
-  }
-}
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.toCanonical();
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        value: this.value,
+        termType: this.termType
+      };
+    }
+  }]);
+  return VariableExt;
+}(Variable);
 
-module.exports = VariableExt
-
+module.exports = VariableExt;
 
 /***/ }),
 /* 263 */
@@ -41156,7 +41747,7 @@ function parseDOM(element, target, base, useInitialContext) {
 }
 
 function parseString(text, target, base, useInitialContext) {
-    var domParser = new (__webpack_require__(73).DOMParser)();
+    var domParser = new (__webpack_require__(74).DOMParser)();
     var documentElement = domParser.parseFromString(text, 'text/html');
     var element = documentElement.documentElement;
     return parseDOM(element, target, base, useInitialContext);
@@ -41190,7 +41781,7 @@ StringStream.prototype._read = function () {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11), __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 266 */
@@ -41201,17 +41792,17 @@ StringStream.prototype._read = function () {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var SerializerStream = __webpack_require__(267);
 
-var Sink = __webpack_require__(53);
+var Sink = __webpack_require__(54);
 
 var Serializer =
 /*#__PURE__*/
@@ -41237,19 +41828,19 @@ module.exports = Serializer;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(86));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(36));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var ObjectEncoder = __webpack_require__(268);
 
@@ -41372,9 +41963,9 @@ module.exports = SerializerStream;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var ObjectEncoder =
 /*#__PURE__*/
@@ -41411,9 +42002,9 @@ module.exports = ObjectEncoder;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var StringEncoder =
 /*#__PURE__*/
@@ -41452,17 +42043,37 @@ module.exports = StringEncoder;
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const SerializerStream = __webpack_require__(271)
-const Sink = __webpack_require__(53)
+"use strict";
 
-class Serializer extends Sink {
-  constructor () {
-    super(SerializerStream)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var SerializerStream = __webpack_require__(271);
+
+var Sink = __webpack_require__(54);
+
+var Serializer =
+/*#__PURE__*/
+function (_Sink) {
+  (0, _inherits2["default"])(Serializer, _Sink);
+
+  function Serializer() {
+    (0, _classCallCheck2["default"])(this, Serializer);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(Serializer).call(this, SerializerStream));
   }
-}
 
-module.exports = Serializer
+  return Serializer;
+}(Sink);
 
+module.exports = Serializer;
 
 /***/ }),
 /* 271 */
@@ -41473,15 +42084,15 @@ module.exports = Serializer
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var quadToNTriples = __webpack_require__(19).quadToNTriples;
 
@@ -41530,17 +42141,37 @@ module.exports = SerializerStream;
 /* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const ParserStream = __webpack_require__(273)
-const Sink = __webpack_require__(53)
+"use strict";
 
-class Parser extends Sink {
-  constructor (options) {
-    super(ParserStream, options)
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
+var ParserStream = __webpack_require__(273);
+
+var Sink = __webpack_require__(54);
+
+var Parser =
+/*#__PURE__*/
+function (_Sink) {
+  (0, _inherits2["default"])(Parser, _Sink);
+
+  function Parser(options) {
+    (0, _classCallCheck2["default"])(this, Parser);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(Parser).call(this, ParserStream, options));
   }
-}
 
-module.exports = Parser
+  return Parser;
+}(Sink);
 
+module.exports = Parser;
 
 /***/ }),
 /* 273 */
@@ -41551,15 +42182,15 @@ module.exports = Parser
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var rdf = __webpack_require__(25);
 
@@ -41626,7 +42257,7 @@ module.exports = ParserStream;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  DataFactory:  __webpack_require__(44),
+  DataFactory:  __webpack_require__(45),
   Lexer:        __webpack_require__(133),
   Parser:       __webpack_require__(134),
   Writer:       __webpack_require__(135),
@@ -41641,804 +42272,973 @@ module.exports = {
 /* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
 // **N3Store** objects store N3 quads by graph in memory.
-
-var DataFactory = __webpack_require__(44),
+var DataFactory = __webpack_require__(45),
     Readable = __webpack_require__(32).Readable;
-var toId = DataFactory.internal.toId,
-    fromId = DataFactory.internal.fromId;
 
-// ## Constructor
-class N3Store {
-  constructor(quads, options) {
+var toId = DataFactory.internal.toId,
+    fromId = DataFactory.internal.fromId; // ## Constructor
+
+var N3Store =
+/*#__PURE__*/
+function () {
+  function N3Store(quads, options) {
+    (0, _classCallCheck2["default"])(this, N3Store);
     // The number of quads is initially zero
-    this._size = 0;
-    // `_graphs` contains subject, predicate, and object indexes per graph
-    this._graphs = Object.create(null);
-    // `_ids` maps entities such as `http://xmlns.com/foaf/0.1/name` to numbers,
+    this._size = 0; // `_graphs` contains subject, predicate, and object indexes per graph
+
+    this._graphs = Object.create(null); // `_ids` maps entities such as `http://xmlns.com/foaf/0.1/name` to numbers,
     // saving memory by using only numbers as keys in `_graphs`
+
     this._id = 0;
     this._ids = Object.create(null);
     this._ids['><'] = 0; // dummy entry, so the first actual key is non-zero
+
     this._entities = Object.create(null); // inverse of `_ids`
     // `_blankNodeIndex` is the index of the last automatically named blank node
-    this._blankNodeIndex = 0;
 
-    // Shift parameters if `quads` is not given
-    if (!options && quads && !quads[0])
-      options = quads, quads = null;
+    this._blankNodeIndex = 0; // Shift parameters if `quads` is not given
+
+    if (!options && quads && !quads[0]) options = quads, quads = null;
     options = options || {};
-    this._factory = options.factory || DataFactory;
+    this._factory = options.factory || DataFactory; // Add quads if passed
 
-    // Add quads if passed
-    if (quads)
-      this.addQuads(quads);
-  }
-
-  // ## Public properties
-
+    if (quads) this.addQuads(quads);
+  } // ## Public properties
   // ### `size` returns the number of quads in the store
-  get size() {
-    // Return the quad count if if was cached
-    var size = this._size;
-    if (size !== null)
-      return size;
 
-    // Calculate the number of quads by counting to the deepest level
-    size = 0;
-    var graphs = this._graphs, subjects, subject;
-    for (var graphKey in graphs)
-      for (var subjectKey in (subjects = graphs[graphKey].subjects))
-        for (var predicateKey in (subject = subjects[subjectKey]))
-          size += Object.keys(subject[predicateKey]).length;
-    return this._size = size;
-  }
 
-  // ## Private methods
+  (0, _createClass2["default"])(N3Store, [{
+    key: "_addToIndex",
+    // ## Private methods
+    // ### `_addToIndex` adds a quad to a three-layered index.
+    // Returns if the index has changed, if the entry did not already exist.
+    value: function _addToIndex(index0, key0, key1, key2) {
+      // Create layers as necessary
+      var index1 = index0[key0] || (index0[key0] = {});
+      var index2 = index1[key1] || (index1[key1] = {}); // Setting the key to _any_ value signals the presence of the quad
 
-  // ### `_addToIndex` adds a quad to a three-layered index.
-  // Returns if the index has changed, if the entry did not already exist.
-  _addToIndex(index0, key0, key1, key2) {
-    // Create layers as necessary
-    var index1 = index0[key0] || (index0[key0] = {});
-    var index2 = index1[key1] || (index1[key1] = {});
-    // Setting the key to _any_ value signals the presence of the quad
-    var existed = key2 in index2;
-    if (!existed)
-      index2[key2] = null;
-    return !existed;
-  }
+      var existed = key2 in index2;
+      if (!existed) index2[key2] = null;
+      return !existed;
+    } // ### `_removeFromIndex` removes a quad from a three-layered index
 
-  // ### `_removeFromIndex` removes a quad from a three-layered index
-  _removeFromIndex(index0, key0, key1, key2) {
-    // Remove the quad from the index
-    var index1 = index0[key0], index2 = index1[key1], key;
-    delete index2[key2];
+  }, {
+    key: "_removeFromIndex",
+    value: function _removeFromIndex(index0, key0, key1, key2) {
+      // Remove the quad from the index
+      var index1 = index0[key0],
+          index2 = index1[key1],
+          key;
+      delete index2[key2]; // Remove intermediary index layers if they are empty
 
-    // Remove intermediary index layers if they are empty
-    for (key in index2) return;
-    delete index1[key1];
-    for (key in index1) return;
-    delete index0[key0];
-  }
+      for (key in index2) {
+        return;
+      }
 
-  // ### `_findInIndex` finds a set of quads in a three-layered index.
-  // The index base is `index0` and the keys at each level are `key0`, `key1`, and `key2`.
-  // Any of these keys can be undefined, which is interpreted as a wildcard.
-  // `name0`, `name1`, and `name2` are the names of the keys at each level,
-  // used when reconstructing the resulting quad
-  // (for instance: _subject_, _predicate_, and _object_).
-  // Finally, `graph` will be the graph of the created quads.
-  // If `callback` is given, each result is passed through it
-  // and iteration halts when it returns truthy for any quad.
-  // If instead `array` is given, each result is added to the array.
-  _findInIndex(index0, key0, key1, key2, name0, name1, name2, graph, callback, array) {
-    var tmp, index1, index2, varCount = !key0 + !key1 + !key2,
-        // depending on the number of variables, keys or reverse index are faster
-        entityKeys = varCount > 1 ? Object.keys(this._ids) : this._entities;
+      delete index1[key1];
 
-    // If a key is specified, use only that part of index 0.
-    if (key0) (tmp = index0, index0 = {})[key0] = tmp[key0];
-    for (var value0 in index0) {
-      var entity0 = entityKeys[value0];
+      for (key in index1) {
+        return;
+      }
 
-      if (index1 = index0[value0]) {
-        // If a key is specified, use only that part of index 1.
-        if (key1) (tmp = index1, index1 = {})[key1] = tmp[key1];
-        for (var value1 in index1) {
-          var entity1 = entityKeys[value1];
+      delete index0[key0];
+    } // ### `_findInIndex` finds a set of quads in a three-layered index.
+    // The index base is `index0` and the keys at each level are `key0`, `key1`, and `key2`.
+    // Any of these keys can be undefined, which is interpreted as a wildcard.
+    // `name0`, `name1`, and `name2` are the names of the keys at each level,
+    // used when reconstructing the resulting quad
+    // (for instance: _subject_, _predicate_, and _object_).
+    // Finally, `graph` will be the graph of the created quads.
+    // If `callback` is given, each result is passed through it
+    // and iteration halts when it returns truthy for any quad.
+    // If instead `array` is given, each result is added to the array.
 
-          if (index2 = index1[value1]) {
-            // If a key is specified, use only that part of index 2, if it exists.
-            var values = key2 ? (key2 in index2 ? [key2] : []) : Object.keys(index2);
-            // Create quads for all items found in index 2.
-            for (var l = 0; l < values.length; l++) {
-              var parts = { subject: null, predicate: null, object: null };
-              parts[name0] = fromId(entity0, this._factory);
-              parts[name1] = fromId(entity1, this._factory);
-              parts[name2] = fromId(entityKeys[values[l]], this._factory);
-              var quad = this._factory.quad(
-                parts.subject, parts.predicate, parts.object, fromId(graph, this._factory));
-              if (array)
-                array.push(quad);
-              else if (callback(quad))
-                return true;
+  }, {
+    key: "_findInIndex",
+    value: function _findInIndex(index0, key0, key1, key2, name0, name1, name2, graph, callback, array) {
+      var tmp,
+          index1,
+          index2,
+          varCount = !key0 + !key1 + !key2,
+          // depending on the number of variables, keys or reverse index are faster
+      entityKeys = varCount > 1 ? Object.keys(this._ids) : this._entities; // If a key is specified, use only that part of index 0.
+
+      if (key0) (tmp = index0, index0 = {})[key0] = tmp[key0];
+
+      for (var value0 in index0) {
+        var entity0 = entityKeys[value0];
+
+        if (index1 = index0[value0]) {
+          // If a key is specified, use only that part of index 1.
+          if (key1) (tmp = index1, index1 = {})[key1] = tmp[key1];
+
+          for (var value1 in index1) {
+            var entity1 = entityKeys[value1];
+
+            if (index2 = index1[value1]) {
+              // If a key is specified, use only that part of index 2, if it exists.
+              var values = key2 ? key2 in index2 ? [key2] : [] : Object.keys(index2); // Create quads for all items found in index 2.
+
+              for (var l = 0; l < values.length; l++) {
+                var parts = {
+                  subject: null,
+                  predicate: null,
+                  object: null
+                };
+                parts[name0] = fromId(entity0, this._factory);
+                parts[name1] = fromId(entity1, this._factory);
+                parts[name2] = fromId(entityKeys[values[l]], this._factory);
+
+                var quad = this._factory.quad(parts.subject, parts.predicate, parts.object, fromId(graph, this._factory));
+
+                if (array) array.push(quad);else if (callback(quad)) return true;
+              }
             }
           }
         }
       }
-    }
-    return array;
-  }
 
-  // ### `_loop` executes the callback on all keys of index 0
-  _loop(index0, callback) {
-    for (var key0 in index0)
-      callback(key0);
-  }
+      return array;
+    } // ### `_loop` executes the callback on all keys of index 0
 
-  // ### `_loopByKey0` executes the callback on all keys of a certain entry in index 0
-  _loopByKey0(index0, key0, callback) {
-    var index1, key1;
-    if (index1 = index0[key0]) {
-      for (key1 in index1)
-        callback(key1);
-    }
-  }
-
-  // ### `_loopByKey1` executes the callback on given keys of all entries in index 0
-  _loopByKey1(index0, key1, callback) {
-    var key0, index1;
-    for (key0 in index0) {
-      index1 = index0[key0];
-      if (index1[key1])
+  }, {
+    key: "_loop",
+    value: function _loop(index0, callback) {
+      for (var key0 in index0) {
         callback(key0);
-    }
-  }
+      }
+    } // ### `_loopByKey0` executes the callback on all keys of a certain entry in index 0
 
-  // ### `_loopBy2Keys` executes the callback on given keys of certain entries in index 2
-  _loopBy2Keys(index0, key0, key1, callback) {
-    var index1, index2, key2;
-    if ((index1 = index0[key0]) && (index2 = index1[key1])) {
-      for (key2 in index2)
-        callback(key2);
-    }
-  }
+  }, {
+    key: "_loopByKey0",
+    value: function _loopByKey0(index0, key0, callback) {
+      var index1, key1;
 
-  // ### `_countInIndex` counts matching quads in a three-layered index.
-  // The index base is `index0` and the keys at each level are `key0`, `key1`, and `key2`.
-  // Any of these keys can be undefined, which is interpreted as a wildcard.
-  _countInIndex(index0, key0, key1, key2) {
-    var count = 0, tmp, index1, index2;
+      if (index1 = index0[key0]) {
+        for (key1 in index1) {
+          callback(key1);
+        }
+      }
+    } // ### `_loopByKey1` executes the callback on given keys of all entries in index 0
 
-    // If a key is specified, count only that part of index 0
-    if (key0) (tmp = index0, index0 = {})[key0] = tmp[key0];
-    for (var value0 in index0) {
-      if (index1 = index0[value0]) {
-        // If a key is specified, count only that part of index 1
-        if (key1) (tmp = index1, index1 = {})[key1] = tmp[key1];
-        for (var value1 in index1) {
-          if (index2 = index1[value1]) {
-            // If a key is specified, count the quad if it exists
-            if (key2) (key2 in index2) && count++;
-            // Otherwise, count all quads
-            else count += Object.keys(index2).length;
+  }, {
+    key: "_loopByKey1",
+    value: function _loopByKey1(index0, key1, callback) {
+      var key0, index1;
+
+      for (key0 in index0) {
+        index1 = index0[key0];
+        if (index1[key1]) callback(key0);
+      }
+    } // ### `_loopBy2Keys` executes the callback on given keys of certain entries in index 2
+
+  }, {
+    key: "_loopBy2Keys",
+    value: function _loopBy2Keys(index0, key0, key1, callback) {
+      var index1, index2, key2;
+
+      if ((index1 = index0[key0]) && (index2 = index1[key1])) {
+        for (key2 in index2) {
+          callback(key2);
+        }
+      }
+    } // ### `_countInIndex` counts matching quads in a three-layered index.
+    // The index base is `index0` and the keys at each level are `key0`, `key1`, and `key2`.
+    // Any of these keys can be undefined, which is interpreted as a wildcard.
+
+  }, {
+    key: "_countInIndex",
+    value: function _countInIndex(index0, key0, key1, key2) {
+      var count = 0,
+          tmp,
+          index1,
+          index2; // If a key is specified, count only that part of index 0
+
+      if (key0) (tmp = index0, index0 = {})[key0] = tmp[key0];
+
+      for (var value0 in index0) {
+        if (index1 = index0[value0]) {
+          // If a key is specified, count only that part of index 1
+          if (key1) (tmp = index1, index1 = {})[key1] = tmp[key1];
+
+          for (var value1 in index1) {
+            if (index2 = index1[value1]) {
+              // If a key is specified, count the quad if it exists
+              if (key2) key2 in index2 && count++; // Otherwise, count all quads
+              else count += Object.keys(index2).length;
+            }
           }
         }
       }
-    }
-    return count;
-  }
 
-  // ### `_getGraphs` returns an array with the given graph,
-  // or all graphs if the argument is null or undefined.
-  _getGraphs(graph) {
-    if (!isString(graph))
-      return this._graphs;
-    var graphs = {};
-    graphs[graph] = this._graphs[graph];
-    return graphs;
-  }
+      return count;
+    } // ### `_getGraphs` returns an array with the given graph,
+    // or all graphs if the argument is null or undefined.
 
-  // ### `_uniqueEntities` returns a function that accepts an entity ID
-  // and passes the corresponding entity to callback if it hasn't occurred before.
-  _uniqueEntities(callback) {
-    var uniqueIds = Object.create(null), entities = this._entities;
-    return function (id) {
-      if (!(id in uniqueIds)) {
-        uniqueIds[id] = true;
-        callback(fromId(entities[id]));
+  }, {
+    key: "_getGraphs",
+    value: function _getGraphs(graph) {
+      if (!isString(graph)) return this._graphs;
+      var graphs = {};
+      graphs[graph] = this._graphs[graph];
+      return graphs;
+    } // ### `_uniqueEntities` returns a function that accepts an entity ID
+    // and passes the corresponding entity to callback if it hasn't occurred before.
+
+  }, {
+    key: "_uniqueEntities",
+    value: function _uniqueEntities(callback) {
+      var uniqueIds = Object.create(null),
+          entities = this._entities;
+      return function (id) {
+        if (!(id in uniqueIds)) {
+          uniqueIds[id] = true;
+          callback(fromId(entities[id]));
+        }
+      };
+    } // ## Public methods
+    // ### `addQuad` adds a new quad to the store.
+    // Returns if the quad index has changed, if the quad did not already exist.
+
+  }, {
+    key: "addQuad",
+    value: function addQuad(subject, predicate, object, graph) {
+      // Shift arguments if a quad object is given instead of components
+      if (!predicate) graph = subject.graph, object = subject.object, predicate = subject.predicate, subject = subject.subject; // Convert terms to internal string representation
+
+      subject = toId(subject);
+      predicate = toId(predicate);
+      object = toId(object);
+      graph = toId(graph); // Find the graph that will contain the triple
+
+      var graphItem = this._graphs[graph]; // Create the graph if it doesn't exist yet
+
+      if (!graphItem) {
+        graphItem = this._graphs[graph] = {
+          subjects: {},
+          predicates: {},
+          objects: {}
+        }; // Freezing a graph helps subsequent `add` performance,
+        // and properties will never be modified anyway
+
+        Object.freeze(graphItem);
+      } // Since entities can often be long IRIs, we avoid storing them in every index.
+      // Instead, we have a separate index that maps entities to numbers,
+      // which are then used as keys in the other indexes.
+
+
+      var ids = this._ids;
+      var entities = this._entities;
+      subject = ids[subject] || (ids[entities[++this._id] = subject] = this._id);
+      predicate = ids[predicate] || (ids[entities[++this._id] = predicate] = this._id);
+      object = ids[object] || (ids[entities[++this._id] = object] = this._id);
+
+      var changed = this._addToIndex(graphItem.subjects, subject, predicate, object);
+
+      this._addToIndex(graphItem.predicates, predicate, object, subject);
+
+      this._addToIndex(graphItem.objects, object, subject, predicate); // The cached quad count is now invalid
+
+
+      this._size = null;
+      return changed;
+    } // ### `addQuads` adds multiple quads to the store
+
+  }, {
+    key: "addQuads",
+    value: function addQuads(quads) {
+      for (var i = 0; i < quads.length; i++) {
+        this.addQuad(quads[i]);
       }
-    };
-  }
+    } // ### `import` adds a stream of quads to the store
 
-  // ## Public methods
+  }, {
+    key: "import",
+    value: function _import(stream) {
+      var self = this;
+      stream.on('data', function (quad) {
+        self.addQuad(quad);
+      });
+      return stream;
+    } // ### `removeQuad` removes a quad from the store if it exists
 
-  // ### `addQuad` adds a new quad to the store.
-  // Returns if the quad index has changed, if the quad did not already exist.
-  addQuad(subject, predicate, object, graph) {
-    // Shift arguments if a quad object is given instead of components
-    if (!predicate)
-      graph = subject.graph, object = subject.object,
-        predicate = subject.predicate, subject = subject.subject;
+  }, {
+    key: "removeQuad",
+    value: function removeQuad(subject, predicate, object, graph) {
+      // Shift arguments if a quad object is given instead of components
+      if (!predicate) graph = subject.graph, object = subject.object, predicate = subject.predicate, subject = subject.subject; // Convert terms to internal string representation
 
-    // Convert terms to internal string representation
-    subject = toId(subject);
-    predicate = toId(predicate);
-    object = toId(object);
-    graph = toId(graph);
+      subject = toId(subject);
+      predicate = toId(predicate);
+      object = toId(object);
+      graph = toId(graph); // Find internal identifiers for all components
+      // and verify the quad exists.
 
-    // Find the graph that will contain the triple
-    var graphItem = this._graphs[graph];
-    // Create the graph if it doesn't exist yet
-    if (!graphItem) {
-      graphItem = this._graphs[graph] = { subjects: {}, predicates: {}, objects: {} };
-      // Freezing a graph helps subsequent `add` performance,
-      // and properties will never be modified anyway
-      Object.freeze(graphItem);
-    }
+      var graphItem,
+          ids = this._ids,
+          graphs = this._graphs,
+          subjects,
+          predicates;
+      if (!(subject = ids[subject]) || !(predicate = ids[predicate]) || !(object = ids[object]) || !(graphItem = graphs[graph]) || !(subjects = graphItem.subjects[subject]) || !(predicates = subjects[predicate]) || !(object in predicates)) return false; // Remove it from all indexes
 
-    // Since entities can often be long IRIs, we avoid storing them in every index.
-    // Instead, we have a separate index that maps entities to numbers,
-    // which are then used as keys in the other indexes.
-    var ids = this._ids;
-    var entities = this._entities;
-    subject   = ids[subject]   || (ids[entities[++this._id] = subject]   = this._id);
-    predicate = ids[predicate] || (ids[entities[++this._id] = predicate] = this._id);
-    object    = ids[object]    || (ids[entities[++this._id] = object]    = this._id);
+      this._removeFromIndex(graphItem.subjects, subject, predicate, object);
 
-    var changed = this._addToIndex(graphItem.subjects,   subject,   predicate, object);
-    this._addToIndex(graphItem.predicates, predicate, object,    subject);
-    this._addToIndex(graphItem.objects,    object,    subject,   predicate);
+      this._removeFromIndex(graphItem.predicates, predicate, object, subject);
 
-    // The cached quad count is now invalid
-    this._size = null;
-    return changed;
-  }
+      this._removeFromIndex(graphItem.objects, object, subject, predicate);
 
-  // ### `addQuads` adds multiple quads to the store
-  addQuads(quads) {
-    for (var i = 0; i < quads.length; i++)
-      this.addQuad(quads[i]);
-  }
+      if (this._size !== null) this._size--; // Remove the graph if it is empty
 
-  // ### `import` adds a stream of quads to the store
-  import(stream) {
-    var self = this;
-    stream.on('data', function (quad) { self.addQuad(quad); });
-    return stream;
-  }
+      for (subject in graphItem.subjects) {
+        return true;
+      }
 
-  // ### `removeQuad` removes a quad from the store if it exists
-  removeQuad(subject, predicate, object, graph) {
-    // Shift arguments if a quad object is given instead of components
-    if (!predicate)
-      graph = subject.graph, object = subject.object,
-        predicate = subject.predicate, subject = subject.subject;
+      delete graphs[graph];
+      return true;
+    } // ### `removeQuads` removes multiple quads from the store
 
-    // Convert terms to internal string representation
-    subject = toId(subject);
-    predicate = toId(predicate);
-    object = toId(object);
-    graph = toId(graph);
+  }, {
+    key: "removeQuads",
+    value: function removeQuads(quads) {
+      for (var i = 0; i < quads.length; i++) {
+        this.removeQuad(quads[i]);
+      }
+    } // ### `remove` removes a stream of quads from the store
 
-    // Find internal identifiers for all components
-    // and verify the quad exists.
-    var graphItem, ids = this._ids, graphs = this._graphs, subjects, predicates;
-    if (!(subject    = ids[subject]) || !(predicate = ids[predicate]) ||
-        !(object     = ids[object])  || !(graphItem = graphs[graph])  ||
-        !(subjects   = graphItem.subjects[subject]) ||
-        !(predicates = subjects[predicate]) ||
-        !(object in predicates))
-      return false;
+  }, {
+    key: "remove",
+    value: function remove(stream) {
+      var self = this;
+      stream.on('data', function (quad) {
+        self.removeQuad(quad);
+      });
+      return stream;
+    } // ### `removeMatches` removes all matching quads from the store
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-    // Remove it from all indexes
-    this._removeFromIndex(graphItem.subjects,   subject,   predicate, object);
-    this._removeFromIndex(graphItem.predicates, predicate, object,    subject);
-    this._removeFromIndex(graphItem.objects,    object,    subject,   predicate);
-    if (this._size !== null) this._size--;
+  }, {
+    key: "removeMatches",
+    value: function removeMatches(subject, predicate, object, graph) {
+      return this.remove(this.match(subject, predicate, object, graph));
+    } // ### `deleteGraph` removes all triples with the given graph from the store
 
-    // Remove the graph if it is empty
-    for (subject in graphItem.subjects) return true;
-    delete graphs[graph];
-    return true;
-  }
+  }, {
+    key: "deleteGraph",
+    value: function deleteGraph(graph) {
+      return this.removeMatches(null, null, null, graph);
+    } // ### `getQuads` returns an array of quads matching a pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-  // ### `removeQuads` removes multiple quads from the store
-  removeQuads(quads) {
-    for (var i = 0; i < quads.length; i++)
-      this.removeQuad(quads[i]);
-  }
+  }, {
+    key: "getQuads",
+    value: function getQuads(subject, predicate, object, graph) {
+      // Convert terms to internal string representation
+      subject = subject && toId(subject);
+      predicate = predicate && toId(predicate);
+      object = object && toId(object);
+      graph = graph && toId(graph);
 
-  // ### `remove` removes a stream of quads from the store
-  remove(stream) {
-    var self = this;
-    stream.on('data', function (quad) { self.removeQuad(quad); });
-    return stream;
-  }
+      var quads = [],
+          graphs = this._getGraphs(graph),
+          content,
+          ids = this._ids,
+          subjectId,
+          predicateId,
+          objectId; // Translate IRIs to internal index keys.
 
-  // ### `removeMatches` removes all matching quads from the store
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  removeMatches(subject, predicate, object, graph) {
-    return this.remove(this.match(subject, predicate, object, graph));
-  }
 
-  // ### `deleteGraph` removes all triples with the given graph from the store
-  deleteGraph(graph) {
-    return this.removeMatches(null, null, null, graph);
-  }
+      if (isString(subject) && !(subjectId = ids[subject]) || isString(predicate) && !(predicateId = ids[predicate]) || isString(object) && !(objectId = ids[object])) return quads;
 
-  // ### `getQuads` returns an array of quads matching a pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  getQuads(subject, predicate, object, graph) {
-    // Convert terms to internal string representation
-    subject = subject && toId(subject);
-    predicate = predicate && toId(predicate);
-    object = object && toId(object);
-    graph = graph && toId(graph);
+      for (var graphId in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graphId]) {
+          // Choose the optimal index, based on what fields are present
+          if (subjectId) {
+            if (objectId) // If subject and object are given, the object index will be the fastest
+              this._findInIndex(content.objects, objectId, subjectId, predicateId, 'object', 'subject', 'predicate', graphId, null, quads);else // If only subject and possibly predicate are given, the subject index will be the fastest
+              this._findInIndex(content.subjects, subjectId, predicateId, null, 'subject', 'predicate', 'object', graphId, null, quads);
+          } else if (predicateId) // If only predicate and possibly object are given, the predicate index will be the fastest
+            this._findInIndex(content.predicates, predicateId, objectId, null, 'predicate', 'object', 'subject', graphId, null, quads);else if (objectId) // If only object is given, the object index will be the fastest
+            this._findInIndex(content.objects, objectId, null, null, 'object', 'subject', 'predicate', graphId, null, quads);else // If nothing is given, iterate subjects and predicates first
+            this._findInIndex(content.subjects, null, null, null, 'subject', 'predicate', 'object', graphId, null, quads);
+        }
+      }
 
-    var quads = [], graphs = this._getGraphs(graph), content,
-        ids = this._ids, subjectId, predicateId, objectId;
-
-    // Translate IRIs to internal index keys.
-    if (isString(subject)   && !(subjectId   = ids[subject])   ||
-        isString(predicate) && !(predicateId = ids[predicate]) ||
-        isString(object)    && !(objectId    = ids[object]))
       return quads;
+    } // ### `match` returns a stream of quads matching a pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-    for (var graphId in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graphId]) {
-        // Choose the optimal index, based on what fields are present
-        if (subjectId) {
-          if (objectId)
-            // If subject and object are given, the object index will be the fastest
-            this._findInIndex(content.objects, objectId, subjectId, predicateId,
-                              'object', 'subject', 'predicate', graphId, null, quads);
-          else
-            // If only subject and possibly predicate are given, the subject index will be the fastest
-            this._findInIndex(content.subjects, subjectId, predicateId, null,
-                              'subject', 'predicate', 'object', graphId, null, quads);
+  }, {
+    key: "match",
+    value: function match(subject, predicate, object, graph) {
+      var self = this;
+      var stream = new Readable({
+        objectMode: true
+      }); // Initialize stream once it is being read
+
+      stream._read = function () {
+        stream._read = function () {};
+
+        var quads = self.getQuads(subject, predicate, object, graph);
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = quads[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var quad = _step.value;
+            stream.push(quad);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
-        else if (predicateId)
-          // If only predicate and possibly object are given, the predicate index will be the fastest
-          this._findInIndex(content.predicates, predicateId, objectId, null,
-                            'predicate', 'object', 'subject', graphId, null, quads);
-        else if (objectId)
-          // If only object is given, the object index will be the fastest
-          this._findInIndex(content.objects, objectId, null, null,
-                            'object', 'subject', 'predicate', graphId, null, quads);
-        else
-          // If nothing is given, iterate subjects and predicates first
-          this._findInIndex(content.subjects, null, null, null,
-                            'subject', 'predicate', 'object', graphId, null, quads);
-      }
-    }
-    return quads;
-  }
 
-  // ### `match` returns a stream of quads matching a pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  match(subject, predicate, object, graph) {
-    var self = this;
-    var stream = new Readable({ objectMode: true });
+        stream.push(null);
+      };
 
-    // Initialize stream once it is being read
-    stream._read = function () {
-      stream._read = function () {};
-      var quads = self.getQuads(subject, predicate, object, graph);
-      for (var quad of quads) {
-        stream.push(quad);
-      }
-      stream.push(null);
-    };
+      return stream;
+    } // ### `countQuads` returns the number of quads matching a pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-    return stream;
-  }
+  }, {
+    key: "countQuads",
+    value: function countQuads(subject, predicate, object, graph) {
+      // Convert terms to internal string representation
+      subject = subject && toId(subject);
+      predicate = predicate && toId(predicate);
+      object = object && toId(object);
+      graph = graph && toId(graph);
 
-  // ### `countQuads` returns the number of quads matching a pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  countQuads(subject, predicate, object, graph) {
-    // Convert terms to internal string representation
-    subject = subject && toId(subject);
-    predicate = predicate && toId(predicate);
-    object = object && toId(object);
-    graph = graph && toId(graph);
+      var count = 0,
+          graphs = this._getGraphs(graph),
+          content,
+          ids = this._ids,
+          subjectId,
+          predicateId,
+          objectId; // Translate IRIs to internal index keys.
 
-    var count = 0, graphs = this._getGraphs(graph), content,
-        ids = this._ids, subjectId, predicateId, objectId;
 
-    // Translate IRIs to internal index keys.
-    if (isString(subject)   && !(subjectId   = ids[subject])   ||
-        isString(predicate) && !(predicateId = ids[predicate]) ||
-        isString(object)    && !(objectId    = ids[object]))
-      return 0;
+      if (isString(subject) && !(subjectId = ids[subject]) || isString(predicate) && !(predicateId = ids[predicate]) || isString(object) && !(objectId = ids[object])) return 0;
 
-    for (var graphId in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graphId]) {
-        // Choose the optimal index, based on what fields are present
-        if (subject) {
-          if (object)
-            // If subject and object are given, the object index will be the fastest
+      for (var graphId in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graphId]) {
+          // Choose the optimal index, based on what fields are present
+          if (subject) {
+            if (object) // If subject and object are given, the object index will be the fastest
+              count += this._countInIndex(content.objects, objectId, subjectId, predicateId);else // If only subject and possibly predicate are given, the subject index will be the fastest
+              count += this._countInIndex(content.subjects, subjectId, predicateId, objectId);
+          } else if (predicate) {
+            // If only predicate and possibly object are given, the predicate index will be the fastest
+            count += this._countInIndex(content.predicates, predicateId, objectId, subjectId);
+          } else {
+            // If only object is possibly given, the object index will be the fastest
             count += this._countInIndex(content.objects, objectId, subjectId, predicateId);
-          else
-            // If only subject and possibly predicate are given, the subject index will be the fastest
-            count += this._countInIndex(content.subjects, subjectId, predicateId, objectId);
-        }
-        else if (predicate) {
-          // If only predicate and possibly object are given, the predicate index will be the fastest
-          count += this._countInIndex(content.predicates, predicateId, objectId, subjectId);
-        }
-        else {
-          // If only object is possibly given, the object index will be the fastest
-          count += this._countInIndex(content.objects, objectId, subjectId, predicateId);
-        }
-      }
-    }
-    return count;
-  }
-
-  // ### `forEach` executes the callback on all quads.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  forEach(callback, subject, predicate, object, graph) {
-    this.some(function (quad) {
-      callback(quad);
-      return false;
-    }, subject, predicate, object, graph);
-  }
-
-  // ### `every` executes the callback on all quads,
-  // and returns `true` if it returns truthy for all them.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  every(callback, subject, predicate, object, graph) {
-    var some = false;
-    var every = !this.some(function (quad) {
-      some = true;
-      return !callback(quad);
-    }, subject, predicate, object, graph);
-    return some && every;
-  }
-
-  // ### `some` executes the callback on all quads,
-  // and returns `true` if it returns truthy for any of them.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  some(callback, subject, predicate, object, graph) {
-    // Convert terms to internal string representation
-    subject = subject && toId(subject);
-    predicate = predicate && toId(predicate);
-    object = object && toId(object);
-    graph = graph && toId(graph);
-
-    var graphs = this._getGraphs(graph), content,
-        ids = this._ids, subjectId, predicateId, objectId;
-
-    // Translate IRIs to internal index keys.
-    if (isString(subject)   && !(subjectId   = ids[subject])   ||
-        isString(predicate) && !(predicateId = ids[predicate]) ||
-        isString(object)    && !(objectId    = ids[object]))
-      return false;
-
-    for (var graphId in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graphId]) {
-        // Choose the optimal index, based on what fields are present
-        if (subjectId) {
-          if (objectId) {
-          // If subject and object are given, the object index will be the fastest
-            if (this._findInIndex(content.objects, objectId, subjectId, predicateId,
-                                  'object', 'subject', 'predicate', graphId, callback, null))
-              return true;
-          }
-          else
-            // If only subject and possibly predicate are given, the subject index will be the fastest
-            if (this._findInIndex(content.subjects, subjectId, predicateId, null,
-                                  'subject', 'predicate', 'object', graphId, callback, null))
-              return true;
-        }
-        else if (predicateId) {
-          // If only predicate and possibly object are given, the predicate index will be the fastest
-          if (this._findInIndex(content.predicates, predicateId, objectId, null,
-                                'predicate', 'object', 'subject', graphId, callback, null)) {
-            return true;
           }
         }
-        else if (objectId) {
-          // If only object is given, the object index will be the fastest
-          if (this._findInIndex(content.objects, objectId, null, null,
-                                'object', 'subject', 'predicate', graphId, callback, null)) {
-            return true;
-          }
-        }
-        else
-        // If nothing is given, iterate subjects and predicates first
-        if (this._findInIndex(content.subjects, null, null, null,
-                              'subject', 'predicate', 'object', graphId, callback, null)) {
-          return true;
-        }
       }
-    }
-    return false;
-  }
 
-  // ### `getSubjects` returns all subjects that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  getSubjects(predicate, object, graph) {
-    var results = [];
-    this.forSubjects(function (s) { results.push(s); }, predicate, object, graph);
-    return results;
-  }
+      return count;
+    } // ### `forEach` executes the callback on all quads.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-  // ### `forSubjects` executes the callback on all subjects that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  forSubjects(callback, predicate, object, graph) {
-    // Convert terms to internal string representation
-    predicate = predicate && toId(predicate);
-    object = object && toId(object);
-    graph = graph && toId(graph);
-
-    var ids = this._ids, graphs = this._getGraphs(graph), content, predicateId, objectId;
-    callback = this._uniqueEntities(callback);
-
-    // Translate IRIs to internal index keys.
-    if (isString(predicate) && !(predicateId = ids[predicate]) ||
-        isString(object)    && !(objectId    = ids[object]))
-      return;
-
-    for (graph in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graph]) {
-        // Choose optimal index based on which fields are wildcards
-        if (predicateId) {
-          if (objectId)
-            // If predicate and object are given, the POS index is best.
-            this._loopBy2Keys(content.predicates, predicateId, objectId, callback);
-          else
-            // If only predicate is given, the SPO index is best.
-            this._loopByKey1(content.subjects, predicateId, callback);
-        }
-        else if (objectId)
-          // If only object is given, the OSP index is best.
-          this._loopByKey0(content.objects, objectId, callback);
-        else
-          // If no params given, iterate all the subjects
-          this._loop(content.subjects, callback);
-      }
-    }
-  }
-
-  // ### `getPredicates` returns all predicates that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  getPredicates(subject, object, graph) {
-    var results = [];
-    this.forPredicates(function (p) { results.push(p); }, subject, object, graph);
-    return results;
-  }
-
-  // ### `forPredicates` executes the callback on all predicates that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  forPredicates(callback, subject, object, graph) {
-    // Convert terms to internal string representation
-    subject = subject && toId(subject);
-    object = object && toId(object);
-    graph = graph && toId(graph);
-
-    var ids = this._ids, graphs = this._getGraphs(graph), content, subjectId, objectId;
-    callback = this._uniqueEntities(callback);
-
-    // Translate IRIs to internal index keys.
-    if (isString(subject) && !(subjectId = ids[subject]) ||
-        isString(object)  && !(objectId  = ids[object]))
-      return;
-
-    for (graph in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graph]) {
-        // Choose optimal index based on which fields are wildcards
-        if (subjectId) {
-          if (objectId)
-            // If subject and object are given, the OSP index is best.
-            this._loopBy2Keys(content.objects, objectId, subjectId, callback);
-          else
-            // If only subject is given, the SPO index is best.
-            this._loopByKey0(content.subjects, subjectId, callback);
-        }
-        else if (objectId)
-          // If only object is given, the POS index is best.
-          this._loopByKey1(content.predicates, objectId, callback);
-        else
-          // If no params given, iterate all the predicates.
-          this._loop(content.predicates, callback);
-      }
-    }
-  }
-
-  // ### `getObjects` returns all objects that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  getObjects(subject, predicate, graph) {
-    var results = [];
-    this.forObjects(function (o) { results.push(o); }, subject, predicate, graph);
-    return results;
-  }
-
-  // ### `forObjects` executes the callback on all objects that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  forObjects(callback, subject, predicate, graph) {
-    // Convert terms to internal string representation
-    subject = subject && toId(subject);
-    predicate = predicate && toId(predicate);
-    graph = graph && toId(graph);
-
-    var ids = this._ids, graphs = this._getGraphs(graph), content, subjectId, predicateId;
-    callback = this._uniqueEntities(callback);
-
-    // Translate IRIs to internal index keys.
-    if (isString(subject)   && !(subjectId   = ids[subject]) ||
-        isString(predicate) && !(predicateId = ids[predicate]))
-      return;
-
-    for (graph in graphs) {
-      // Only if the specified graph contains triples, there can be results
-      if (content = graphs[graph]) {
-        // Choose optimal index based on which fields are wildcards
-        if (subjectId) {
-          if (predicateId)
-            // If subject and predicate are given, the SPO index is best.
-            this._loopBy2Keys(content.subjects, subjectId, predicateId, callback);
-          else
-            // If only subject is given, the OSP index is best.
-            this._loopByKey1(content.objects, subjectId, callback);
-        }
-        else if (predicateId)
-          // If only predicate is given, the POS index is best.
-          this._loopByKey0(content.predicates, predicateId, callback);
-        else
-          // If no params given, iterate all the objects.
-          this._loop(content.objects, callback);
-      }
-    }
-  }
-
-  // ### `getGraphs` returns all graphs that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  getGraphs(subject, predicate, object) {
-    var results = [];
-    this.forGraphs(function (g) { results.push(g); }, subject, predicate, object);
-    return results;
-  }
-
-  // ### `forGraphs` executes the callback on all graphs that match the pattern.
-  // Setting any field to `undefined` or `null` indicates a wildcard.
-  forGraphs(callback, subject, predicate, object) {
-    for (var graph in this._graphs) {
+  }, {
+    key: "forEach",
+    value: function forEach(callback, subject, predicate, object, graph) {
       this.some(function (quad) {
-        callback(quad.graph);
-        return true; // Halt iteration of some()
+        callback(quad);
+        return false;
       }, subject, predicate, object, graph);
-    }
-  }
+    } // ### `every` executes the callback on all quads,
+    // and returns `true` if it returns truthy for all them.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-  // ### `createBlankNode` creates a new blank node, returning its name
-  createBlankNode(suggestedName) {
-    var name, index;
-    // Generate a name based on the suggested name
-    if (suggestedName) {
-      name = suggestedName = '_:' + suggestedName, index = 1;
-      while (this._ids[name])
-        name = suggestedName + index++;
-    }
-    // Generate a generic blank node name
-    else {
-      do { name = '_:b' + this._blankNodeIndex++; }
-      while (this._ids[name]);
-    }
-    // Add the blank node to the entities, avoiding the generation of duplicates
-    this._ids[name] = ++this._id;
-    this._entities[this._id] = name;
-    return this._factory.blankNode(name.substr(2));
-  }
-}
+  }, {
+    key: "every",
+    value: function every(callback, subject, predicate, object, graph) {
+      var some = false;
+      var every = !this.some(function (quad) {
+        some = true;
+        return !callback(quad);
+      }, subject, predicate, object, graph);
+      return some && every;
+    } // ### `some` executes the callback on all quads,
+    // and returns `true` if it returns truthy for any of them.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
 
-// Determines whether the argument is a string
+  }, {
+    key: "some",
+    value: function some(callback, subject, predicate, object, graph) {
+      // Convert terms to internal string representation
+      subject = subject && toId(subject);
+      predicate = predicate && toId(predicate);
+      object = object && toId(object);
+      graph = graph && toId(graph);
+
+      var graphs = this._getGraphs(graph),
+          content,
+          ids = this._ids,
+          subjectId,
+          predicateId,
+          objectId; // Translate IRIs to internal index keys.
+
+
+      if (isString(subject) && !(subjectId = ids[subject]) || isString(predicate) && !(predicateId = ids[predicate]) || isString(object) && !(objectId = ids[object])) return false;
+
+      for (var graphId in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graphId]) {
+          // Choose the optimal index, based on what fields are present
+          if (subjectId) {
+            if (objectId) {
+              // If subject and object are given, the object index will be the fastest
+              if (this._findInIndex(content.objects, objectId, subjectId, predicateId, 'object', 'subject', 'predicate', graphId, callback, null)) return true;
+            } else // If only subject and possibly predicate are given, the subject index will be the fastest
+              if (this._findInIndex(content.subjects, subjectId, predicateId, null, 'subject', 'predicate', 'object', graphId, callback, null)) return true;
+          } else if (predicateId) {
+            // If only predicate and possibly object are given, the predicate index will be the fastest
+            if (this._findInIndex(content.predicates, predicateId, objectId, null, 'predicate', 'object', 'subject', graphId, callback, null)) {
+              return true;
+            }
+          } else if (objectId) {
+            // If only object is given, the object index will be the fastest
+            if (this._findInIndex(content.objects, objectId, null, null, 'object', 'subject', 'predicate', graphId, callback, null)) {
+              return true;
+            }
+          } else // If nothing is given, iterate subjects and predicates first
+            if (this._findInIndex(content.subjects, null, null, null, 'subject', 'predicate', 'object', graphId, callback, null)) {
+              return true;
+            }
+        }
+      }
+
+      return false;
+    } // ### `getSubjects` returns all subjects that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "getSubjects",
+    value: function getSubjects(predicate, object, graph) {
+      var results = [];
+      this.forSubjects(function (s) {
+        results.push(s);
+      }, predicate, object, graph);
+      return results;
+    } // ### `forSubjects` executes the callback on all subjects that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "forSubjects",
+    value: function forSubjects(callback, predicate, object, graph) {
+      // Convert terms to internal string representation
+      predicate = predicate && toId(predicate);
+      object = object && toId(object);
+      graph = graph && toId(graph);
+
+      var ids = this._ids,
+          graphs = this._getGraphs(graph),
+          content,
+          predicateId,
+          objectId;
+
+      callback = this._uniqueEntities(callback); // Translate IRIs to internal index keys.
+
+      if (isString(predicate) && !(predicateId = ids[predicate]) || isString(object) && !(objectId = ids[object])) return;
+
+      for (graph in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graph]) {
+          // Choose optimal index based on which fields are wildcards
+          if (predicateId) {
+            if (objectId) // If predicate and object are given, the POS index is best.
+              this._loopBy2Keys(content.predicates, predicateId, objectId, callback);else // If only predicate is given, the SPO index is best.
+              this._loopByKey1(content.subjects, predicateId, callback);
+          } else if (objectId) // If only object is given, the OSP index is best.
+            this._loopByKey0(content.objects, objectId, callback);else // If no params given, iterate all the subjects
+            this._loop(content.subjects, callback);
+        }
+      }
+    } // ### `getPredicates` returns all predicates that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "getPredicates",
+    value: function getPredicates(subject, object, graph) {
+      var results = [];
+      this.forPredicates(function (p) {
+        results.push(p);
+      }, subject, object, graph);
+      return results;
+    } // ### `forPredicates` executes the callback on all predicates that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "forPredicates",
+    value: function forPredicates(callback, subject, object, graph) {
+      // Convert terms to internal string representation
+      subject = subject && toId(subject);
+      object = object && toId(object);
+      graph = graph && toId(graph);
+
+      var ids = this._ids,
+          graphs = this._getGraphs(graph),
+          content,
+          subjectId,
+          objectId;
+
+      callback = this._uniqueEntities(callback); // Translate IRIs to internal index keys.
+
+      if (isString(subject) && !(subjectId = ids[subject]) || isString(object) && !(objectId = ids[object])) return;
+
+      for (graph in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graph]) {
+          // Choose optimal index based on which fields are wildcards
+          if (subjectId) {
+            if (objectId) // If subject and object are given, the OSP index is best.
+              this._loopBy2Keys(content.objects, objectId, subjectId, callback);else // If only subject is given, the SPO index is best.
+              this._loopByKey0(content.subjects, subjectId, callback);
+          } else if (objectId) // If only object is given, the POS index is best.
+            this._loopByKey1(content.predicates, objectId, callback);else // If no params given, iterate all the predicates.
+            this._loop(content.predicates, callback);
+        }
+      }
+    } // ### `getObjects` returns all objects that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "getObjects",
+    value: function getObjects(subject, predicate, graph) {
+      var results = [];
+      this.forObjects(function (o) {
+        results.push(o);
+      }, subject, predicate, graph);
+      return results;
+    } // ### `forObjects` executes the callback on all objects that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "forObjects",
+    value: function forObjects(callback, subject, predicate, graph) {
+      // Convert terms to internal string representation
+      subject = subject && toId(subject);
+      predicate = predicate && toId(predicate);
+      graph = graph && toId(graph);
+
+      var ids = this._ids,
+          graphs = this._getGraphs(graph),
+          content,
+          subjectId,
+          predicateId;
+
+      callback = this._uniqueEntities(callback); // Translate IRIs to internal index keys.
+
+      if (isString(subject) && !(subjectId = ids[subject]) || isString(predicate) && !(predicateId = ids[predicate])) return;
+
+      for (graph in graphs) {
+        // Only if the specified graph contains triples, there can be results
+        if (content = graphs[graph]) {
+          // Choose optimal index based on which fields are wildcards
+          if (subjectId) {
+            if (predicateId) // If subject and predicate are given, the SPO index is best.
+              this._loopBy2Keys(content.subjects, subjectId, predicateId, callback);else // If only subject is given, the OSP index is best.
+              this._loopByKey1(content.objects, subjectId, callback);
+          } else if (predicateId) // If only predicate is given, the POS index is best.
+            this._loopByKey0(content.predicates, predicateId, callback);else // If no params given, iterate all the objects.
+            this._loop(content.objects, callback);
+        }
+      }
+    } // ### `getGraphs` returns all graphs that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "getGraphs",
+    value: function getGraphs(subject, predicate, object) {
+      var results = [];
+      this.forGraphs(function (g) {
+        results.push(g);
+      }, subject, predicate, object);
+      return results;
+    } // ### `forGraphs` executes the callback on all graphs that match the pattern.
+    // Setting any field to `undefined` or `null` indicates a wildcard.
+
+  }, {
+    key: "forGraphs",
+    value: function forGraphs(callback, subject, predicate, object) {
+      for (var graph in this._graphs) {
+        this.some(function (quad) {
+          callback(quad.graph);
+          return true; // Halt iteration of some()
+        }, subject, predicate, object, graph);
+      }
+    } // ### `createBlankNode` creates a new blank node, returning its name
+
+  }, {
+    key: "createBlankNode",
+    value: function createBlankNode(suggestedName) {
+      var name, index; // Generate a name based on the suggested name
+
+      if (suggestedName) {
+        name = suggestedName = '_:' + suggestedName, index = 1;
+
+        while (this._ids[name]) {
+          name = suggestedName + index++;
+        }
+      } // Generate a generic blank node name
+      else {
+          do {
+            name = '_:b' + this._blankNodeIndex++;
+          } while (this._ids[name]);
+        } // Add the blank node to the entities, avoiding the generation of duplicates
+
+
+      this._ids[name] = ++this._id;
+      this._entities[this._id] = name;
+      return this._factory.blankNode(name.substr(2));
+    }
+  }, {
+    key: "size",
+    get: function get() {
+      // Return the quad count if if was cached
+      var size = this._size;
+      if (size !== null) return size; // Calculate the number of quads by counting to the deepest level
+
+      size = 0;
+      var graphs = this._graphs,
+          subjects,
+          subject;
+
+      for (var graphKey in graphs) {
+        for (var subjectKey in subjects = graphs[graphKey].subjects) {
+          for (var predicateKey in subject = subjects[subjectKey]) {
+            size += Object.keys(subject[predicateKey]).length;
+          }
+        }
+      }
+
+      return this._size = size;
+    }
+  }]);
+  return N3Store;
+}(); // Determines whether the argument is a string
+
+
 function isString(s) {
   return typeof s === 'string' || s instanceof String;
-}
+} // ## Exports
 
-// ## Exports
+
 module.exports = N3Store;
-
 
 /***/ }),
 /* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(36));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
 // **N3StreamParser** parses a text stream into a quad stream.
 var Transform = __webpack_require__(32).Transform,
-    N3Parser = __webpack_require__(134);
+    N3Parser = __webpack_require__(134); // ## Constructor
 
-// ## Constructor
-class N3StreamParser extends Transform {
-  constructor(options) {
-    super({ decodeStrings: true });
-    this._readableState.objectMode = true;
 
-    // Set up parser with dummy stream to obtain `data` and `end` callbacks
-    var self = this, parser = new N3Parser(options), onData, onEnd;
+var N3StreamParser =
+/*#__PURE__*/
+function (_Transform) {
+  (0, _inherits2["default"])(N3StreamParser, _Transform);
+
+  function N3StreamParser(options) {
+    var _this;
+
+    (0, _classCallCheck2["default"])(this, N3StreamParser);
+    _this = (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(N3StreamParser).call(this, {
+      decodeStrings: true
+    }));
+    _this._readableState.objectMode = true; // Set up parser with dummy stream to obtain `data` and `end` callbacks
+
+    var self = (0, _assertThisInitialized2["default"])(_this),
+        parser = new N3Parser(options),
+        onData,
+        onEnd;
     parser.parse({
-      on: function (event, callback) {
+      on: function on(event, callback) {
         switch (event) {
-        case 'data': onData = callback; break;
-        case 'end':   onEnd = callback; break;
+          case 'data':
+            onData = callback;
+            break;
+
+          case 'end':
+            onEnd = callback;
+            break;
         }
-      },
-    },
-      // Handle quads by pushing them down the pipeline
-      function (error, quad) { error && self.emit('error', error) || quad && self.push(quad); },
-      // Emit prefixes through the `prefix` event
-      function (prefix, uri) { self.emit('prefix', prefix, uri); }
-    );
+      }
+    }, // Handle quads by pushing them down the pipeline
+    function (error, quad) {
+      error && self.emit('error', error) || quad && self.push(quad);
+    }, // Emit prefixes through the `prefix` event
+    function (prefix, uri) {
+      self.emit('prefix', prefix, uri);
+    }); // Implement Transform methods through parser callbacks
 
-    // Implement Transform methods through parser callbacks
-    this._transform = function (chunk, encoding, done) { onData(chunk); done(); };
-    this._flush = function (done) { onEnd(); done(); };
-  }
+    _this._transform = function (chunk, encoding, done) {
+      onData(chunk);
+      done();
+    };
 
-  // ### Parses a stream of strings
-  import(stream) {
-    var self = this;
-    stream.on('data',  function (chunk) { self.write(chunk); });
-    stream.on('end',   function ()      { self.end(); });
-    stream.on('error', function (error) { self.emit('error', error); });
-    return this;
-  }
-}
+    _this._flush = function (done) {
+      onEnd();
+      done();
+    };
 
-// ## Exports
+    return _this;
+  } // ### Parses a stream of strings
+
+
+  (0, _createClass2["default"])(N3StreamParser, [{
+    key: "import",
+    value: function _import(stream) {
+      var self = this;
+      stream.on('data', function (chunk) {
+        self.write(chunk);
+      });
+      stream.on('end', function () {
+        self.end();
+      });
+      stream.on('error', function (error) {
+        self.emit('error', error);
+      });
+      return this;
+    }
+  }]);
+  return N3StreamParser;
+}(Transform); // ## Exports
+
+
 module.exports = N3StreamParser;
-
 
 /***/ }),
 /* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(36));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
+
 // **N3StreamWriter** serializes a quad stream into a text stream.
 var Transform = __webpack_require__(32).Transform,
-    N3Writer = __webpack_require__(135);
-
-// ## Constructor
-class N3StreamWriter extends Transform {
-  constructor(options) {
-    super({ encoding: 'utf8' });
-    this._writableState.objectMode = true;
-
-    // Set up writer with a dummy stream object
-    var self = this;
-    var writer = this._writer = new N3Writer({
-      write: function (quad, encoding, callback) { self.push(quad); callback && callback(); },
-      end: function (callback) { self.push(null); callback && callback(); },
-    }, options);
-
-    // Implement Transform methods on top of writer
-    this._transform = function (quad, encoding, done) { writer.addQuad(quad, done); };
-    this._flush = function (done) { writer.end(done); };
-  }
-
-// ### Serializes a stream of quads
-  import(stream) {
-    var self = this;
-    stream.on('data',   function (quad)  { self.write(quad); });
-    stream.on('end',    function ()      { self.end(); });
-    stream.on('error',  function (error) { self.emit('error', error); });
-    stream.on('prefix', function (prefix, iri) { self._writer.addPrefix(prefix, iri); });
-    return this;
-  }
-}
+    N3Writer = __webpack_require__(135); // ## Constructor
 
 
+var N3StreamWriter =
+/*#__PURE__*/
+function (_Transform) {
+  (0, _inherits2["default"])(N3StreamWriter, _Transform);
 
-// ## Exports
+  function N3StreamWriter(options) {
+    var _this;
+
+    (0, _classCallCheck2["default"])(this, N3StreamWriter);
+    _this = (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(N3StreamWriter).call(this, {
+      encoding: 'utf8'
+    }));
+    _this._writableState.objectMode = true; // Set up writer with a dummy stream object
+
+    var self = (0, _assertThisInitialized2["default"])(_this);
+    var writer = _this._writer = new N3Writer({
+      write: function write(quad, encoding, callback) {
+        self.push(quad);
+        callback && callback();
+      },
+      end: function end(callback) {
+        self.push(null);
+        callback && callback();
+      }
+    }, options); // Implement Transform methods on top of writer
+
+    _this._transform = function (quad, encoding, done) {
+      writer.addQuad(quad, done);
+    };
+
+    _this._flush = function (done) {
+      writer.end(done);
+    };
+
+    return _this;
+  } // ### Serializes a stream of quads
+
+
+  (0, _createClass2["default"])(N3StreamWriter, [{
+    key: "import",
+    value: function _import(stream) {
+      var self = this;
+      stream.on('data', function (quad) {
+        self.write(quad);
+      });
+      stream.on('end', function () {
+        self.end();
+      });
+      stream.on('error', function (error) {
+        self.emit('error', error);
+      });
+      stream.on('prefix', function (prefix, iri) {
+        self._writer.addPrefix(prefix, iri);
+      });
+      return this;
+    }
+  }]);
+  return N3StreamWriter;
+}(Transform); // ## Exports
+
+
 module.exports = N3StreamWriter;
-
 
 /***/ }),
 /* 278 */
@@ -42446,7 +43246,7 @@ module.exports = N3StreamWriter;
 
 // **N3Util** provides N3 utility functions.
 
-var DataFactory = __webpack_require__(44);
+var DataFactory = __webpack_require__(45);
 
 var N3Util = {
   // Tests whether the given term represents an IRI
@@ -42526,17 +43326,17 @@ module.exports = N3Util;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var ParserStream = __webpack_require__(280);
 
-var Sink = __webpack_require__(53);
+var Sink = __webpack_require__(54);
 
 var Parser =
 /*#__PURE__*/
@@ -42562,19 +43362,19 @@ module.exports = Parser;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var concat = __webpack_require__(281);
 
@@ -42880,7 +43680,7 @@ function u8Concat (parts) {
   return u8
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 282 */
@@ -42956,7 +43756,7 @@ function bufferFrom (value, encodingOrOffset, length) {
 
 module.exports = bufferFrom
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 283 */
@@ -43605,7 +44405,7 @@ var _interopRequireDefault = __webpack_require__(0);
 
 var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(285));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
@@ -43646,7 +44446,7 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-var canonize = __webpack_require__(74);
+var canonize = __webpack_require__(75);
 
 var util = __webpack_require__(13);
 
@@ -43673,7 +44473,7 @@ var _require4 = __webpack_require__(308),
 var _require5 = __webpack_require__(309),
     _frameMergedOrDefault = _require5.frameMergedOrDefault;
 
-var _require6 = __webpack_require__(16),
+var _require6 = __webpack_require__(17),
     _isArray = _require6.isArray,
     _isObject = _require6.isObject,
     _isString = _require6.isString;
@@ -43691,7 +44491,7 @@ var _require9 = __webpack_require__(310),
     _compactIri = _require9.compactIri,
     _removePreserve = _require9.removePreserve;
 
-var _require10 = __webpack_require__(55),
+var _require10 = __webpack_require__(56),
     _createNodeMap = _require10.createNodeMap,
     _createMergedNodeMap = _require10.createMergedNodeMap,
     _mergeNodeMaps = _require10.mergeNodeMaps; // determine if in-browser or using node.js
@@ -45240,7 +46040,7 @@ var wrapper = function wrapper(jsonld) {
   jsonld.registerRDFParser('rdfa-api', Rdfa.parse);
   /* URL API */
 
-  jsonld.url = __webpack_require__(47);
+  jsonld.url = __webpack_require__(48);
   /* Utility API */
 
   jsonld.util = util; // backwards compatibility
@@ -45249,7 +46049,7 @@ var wrapper = function wrapper(jsonld) {
 
   jsonld.promises = jsonld; // backwards compatibility
 
-  jsonld.RequestQueue = __webpack_require__(78);
+  jsonld.RequestQueue = __webpack_require__(79);
   /* WebIDL API */
 
   jsonld.JsonLdProcessor = __webpack_require__(316)(jsonld); // setup browser global JsonLdProcessor
@@ -45297,7 +46097,7 @@ var factory = function factory() {
 wrapper(factory); // export API
 
 module.exports = factory;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11), __webpack_require__(12)))
 
 /***/ }),
 /* 285 */
@@ -45356,7 +46156,7 @@ module.exports = _objectWithoutPropertiesLoose;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -46077,11 +46877,11 @@ try {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var util = __webpack_require__(28);
 
@@ -46260,8 +47060,8 @@ function () {
  *
  * Copyright (c) 2010-2015 Digital Bazaar, Inc.
  */
-var forge = __webpack_require__(45);
-__webpack_require__(76);
+var forge = __webpack_require__(46);
+__webpack_require__(77);
 __webpack_require__(138);
 
 var sha1 = module.exports = forge.sha1 = forge.sha1 || {};
@@ -46765,7 +47565,7 @@ function _encodeWithByteBuffer(input, alphabet) {
   return output;
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9).Buffer))
 
 /***/ }),
 /* 291 */
@@ -46780,8 +47580,8 @@ function _encodeWithByteBuffer(input, alphabet) {
  *
  * Copyright (c) 2010-2015 Digital Bazaar, Inc.
  */
-var forge = __webpack_require__(45);
-__webpack_require__(76);
+var forge = __webpack_require__(46);
+__webpack_require__(77);
 __webpack_require__(138);
 
 var sha256 = module.exports = forge.sha256 = forge.sha256 || {};
@@ -47112,17 +47912,17 @@ function _update(s, w, bytes) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var URDNA2015 = __webpack_require__(136);
 
@@ -47246,15 +48046,15 @@ function (_URDNA) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(10));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(7));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(9));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(6));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(11));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8));
 
 var URDNA2015Sync = __webpack_require__(140);
 
@@ -47395,9 +48195,9 @@ module.exports = _iterableToArrayLimit;
 /* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(9);
+var getPrototypeOf = __webpack_require__(6);
 
-var setPrototypeOf = __webpack_require__(58);
+var setPrototypeOf = __webpack_require__(59);
 
 var isNativeFunction = __webpack_require__(297);
 
@@ -47453,7 +48253,7 @@ module.exports = _isNativeFunction;
 /* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(58);
+var setPrototypeOf = __webpack_require__(59);
 
 function isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -47497,7 +48297,7 @@ module.exports = _construct;
  */
  // TODO: move `NQuads` to its own package
 
-module.exports = __webpack_require__(74).NQuads;
+module.exports = __webpack_require__(75).NQuads;
 
 /***/ }),
 /* 300 */
@@ -47513,11 +48313,11 @@ module.exports = __webpack_require__(74).NQuads;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _require = __webpack_require__(46),
+var _require = __webpack_require__(47),
     RDF_LANGSTRING = _require.RDF_LANGSTRING,
     RDF_PLAIN_LITERAL = _require.RDF_PLAIN_LITERAL,
     RDF_OBJECT = _require.RDF_OBJECT,
@@ -47676,7 +48476,7 @@ function () {
 
 function getXMLSerializerClass() {
   if (typeof XMLSerializer === 'undefined') {
-    return __webpack_require__(73).XMLSerializer;
+    return __webpack_require__(74).XMLSerializer;
   }
 
   return XMLSerializer;
@@ -47694,15 +48494,15 @@ function getXMLSerializerClass() {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
 var JsonLdError = __webpack_require__(24);
 
-var _require = __webpack_require__(16),
+var _require = __webpack_require__(17),
     _isArray = _require.isArray,
     _isObject = _require.isObject,
     _isEmptyObject = _require.isEmptyObject,
@@ -47720,7 +48520,7 @@ var _require3 = __webpack_require__(29),
     _isKeyword = _require3.isKeyword,
     _processContext = _require3.process;
 
-var _require4 = __webpack_require__(47),
+var _require4 = __webpack_require__(48),
     _isAbsoluteIri = _require4.isAbsolute;
 
 var _require5 = __webpack_require__(13),
@@ -49043,9 +49843,9 @@ module.exports = _nonIterableSpread;
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
 var _require = __webpack_require__(13),
     clone = _require.clone;
@@ -49117,14 +49917,14 @@ function () {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
 var _require = __webpack_require__(23),
     _isSubjectReference = _require.isSubjectReference;
 
-var _require2 = __webpack_require__(55),
+var _require2 = __webpack_require__(56),
     _createMergedNodeMap = _require2.createMergedNodeMap;
 
 var api = {};
@@ -49173,18 +49973,18 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
 var graphTypes = __webpack_require__(23);
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var util = __webpack_require__(13); // constants
 
 
-var _require = __webpack_require__(46),
+var _require = __webpack_require__(47),
     RDF_LIST = _require.RDF_LIST,
     RDF_FIRST = _require.RDF_FIRST,
     RDF_REST = _require.RDF_REST,
@@ -49723,11 +50523,11 @@ function _RDFToObject(o, useNativeTypes) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
-var _require = __webpack_require__(55),
+var _require = __webpack_require__(56),
     createNodeMap = _require.createNodeMap;
 
 var _require2 = __webpack_require__(29),
@@ -49735,11 +50535,11 @@ var _require2 = __webpack_require__(29),
 
 var graphTypes = __webpack_require__(23);
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var util = __webpack_require__(13);
 
-var _require3 = __webpack_require__(46),
+var _require3 = __webpack_require__(47),
     RDF_FIRST = _require3.RDF_FIRST,
     RDF_REST = _require3.RDF_REST,
     RDF_NIL = _require3.RDF_NIL,
@@ -49750,7 +50550,7 @@ var _require3 = __webpack_require__(46),
     XSD_INTEGER = _require3.XSD_INTEGER,
     XSD_STRING = _require3.XSD_STRING;
 
-var _require4 = __webpack_require__(47),
+var _require4 = __webpack_require__(48),
     _isAbsoluteIri = _require4.isAbsolute;
 
 var api = {};
@@ -50093,11 +50893,11 @@ function _objectToRDF(item) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(16));
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(72));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(73));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -50106,13 +50906,13 @@ var _require = __webpack_require__(29),
 
 var graphTypes = __webpack_require__(23);
 
-var types = __webpack_require__(16);
+var types = __webpack_require__(17);
 
 var util = __webpack_require__(13);
 
 var JsonLdError = __webpack_require__(24);
 
-var _require2 = __webpack_require__(55),
+var _require2 = __webpack_require__(56),
     _createNodeMap = _require2.createNodeMap,
     _mergeNodeMapGraphs = _require2.mergeNodeMapGraphs;
 
@@ -51060,15 +51860,15 @@ var _interopRequireDefault = __webpack_require__(0);
 
 var _toArray2 = _interopRequireDefault(__webpack_require__(311));
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(72));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(73));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
 var JsonLdError = __webpack_require__(24);
 
-var _require = __webpack_require__(16),
+var _require = __webpack_require__(17),
     _isArray = _require.isArray,
     _isObject = _require.isObject,
     _isString = _require.isString,
@@ -51087,7 +51887,7 @@ var _require3 = __webpack_require__(29),
     _isKeyword = _require3.isKeyword,
     _processContext = _require3.process;
 
-var _require4 = __webpack_require__(47),
+var _require4 = __webpack_require__(48),
     _removeBase = _require4.removeBase;
 
 var _require5 = __webpack_require__(13),
@@ -52416,7 +53216,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -52424,12 +53224,12 @@ var _require = __webpack_require__(13),
     parseLinkHeader = _require.parseLinkHeader,
     buildHeaders = _require.buildHeaders;
 
-var _require2 = __webpack_require__(46),
+var _require2 = __webpack_require__(47),
     LINK_HEADER_REL = _require2.LINK_HEADER_REL;
 
 var JsonLdError = __webpack_require__(24);
 
-var RequestQueue = __webpack_require__(78);
+var RequestQueue = __webpack_require__(79);
 /**
  * Creates a built-in node document loader.
  *
@@ -52702,7 +53502,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(22));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -52710,12 +53510,12 @@ var _require = __webpack_require__(13),
     parseLinkHeader = _require.parseLinkHeader,
     buildHeaders = _require.buildHeaders;
 
-var _require2 = __webpack_require__(46),
+var _require2 = __webpack_require__(47),
     LINK_HEADER_REL = _require2.LINK_HEADER_REL;
 
 var JsonLdError = __webpack_require__(24);
 
-var RequestQueue = __webpack_require__(78);
+var RequestQueue = __webpack_require__(79);
 
 var REGEX_LINK_HEADER = /(^|(\r\n))link:/i;
 /**
@@ -52901,11 +53701,11 @@ function _get(xhr, url, headers) {
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(2));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(6));
+var _createClass2 = _interopRequireDefault(__webpack_require__(5));
 
-var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(3));
+var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(4));
 
 var _this = void 0;
 
@@ -52972,12 +53772,605 @@ module.exports = function (jsonld) {
 
 /***/ }),
 /* 317 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _uri = __webpack_require__(318);
+
+/**
+ * @fileoverview
+ *  RDF/XML PARSER
+ *
+ * Version 0.1
+ *  Parser believed to be in full positive RDF/XML parsing compliance
+ *  with the possible exception of handling deprecated RDF attributes
+ *  appropriately. Parser is believed to comply fully with other W3C
+ *  and industry standards where appropriate (DOM, ECMAScript, &c.)
+ *
+ *  Author: David Sheets <dsheets@mit.edu>
+ *
+ * W3C® SOFTWARE NOTICE AND LICENSE
+ * http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * This work (and included software, documentation such as READMEs, or
+ * other related items) is being provided by the copyright holders under
+ * the following license. By obtaining, using and/or copying this work,
+ * you (the licensee) agree that you have read, understood, and will
+ * comply with the following terms and conditions.
+ *
+ * Permission to copy, modify, and distribute this software and its
+ * documentation, with or without modification, for any purpose and
+ * without fee or royalty is hereby granted, provided that you include
+ * the following on ALL copies of the software and documentation or
+ * portions thereof, including modifications:
+ *
+ * 1. The full text of this NOTICE in a location viewable to users of
+ * the redistributed or derivative work.
+ * 2. Any pre-existing intellectual property disclaimers, notices, or terms and
+ * conditions. If none exist, the W3C Software Short Notice should be
+ * included (hypertext is preferred, text is permitted) within the body
+ * of any redistributed or derivative code.
+ * 3. Notice of any changes or modifications to the files, including the
+ * date changes were made. (We recommend you provide URIs to the location
+ * from which the code is derived.)
+ *
+ * THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS," AND COPYRIGHT
+ * HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY OR FITNESS
+ * FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE SOFTWARE OR
+ * DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS,
+ * TRADEMARKS OR OTHER RIGHTS.
+ *
+ * COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL
+ * OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE SOFTWARE OR
+ * DOCUMENTATION.
+ *
+ * The name and trademarks of copyright holders may NOT be used in
+ * advertising or publicity pertaining to the software without specific,
+ * written prior permission. Title to copyright in this software and any
+ * associated documentation will at all times remain with copyright
+ * holders.
+ */
+
+/**
+ * @class Class defining an RDFParser resource object tied to an RDFStore
+ *
+ * @author David Sheets <dsheets@mit.edu>
+ * @version 0.1
+ *
+ * @constructor
+ * @param {RDFStore} store An RDFStore object
+ */
+var RDFParser = function RDFParser(store) {
+  var RDFParser = {};
+  /** Standard namespaces that we know how to handle @final
+   *  @member RDFParser
+   */
+
+  RDFParser.ns = {
+    'RDF': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    'RDFS': 'http://www.w3.org/2000/01/rdf-schema#'
+    /** DOM Level 2 node type magic numbers @final
+     *  @member RDFParser
+     */
+
+  };
+  RDFParser.nodeType = {
+    'ELEMENT': 1,
+    'ATTRIBUTE': 2,
+    'TEXT': 3,
+    'CDATA_SECTION': 4,
+    'ENTITY_REFERENCE': 5,
+    'ENTITY': 6,
+    'PROCESSING_INSTRUCTION': 7,
+    'COMMENT': 8,
+    'DOCUMENT': 9,
+    'DOCUMENT_TYPE': 10,
+    'DOCUMENT_FRAGMENT': 11,
+    'NOTATION': 12
+    /**
+     * Frame class for namespace and base URI lookups
+     * Base lookups will always resolve because the parser knows
+     * the default base.
+     *
+     * @private
+     */
+
+  };
+
+  this.frameFactory = function (parser, parent, element) {
+    return {
+      'NODE': 1,
+      'ARC': 2,
+      'parent': parent,
+      'parser': parser,
+      'store': parser.store,
+      'element': element,
+      'lastChild': 0,
+      'base': null,
+      'lang': null,
+      'node': null,
+      'nodeType': null,
+      'listIndex': 1,
+      'rdfid': null,
+      'datatype': null,
+      'collection': false,
+
+      /** Terminate the frame and notify the store that we're done */
+      'terminateFrame': function terminateFrame() {
+        if (this.collection) {
+          this.node.close();
+        }
+      },
+
+      /** Add a symbol of a certain type to the this frame */
+      'addSymbol': function addSymbol(type, uri) {
+        uri = (0, _uri.join)(uri, this.base);
+        this.node = this.store.sym(uri);
+        this.nodeType = type;
+      },
+
+      /** Load any constructed triples into the store */
+      'loadTriple': function loadTriple() {
+        if (this.parent.parent.collection) {
+          this.parent.parent.node.append(this.node);
+        } else {
+          this.store.add(this.parent.parent.node, this.parent.node, this.node, this.parser.why);
+        }
+
+        if (this.parent.rdfid != null) {
+          // reify
+          var triple = this.store.sym((0, _uri.join)('#' + this.parent.rdfid, this.base));
+          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'type'), this.store.sym(RDFParser.ns.RDF + 'Statement'), this.parser.why);
+          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'subject'), this.parent.parent.node, this.parser.why);
+          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'predicate'), this.parent.node, this.parser.why);
+          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'object'), this.node, this.parser.why);
+        }
+      },
+
+      /** Check if it's OK to load a triple */
+      'isTripleToLoad': function isTripleToLoad() {
+        return this.parent != null && this.parent.parent != null && this.nodeType === this.NODE && this.parent.nodeType === this.ARC && this.parent.parent.nodeType === this.NODE;
+      },
+
+      /** Add a symbolic node to this frame */
+      'addNode': function addNode(uri) {
+        this.addSymbol(this.NODE, uri);
+
+        if (this.isTripleToLoad()) {
+          this.loadTriple();
+        }
+      },
+
+      /** Add a collection node to this frame */
+      'addCollection': function addCollection() {
+        this.nodeType = this.NODE;
+        this.node = this.store.collection();
+        this.collection = true;
+
+        if (this.isTripleToLoad()) {
+          this.loadTriple();
+        }
+      },
+
+      /** Add a collection arc to this frame */
+      'addCollectionArc': function addCollectionArc() {
+        this.nodeType = this.ARC;
+      },
+
+      /** Add a bnode to this frame */
+      'addBNode': function addBNode(id) {
+        if (id != null) {
+          if (this.parser.bnodes[id] != null) {
+            this.node = this.parser.bnodes[id];
+          } else {
+            this.node = this.parser.bnodes[id] = this.store.bnode();
+          }
+        } else {
+          this.node = this.store.bnode();
+        }
+
+        this.nodeType = this.NODE;
+
+        if (this.isTripleToLoad()) {
+          this.loadTriple();
+        }
+      },
+
+      /** Add an arc or property to this frame */
+      'addArc': function addArc(uri) {
+        if (uri === RDFParser.ns.RDF + 'li') {
+          uri = RDFParser.ns.RDF + '_' + this.parent.listIndex;
+          this.parent.listIndex++;
+        }
+
+        this.addSymbol(this.ARC, uri);
+      },
+
+      /** Add a literal to this frame */
+      'addLiteral': function addLiteral(value) {
+        if (this.parent.datatype) {
+          this.node = this.store.literal(value, '', this.store.sym(this.parent.datatype));
+        } else {
+          this.node = this.store.literal(value, this.lang);
+        }
+
+        this.nodeType = this.NODE;
+
+        if (this.isTripleToLoad()) {
+          this.loadTriple();
+        }
+      }
+    };
+  }; // from the OpenLayers source .. needed to get around IE problems.
+
+
+  this.getAttributeNodeNS = function (node, uri, name) {
+    var attributeNode = null;
+
+    if (node.getAttributeNodeNS) {
+      attributeNode = node.getAttributeNodeNS(uri, name);
+    } else {
+      var attributes = node.attributes;
+      var potentialNode, fullName;
+
+      for (var i = 0; i < attributes.length; ++i) {
+        potentialNode = attributes[i];
+
+        if (potentialNode.namespaceURI === uri) {
+          fullName = potentialNode.prefix ? potentialNode.prefix + ':' + name : name;
+
+          if (fullName === potentialNode.nodeName) {
+            attributeNode = potentialNode;
+            break;
+          }
+        }
+      }
+    }
+
+    return attributeNode;
+  };
+  /** Our triple store reference @private */
+
+
+  this.store = store;
+  /** Our identified blank nodes @private */
+
+  this.bnodes = {};
+  /** A context for context-aware stores @private */
+
+  this.why = null;
+  /** Reification flag */
+
+  this.reify = false;
+  /**
+   * Build our initial scope frame and parse the DOM into triples
+   * @param {DOMTree} document The DOM to parse
+   * @param {String} base The base URL to use
+   * @param {Object} why The context to which this resource belongs
+   */
+
+  this.parse = function (document, base, why) {
+    var children = document.childNodes; // clean up for the next run
+
+    this.cleanParser(); // figure out the root element
+
+    var root;
+
+    if (document.nodeType === RDFParser.nodeType.DOCUMENT) {
+      for (var c = 0; c < children.length; c++) {
+        if (children[c].nodeType === RDFParser.nodeType.ELEMENT) {
+          root = children[c];
+          break;
+        }
+      }
+    } else if (document.nodeType === RDFParser.nodeType.ELEMENT) {
+      root = document;
+    } else {
+      throw new Error("RDFParser: can't find root in " + base + '. Halting. '); // return false
+    }
+
+    this.why = why; // our topmost frame
+
+    var f = this.frameFactory(this);
+    this.base = base;
+    f.base = base;
+    f.lang = null; // was '' but can't have langs like that 2015 (!)
+
+    this.parseDOM(this.buildFrame(f, root));
+    return true;
+  };
+
+  this.parseDOM = function (frame) {
+    // a DOM utility function used in parsing
+    var rdfid;
+
+    var elementURI = function (el) {
+      var result = '';
+
+      if (el.namespaceURI == null) {
+        throw new Error('RDF/XML syntax error: No namespace for ' + el.localName + ' in ' + this.base);
+      }
+
+      if (el.namespaceURI) {
+        result = result + el.namespaceURI;
+      }
+
+      if (el.localName) {
+        result = result + el.localName;
+      } else if (el.nodeName) {
+        if (el.nodeName.indexOf(':') >= 0) result = result + el.nodeName.split(':')[1];else result = result + el.nodeName;
+      }
+
+      return result;
+    }.bind(this);
+
+    var dig = true; // if we'll dig down in the tree on the next iter
+
+    while (frame.parent) {
+      var dom = frame.element;
+      var attrs = dom.attributes;
+
+      if (dom.nodeType === RDFParser.nodeType.TEXT || dom.nodeType === RDFParser.nodeType.CDATA_SECTION) {
+        // we have a literal
+        if (frame.parent.nodeType === frame.NODE) {
+          // must have had attributes, store as rdf:value
+          frame.addArc(RDFParser.ns.RDF + 'value');
+          frame = this.buildFrame(frame);
+        }
+
+        frame.addLiteral(dom.nodeValue);
+      } else if (elementURI(dom) !== RDFParser.ns.RDF + 'RDF') {
+        // not root
+        if (frame.parent && frame.parent.collection) {
+          // we're a collection element
+          frame.addCollectionArc();
+          frame = this.buildFrame(frame, frame.element);
+          frame.parent.element = null;
+        }
+
+        if (!frame.parent || !frame.parent.nodeType || frame.parent.nodeType === frame.ARC) {
+          // we need a node
+          var about = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'about');
+          rdfid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'ID');
+
+          if (about && rdfid) {
+            throw new Error('RDFParser: ' + dom.nodeName + ' has both rdf:id and rdf:about.' + ' Halting. Only one of these' + ' properties may be specified on a' + ' node.');
+          }
+
+          if (!about && rdfid) {
+            frame.addNode('#' + rdfid.nodeValue);
+            dom.removeAttributeNode(rdfid);
+          } else if (about == null && rdfid == null) {
+            var bnid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'nodeID');
+
+            if (bnid) {
+              frame.addBNode(bnid.nodeValue);
+              dom.removeAttributeNode(bnid);
+            } else {
+              frame.addBNode();
+            }
+          } else {
+            frame.addNode(about.nodeValue);
+            dom.removeAttributeNode(about);
+          } // Typed nodes
+
+
+          var rdftype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'type');
+
+          if (RDFParser.ns.RDF + 'Description' !== elementURI(dom)) {
+            rdftype = {
+              'nodeValue': elementURI(dom)
+            };
+          }
+
+          if (rdftype != null) {
+            this.store.add(frame.node, this.store.sym(RDFParser.ns.RDF + 'type'), this.store.sym((0, _uri.join)(rdftype.nodeValue, frame.base)), this.why);
+
+            if (rdftype.nodeName) {
+              dom.removeAttributeNode(rdftype);
+            }
+          } // Property Attributes
+
+
+          for (var x = attrs.length - 1; x >= 0; x--) {
+            this.store.add(frame.node, this.store.sym(elementURI(attrs[x])), this.store.literal(attrs[x].nodeValue, frame.lang), this.why);
+          }
+        } else {
+          // we should add an arc (or implicit bnode+arc)
+          frame.addArc(elementURI(dom)); // save the arc's rdf:ID if it has one
+
+          if (this.reify) {
+            rdfid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'ID');
+
+            if (rdfid) {
+              frame.rdfid = rdfid.nodeValue;
+              dom.removeAttributeNode(rdfid);
+            }
+          }
+
+          var parsetype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'parseType');
+          var datatype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'datatype');
+
+          if (datatype) {
+            frame.datatype = datatype.nodeValue;
+            dom.removeAttributeNode(datatype);
+          }
+
+          if (parsetype) {
+            var nv = parsetype.nodeValue;
+
+            if (nv === 'Literal') {
+              frame.datatype = RDFParser.ns.RDF + 'XMLLiteral'; // (this.buildFrame(frame)).addLiteral(dom)
+              // should work but doesn't
+
+              frame = this.buildFrame(frame);
+              frame.addLiteral(dom);
+              dig = false;
+            } else if (nv === 'Resource') {
+              frame = this.buildFrame(frame, frame.element);
+              frame.parent.element = null;
+              frame.addBNode();
+            } else if (nv === 'Collection') {
+              frame = this.buildFrame(frame, frame.element);
+              frame.parent.element = null;
+              frame.addCollection();
+            }
+
+            dom.removeAttributeNode(parsetype);
+          }
+
+          if (attrs.length !== 0) {
+            var resource = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'resource');
+            var bnid2 = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'nodeID');
+            frame = this.buildFrame(frame);
+
+            if (resource) {
+              frame.addNode(resource.nodeValue);
+              dom.removeAttributeNode(resource);
+            } else {
+              if (bnid2) {
+                frame.addBNode(bnid2.nodeValue);
+                dom.removeAttributeNode(bnid2);
+              } else {
+                frame.addBNode();
+              }
+            }
+
+            for (var x1 = attrs.length - 1; x1 >= 0; x1--) {
+              var f = this.buildFrame(frame);
+              f.addArc(elementURI(attrs[x1]));
+
+              if (elementURI(attrs[x1]) === RDFParser.ns.RDF + 'type') {
+                this.buildFrame(f).addNode(attrs[x1].nodeValue);
+              } else {
+                this.buildFrame(f).addLiteral(attrs[x1].nodeValue);
+              }
+            }
+          } else if (dom.childNodes.length === 0) {
+            this.buildFrame(frame).addLiteral('');
+          }
+        }
+      } // rdf:RDF
+      // dig dug
+
+
+      dom = frame.element;
+
+      while (frame.parent) {
+        var pframe = frame;
+
+        while (dom == null) {
+          frame = frame.parent;
+          dom = frame.element;
+        }
+
+        var candidate = dom.childNodes && dom.childNodes[frame.lastChild];
+
+        if (!candidate || !dig) {
+          frame.terminateFrame();
+
+          if (!(frame = frame.parent)) {
+            break;
+          } // done
+
+
+          dom = frame.element;
+          dig = true;
+        } else if (candidate.nodeType !== RDFParser.nodeType.ELEMENT && candidate.nodeType !== RDFParser.nodeType.TEXT && candidate.nodeType !== RDFParser.nodeType.CDATA_SECTION || (candidate.nodeType === RDFParser.nodeType.TEXT || candidate.nodeType === RDFParser.nodeType.CDATA_SECTION) && dom.childNodes.length !== 1) {
+          frame.lastChild++;
+        } else {
+          // not a leaf
+          frame.lastChild++;
+          frame = this.buildFrame(pframe, dom.childNodes[frame.lastChild - 1]);
+          break;
+        }
+      }
+    } // while
+
+  };
+  /**
+   * Cleans out state from a previous parse run
+   * @private
+   */
+
+
+  this.cleanParser = function () {
+    this.bnodes = {};
+    this.why = null;
+  };
+  /**
+   * Builds scope frame
+   * @private
+   */
+
+
+  this.buildFrame = function (parent, element) {
+    var frame = this.frameFactory(this, parent, element);
+
+    if (parent) {
+      frame.base = parent.base;
+      frame.lang = parent.lang;
+    }
+
+    if (!element || element.nodeType === RDFParser.nodeType.TEXT || element.nodeType === RDFParser.nodeType.CDATA_SECTION) {
+      return frame;
+    }
+
+    var attrs = element.attributes;
+    var base = element.getAttributeNode('xml:base');
+
+    if (base != null) {
+      frame.base = base.nodeValue;
+      element.removeAttribute('xml:base');
+    }
+
+    var lang = element.getAttributeNode('xml:lang');
+
+    if (lang != null) {
+      frame.lang = lang.nodeValue;
+      element.removeAttribute('xml:lang');
+    } // remove all extraneous xml and xmlns attributes
+
+
+    for (var x = attrs.length - 1; x >= 0; x--) {
+      if (attrs[x].nodeName.substr(0, 3) === 'xml') {
+        if (attrs[x].name.slice(0, 6) === 'xmlns:') {
+          var uri = attrs[x].nodeValue; // alert('base for namespac attr:'+this.base)
+
+          if (this.base) uri = (0, _uri.join)(uri, this.base);
+          this.store.setPrefixForURI(attrs[x].name.slice(6), uri);
+        } //		alert('rdfparser: xml atribute: '+attrs[x].name) //@@
+
+
+        element.removeAttributeNode(attrs[x]);
+      }
+    }
+
+    return frame;
+  };
+};
+
+var _default = RDFParser;
+exports["default"] = _default;
+
+/***/ }),
+/* 318 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./js/uri.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "docpart", function() { return _docpart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hostpart", function() { return _hostpart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "join", function() { return _join; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "protocol", function() { return _protocol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "refTo", function() { return _refTo; });
 /*
  * Implements URI-specific functions
  *
@@ -52988,7 +54381,7 @@ __webpack_require__.r(__webpack_exports__);
  *   http://www.w3.org/2000/10/swap/uripath.py
  *
  */
-var uri_alert = uri_alert || console.log
+var alert = alert || console.log
 
 const _docpart = docpart;
 
@@ -53049,7 +54442,7 @@ function join (given, base) {
     return given
   }
   if (baseColon < 0) {
-    uri_alert('Invalid base: ' + base + ' in join with given: ' + given)
+    alert('Invalid base: ' + base + ' in join with given: ' + given)
     return given
   }
   baseScheme = base.slice(0, +baseColon + 1 || 9e9)
@@ -53167,465 +54560,6 @@ function refTo (base, uri) {
   }
   return s + uri.slice(i)
 }
-
-// CONCATENATED MODULE: ./js/rdfxmlparser.js
-/**
- * @fileoverview
- *  RDF/XML PARSER
- *
- * Version 0.1
- *  Parser believed to be in full positive RDF/XML parsing compliance
- *  with the possible exception of handling deprecated RDF attributes
- *  appropriately. Parser is believed to comply fully with other W3C
- *  and industry standards where appropriate (DOM, ECMAScript, &c.)
- *
- *  Author: David Sheets <dsheets@mit.edu>
- *
- * W3C® SOFTWARE NOTICE AND LICENSE
- * http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
- * This work (and included software, documentation such as READMEs, or
- * other related items) is being provided by the copyright holders under
- * the following license. By obtaining, using and/or copying this work,
- * you (the licensee) agree that you have read, understood, and will
- * comply with the following terms and conditions.
- *
- * Permission to copy, modify, and distribute this software and its
- * documentation, with or without modification, for any purpose and
- * without fee or royalty is hereby granted, provided that you include
- * the following on ALL copies of the software and documentation or
- * portions thereof, including modifications:
- *
- * 1. The full text of this NOTICE in a location viewable to users of
- * the redistributed or derivative work.
- * 2. Any pre-existing intellectual property disclaimers, notices, or terms and
- * conditions. If none exist, the W3C Software Short Notice should be
- * included (hypertext is preferred, text is permitted) within the body
- * of any redistributed or derivative code.
- * 3. Notice of any changes or modifications to the files, including the
- * date changes were made. (We recommend you provide URIs to the location
- * from which the code is derived.)
- *
- * THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS," AND COPYRIGHT
- * HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY OR FITNESS
- * FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE SOFTWARE OR
- * DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS,
- * TRADEMARKS OR OTHER RIGHTS.
- *
- * COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL
- * OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE SOFTWARE OR
- * DOCUMENTATION.
- *
- * The name and trademarks of copyright holders may NOT be used in
- * advertising or publicity pertaining to the software without specific,
- * written prior permission. Title to copyright in this software and any
- * associated documentation will at all times remain with copyright
- * holders.
- */
-/**
- * @class Class defining an RDFParser resource object tied to an RDFStore
- *
- * @author David Sheets <dsheets@mit.edu>
- * @version 0.1
- *
- * @constructor
- * @param {RDFStore} store An RDFStore object
- */
-
-
-var rdfxmlparser_RDFParser = function (store) {
-  var RDFParser = {}
-
-  /** Standard namespaces that we know how to handle @final
-   *  @member RDFParser
-   */
-  RDFParser.ns = {'RDF': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDFS': 'http://www.w3.org/2000/01/rdf-schema#'}
-
-  /** DOM Level 2 node type magic numbers @final
-   *  @member RDFParser
-   */
-  RDFParser.nodeType = {'ELEMENT': 1, 'ATTRIBUTE': 2, 'TEXT': 3,
-    'CDATA_SECTION': 4, 'ENTITY_REFERENCE': 5,
-    'ENTITY': 6, 'PROCESSING_INSTRUCTION': 7,
-    'COMMENT': 8, 'DOCUMENT': 9, 'DOCUMENT_TYPE': 10,
-  'DOCUMENT_FRAGMENT': 11, 'NOTATION': 12}
-
-  /**
-   * Frame class for namespace and base URI lookups
-   * Base lookups will always resolve because the parser knows
-   * the default base.
-   *
-   * @private
-   */
-
-  this.frameFactory = function (parser, parent, element) {
-    return {'NODE': 1, 'ARC': 2, 'parent': parent, 'parser': parser, 'store': parser.store, 'element': element,
-      'lastChild': 0, 'base': null, 'lang': null, 'node': null, 'nodeType': null, 'listIndex': 1, 'rdfid': null, 'datatype': null, 'collection': false, /** Terminate the frame and notify the store that we're done */
-      'terminateFrame': function () {
-        if (this.collection) {
-          this.node.close()
-        }
-      },         /** Add a symbol of a certain type to the this frame */'addSymbol': function (type, uri) {
-        uri = _join(uri, this.base)
-        this.node = this.store.sym(uri)
-
-        this.nodeType = type
-      },         /** Load any constructed triples into the store */'loadTriple': function () {
-        if (this.parent.parent.collection) {
-          this.parent.parent.node.append(this.node)
-        } else {
-          this.store.add(this.parent.parent.node, this.parent.node, this.node, this.parser.why)
-        }
-        if (this.parent.rdfid != null) {
-          // reify
-          var triple = this.store.sym(_join('#' + this.parent.rdfid, this.base))
-          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'type'), this.store.sym(RDFParser.ns.RDF + 'Statement'), this.parser.why)
-          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'subject'), this.parent.parent.node, this.parser.why)
-          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'predicate'), this.parent.node, this.parser.why)
-
-          this.store.add(triple, this.store.sym(RDFParser.ns.RDF + 'object'), this.node, this.parser.why)
-        }
-      },         /** Check if it's OK to load a triple */'isTripleToLoad': function () {
-        return (this.parent != null && this.parent.parent != null && this.nodeType === this.NODE && this.parent.nodeType ===
-        this.ARC && this.parent.parent.nodeType === this.NODE)
-      },         /** Add a symbolic node to this frame */'addNode': function (uri) {
-        this.addSymbol(this.NODE, uri)
-        if (this.isTripleToLoad()) {
-          this.loadTriple()
-        }
-      },         /** Add a collection node to this frame */'addCollection': function () {
-        this.nodeType = this.NODE
-        this.node = this.store.collection()
-        this.collection = true
-        if (this.isTripleToLoad()) {
-          this.loadTriple()
-        }
-      },         /** Add a collection arc to this frame */'addCollectionArc': function () {
-        this.nodeType = this.ARC
-      },         /** Add a bnode to this frame */'addBNode': function (id) {
-        if (id != null) {
-          if (this.parser.bnodes[id] != null) {
-            this.node = this.parser.bnodes[id]
-          } else {
-            this.node = this.parser.bnodes[id] = this.store.bnode()
-          }
-        } else {
-          this.node = this.store.bnode()
-        }
-        this.nodeType = this.NODE
-        if (this.isTripleToLoad()) {
-          this.loadTriple()
-        }
-      },         /** Add an arc or property to this frame */'addArc': function (uri) {
-        if (uri === RDFParser.ns.RDF + 'li') {
-          uri = RDFParser.ns.RDF + '_' + this.parent.listIndex
-          this.parent.listIndex++
-        }
-
-        this.addSymbol(this.ARC, uri)
-      },         /** Add a literal to this frame */'addLiteral': function (value) {
-        if (this.parent.datatype) {
-          this.node = this.store.literal(value, '', this.store.sym(this.parent.datatype))
-        } else {
-          this.node = this.store.literal(value, this.lang)
-        }
-        this.nodeType = this.NODE
-        if (this.isTripleToLoad()) {
-          this.loadTriple()
-        }
-      }
-    }
-  }
-
-  // from the OpenLayers source .. needed to get around IE problems.
-  this.getAttributeNodeNS = function (node, uri, name) {
-    var attributeNode = null
-    if (node.getAttributeNodeNS) {
-      attributeNode = node.getAttributeNodeNS(uri, name)
-    } else {
-      var attributes = node.attributes
-      var potentialNode, fullName
-      for (var i = 0;i < attributes.length; ++i) {
-        potentialNode = attributes[i]
-        if (potentialNode.namespaceURI === uri) {
-          fullName = (potentialNode.prefix) ? (potentialNode.prefix + ':' + name) : name
-          if (fullName === potentialNode.nodeName) {
-            attributeNode = potentialNode
-            break
-          }
-        }
-      }
-    }
-    return attributeNode
-  }
-
-  /** Our triple store reference @private */
-
-  this.store = store /** Our identified blank nodes @private */
-  this.bnodes = {} /** A context for context-aware stores @private */
-  this.why = null /** Reification flag */
-  this.reify = false
-
-  /**
-   * Build our initial scope frame and parse the DOM into triples
-   * @param {DOMTree} document The DOM to parse
-   * @param {String} base The base URL to use
-   * @param {Object} why The context to which this resource belongs
-   */
-
-  this.parse = function (document, base, why) {
-    var children = document.childNodes // clean up for the next run
-    this.cleanParser() // figure out the root element
-    var root
-    if (document.nodeType === RDFParser.nodeType.DOCUMENT) {
-      for (var c = 0;c < children.length;c++) {
-        if (children[c].nodeType === RDFParser.nodeType.ELEMENT) {
-          root = children[c]
-          break
-        }
-      }
-    } else if (document.nodeType === RDFParser.nodeType.ELEMENT) {
-      root = document
-    } else {
-      throw new Error("RDFParser: can't find root in " + base + '. Halting. ')
-    // return false
-    }
-    this.why = why // our topmost frame
-    var f = this.frameFactory(this)
-    this.base = base
-    f.base = base
-    f.lang = null // was '' but can't have langs like that 2015 (!)
-    this.parseDOM(this.buildFrame(f, root))
-    return true
-  }
-
-  this.parseDOM = function (frame) {
-    // a DOM utility function used in parsing
-    var rdfid
-    var elementURI = function (el) {
-      var result = ''
-      if (el.namespaceURI == null) {
-        throw new Error('RDF/XML syntax error: No namespace for ' + el.localName + ' in ' + this.base)
-      }
-      if (el.namespaceURI) {
-        result = result + el.namespaceURI
-      }
-      if (el.localName) {
-        result = result + el.localName
-      } else if (el.nodeName) {
-        if (el.nodeName.indexOf(':') >= 0)result = result + el.nodeName.split(':')[1]
-        else result = result + el.nodeName
-      }
-      return result
-    }.bind(this)
-    var dig = true // if we'll dig down in the tree on the next iter
-    while (frame.parent) {
-      var dom = frame.element
-      var attrs = dom.attributes
-      if (dom.nodeType === RDFParser.nodeType.TEXT || dom.nodeType === RDFParser.nodeType.CDATA_SECTION) {
-        // we have a literal
-        if (frame.parent.nodeType === frame.NODE) {
-          // must have had attributes, store as rdf:value
-          frame.addArc(RDFParser.ns.RDF + 'value')
-          frame = this.buildFrame(frame)
-        }
-        frame.addLiteral(dom.nodeValue)
-      } else if (elementURI(dom) !== RDFParser.ns.RDF + 'RDF') {
-        // not root
-        if (frame.parent && frame.parent.collection) {
-          // we're a collection element
-          frame.addCollectionArc()
-          frame = this.buildFrame(frame, frame.element)
-          frame.parent.element = null
-        }
-        if (!frame.parent || !frame.parent.nodeType || frame.parent.nodeType === frame.ARC) {
-          // we need a node
-          var about = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'about')
-          rdfid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'ID')
-          if (about && rdfid) {
-            throw new Error('RDFParser: ' + dom.nodeName + ' has both rdf:id and rdf:about.' +
-              ' Halting. Only one of these' + ' properties may be specified on a' + ' node.')
-          }
-          if (!about && rdfid) {
-            frame.addNode('#' + rdfid.nodeValue)
-            dom.removeAttributeNode(rdfid)
-          } else if (about == null && rdfid == null) {
-            var bnid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'nodeID')
-            if (bnid) {
-              frame.addBNode(bnid.nodeValue)
-              dom.removeAttributeNode(bnid)
-            } else {
-              frame.addBNode()
-            }
-          } else {
-            frame.addNode(about.nodeValue)
-            dom.removeAttributeNode(about)
-          }
-          // Typed nodes
-          var rdftype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'type')
-          if (RDFParser.ns.RDF + 'Description' !== elementURI(dom)) {
-            rdftype = {'nodeValue': elementURI(dom)}
-          }
-          if (rdftype != null) {
-            this.store.add(frame.node, this.store.sym(RDFParser.ns.RDF + 'type'), this.store.sym(_join(rdftype.nodeValue,
-              frame.base)), this.why)
-            if (rdftype.nodeName) {
-              dom.removeAttributeNode(rdftype)
-            }
-          }
-          // Property Attributes
-          for (var x = attrs.length - 1; x >= 0; x--) {
-            this.store.add(frame.node, this.store.sym(elementURI(attrs[x])), this.store.literal(attrs[x].nodeValue,
-              frame.lang), this.why)
-          }
-        } else {
-          // we should add an arc (or implicit bnode+arc)
-          frame.addArc(elementURI(dom)) // save the arc's rdf:ID if it has one
-          if (this.reify) {
-            rdfid = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'ID')
-            if (rdfid) {
-              frame.rdfid = rdfid.nodeValue
-              dom.removeAttributeNode(rdfid)
-            }
-          }
-          var parsetype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'parseType')
-          var datatype = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'datatype')
-          if (datatype) {
-            frame.datatype = datatype.nodeValue
-            dom.removeAttributeNode(datatype)
-          }
-          if (parsetype) {
-            var nv = parsetype.nodeValue
-            if (nv === 'Literal') {
-              frame.datatype = RDFParser.ns.RDF + 'XMLLiteral' // (this.buildFrame(frame)).addLiteral(dom)
-              // should work but doesn't
-              frame = this.buildFrame(frame)
-              frame.addLiteral(dom)
-              dig = false
-            } else if (nv === 'Resource') {
-              frame = this.buildFrame(frame, frame.element)
-              frame.parent.element = null
-              frame.addBNode()
-            } else if (nv === 'Collection') {
-              frame = this.buildFrame(frame, frame.element)
-              frame.parent.element = null
-              frame.addCollection()
-            }
-            dom.removeAttributeNode(parsetype)
-          }
-          if (attrs.length !== 0) {
-            var resource = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'resource')
-            var bnid2 = this.getAttributeNodeNS(dom, RDFParser.ns.RDF, 'nodeID')
-            frame = this.buildFrame(frame)
-            if (resource) {
-              frame.addNode(resource.nodeValue)
-              dom.removeAttributeNode(resource)
-            } else {
-              if (bnid2) {
-                frame.addBNode(bnid2.nodeValue)
-                dom.removeAttributeNode(bnid2)
-              } else {
-                frame.addBNode()
-              }
-            }
-            for (var x1 = attrs.length - 1; x1 >= 0; x1--) {
-              var f = this.buildFrame(frame)
-              f.addArc(elementURI(attrs[x1]))
-              if (elementURI(attrs[x1]) === RDFParser.ns.RDF + 'type') {
-                (this.buildFrame(f)).addNode(attrs[x1].nodeValue)
-              } else {
-                (this.buildFrame(f)).addLiteral(attrs[x1].nodeValue)
-              }
-            }
-          } else if (dom.childNodes.length === 0) {
-            (this.buildFrame(frame)).addLiteral('')
-          }
-        }
-      } // rdf:RDF
-      // dig dug
-      dom = frame.element
-      while (frame.parent) {
-        var pframe = frame
-        while (dom == null) {
-          frame = frame.parent
-          dom = frame.element
-        }
-        var candidate = dom.childNodes && dom.childNodes[frame.lastChild]
-        if (!candidate || !dig) {
-          frame.terminateFrame()
-          if (!(frame = frame.parent)) {
-            break
-          } // done
-          dom = frame.element
-          dig = true
-        } else if ((candidate.nodeType !== RDFParser.nodeType.ELEMENT &&
-          candidate.nodeType !== RDFParser.nodeType.TEXT &&
-          candidate.nodeType !== RDFParser.nodeType.CDATA_SECTION) ||
-          ((candidate.nodeType === RDFParser.nodeType.TEXT ||
-          candidate.nodeType === RDFParser.nodeType.CDATA_SECTION) &&
-          dom.childNodes.length !== 1)) {
-          frame.lastChild++
-        } else {
-          // not a leaf
-          frame.lastChild++
-          frame = this.buildFrame(pframe, dom.childNodes[frame.lastChild - 1])
-          break
-        }
-      }
-    } // while
-  }
-
-  /**
-   * Cleans out state from a previous parse run
-   * @private
-   */
-  this.cleanParser = function () {
-    this.bnodes = {}
-    this.why = null
-  }
-
-  /**
-   * Builds scope frame
-   * @private
-   */
-  this.buildFrame = function (parent, element) {
-    var frame = this.frameFactory(this, parent, element)
-    if (parent) {
-      frame.base = parent.base
-      frame.lang = parent.lang
-    }
-    if (!element || element.nodeType === RDFParser.nodeType.TEXT ||
-      element.nodeType === RDFParser.nodeType.CDATA_SECTION) {
-      return frame
-    }
-    var attrs = element.attributes
-    var base = element.getAttributeNode('xml:base')
-    if (base != null) {
-      frame.base = base.nodeValue
-      element.removeAttribute('xml:base')
-    }
-    var lang = element.getAttributeNode('xml:lang')
-    if (lang != null) {
-      frame.lang = lang.nodeValue
-      element.removeAttribute('xml:lang')
-    }
-    // remove all extraneous xml and xmlns attributes
-    for (var x = attrs.length - 1;x >= 0;x--) {
-      if (attrs[x].nodeName.substr(0, 3) === 'xml') {
-        if (attrs[x].name.slice(0, 6) === 'xmlns:') {
-          var uri = attrs[x].nodeValue // alert('base for namespac attr:'+this.base)
-          if (this.base) uri = _join(uri, this.base)
-          this.store.setPrefixForURI(attrs[x].name.slice(6), uri)
-        }
-        //		alert('rdfparser: xml atribute: '+attrs[x].name) //@@
-        element.removeAttributeNode(attrs[x])
-      }
-    }
-    return frame
-  }
-}
-
-/* harmony default export */ var rdfxmlparser = __webpack_exports__["default"] = (rdfxmlparser_RDFParser);
 
 
 /***/ })
