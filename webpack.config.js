@@ -81,7 +81,7 @@ module.exports = {
     '@nleanba/ndjs': 'window'
   },
   optimization: {
-    minimize: false
+    minimize: true
   },
   devtool: 'source-map',
   plugins: [
