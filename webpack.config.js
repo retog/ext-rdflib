@@ -22,9 +22,6 @@ module.exports = {
           if (/js\/rdf.js$/.test(absPath)) {
             return true;
           }
-          if (/jsonld/.test(absPath)) {
-            return true;
-          }
           if (/rdf-dataset-indexed/.test(absPath)) {
             return true;
           }
@@ -41,7 +38,7 @@ module.exports = {
             //console.log("babeling "+absPath);
             return true;
           }
-          console.log("not babeling "+absPath);
+          //console.log("not babeling "+absPath);
           return false;
         },
         use: {
@@ -78,7 +75,8 @@ module.exports = {
   externals: {
     'node-fetch': 'fetch',
     'xmldom': 'window',
-    '@nleanba/ndjs': 'window'
+    '@nleanba/ndjs': 'window',
+    'jsonld': 'jsonld'
   },
   optimization: {
     minimize: true

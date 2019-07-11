@@ -5,6 +5,7 @@
 </head>
 <body>
     This page is a playground for testing, nothing more.
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/1.0.0/jsonld.min.js"></script>
     <script src="/rdf.js"></script>
     <script id="data" type="application/ld+json">
         [
@@ -25,8 +26,8 @@
         ]
     </script>     
     <script>
-        let jsonld = document.getElementById("data").text
-        $rdf.parse(jsonld, $rdf.graph(), window.location.toString().split('#')[0], "application/ld+json", (err, result) => {
+        let data = document.getElementById("data").text
+        $rdf.parse(data, $rdf.graph(), window.location.toString().split('#')[0], "application/ld+json", (err, result) => {
             if (err) {
                 console.log(err);
                 alert("error: "+err);
