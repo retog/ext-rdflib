@@ -16,9 +16,10 @@ With node.js:
 
 In the browser:
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/1.0.0/jsonld.min.js"></script>
     <script type="text/javascript" src="https://retog.github.io/ext-rdflib/latest/rdf.js"></script>
 
-The above URI always point to the latest version, replace `latest` with a specific version number to avoid potentially breaking updates, e.g. `https://retog.github.io/ext-rdflib/0.0.2/rdf.js`
+The first line is optional and only required if JSON-LD support is required. The ext-rdflib URI always point to the latest version, replace `latest` with a specific version number to avoid potentially breaking updates, e.g. `https://retog.github.io/ext-rdflib/0.5.0/rdf.js`
 
 
 The `$rdf` variable will provide all method of rdf-ext plus some methods to mimick the rdflib.js API.
