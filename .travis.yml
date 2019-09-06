@@ -16,7 +16,7 @@ before_install:
 cache:
   yarn: true
 script:
- # - yarn test
+  - yarn test
   - yarn build
 branches:
   only: 

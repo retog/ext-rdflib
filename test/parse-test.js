@@ -1,6 +1,8 @@
-const expect = require('chai').expect
-const $rdf = require('../js/rdf')
+import chai from 'chai'
+import $rdf from '../js/rdf'
 
+
+const expect = chai.expect
 let parse = $rdf.parse
 let graph = $rdf.graph
 
