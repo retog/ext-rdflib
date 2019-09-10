@@ -156,11 +156,15 @@ $rdf.Util = {
 
 let DataSetPrototype = Object.getPrototypeOf($rdf.graph());
 
-Object.defineProperty(DataSetPrototype, "statements", {
-    get: function myProperty() {
-        return this.toArray();
-    }
-});
+
+if (!DataSetPrototype.hasOwnProperty("statements")) {
+    Object.defineProperty(DataSetPrototype, "statements", {
+        get: function myProperty() {
+            return this.toArray();
+        }
+    });
+};
+
 
 DataSetPrototype.statementsMatching = function(s,p,o,g) {
     return this.match(s,p,o,g).toArray();
