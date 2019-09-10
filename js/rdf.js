@@ -156,14 +156,19 @@ $rdf.Util = {
 
 let DataSetPrototype = Object.getPrototypeOf($rdf.graph());
 
+function defineProperty(obj, name, prop) {
 
-if (!DataSetPrototype.hasOwnProperty("statements")) {
-    Object.defineProperty(DataSetPrototype, "statements", {
-        get: function myProperty() {
-            return this.toArray();
-        }
-    });
-};
+    if (!DataSetPrototype.hasOwnProperty(name)) {
+        Object.defineProperty(obj, name, prop)
+    }
+}
+
+defineProperty(DataSetPrototype, "statements", {
+    get: function myProperty() {
+        return this.toArray();
+    }
+});
+
 
 
 DataSetPrototype.statementsMatching = function(s,p,o,g) {
@@ -204,7 +209,7 @@ DataSetPrototype.add = function(subjectOrQuad, p, o, g) {
 
 let LiteralPrototype = Object.getPrototypeOf($rdf.literal());
 
-Object.defineProperty(LiteralPrototype, "lang", {
+defineProperty(LiteralPrototype, "lang", {
     get: function myProperty() {
         return this.language;
     }
@@ -212,7 +217,7 @@ Object.defineProperty(LiteralPrototype, "lang", {
 
 let LiteralPrototype2 = Object.getPrototypeOf(rdfjsDataModel.literal());
 
-Object.defineProperty(LiteralPrototype2, "lang", {
+defineProperty(LiteralPrototype2, "lang", {
     get: function myProperty() {
         return this.language;
     }
