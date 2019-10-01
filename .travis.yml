@@ -12,7 +12,7 @@ addons:
     - g++-5
 script:
   - npm test
-  - npm build
+  - npm run build
 branches:
   only: 
     - gh-pages
