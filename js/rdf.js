@@ -224,7 +224,7 @@ defineProperty(LiteralPrototype2, "lang", {
 
 let LiteralPrototype3 = Object.getPrototypeOf(dataModel.literal());
 
-Object.defineProperty(LiteralPrototype3, "lang", {
+defineProperty(LiteralPrototype3, "lang", {
     get: function myProperty() {
         return this.language;
     }
