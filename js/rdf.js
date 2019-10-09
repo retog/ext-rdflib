@@ -157,8 +157,7 @@ $rdf.Util = {
 let DataSetPrototype = Object.getPrototypeOf($rdf.graph());
 
 function defineProperty(obj, name, prop) {
-
-    if (!DataSetPrototype.hasOwnProperty(name)) {
+    if (!obj.hasOwnProperty(name)) {
         Object.defineProperty(obj, name, prop)
     }
 }
