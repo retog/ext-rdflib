@@ -42,7 +42,7 @@
     "chai": "^4.2.0",
     "cross-var": "^1.1.0",
     "lodash": "^4.17.15",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "ncp": "^2.0.0",
     "rc": "^1.2.8",
     "uglifyjs-webpack-plugin": "^2.2.0",
