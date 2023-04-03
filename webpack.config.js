@@ -75,6 +75,7 @@ module.exports = {
   externals: {
     'node-fetch': 'fetch',
     'xmldom': 'window',
+    '@xmldom/xmldom': 'window',
     '@nleanba/ndjs': 'window',
     'jsonld': 'jsonld'
   },

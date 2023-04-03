@@ -14,7 +14,7 @@ const DOMParser = (function() {
     if (typeof window !== 'undefined') {
         return window.DOMParser;
     } else {
-        return require('xmldom').DOMParser;
+        return require('@xmldom/xmldom').DOMParser;
     }
 })();
 
